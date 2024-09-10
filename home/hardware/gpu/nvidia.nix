@@ -1,7 +1,7 @@
 { ... }:
 {
   # nvidia needs some variables passed to it
-  wayland.windowManager.hyprland = {
+  wayland.windowManager.hyprland.settings = {
     "env" = [
       "GBM_BACKEND,nvidia-drm"
       "LIBVA_DRIVER_NAME,nvidia"
