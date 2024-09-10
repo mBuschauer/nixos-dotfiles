@@ -34,8 +34,6 @@
 
   programs.git = {
     enable = true;
-    userName = "mBuschauer";
-    userEmail = "marco@buschauer.us";
   };
 
   imports = [

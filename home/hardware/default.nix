@@ -2,5 +2,7 @@
 {
 	imports = [
     ./audio.nix
+
+    ./gpu
   ];
 }

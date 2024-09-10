@@ -9,5 +9,7 @@
     ./network.nix
     ./printers.nix
 
+    ./gpu
+
 	];
 }

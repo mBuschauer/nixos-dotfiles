@@ -34,13 +34,6 @@ in
     package = pkgs.firefox;
     wrapperConfig = {
       MOZ_ENABLE_WAYLAND = "1";
-      __NV_PRIME_RENDER_OFFLOAD = "1";
-      __NV_PRIME_RENDER_OFFLOAD_PROVIDER = "NVIDIA-G0";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-
-      # nvidia vaapi
-      MOZ_DISABLE_RDD_SANDBOX = "1";
-      LIBVA_DRIVER_NAME = "nvidia";
     };
     policies = {
       DisableTelemetry = true;
@@ -109,13 +102,6 @@ in
         "browser.newtabpage.activity-stream.showSponsored" = lock-false;
         "browser.newtabpage.activity-stream.system.showSponsored" = lock-false;
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = lock-false;
-
-        # nvidia support
-        "media.ffmpeg.vaapi.enabled" = lock-true;
-        "media.rdd-ffmpeg.enabled" = lock-true;
-        "media.av1.enabled" = lock-false;
-        "gfx.x11-egl.force-enabled" = lock-true;
-        "widget.dmabuf.force-enabled" = lock-true;
       };
     };
   };
@@ -150,8 +136,6 @@ in
  
 
   environment.systemPackages = with pkgs; [
-    nvidia-vaapi-driver # recommended for firefox for nvidia hardware acceleration
-
     zoom-us
 	  discord
     # vesktop # discord electron wrapper, hardware acceleration doesnt seem to work though
