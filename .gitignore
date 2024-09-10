@@ -1,3 +1,4 @@
- env.nix
- hardware-configuration.nix
- *.lock
+home/env.nix
+modules/env.nix
+hardware-configuration.nix
+*.lock
