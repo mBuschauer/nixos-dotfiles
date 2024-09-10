@@ -32,7 +32,7 @@ in
       (createChromiumExtension {
         # Hover Zoom + 
         id = "pccckmaobkjjboncdfnnofkonhgpceea";
-        sha256="sha256:1879jikj8c02jcq3h1nhhkj774c42hvbnqc5f11y7qy7acqg6j1r";
+        sha256="sha256:0vxnn56ihakk78x1z53k89fp9r7nsyq64b2sgibx3padrxmd3r5l";
         version="1.0.219";
       })
       (createChromiumExtension {
@@ -41,16 +41,10 @@ in
         sha256="sha256:0yssxmn6hkp6l1r3c0vnw4jsz4r9sdw356prbydg1n1samzhhqyk";
         version="2024.8.1";
       })
-      #(createChromiumExtension {
-      #  # Hive AI detector
-      #  id = "cmeikcgfecnhojcbfapbmpbjgllklcbi";
-      #  sha256="sha256:0m60hndms87v0y9x94400bkxllzqv030kwvr0bgcb7p74jn31qr5";
-      #  version="0.0.8";
-      # })
       (createChromiumExtension {
         # sponsor block
         id="mnjggcdmjocbbbhaepdhchncahnbgone";
-        sha256="sha256:092122qqz60jyqa5nfvd7iqx9vhai0sh48s8ys1nrrfympzljign";
+        sha256="sha256:0nj1jxn9j0gln95f6xkfrhymb3cs50lc8yf0av1v7ba6a51prvs8";
         version="5.7";
       })
     ];

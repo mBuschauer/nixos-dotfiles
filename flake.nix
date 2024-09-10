@@ -11,17 +11,6 @@
 	    submodules = true;
 	  };
 
-    Hyprspace = {
-      url = "github:KZDKM/Hyprspace";
-      # Hyprspace uses latest Hyprland. We declare this to keep them in sync.
-      inputs.hyprland.follows = "hyprland";
-    };
-
-    split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces";
-      inputs.hyprland.follows = "hyprland"; # <- make sure this line is present for the plugin to work as intended
-    };
-
     waybar = {
 	    type = "git";
 	    url = "https://github.com/Alexays/Waybar";
@@ -31,7 +20,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
 
     hypridle = {
       url = "github:hyprwm/hypridle";
@@ -78,7 +66,6 @@
       nixpkgs, 
       nixpkgs-stable, 
       home-manager, 
-      Hyprspace, 
       ... 
     } @ 
     inputs: 
@@ -93,7 +80,7 @@
       };
     in
     {
-      nixosConfigurations.MarcoMNix = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 		    specialArgs = { inherit inputs; };
 
 		    modules = [

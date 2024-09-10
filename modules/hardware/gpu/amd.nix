@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   # Enable AMDGPU Drivers
   boot.initrd.kernelModules = [ "amdgpu" ];
@@ -20,6 +20,6 @@
   environment.systemPackages = with pkgs; [
     sigil
     wayland
-  ]
+  ];
 
 }

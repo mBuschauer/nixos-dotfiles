@@ -6,7 +6,7 @@
     description = "marco";
     extraGroups = [ "networkmanager" "wheel" "audio"  "storage" "docker"];
     packages = [
-      pkgs.home-manager
+      # pkgs.home-manager
     ];
   };
 
