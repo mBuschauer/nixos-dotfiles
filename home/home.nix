@@ -6,8 +6,12 @@
     username = "${settings.username}";
     homeDirectory = "/home/${settings.username}";
     stateVersion = "24.05";
+    sessionVariables = {
+      EDITOR = "lvim";
+      TERM = "kitty";
+      BROWSER = "firefox";
+    };
   };
-
   programs.bash = {
     enable = true;
     shellAliases = {
@@ -25,4 +29,12 @@
     };
   };
 
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    pictures = "/home/${settings.username}/Pictures";
+    download = "/home/${settings.username}/Downloads";
+    documents = "/home/${settings.username}/Documents";
+    desktop = "/home/${settings.username}/Desktop";
+  };
 }

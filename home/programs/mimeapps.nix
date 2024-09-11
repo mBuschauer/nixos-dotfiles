@@ -1,37 +1,43 @@
 { ... }:
+let
+  browser = "firefox.desktop";
+  images = "qimgv.desktop";
+  fileExplorer = "org.kde.dolphin.deskop";
+  fileArchiver = "ark.desktop";
+in
 {
   xdg.mimeApps = {
     enable = true;
     associations = {
       added = {
-        "application/pdf" = [ "okular.desktop" ];
-        "x-scheme-handler/http" = [ "firefox.desktop" ];
-        "x-scheme-handler/https" = [ "firefox.desktop" ];
-        "x-scheme-handler/chrome" = [ "firefox.desktop" ];
-        "text/html" = [ "firefox.desktop" ];
-        "application/x-extension-htm" = [ "firefox.desktop" ];
-        "application/x-extension-html" = [ "firefox.desktop" ];
+        "application/pdf" = [ "${browser}" ];
+        "x-scheme-handler/http" = [ "${browser}" ];
+        "x-scheme-handler/https" = [ "${browser}" ];
+        "x-scheme-handler/chrome" = [ "${browser}" ];
+        "text/html" = [ "${browser}" ];
+        "application/x-extension-htm" = [ "${browser}" ];
+        "application/x-extension-html" = [ "${browser}" ];
         "text/xhtml" = [ "code.desktop" ];
-        "application/x-extension-shtml" = [ "firefox.desktop" ];
-        "application/xhtml+xml" = [ "firefox.desktop" ];
-        "application/x-extension-xhtml" = [ "firefox.desktop" ];
-        "application/x-extension-xht" = [ "firefox.desktop" ];
-        "application/png" = [ "qimgv.desktop" ];
+        "application/x-extension-shtml" = [ "${browser}" ];
+        "application/xhtml+xml" = [ "${browser}" ];
+        "application/x-extension-xhtml" = [ "${browser}" ];
+        "application/x-extension-xht" = [ "${browser}" ];
+        "application/png" = [ "${images}" ];
         "application/xml" = [ "code.desktop" ];
 
-        "image/png" = [ "qimgv.desktop" ];
-        "image/jpg" = [ "qimgv.desktop" ];
-        "image/jpeg" = [ "qimgv.desktop" ];
-        "image/webp" = [ "qimgv.desktop" ];
-        "image/avif" = [ "qimgv.desktop" ];
+        "image/png" = [ "${images}" ];
+        "image/jpg" = [ "${images}" ];
+        "image/jpeg" = [ "${images}" ];
+        "image/webp" = [ "${images}" ];
+        "image/avif" = [ "${images}" ];
 
         "application/epub" = [ "sigil.desktop" ];
         "application/epub+zip" = [ "sigil.desktop" ];
         "text/plain" = [ "NotepadNext.desktop" ];
-        "inode/directory" = [ "nemo.deskop" ];
-        "application/zip" = [ "ark.desktop" ];
-        "application/cbr" = [ "ark.desktop" ]; # .cbr
-        "application/vnd.comicbook-rar" = [ "ark.desktop" ]; # .cbr
+        "inode/directory" = [ "${fileExplorer}" ];
+        "application/zip" = [ "${fileArchiver}" ];
+        "application/cbr" = [ "${fileArchiver}" ]; # .cbr
+        "application/vnd.comicbook-rar" = [ "${fileArchiver}" ]; # .cbr
         "application/cbz" = [ "okular.desktop" ]; # .cbz
         "application/vnd.comicbook+zip" = [ "okular.desktop" ]; # .cbz
       };
@@ -52,32 +58,32 @@
     };
     defaultApplications = {
       "application/pdf" = [ "okular.desktop" ];
-      "x-scheme-handler/http" = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
-      "x-scheme-handler/chrome" = [ "firefox.desktop" ];
-      "text/html" = [ "firefox.desktop" ];
-      "text/xhtml" = [ "firefox.desktop" ];
-      "application/x-extension-htm" = [ "firefox.desktop" ];
-      "application/x-extension-html" = [ "firefox.desktop" ];
-      "application/x-extension-shtml" = [ "firefox.desktop" ];
-      "application/xhtml+xml" = [ "firefox.desktop" ];
-      "application/x-extension-xhtml" = [ "firefox.desktop" ];
-      "application/x-extension-xht" = [ "firefox.desktop" ];
-      "application/png" = [ "qimgv.desktop" ];
+      "x-scheme-handler/http" = [ "${browser}" ];
+      "x-scheme-handler/https" = [ "${browser}" ];
+      "x-scheme-handler/chrome" = [ "${browser}" ];
+      "text/html" = [ "${browser}" ];
+      "text/xhtml" = [ "${browser}" ];
+      "application/x-extension-htm" = [ "${browser}" ];
+      "application/x-extension-html" = [ "${browser}" ];
+      "application/x-extension-shtml" = [ "${browser}" ];
+      "application/xhtml+xml" = [ "${browser}" ];
+      "application/x-extension-xhtml" = [ "${browser}" ];
+      "application/x-extension-xht" = [ "${browser}" ];
+      "application/png" = [ "${images}" ];
 
-      "image/png" = [ "qimgv.desktop" ];
-      "image/jpg" = [ "qimgv.desktop" ];
-      "image/jpeg" = [ "qimgv.desktop" ];
-      "image/webp" = [ "qimgv.desktop" ];
-      "image/avif" = [ "qimgv.desktop" ];
+      "image/png" = [ "${images}" ];
+      "image/jpg" = [ "${images}" ];
+      "image/jpeg" = [ "${images}" ];
+      "image/webp" = [ "${images}" ];
+      "image/avif" = [ "${images}" ];
 
       "application/epub" = [ "sigil.desktop" ];
       "application/epub+zip" = [ "sigil.desktop" ];
-      "application/vnd.comicbook-rar" = [ "ark.desktop" ];
+      "application/vnd.comicbook-rar" = [ "${fileArchiver}" ];
       "text/plain" = [ "NotepadNext.desktop" ];
-      "inode/directory" = [ "nemo.desktop" ]; # not working??
-      "application/zip" = [ "ark.desktop" ];
-      "application/cbr" = [ "ark.desktop" ];
+      "inode/directory" = [ "${fileExplorer}" ];
+      "application/zip" = [ "${fileArchiver}" ];
+      "application/cbr" = [ "${fileArchiver}" ];
       "application/cbz" = [ "okular.desktop" ];
       "application/xml" = [ "code.desktop" ];
     };
