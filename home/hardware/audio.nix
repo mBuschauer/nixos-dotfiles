@@ -1,10 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, settings, ... }:
 {
 
   services.mpd = {
     enable = true;
-    musicDirectory = "/home/marco/Music/";
-    #user = "marco";
+    musicDirectory = "/home/${settings.username}/Music/";
   
     extraConfig = ''
       audio_output {

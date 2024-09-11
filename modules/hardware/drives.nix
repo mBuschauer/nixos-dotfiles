@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, settings, ... }:
 {
   environment.systemPackages = with pkgs; [
     gnome-disk-utility # gui for disk partitioning
@@ -18,6 +18,8 @@
     supportedFilesystems = [ "nfs" ];
     kernelModules = [ "nfs" ];
   };
+  users.users.${settings.username}.extraGroups = [ "storage" ];
+
 
   # add support for external drives
   services.devmon.enable = true;

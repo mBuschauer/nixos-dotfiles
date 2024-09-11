@@ -6,10 +6,10 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
 
     hyprland = {
-	    type = "git";
-	    url = "https://github.com/hyprwm/Hyprland";
-	    submodules = true;
-	  };
+      type = "git";
+      url = "https://github.com/hyprwm/Hyprland";
+      submodules = true;
+    };
 
     Hyprspace = {
       url = "github:KZDKM/Hyprspace";
@@ -23,9 +23,9 @@
     };
 
     waybar = {
-	    type = "git";
-	    url = "https://github.com/Alexays/Waybar";
-	  };
+      type = "git";
+      url = "https://github.com/Alexays/Waybar";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -68,22 +68,22 @@
     };
 
     # tsui = {
-      # url = "github:neuralinkcorp/tsui";
-      # inputs.nixpkgs.follows = "nixpkgs";
+    # url = "github:neuralinkcorp/tsui";
+    # inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-};
+  };
 
-  outputs = { 
-      nixpkgs, 
-      nixpkgs-stable, 
-      home-manager, 
-      Hyprspace, 
-      ... 
-    } @ 
-    inputs: 
+  outputs =
+    { nixpkgs
+    , nixpkgs-stable
+    , home-manager
+    , Hyprspace
+    , ...
+    } @
+    inputs:
     let
-		  system = "x86_64-linux";
+      system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       overlay-stable = final: prev: {
         stable = import nixpkgs-stable {
@@ -91,28 +91,36 @@
           config.allowUnfree = true;
         };
       };
+      settings = import (./. + "/settings.nix") { inherit pkgs; };
     in
     {
-      nixosConfigurations.MarcoMNix = nixpkgs.lib.nixosSystem {
-		    specialArgs = { inherit inputs; };
+      nixosConfigurations."${settings.hostname}" = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          inherit settings;
+        };
 
-		    modules = [
-          ({config, pkgs, ...}: 
+        modules = [
+          ({ config, pkgs, ... }:
             {
               nixpkgs.overlays = [ overlay-stable ];
             }
           )
-			    ./configuration.nix
+          ./configuration.nix
           inputs.home-manager.nixosModules.default
-          home-manager.nixosModules.home-manager {
+          home-manager.nixosModules.home-manager
+          {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.marco.imports = [ ./home/default.nix ];
-            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users."${settings.username}".imports = [ ./home/default.nix ];
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              inherit settings;
+            };
             home-manager.backupFileExtension = "backupExt";
           }
-	      ];
-	    };
+        ];
+      };
     };
 
 

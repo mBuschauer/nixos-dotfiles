@@ -1,13 +1,13 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, settings, ... }:
 
 {
   programs.home-manager.enable = true;
   home = {
-    username = "marco";
-    homeDirectory = "/home/marco";
+    username = "${settings.username}";
+    homeDirectory = "/home/${settings.username}";
     stateVersion = "24.05";
   };
-  
+
   programs.bash = {
     enable = true;
     shellAliases = {
@@ -17,7 +17,7 @@
       # cat = "bat";
       disk-analysis = "sudo ncdu / --exclude=/mnt";
       # edit-config = "cd /etc/nixos/ && sudo lvim"; 
-      update-config =  "sudo nixos-rebuild switch";
+      update-config = "sudo nixos-rebuild switch";
       upgrade-config = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch";
       neofetch = "fastfetch";
       # pokemon-icat = "/home/marco/.config/.pokemon-icat/pokemon-icat";

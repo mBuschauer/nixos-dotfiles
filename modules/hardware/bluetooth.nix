@@ -6,7 +6,7 @@
     powerOnBoot = true;
     settings.General = {
       experimental = true;
-      
+
       # https://www.reddit.com/r/NixOS/comments/1ch5d2p/comment/lkbabax/
       # for pairing bluetooth controller
       Privacy = "device";
@@ -18,7 +18,7 @@
   services.blueman.enable = true;
 
   hardware.xpadneo.enable = true; # Enable the xpadneo driver for Xbox One wireless controllers
- 
+
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [ xpadneo ];
     extraModprobeConfig = ''

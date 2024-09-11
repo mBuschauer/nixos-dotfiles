@@ -2,7 +2,7 @@
 {
   imports = [
     ./env.nix
-    
+
     # desktop environments
     ./desktopEnvironment/hypr
     # ./desktopEnvironment/gnome.nix
@@ -11,7 +11,7 @@
     ./programs
 
     ./hardware
-    
+
     ./home.nix
   ];
 }

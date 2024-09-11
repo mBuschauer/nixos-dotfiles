@@ -1,10 +1,10 @@
 { ... }:
 {
-	imports = 
-	[
-		./boot.nix
-    ./fonts.nix
-    ./settings.nix
-    ./users.nix
-	];
+  imports =
+    [
+      ./boot.nix
+      ./fonts.nix
+      ./settings.nix
+      ./users.nix
+    ];
 }
