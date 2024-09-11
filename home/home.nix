@@ -16,7 +16,7 @@
       top = "btm";
       # cat = "bat";
       disk-analysis = "sudo ncdu / --exclude=/mnt";
-      edit-config = "cd /etc/nixos/ && sudo lvim"; 
+      # edit-config = "cd /etc/nixos/ && sudo lvim"; 
       update-config =  "sudo nixos-rebuild switch";
       upgrade-config = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch";
       neofetch = "fastfetch";

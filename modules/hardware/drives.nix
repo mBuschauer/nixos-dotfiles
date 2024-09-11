@@ -36,6 +36,7 @@
     ];
   };
 
+
   fileSystems."/mnt/nvme0n1p4" = {
     device = "/dev/nvme0n1p4";
     fsType = "auto";
@@ -64,7 +65,20 @@
 
     ];
   };
+  fileSystems."/mnt/Documents" = {
+    device = "//192.168.0.8/Documents";
+    fsType = "cifs";
+    options = [
+      "noauto"
+      "_netdev"
+      "x-systemd.automount"
+      "x-systemd.requires=tailscaled.service"
 
+      "uid=1000"
+      "users"
+
+    ];
+  };
   fileSystems."/mnt/Calibre" = {
     device = "server-2024:/Calibre";
     fsType = "nfs";

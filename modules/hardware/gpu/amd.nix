@@ -15,11 +15,10 @@
     ];
 
   };
-
   
   environment.systemPackages = with pkgs; [
-    sigil
-    wayland
+    sigil # broken with nvidia so imported there
+    wayland # broken with nvidia so imported there
   ]
 
 }
