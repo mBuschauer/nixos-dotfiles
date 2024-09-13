@@ -3,6 +3,11 @@ let
   wallpapers = "/etc/nixos/home/desktopEnvironment/hypr/wallpapers";
 in
 {
+  wayland.windowManager.hyprland.settings."exec-once" = [
+    # "hyprpaper"
+    "swww-daemon"
+  ];
+
   services.hyprpaper.settings = {
     settings = {
       preload = [

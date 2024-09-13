@@ -10,7 +10,7 @@ in
     enable = true;
     associations = {
       added = {
-        "application/pdf" = [ "${browser}" ];
+        "application/pdf" = [ "okular.desktop" ];
         "x-scheme-handler/http" = [ "${browser}" ];
         "x-scheme-handler/https" = [ "${browser}" ];
         "x-scheme-handler/chrome" = [ "${browser}" ];

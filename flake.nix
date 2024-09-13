@@ -61,7 +61,9 @@
         systems.follows = "hyprland/systems";
       };
     };
-
+    
+    swww.url = "github:LGFae/swww";
+    
     tailray = {
       url = "github:NotAShelf/tailray";
       inputs.nixpkgs.follows = "nixpkgs";

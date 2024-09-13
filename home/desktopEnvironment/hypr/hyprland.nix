@@ -70,7 +70,6 @@ in
       
       "exec-once" = [
         "waybar"
-        "hyprpaper"
         # "hyprctl setcursor ${cursorName} ${toString pointerSize}"
         "wl-paste --watch cliphist store"
         #"kitty -e ncspot"
