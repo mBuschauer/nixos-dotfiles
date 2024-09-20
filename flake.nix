@@ -94,12 +94,14 @@
         };
       };
       settings = import (./. + "/settings.nix") { inherit pkgs; };
+      secrets = import (./. + "/secrets.nix") { inherit pkgs; };
     in
     {
       nixosConfigurations."${settings.hostname}" = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
           inherit settings;
+          inherit secrets;
         };
 
         modules = [
@@ -118,6 +120,7 @@
             home-manager.extraSpecialArgs = {
               inherit inputs;
               inherit settings;
+              inherit secrets;
             };
             home-manager.backupFileExtension = "backupExt";
           }

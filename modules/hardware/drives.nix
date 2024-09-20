@@ -1,9 +1,9 @@
-{ pkgs, settings, ... }:
+{ pkgs, settings, secrets, ... }:
 {
   environment.systemPackages = with pkgs; [
     gnome-disk-utility # gui for disk partitioning
 
-    ntfs3g 
+    ntfs3g
     mdadm # for managing RAID arrays in Linux
     lvm2 # for LVM support
 
@@ -54,13 +54,15 @@
   services.rpcbind.enable = true;
 
   fileSystems."/mnt/Storage" = {
-    device = "//192.168.0.8/Marco";
+    device = "//${secrets.nasIP}/Marco";
     fsType = "cifs";
     options = [
       "noauto"
       # "_netdev"
       "x-systemd.automount"
       "x-systemd.requires=tailscaled.service"
+      "username=${secrets.nasUser}"
+      "password=${secrets.nasPassword}"
 
       "uid=1000"
       "users"
@@ -68,13 +70,15 @@
     ];
   };
   fileSystems."/mnt/Documents" = {
-    device = "//192.168.0.8/Documents";
+    device = "//${secrets.nasIP}/Documents";
     fsType = "cifs";
     options = [
       "noauto"
       # "_netdev"
       "x-systemd.automount"
       "x-systemd.requires=tailscaled.service"
+      "username=${secrets.nasUser}"
+      "password=${secrets.nasPassword}"
 
       "uid=1000"
       "users"
@@ -82,7 +86,7 @@
     ];
   };
   fileSystems."/mnt/Calibre" = {
-    device = "server-2024:/Calibre";
+    device = "${secrets.homeServerIP}:/Calibre";
     fsType = "nfs";
     options = [
       "noauto"

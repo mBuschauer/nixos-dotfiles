@@ -1,8 +1,6 @@
 { ... }:
 {
   imports = [
-    ./env.nix
-
     # desktop environments
     ./desktopEnvironment/hypr
     # ./desktopEnvironment/gnome.nix

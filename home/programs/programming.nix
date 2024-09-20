@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, secrets, ... }:
 {
   programs.vscode = {
     enable = true;
@@ -36,5 +36,7 @@
 
   programs.git = {
     enable = true;
+    userName = "${secrets.gitUser}";
+    userEmail = "${secrets.gitEmail}";
   };
 }

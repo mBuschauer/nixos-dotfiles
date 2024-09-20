@@ -1,3 +1,3 @@
- env.nix
- hardware-configuration.nix
- *.lock
+secrets.nix
+hardware-configuration.nix
+*.lock
