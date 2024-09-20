@@ -28,7 +28,7 @@
 
   fileSystems."/mnt/sda1" = {
     device = "/dev/sda1";
-    fsType = "auto";
+    fsType = "ntfs";
     options = [
       "soft" # return errors to client when access is lost, instead of waiting indefinitely
       "softreval" # use cache even when access is lost
@@ -41,7 +41,7 @@
 
   fileSystems."/mnt/nvme0n1p4" = {
     device = "/dev/nvme0n1p4";
-    fsType = "auto";
+    fsType = "ntfs";
     options = [
       "soft" # return errors to client when access is lost, instead of waiting indefinitely
       "softreval" # use cache even when access is lost
@@ -58,7 +58,7 @@
     fsType = "cifs";
     options = [
       "noauto"
-      "_netdev"
+      # "_netdev"
       "x-systemd.automount"
       "x-systemd.requires=tailscaled.service"
 
@@ -72,7 +72,7 @@
     fsType = "cifs";
     options = [
       "noauto"
-      "_netdev"
+      # "_netdev"
       "x-systemd.automount"
       "x-systemd.requires=tailscaled.service"
 

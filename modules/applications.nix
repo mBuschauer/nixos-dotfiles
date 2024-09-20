@@ -143,9 +143,11 @@ in
     libreoffice-fresh
     libsForQt5.okular
 
-    monitor
+    ## Task Manager for Linux
+    # monitor
     # gnome.gnome-system-monitor
-    kdePackages.plasma-systemmonitor
+    # kdePackages.plasma-systemmonitor
+    mission-center
 
     notepad-next
 

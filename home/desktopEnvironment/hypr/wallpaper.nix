@@ -9,6 +9,7 @@ in
   ];
 
   services.hyprpaper.settings = {
+    enable = false;
     settings = {
       preload = [
         # "./wallpapers/nixos/pastel_gay_nix.png"

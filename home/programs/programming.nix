@@ -9,7 +9,7 @@
       yzhang.markdown-all-in-one # markdown-all-in-one
       bbenoist.nix # nix
       jnoortheen.nix-ide #nix IDE
-      ms-python.python # Python
+      # ms-python.python # Python
       ms-python.vscode-pylance # vscode-pylance
       rust-lang.rust-analyzer # rust-analyzer
       vscode-icons-team.vscode-icons # vscode-icons

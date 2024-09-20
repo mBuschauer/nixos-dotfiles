@@ -2,7 +2,7 @@
 
 { 
   virtualisation = {
-    waydroid.enable = true;
+    # waydroid.enable = true;
 
     spiceUSBRedirection.enable = true;
 

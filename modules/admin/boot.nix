@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 {
   # use new linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_9;
+  # boot.kernelPackages = pkgs.linuxPackages_latest; # having issues with 6.11
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_10;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
