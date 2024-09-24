@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, settings, ... }:
 {
   systemd.services.NetworkManager-wait-online.enable = pkgs.lib.mkForce false;
 
@@ -6,7 +6,8 @@
     # Enable networking
     networkmanager.enable = true;
   
-    hostName = "nixos"; # Define your hostname.
+
+    hostName = "${settings.hostname}"; # Define your hostname.
     
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     

@@ -1,4 +1,3 @@
-home/env.nix
-modules/env.nix
+secrets.nix
 hardware-configuration.nix
 *.lock

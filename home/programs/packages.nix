@@ -6,7 +6,7 @@
     fastfetch
     cava
     toipe
-    ncspot         
+    ncspot
     ncdu
     ncmpcpp
     mpc-cli
@@ -21,9 +21,9 @@
     sl
     cmatrix
     #spotify      
-  	prismlauncher
+    prismlauncher
     #mangohud
-    qalculate-gtk 
+    qalculate-gtk
     qimgv # image viewer
     libsForQt5.ark # zip browser
     rofi-wayland
@@ -44,11 +44,16 @@
     hakuneko
   ];
 
+  imports = [
+    inputs.tailray.homeManagerModules.default
+  ];
+  
   services.tailray.enable = true;
 
 
   programs.ncspot = {
     enable = true;
+
     settings = {
       use_nerdfont = true;
       volnorm = true;
@@ -57,10 +62,10 @@
 
   xdg.desktopEntries = {
     hakunektwo = {
-     name = "Hakunektwo";
-     exec = "hakuneko --no-sandbox";
-     terminal = false;
-     icon = "${pkgs.hakuneko}/share/icons/hicolor/256x256/apps/hakuneko-desktop.png";
+      name = "Hakunektwo";
+      exec = "hakuneko --no-sandbox";
+      terminal = false;
+      icon = "${pkgs.hakuneko}/share/icons/hicolor/256x256/apps/hakuneko-desktop.png";
     };
 
     tailscale-tray = {
@@ -113,7 +118,7 @@
       symlink-arrow = "⇒";
       header = false;
     };
-  };  
+  };
 
 
   programs.tofi = {

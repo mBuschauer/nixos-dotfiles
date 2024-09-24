@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, settings, secrets, ... }:
 {
   environment.systemPackages = with pkgs; [
     gnome-disk-utility # gui for disk partitioning
 
-    ntfs3g 
+    ntfs3g
     mdadm # for managing RAID arrays in Linux
     lvm2 # for LVM support
 
@@ -18,12 +18,14 @@
     supportedFilesystems = [ "nfs" ];
     kernelModules = [ "nfs" ];
   };
+  users.users.${settings.username}.extraGroups = [ "storage" ];
 
   # add support for external drives
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
+  
   fileSystems."/mnt/nvme0n1p3" = {
     device = "/dev/nvme0n1p3";
     fsType = "ntfs";
@@ -79,9 +81,12 @@
       "noauto"
       "_netdev"
       "x-systemd.automount"
-  
+      
       "uid=1000"
       "users"
+      
+      "username=${secrets.nasUser}"
+      "password=${secrets.nasPassword}"
     ];
   };
   # fileSystems."/mnt/Documents" = {
@@ -131,5 +136,4 @@
   #    /export/Maryland    *(rw,nohide,insecure,no_subtree_check)
   #  '';
   # };
-
 }

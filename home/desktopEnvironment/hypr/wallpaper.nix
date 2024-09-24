@@ -3,7 +3,13 @@ let
   wallpapers = "/etc/nixos/home/desktopEnvironment/hypr/wallpapers";
 in
 {
+  wayland.windowManager.hyprland.settings."exec-once" = [
+    # "hyprpaper"
+    "swww-daemon"
+  ];
+
   services.hyprpaper.settings = {
+    enable = false;
     settings = {
       preload = [
         # "./wallpapers/nixos/pastel_gay_nix.png"

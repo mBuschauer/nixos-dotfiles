@@ -1,8 +1,8 @@
-{ pkgs, ... }: 
+{ pkgs, settings, ... }: 
 
 { 
   virtualisation = {
-    waydroid.enable = true;
+    # waydroid.enable = true;
 
     spiceUSBRedirection.enable = true;
 
@@ -44,9 +44,9 @@
     bottles # modern wine gui
   ];
 
-  users.users.marco.extraGroups = [ "libvirtd" ];
+  users.users.${settings.username}.extraGroups = [ "libvirtd" ];
 
-  home-manager.users.marco = {
+  home-manager.users.${settings.username} = {
     dconf.settings = {
       "org/virt-manager/virt-manager/connections" = {
         autoconnect = [ "qemu:///system" ];

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, settings, ... }:
 let
   neovim = pkgs.neovim.overrideAttrs (oldAttrs: {
     postInstall = (oldAttrs.postInstall or "") + ''
@@ -10,6 +10,8 @@ let
   });
 in
 {
+  users.users.${settings.username}.extraGroups = [ "docker" ];
+
   # enable docker
   virtualisation.docker = {
     enable = true;

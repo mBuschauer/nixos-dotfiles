@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, settings, ... }:
 {
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.marco = {
+  users.users.${settings.username} = {
     isNormalUser = true;
-    description = "marco";
-    extraGroups = [ "networkmanager" "wheel" "audio"  "storage" "docker"];
+    description = "${settings.username}";
+    extraGroups = [ "networkmanager" "wheel" "audio"];
     packages = [
       # pkgs.home-manager
     ];

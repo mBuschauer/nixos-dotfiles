@@ -70,7 +70,6 @@ in
       
       "exec-once" = [
         "waybar"
-        "hyprpaper"
         # "hyprctl setcursor ${cursorName} ${toString pointerSize}"
         "wl-paste --watch cliphist store"
         #"kitty -e ncspot"
@@ -97,8 +96,8 @@ in
       };
 
       general = {
-        gaps_in = 5;
-        gaps_out = 0;
+        gaps_in = 1;
+        gaps_out = 1;
         border_size = 2;
         "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
@@ -265,7 +264,7 @@ in
         "$mod, mouse_up, workspace, e-1"
 
         ",F11,fullscreen,1"
-        ",F1,overview:toggle" # for hyprspace
+        # ",F1,overview:toggle" # for hyprspace
         # ",F1,hyprexpo:expo,toggle" # for hyprexpo
       ];
 
@@ -282,7 +281,7 @@ in
     };
     
     plugins = builtins.attrValues { inherit (pkgs.hyprlandPlugins)
-      hyprspace 
+      # hyprspace 
       # split-monitor-workspaces
       ; 
     } ++ [
