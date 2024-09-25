@@ -2,14 +2,14 @@
 let
   # this is related to an issue with nvidia, I believe, not wayland but setting backend as xcb seems to fix playback issues
   jellyfin-wayland = pkgs.jellyfin-media-player.overrideAttrs (prevAttrs: {
-    nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ]) ++ [ pkgs.makeBinaryWrapper ];
+    nativeBuildInputs = (prevAttrs.nativeBuildInputs or []) ++ [ pkgs.makeBinaryWrapper ];
     postInstall = (prevAttrs.postInstall or "") + ''
       wrapProgram $out/bin/jellyfinmediaplayer --set QT_QPA_PLATFORM xcb 
     '';
   });
   # seemed to have trouble rendering on wayland w/ nvidia gpu, setting backend as xcb seems to fix them
   sigil-wayland = pkgs.sigil.overrideAttrs (prevAttrs: {
-    nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ]) ++ [ pkgs.makeBinaryWrapper ];
+    nativeBuildInputs = (prevAttrs.nativeBuildInputs or []) ++ [ pkgs.makeBinaryWrapper ];
     postInstall = (prevAttrs.postInstall or "") + ''
       wrapProgram $out/bin/sigil --set QT_QPA_PLATFORM xcb 
     '';
@@ -151,18 +151,18 @@ in
 
     notepad-next
 
-    sigil-wayland
-
     teams-for-linux # electron client for microsoft teams
 
     mpv
 
     komikku
 
-    jellyfin-wayland
+    sigil-wayland # override because its broken on Nvidia
+    jellyfin-wayland # override because its broken on Nvidia
 
     ryujinx
 
+    zip
     unzip
 
     wget

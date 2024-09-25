@@ -14,7 +14,7 @@
         dictionary
       ];
       x = { fraction = 0.5; };
-      y = { fraction = 0.4; };
+      y = { fraction = 0.35; };
       # width = { absolute = 0; };
       # height = { absolute = 0;};
       hideIcons = false;
