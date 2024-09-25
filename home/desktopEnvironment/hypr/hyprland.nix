@@ -264,14 +264,15 @@ in
         "$mod, mouse_up, workspace, e-1"
 
         ",F11,fullscreen,1"
-        # ",F1,overview:toggle" # for hyprspace
+        ",F1,overview:toggle" # for hyprspace
         # ",F1,hyprexpo:expo,toggle" # for hyprexpo
       ];
 
       bindr = [
-        "$mod, $mod_L, exec, pkill wofi || wofi --show drun --insensitive --allow-images"
+        # "$mod, $mod_L, exec, pkill wofi || wofi --show drun --insensitive --allow-images"
         # "$mod, $mod_L, exec, pkill fuzzel || fuzzel"
         "$mod, V, exec, pkill wofi || cliphist list | wofi --dmenu --insensitive | cliphist decode | wl-copy"
+        "$mod, SUPER_L, exec, pkill anyrun || anyrun"
 
       ];
       bindm = [
@@ -281,7 +282,7 @@ in
     };
     
     plugins = builtins.attrValues { inherit (pkgs.hyprlandPlugins)
-      # hyprspace 
+      hyprspace 
       # split-monitor-workspaces
       ; 
     } ++ [

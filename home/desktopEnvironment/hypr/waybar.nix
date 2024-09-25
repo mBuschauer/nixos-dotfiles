@@ -216,7 +216,7 @@
 
         "hyprland/window" = {
           format = "{}";
-          max-length = 30;
+          max-length = 50;
           # max-length = 100;
           tooltip = false;
         };
