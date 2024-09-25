@@ -15,17 +15,15 @@
       ];
       x = { fraction = 0.5; };
       y = { fraction = 0.35; };
-      # width = { absolute = 0; };
-      # height = { absolute = 0;};
       hideIcons = false;
       ignoreExclusiveZones = false;
-      # layer = "";
+      layer = "overlay";
       hidePluginInfo = false;
       closeOnClick = true;
       showResultsImmediately = true;
       maxEntries = null;
     };
-    extraCss = builtins.readFile (./. + "/style-dark.css");
+    extraCss = builtins.readFile (./. + "/style-light.css");
     extraConfigFiles = {
       "applications.ron".text = ''
         Config(

@@ -1,6 +1,7 @@
 * {
     all: unset;
     font-size: 1.2rem;
+    color: black;
   }
   
   #window,
@@ -12,10 +13,9 @@
   }
   
   #match.activatable {
-    border-radius: 8px;
-    margin: 4px 0;
+    border-radius: 3px;
+    margin: 2px 0;
     padding: 4px;
-    /* transition: 100ms ease-out; */
   }
   #match.activatable:first-child {
     margin-top: 12px;
@@ -25,21 +25,21 @@
   }
   
   #match:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(110, 110, 110, 0.5);
   }
   #match:selected {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(110, 110, 110, 0.5);
   }
   
   #entry {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    padding: 4px 8px;
+    padding: 14px 14px 14px;
   }
   
   box#main {
-    background: rgba(40, 40, 40, 1);
-    border-radius: 20px;
-    padding: 12px;
+    background: rgb(219, 219, 219);
+    border-radius: 10px;
+    /* padding: 12px; */
   }
