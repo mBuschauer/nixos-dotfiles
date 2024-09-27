@@ -68,12 +68,15 @@
     # inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+
   };
 
   outputs =
     { nixpkgs
     , nixpkgs-stable
     , home-manager
+    , nixos-cosmic
     , ...
     } @
     inputs:
@@ -117,6 +120,14 @@
             };
             home-manager.backupFileExtension = "backupExt";
           }
+          # all for installing Cosmic Desktop Alpha 2
+          {
+            nix.settings = {
+              substituters = [ "https://cosmic.cachix.org/" ];
+              trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+            };
+          }
+          nixos-cosmic.nixosModules.default
         ];
       };
     };
