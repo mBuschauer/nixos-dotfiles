@@ -1,4 +1,4 @@
- {pkgs, inputs, ...}:
+ {pkgs, inputs, secrets, ...}:
 {
 
   home.packages = with pkgs; [
@@ -183,7 +183,7 @@
           format = " {}°";
           tooltip = true;
           interval = 3600;
-          exec = "wttrbar --location 'College Park, MD' --mph --hide-conditions --date-format %m/%d/%Y";
+          exec = "wttrbar --location '${secrets.location}' --mph --hide-conditions --date-format %m/%d/%Y";
           return-type = "json";
         };
 

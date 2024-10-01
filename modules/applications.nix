@@ -45,7 +45,7 @@ in
         Fingerprinting = true;
       };
       DisablePocket = true;
-      DisplayBookmarksToolbar = "always";
+      DisplayBookmarksToolbar = true;
 
       ExtensionSettings = {
         # privacy badger
@@ -138,6 +138,7 @@ in
   environment.systemPackages = with pkgs; [
     zoom-us
     discord
+    webcord # a different discord client
     # vesktop # discord electron wrapper, hardware acceleration doesnt seem to work though
 
     libreoffice-fresh

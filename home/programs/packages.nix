@@ -75,6 +75,12 @@
       icon = "${inputs.tailray.packages.${pkgs.system}.tailray}/icons/tailscale-offline.svg"; # doesnt work, idk why, idc
     };
 
+    # test-location = {
+    #   name = "Print Location";
+    #   exec = "wl-copy ${pkgs.libsForQt5.dolphin}";
+    #   terminal = false;
+    # };
+
   };
 
   programs.lsd = {

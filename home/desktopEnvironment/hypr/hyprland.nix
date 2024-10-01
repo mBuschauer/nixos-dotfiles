@@ -264,7 +264,7 @@ in
         "$mod, mouse_up, workspace, e-1"
 
         ",F11,fullscreen,1"
-        ",F1,overview:toggle" # for hyprspace
+        # ",F1,overview:toggle" # for hyprspace
         # ",F1,hyprexpo:expo,toggle" # for hyprexpo
       ];
 
@@ -282,7 +282,7 @@ in
     };
     
     plugins = builtins.attrValues { inherit (pkgs.hyprlandPlugins)
-      hyprspace 
+      # hyprspace 
       # split-monitor-workspaces
       ; 
     } ++ [

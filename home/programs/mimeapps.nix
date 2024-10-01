@@ -3,6 +3,7 @@ let
   browser = "firefox.desktop";
   images = "qimgv.desktop";
   fileExplorer = "org.kde.dolphin.deskop";
+  # fileExplorer = "dolphin.desktop";
   fileArchiver = "ark.desktop";
 in
 {
@@ -47,7 +48,7 @@ in
         "application/cbr" = [ "okular.desktop" ];
         "application/vnd.comicbook-rar" = [ "okular.desktop" ];
         "application/pdf" = [ "calibre.desktop" ];
-        "inode/directory" = [ "code.desktop" "zed.desktop" ];
+        "inode/directory" = [ "kitty-open.desktop" "code.desktop" "zed.desktop" ];
         "application/directory" = [ "prismlauncher.desktop" ];
         "text/plain" = [ "libreoffice.desktop" ];
         "image/png" = [ "chromium.desktop" ];
