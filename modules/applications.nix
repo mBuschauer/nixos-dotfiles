@@ -137,9 +137,6 @@ in
 
   environment.systemPackages = with pkgs; [
     zoom-us
-    discord
-    webcord # a different discord client
-    # vesktop # discord electron wrapper, hardware acceleration doesnt seem to work though
 
     libreoffice-fresh
     libsForQt5.okular
