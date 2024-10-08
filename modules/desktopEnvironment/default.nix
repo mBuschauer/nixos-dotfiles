@@ -2,7 +2,8 @@
 {
   imports = [
     # ./cosmic.nix
-    # ./gnome.nix
     ./hypr
+    # ./gnome.nix
+    # ./kde.nix
   ];
 }

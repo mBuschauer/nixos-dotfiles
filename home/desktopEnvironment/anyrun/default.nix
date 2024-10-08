@@ -12,6 +12,7 @@
         rink
         shell
         dictionary
+        stdin
       ];
       x = { fraction = 0.5; };
       y = { fraction = 0.35; };
