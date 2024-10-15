@@ -4,7 +4,7 @@
   home.packages = with pkgs; [
     wl-clipboard
     fastfetch
-    
+
     # fun cli programs
     cava
     toipe
@@ -21,7 +21,7 @@
     dconf # idk why this is needed now
     imagemagick
     mpg123
-    calibre 
+    calibre
 
     #spotify      
     prismlauncher
@@ -49,6 +49,8 @@
     # discord
     webcord # a different discord client
     # vesktop # discord electron wrapper, hardware acceleration doesnt seem to work though
+  ] ++ [
+    inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo
   ];
 
   imports = [
@@ -92,6 +94,11 @@
     # test-location = {
     #   name = "Print Location";
     #   exec = "wl-copy ${pkgs.libsForQt5.dolphin}";
+    #   terminal = false;
+    # };
+    # hyprsysteminfo = {
+    #   name = "HyprSystemInfo";
+    #   exec = "hyprsysteminfo";
     #   terminal = false;
     # };
 
@@ -159,4 +166,4 @@
     };
   };
 
-  }
+}

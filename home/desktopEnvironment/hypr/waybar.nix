@@ -7,6 +7,7 @@
     waybar-mpris
     glxinfo
     bc
+    # pw-volume
   ];
   programs.waybar = {
 	  enable = true;
@@ -28,6 +29,7 @@
           "custom/weather"
           "custom/arrow11"
           "pulseaudio"
+          # "custom/pipewire"
           "cava"
           "custom/arrow7"
           "tray"
@@ -241,6 +243,7 @@
           tooltip = false;
         };
 
+
         "custom/groupHardware" = {
           format = "";
           tooltip = false;
@@ -442,6 +445,7 @@
         #mode,
         #network,
         #pulseaudio,
+        #custom-pipewire
         #temperature,
         #tray,
         #backlight,
@@ -549,6 +553,11 @@
         }
 
         #pulseaudio {
+       	background: @sound;
+       	color: @black;
+        }
+
+        #custom-pipewire {
        	background: @sound;
        	color: @black;
         }

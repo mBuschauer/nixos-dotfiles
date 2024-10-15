@@ -25,9 +25,15 @@ in
   services.openssh = {
     enable = true;
     openFirewall = true;
-    settings = {
-      X11Forwarding = true;
-    }; 
+    settings.X11Forwarding = true;
+    extraConfig = ''
+        X11UseLocalHost no
+      '';
+  };
+
+  programs.ssh = {
+    package = pkgs.openssh;
+    forwardX11 = true;
   };
 
   environment.systemPackages = with pkgs; [ 

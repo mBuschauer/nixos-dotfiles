@@ -51,6 +51,8 @@
       };
     };
 
+    hyprsysteminfo.url = "github:hyprwm/hyprsysteminfo";
+
     swww.url = "github:LGFae/swww";
 
     anyrun = {
