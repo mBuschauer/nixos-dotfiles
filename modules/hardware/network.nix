@@ -6,6 +6,7 @@
     # Enable networking
     networkmanager.enable = true;
   
+
     hostName = "${settings.hostname}"; # Define your hostname.
     
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.

@@ -41,12 +41,6 @@ in
         sha256 = "sha256:0yssxmn6hkp6l1r3c0vnw4jsz4r9sdw356prbydg1n1samzhhqyk";
         version = "2024.8.1";
       })
-      #(createChromiumExtension {
-      #  # Hive AI detector
-      #  id = "cmeikcgfecnhojcbfapbmpbjgllklcbi";
-      #  sha256="sha256:0m60hndms87v0y9x94400bkxllzqv030kwvr0bgcb7p74jn31qr5";
-      #  version="0.0.8";
-      # })
       (createChromiumExtension {
         # sponsor block
         id = "mnjggcdmjocbbbhaepdhchncahnbgone";

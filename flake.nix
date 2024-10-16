@@ -21,7 +21,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     hypridle = {
       url = "github:hyprwm/hypridle";
       inputs = {
@@ -82,6 +81,7 @@
     , ...
     } @
     inputs:
+
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -101,7 +101,6 @@
           inherit settings;
           inherit secrets;
         };
-
         modules = [
           ({ config, pkgs, ... }:
             {
