@@ -49,9 +49,16 @@
         systems.follows = "hyprland/systems";
       };
     };
-    
+
+    hyprsysteminfo.url = "github:hyprwm/hyprsysteminfo";
+
     swww.url = "github:LGFae/swww";
-    
+
+    anyrun = {
+      url = "github:anyrun-org/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     tailray = {
       url = "github:NotAShelf/tailray";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,15 +69,19 @@
     # inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+
   };
 
-  outputs = { 
-      nixpkgs, 
-      nixpkgs-stable, 
-      home-manager, 
-      ... 
-    } @ 
-    inputs: 
+  outputs =
+    { nixpkgs
+    , nixpkgs-stable
+    , home-manager
+    # , nixos-cosmic
+    , ...
+    } @
+    inputs:
+
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -110,6 +121,14 @@
             };
             home-manager.backupFileExtension = "backupExt";
           }
+          # # all for installing Cosmic Desktop Alpha 2
+          # {
+          #   nix.settings = {
+          #     substituters = [ "https://cosmic.cachix.org/" ];
+          #     trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+          #   };
+          # }
+          # nixos-cosmic.nixosModules.default
         ];
       };
     };

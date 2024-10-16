@@ -4,22 +4,25 @@
   home.packages = with pkgs; [
     wl-clipboard
     fastfetch
+
+    # fun cli programs
     cava
     toipe
+    lolcat
+    asciiquarium
+    sl
+    peaclock
+    cmatrix
+
     ncspot
     ncdu
     ncmpcpp
     mpc-cli
     dconf # idk why this is needed now
-    lolcat
-    asciiquarium
     imagemagick
     mpg123
-    peaclock
-    lazygit
     calibre
-    sl
-    cmatrix
+
     #spotify      
     prismlauncher
     #mangohud
@@ -42,12 +45,18 @@
     gparted # alternative to disks
 
     hakuneko
+
+    # discord
+    webcord # a different discord client
+    # vesktop # discord electron wrapper, hardware acceleration doesnt seem to work though
+  ] ++ [
+    inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo
   ];
 
   imports = [
     inputs.tailray.homeManagerModules.default
   ];
-  
+
   services.tailray.enable = true;
 
 
@@ -74,6 +83,24 @@
       terminal = false;
       icon = "${inputs.tailray.packages.${pkgs.system}.tailray}/icons/tailscale-offline.svg"; # doesnt work, idk why, idc
     };
+
+    discord-webcord = {
+      name = "Discord";
+      exec = "webcord";
+      terminal = false;
+      icon = "${pkgs.webcord}/share/icons/hicolor/256x256/apps/webcord.png";
+    };
+
+    # test-location = {
+    #   name = "Print Location";
+    #   exec = "wl-copy ${pkgs.libsForQt5.dolphin}";
+    #   terminal = false;
+    # };
+    # hyprsysteminfo = {
+    #   name = "HyprSystemInfo";
+    #   exec = "hyprsysteminfo";
+    #   terminal = false;
+    # };
 
   };
 
@@ -138,4 +165,5 @@
       history = true;
     };
   };
+
 }

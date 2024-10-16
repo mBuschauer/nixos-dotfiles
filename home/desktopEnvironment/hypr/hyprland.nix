@@ -98,7 +98,7 @@ in
       general = {
         gaps_in = 1;
         gaps_out = 1;
-        border_size = 2;
+        border_size = 1;
         "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
         resize_on_border = false;
@@ -164,6 +164,10 @@ in
 	      #"noinitialfocus,class:^(xwaylandvideobridge)$"
 	      #"maxsize 1 1,class:^(xwaylandvideobridge)$"
 	      #"noblur,class:^(xwaylandvideobridge)$"
+      ];
+
+      workspace = [
+        "f[1], gapsout:0, gapsin:0, border: 0, rounding:0"
       ];
 
 
@@ -264,14 +268,17 @@ in
         "$mod, mouse_up, workspace, e-1"
 
         ",F11,fullscreen,1"
+        "$mod,F11,fullscreen,2"
         # ",F1,overview:toggle" # for hyprspace
         # ",F1,hyprexpo:expo,toggle" # for hyprexpo
       ];
 
       bindr = [
-        "$mod, $mod_L, exec, pkill wofi || wofi --show drun --insensitive --allow-images"
+        # "$mod, $mod_L, exec, pkill wofi || wofi --show drun --insensitive --allow-images"
         # "$mod, $mod_L, exec, pkill fuzzel || fuzzel"
         "$mod, V, exec, pkill wofi || cliphist list | wofi --dmenu --insensitive | cliphist decode | wl-copy"
+        # "$mod, V, exec, pkill anyrun || cliphist list | anyrun --plugins libstdin.so | cliphist decode | wl-copy" # no work
+        "$mod, SUPER_L, exec, pkill anyrun || anyrun"
 
       ];
       bindm = [

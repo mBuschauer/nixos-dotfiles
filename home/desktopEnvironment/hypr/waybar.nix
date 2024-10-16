@@ -1,4 +1,4 @@
- {pkgs, inputs, ...}:
+ {pkgs, inputs, secrets, ...}:
 {
 
   home.packages = with pkgs; [
@@ -7,6 +7,7 @@
     waybar-mpris
     glxinfo
     bc
+    # pw-volume
   ];
   programs.waybar = {
 	  enable = true;
@@ -28,6 +29,7 @@
           "custom/weather"
           "custom/arrow11"
           "pulseaudio"
+          # "custom/pipewire"
           "cava"
           "custom/arrow7"
           "tray"
@@ -165,7 +167,7 @@
           format = " {}°";
           tooltip = true;
           interval = 3600;
-          exec = "wttrbar --location 'College Park, MD' --mph --hide-conditions --date-format %m/%d/%Y";
+          exec = "wttrbar --location '${secrets.location}' --mph --hide-conditions --date-format %m/%d/%Y";
           return-type = "json";
         };
 
@@ -198,7 +200,7 @@
 
         "hyprland/window" = {
           format = "{}";
-          max-length = 30;
+          max-length = 50;
           # max-length = 100;
           tooltip = false;
         };
@@ -222,6 +224,7 @@
           on-click = "blueman-manager";
           tooltip = false;
         };
+
 
         "custom/groupHardware" = {
           format = "";
@@ -424,6 +427,7 @@
         #mode,
         #network,
         #pulseaudio,
+        #custom-pipewire
         #temperature,
         #tray,
         #backlight,
@@ -531,6 +535,11 @@
         }
 
         #pulseaudio {
+       	background: @sound;
+       	color: @black;
+        }
+
+        #custom-pipewire {
        	background: @sound;
        	color: @black;
         }

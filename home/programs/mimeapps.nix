@@ -3,7 +3,9 @@ let
   browser = "firefox.desktop";
   images = "qimgv.desktop";
   fileExplorer = "org.kde.dolphin.deskop";
+  # fileExplorer = "dolphin.desktop";
   fileArchiver = "ark.desktop";
+  vsCode = "codium.desktop";
 in
 {
   xdg.mimeApps = {
@@ -17,13 +19,13 @@ in
         "text/html" = [ "${browser}" ];
         "application/x-extension-htm" = [ "${browser}" ];
         "application/x-extension-html" = [ "${browser}" ];
-        "text/xhtml" = [ "code.desktop" ];
+        "text/xhtml" = [ "${vsCode}" ];
         "application/x-extension-shtml" = [ "${browser}" ];
         "application/xhtml+xml" = [ "${browser}" ];
         "application/x-extension-xhtml" = [ "${browser}" ];
         "application/x-extension-xht" = [ "${browser}" ];
         "application/png" = [ "${images}" ];
-        "application/xml" = [ "code.desktop" ];
+        "application/xml" = [ "${vsCode}" ];
 
         "image/png" = [ "${images}" ];
         "image/jpg" = [ "${images}" ];
@@ -47,7 +49,7 @@ in
         "application/cbr" = [ "okular.desktop" ];
         "application/vnd.comicbook-rar" = [ "okular.desktop" ];
         "application/pdf" = [ "calibre.desktop" ];
-        "inode/directory" = [ "code.desktop" "zed.desktop" ];
+        "inode/directory" = [ "kitty-open.desktop" "${vsCode}" "zed.desktop" ];
         "application/directory" = [ "prismlauncher.desktop" ];
         "text/plain" = [ "libreoffice.desktop" ];
         "image/png" = [ "chromium.desktop" ];
@@ -85,7 +87,7 @@ in
       "application/zip" = [ "${fileArchiver}" ];
       "application/cbr" = [ "${fileArchiver}" ];
       "application/cbz" = [ "okular.desktop" ];
-      "application/xml" = [ "code.desktop" ];
+      "application/xml" = [ "${vsCode}" ];
     };
   };
 

@@ -25,9 +25,15 @@ in
   services.openssh = {
     enable = true;
     openFirewall = true;
-    settings = {
-      X11Forwarding = true;
-    }; 
+    settings.X11Forwarding = true;
+    extraConfig = ''
+        X11UseLocalHost no
+      '';
+  };
+
+  programs.ssh = {
+    package = pkgs.openssh;
+    forwardX11 = true;
   };
 
   environment.systemPackages = with pkgs; [ 
@@ -70,6 +76,7 @@ in
   ]
   ++ [
     # inputs.tsui.packages."x86_64-linux".tsui # currently broken, not going to fix now.
+    # inputs.anyrun.packages."x86_64-linux".anyrun
   ];
 
 }

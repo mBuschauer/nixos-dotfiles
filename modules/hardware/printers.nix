@@ -3,13 +3,14 @@
 {
   # enable printing
   services.printing = {
-    enable = true;
+    enable = false; # disabled because of CUPs vulnerability 
     drivers = with pkgs; [gutenprint hplip];
+    openFirewall = false; # disabled because of CUPs vulnerability 
   };
 
   services.avahi  = {
-    enable = true;
+    enable = false; # disabled because of CUPs vulnerability 
     nssmdns4 = true;
-    openFirewall = true;
+    openFirewall = false; # disabled because of CUPs vulnerability 
   };
 }

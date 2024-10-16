@@ -21,6 +21,6 @@
     enable = true;
     font.name = "JetBrainsMono Nerd Font";
     font.size = 11;
-    theme = "Ayu Mirage";
+    themeFile = "ayu_mirage";
   };
 }

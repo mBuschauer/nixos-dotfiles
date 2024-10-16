@@ -1,0 +1,46 @@
+* {
+    all: unset;
+    font-size: 1.2rem;
+    color: black;
+  }
+  
+  #window,
+  #match,
+  #entry,
+  #plugin,
+  #main {
+    background: transparent;
+  }
+  
+  #match.activatable {
+    background: rgb(215, 215, 215);
+    border-radius: 3px;
+    margin: 2px 0;
+    padding: 4px;
+  }
+  #match.activatable:first-child {
+    margin-top: 12px;
+  }
+  #match.activatable:last-child {
+    margin-bottom: 0;
+  }
+  
+  #match:hover {
+    background: rgba(110, 110, 110, 0.5);
+  }
+  #match:selected {
+    background: rgba(110, 110, 110, 0.5);
+  }
+
+  #entry {
+    background: rgb(215, 215, 215);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 14px 14px 14px;
+  }
+  
+  box#main {
+    background: rgb(160, 160, 160);
+    border-radius: 8px;
+    padding: 5px;
+  }

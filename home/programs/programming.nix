@@ -1,7 +1,9 @@
-{ inputs, pkgs, secrets, ... }:
+{ inputs, pkgs, secrets, lib, ... }:
 {
   programs.vscode = {
     enable = true;
+    # package = pkgs.vscodium; # doensn't support microsoft extensions
+    package = pkgs.vscode;
     extensions = with pkgs.vscode-extensions; [
       ms-python.debugpy # Python Debugger
       ms-vscode-remote.remote-containers # Dev Containers
@@ -9,7 +11,7 @@
       yzhang.markdown-all-in-one # markdown-all-in-one
       bbenoist.nix # nix
       jnoortheen.nix-ide #nix IDE
-      # ms-python.python # Python
+      ms-python.python # Python
       ms-python.vscode-pylance # vscode-pylance
       rust-lang.rust-analyzer # rust-analyzer
       vscode-icons-team.vscode-icons # vscode-icons
@@ -31,8 +33,16 @@
         version = "0.2.14";
         sha256 = "63c73c0791f33082fbfc81c54dc8b2ac08a5a482226c1598b2c25e3b37f8252a";
       }
+      {
+        # sftp support
+        name = "SFTP";
+        publisher = "Natizyskunk";
+        version = "1.16.3";
+        sha256 = "sha256-HifPiHIbgsfTldIeN9HaVKGk/ujaZbjHMiLAza/o6J4";
+      }
     ];
   };
+
 
   programs.git = {
     enable = true;

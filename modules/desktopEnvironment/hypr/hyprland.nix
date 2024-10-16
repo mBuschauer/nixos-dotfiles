@@ -43,17 +43,31 @@
     platformTheme = "qt5ct";
   };
 
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-    config = {
-      hyprland.default = [ "hyprland" ];
-    };
+  xdg = {
+    portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+      config = {
+        hyprland.default = [ "hyprland" ];
+      };
 
-    extraPortals = [
-      inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk
-    ];
+      extraPortals = [
+        inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+        pkgs.xdg-desktop-portal-gtk
+      ];
+    };
+    mime = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = [ "org.kde.dolphin.deskop" ];
+      };
+      addedAssociations = {
+        "inode/directory" = [ "org.kde.dolphin.deskop" ];
+      };
+      removedAssociations = {
+        "inode/directory" = [ "kitty-open.deskop" ];
+      };
+    };
   };
 
   # hint electron apps to use wayland

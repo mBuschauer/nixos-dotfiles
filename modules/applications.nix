@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 let
   # this is related to an issue with nvidia, I believe, not wayland but setting backend as xcb seems to fix playback issues
   jellyfin-wayland = pkgs.jellyfin-media-player.overrideAttrs (prevAttrs: {
@@ -45,7 +45,7 @@ in
         Fingerprinting = true;
       };
       DisablePocket = true;
-      DisplayBookmarksToolbar = "always";
+      DisplayBookmarksToolbar = true;
 
       ExtensionSettings = {
         # privacy badger
@@ -110,6 +110,9 @@ in
   programs.steam = {
     enable = true;
     package = pkgs.steam;
+    extraPackages = with pkgs; [
+      mangohud
+    ];
   };
 
   programs.thunar = {
@@ -137,8 +140,6 @@ in
 
   environment.systemPackages = with pkgs; [
     zoom-us
-    discord
-    # vesktop # discord electron wrapper, hardware acceleration doesnt seem to work though
 
     libreoffice-fresh
     libsForQt5.okular
@@ -151,18 +152,18 @@ in
 
     notepad-next
 
-    sigil-wayland
-
     teams-for-linux # electron client for microsoft teams
 
     mpv
 
     komikku
 
-    jellyfin-wayland
+    sigil-wayland # override because its broken on Nvidia
+    jellyfin-wayland # override because its broken on Nvidia
 
     ryujinx
 
+    zip
     unzip
 
     wget
