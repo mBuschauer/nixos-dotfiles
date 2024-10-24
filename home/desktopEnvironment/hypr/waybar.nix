@@ -1,4 +1,4 @@
- {pkgs, inputs, secrets, ...}:
+{ pkgs, inputs, secrets, ... }:
 {
 
   home.packages = with pkgs; [
@@ -10,18 +10,18 @@
     # pw-volume
   ];
   programs.waybar = {
-	  enable = true;
-	  package = inputs.waybar.packages."${pkgs.system}".waybar;
+    enable = true;
+    package = inputs.waybar.packages."${pkgs.system}".waybar;
     settings = {
       mainBar = {
         layer = "top";
         position = "top";
         output = [
-          "HDMI-A-1" 
+          "HDMI-A-1"
           "DP-1"
         ];
-        modules-left = ["hyprland/workspaces" "custom/arrow10" "custom/waybar-mpris"];
-        modules-center = ["hyprland/window"];
+        modules-left = [ "hyprland/workspaces" "custom/arrow10" "custom/waybar-mpris" ];
+        modules-center = [ "hyprland/window" ];
         modules-right = [
           "group/hardware"
           "custom/hardware"
@@ -38,7 +38,7 @@
           "clock#time"
           "custom/arrow8"
           "group/power"
-          ];
+        ];
 
         "group/power" = {
           orientation = "horizontal";
@@ -91,7 +91,7 @@
           waves = false;
           noise_reduction = 0.4;
           input_delay = 1;
-          format-icons = ["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
+          format-icons = [ "▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
           on-click = "easyeffects";
         };
 
@@ -129,13 +129,13 @@
               today = "<span color='#ff6699'><b>{}</b></span>";
             };
           };
-          actions =  {
+          actions = {
             on-click = "shift_up";
             on-click-middle = "shift_reset";
             on-click-right = "shift_down";
           };
         };
-        
+
         "cpu" = {
           interval = 5;
           tooltip = true;
@@ -154,7 +154,25 @@
           interval = 1;
           on-click = "gpustat";
           exec = pkgs.writeShellScript "get_nvidia_gpu" ''
-            {"text": "ERROR","tooltip": "ERROR"}
+            # Fetch GPU usage percentage
+            gpu_usage=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits)
+
+            # Fetch GPU temperature
+            gpu_temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits)
+
+            # Fetch driver version
+            driver_version=$(nvidia-smi --query-gpu=driver_version --format=csv,noheader)
+
+            # Fetch total and used memory
+            total_memory=$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits)
+            used_memory=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits)
+
+            # Fetch GPU name
+            gpu_name=$(nvidia-smi --query-gpu=name --format=csv,noheader)
+
+            # Create the JSON output
+            json_output=$(cat <<EOF
+            {"text": "$gpu_usage","tooltip": "GPU Name: $gpu_name\nUsed Memory: $used_memory MiB / $total_memory MiB\nTemperature: $gpu_temp°C\nDriver Version: $driver_version"}
             EOF
             )
 
@@ -180,7 +198,7 @@
 
         "network" = {
           interval = 5;
-          format-wifi =  " {essid} ({signalStrength}%)";
+          format-wifi = " {essid} ({signalStrength}%)";
           format-ethernet = " {bandwidthDownBits} {bandwidthUpBits}";
           format-disconnected = "No connection";
           format-alt = " {ipaddr}/{cidr}";
