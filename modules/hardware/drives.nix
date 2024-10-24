@@ -58,7 +58,7 @@
     fsType = "cifs";
     options = [
       "noauto"
-      # "_netdev"
+      "_netdev"
       "x-systemd.automount"
       "x-systemd.requires=tailscaled.service"
       "username=${secrets.nasUser}"
@@ -74,7 +74,7 @@
     fsType = "cifs";
     options = [
       "noauto"
-      # "_netdev"
+      "_netdev"
       "x-systemd.automount"
       "x-systemd.requires=tailscaled.service"
       "username=${secrets.nasUser}"

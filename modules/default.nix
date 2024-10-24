@@ -6,9 +6,8 @@
 		./admin
 		./desktopEnvironment
 		./hardware
+		./programs
 
-		./applications.nix
-		./programming.nix
     ./virtualization.nix
 	];
 }

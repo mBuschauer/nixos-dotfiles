@@ -10,9 +10,8 @@ let
   });
 in
 {
-  users.users.${settings.username}.extraGroups = [ "docker" ];
-
   # enable docker
+  users.users.${settings.username}.extraGroups = [ "docker" ];
   virtualisation.docker = {
     enable = true;
     liveRestore = false;
@@ -35,6 +34,9 @@ in
     package = pkgs.openssh;
     forwardX11 = true;
   };
+
+  programs.tmux.enable = true;
+
 
   environment.systemPackages = with pkgs; [ 
     rustc

@@ -8,7 +8,7 @@ in
 
     # used for clipboard history (SUPER + V)
     wl-clipboard
-    cliphist
+    stable.cliphist
   ];
   
   services.dunst = {
@@ -74,7 +74,7 @@ in
         "wl-paste --watch cliphist store"
         #"kitty -e ncspot"
         "easyeffects --gapplication-service" 
-        #"xwaylandvideobridge"
+        # "xwaylandvideobridge"
         #"mpd-mpris"
         # "discord --start-minimized" # starts discord before waybar so icon doesnt show up anyway
       ];
@@ -158,12 +158,12 @@ in
         "float,class:(ark)"
         "float,class:(qimgv)"
 	
-	      # for screemsharing under XWayland (like Discord)
-	      #"opacity 0.0 override,class:^(xwaylandvideobridge)$"
-	      #"noanim,class:^(xwaylandvideobridge)$"
-	      #"noinitialfocus,class:^(xwaylandvideobridge)$"
-	      #"maxsize 1 1,class:^(xwaylandvideobridge)$"
-	      #"noblur,class:^(xwaylandvideobridge)$"
+	      # for screensharing under XWayland (like Discord)
+	      # "opacity 0.0 override,class:^(xwaylandvideobridge)$"
+	      # "noanim,class:^(xwaylandvideobridge)$"
+	      # "noinitialfocus,class:^(xwaylandvideobridge)$"
+	      # "maxsize 1 1,class:^(xwaylandvideobridge)$"
+	      # "noblur,class:^(xwaylandvideobridge)$"
       ];
 
       workspace = [
