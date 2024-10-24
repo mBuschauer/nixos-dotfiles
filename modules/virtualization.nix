@@ -1,6 +1,6 @@
-{ pkgs, settings, ... }: 
+{ pkgs, settings, ... }:
 
-{ 
+{
   virtualisation = {
     # waydroid.enable = true;
 
@@ -23,6 +23,13 @@
     #  dockerCompat = true;
     #  defaultNetwork.settings.dns_enabled = true;
     #};
+
+    virtualbox.host = {
+      enable = true;
+      package = pkgs.stable.virtualbox;
+      enableExtensionPack = true;
+      enableHardening = true;
+    };
   };
 
   programs.virt-manager = {
@@ -30,7 +37,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-   # podman-compose
+    # podman-compose
     qemu
     spice
     spice-gtk
@@ -38,13 +45,13 @@
     virt-manager
     virt-viewer
     win-spice
-    win-virtio 
+    win-virtio
 
 
     bottles # modern wine gui
   ];
 
-  users.users.${settings.username}.extraGroups = [ "libvirtd" ];
+  users.users.${settings.username}.extraGroups = [ "libvirtd" "vboxusers" ];
 
   home-manager.users.${settings.username} = {
     dconf.settings = {

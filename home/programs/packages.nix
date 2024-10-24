@@ -23,9 +23,8 @@
     mpg123
     calibre
 
-    #spotify      
+    spotify      
     prismlauncher
-    #mangohud
     qalculate-gtk
     qimgv # image viewer
     libsForQt5.ark # zip browser
@@ -33,6 +32,7 @@
 
     heroic
     # localsend
+
 
     # caligula # disk/iso imager
 
@@ -45,6 +45,8 @@
     gparted # alternative to disks
 
     hakuneko
+
+    p7zip # for 7z support
 
     # discord
     webcord # a different discord client
