@@ -29,8 +29,6 @@
     qimgv # image viewer
     libsForQt5.ark # zip browser
     rofi-wayland
-
-    heroic
     # localsend
 
 

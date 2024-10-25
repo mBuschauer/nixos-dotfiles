@@ -19,14 +19,6 @@ in
 {
   nixpkgs.config.allowUnfree = true;
 
-  programs.steam = {
-    enable = true;
-    package = pkgs.steam;
-    extraPackages = with pkgs; [
-      mangohud
-    ];
-  };
-
   programs.thunar = {
     enable = false;
     plugins = with pkgs.xfce; [
