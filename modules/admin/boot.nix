@@ -2,11 +2,12 @@
 {
   # use new linux kernel
 
-  # 6.11 is broken in nixpkgs. Pinning it at 6.10 for now.
-  # boot.kernelPackages = pkgs.linuxPackages_latest; 
-  # https://github.com/NixOS/nixpkgs/issues/343774
-  # https://github.com/NVIDIA/open-gpu-kernel-modules/pull/692
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_10;
+  # 6.11 is broken with nvidia stable drivers. Changed to beta and not works.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  boot.kernelParams = [
+    # "initcall_blacklist=simpledrm_platform_driver_init"
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

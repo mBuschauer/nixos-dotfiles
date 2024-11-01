@@ -17,9 +17,6 @@ in
     liveRestore = false;
   };
 
-  services.tailscale.enable = true;
-  services.tailscale.useRoutingFeatures = "client";
-  # sudo tailscale set --exit-node=xxx
 
   services.openssh = {
     enable = true;

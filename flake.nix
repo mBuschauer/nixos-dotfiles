@@ -137,8 +137,9 @@
             };
           }
           # nixos-cosmic.nixosModules.default
+          
           # {
-          #   # angl
+          #   # aagl
           #   imports = [ aagl.nixosModules.default ];
           #   nix.settings = aagl.nixConfig; # Set up Cachix
           # }
