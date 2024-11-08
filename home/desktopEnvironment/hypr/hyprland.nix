@@ -153,9 +153,10 @@ in
       windowrulev2 = [ 
         "maximize,class:(okular)"
 
-        "maximize,class:(sigil),title:(.*)( - Sigil [std])$"
-        "maximize,class:(sigil),title:(.*)( - Sigil)$"
-        "float,class:(ark)"
+        # "maximize,class:(sigil),title:(.*)( - Sigil [std])$"
+        # "maximize,class:(sigil),title:(.*)( - Sigil)$"
+        "maximize,class:(sigil)"
+        "float,class:(CoreArchiver)"
         "float,class:(qimgv)"
 	
 	      # for screensharing under XWayland (like Discord)

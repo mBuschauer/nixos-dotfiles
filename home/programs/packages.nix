@@ -23,11 +23,12 @@
     mpg123
     calibre
 
-    spotify      
+    spotify
     prismlauncher
     qalculate-gtk
     qimgv # image viewer
-    libsForQt5.ark # zip browser
+    # kdePackages.ark # zip browser
+    CuboCore.corearchiver # zip browser
     rofi-wayland
     # localsend
 
@@ -90,17 +91,57 @@
       terminal = false;
       icon = "${pkgs.webcord}/share/icons/hicolor/256x256/apps/webcord.png";
     };
-
-    # test-location = {
-    #   name = "Print Location";
-    #   exec = "wl-copy ${pkgs.libsForQt5.dolphin}";
-    #   terminal = false;
-    # };
     # hyprsysteminfo = {
     #   name = "HyprSystemInfo";
     #   exec = "hyprsysteminfo";
     #   terminal = false;
     # };
+    corearchiver = {
+      type = "Application";
+      name = "CoreArchiver";
+      comment = "Archiver for C Suite, to create and extract archives.";
+      exec = "corearchiver %F";
+      icon = "${pkgs.CuboCore.corearchiver}/share/icons/hicolor/scalable/apps/org.cubocore.CoreArchiver.svg";
+      terminal = false;
+      startupNotify = true;
+      categories = [ "Qt" "Utility" "FileTools" "Archiving" "Compression" "X-CSuite" ];
+      mimeType = [
+        "application/x-cpio"
+        "application/x-shar"
+        "application/x-tar"
+        "application/x-compressed-tar"
+        "application/octet-stream"
+        "application/x-xz-compressed-tar"
+        "application/x-lzma-compressed-tar"
+        "application/x-lz4-compressed-tar"
+        "application/x-bzip-compressed-tar"
+        "application/x-tarz"
+        "application/x-cd-image"
+        "application/zip"
+        "application/x-archive"
+        "application/x-xar"
+        "application/x-7z-compressed"
+        "application/x-lzip"
+        "application/x-lz4"
+        "text/x-uuencode"
+        "application/x-lzop"
+        "application/gzip"
+        "application/x-bzip"
+        "application/x-lzma"
+        "application/x-xz"
+        "application/x-lrzip"
+      ];
+      actions = {
+        CreateArchive = {
+          name = "Add to archive";
+          exec = "corearchiver %F";
+        };
+        ExtractArchive = {
+          name = "Extract archive";
+          exec = "corearchiver %F";
+        };
+      };
+    };
 
   };
 

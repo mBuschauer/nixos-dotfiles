@@ -66,6 +66,7 @@ in
 
     zip
     unzip
+    gzip
 
     wget
     bottom

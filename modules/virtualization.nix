@@ -33,7 +33,8 @@
   };
 
   programs.virt-manager = {
-    enable = true;
+    enable = true; # front end for qemu
+    package = pkgs.virt-manager;
   };
 
   environment.systemPackages = with pkgs; [
@@ -47,11 +48,13 @@
     win-spice
     win-virtio
 
-
     bottles # modern wine gui
   ];
 
-  users.users.${settings.username}.extraGroups = [ "libvirtd" "vboxusers" ];
+  users.users.${settings.username}.extraGroups = [ 
+    "libvirtd" 
+    "vboxusers" # Adding users to the group vboxusers allows them to use the virtualbox functionality. 
+  ];
 
   home-manager.users.${settings.username} = {
     dconf.settings = {
