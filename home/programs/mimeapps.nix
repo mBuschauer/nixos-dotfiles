@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   browser = "firefox.desktop";
   images = "qimgv.desktop";
@@ -8,6 +8,13 @@ let
   vsCode = "codium.desktop";
 in
 {
+
+  home.packages = with pkgs; [ 
+    file
+  ];
+
+
+
   xdg.mimeApps = {
     enable = true;
     associations = {
@@ -36,8 +43,8 @@ in
         "application/epub" = [ "sigil.desktop" ];
         "application/epub+zip" = [ "sigil.desktop" ];
         "text/plain" = [ "NotepadNext.desktop" ];
-        "text/css" = [ "${vsCode}" ];
-        "text/js" = [ "${vsCode}" ];
+        "application/javascript" = [ "${vsCode}" ];
+
         "inode/directory" = [ "${fileExplorer}" ];
         "application/zip" = [ "${fileArchiver}" ];
         "application/cbr" = [ "${fileArchiver}" ]; # .cbr
@@ -48,7 +55,7 @@ in
       removed = {
         "application/epub" = [ "okular.desktop" ];
         "application/epub+zip" = [ "okular.desktop" ];
-        "application/zip" = ["prism.desktop"];
+        "application/zip" = [ "prism.desktop" ];
         "application/cbr" = [ "okular.desktop" ];
         "application/vnd.comicbook-rar" = [ "okular.desktop" ];
         "application/pdf" = [ "calibre.desktop" ];
@@ -86,8 +93,7 @@ in
       "application/epub+zip" = [ "sigil.desktop" ];
       "application/vnd.comicbook-rar" = [ "${fileArchiver}" ];
       "text/plain" = [ "NotepadNext.desktop" ];
-      "text/css" = [ "${vsCode}" ];
-      "text/js" = [ "${vsCode}" ];
+      "application/javascript" = [ "${vsCode}" ];
       "inode/directory" = [ "${fileExplorer}" ];
       "application/zip" = [ "${fileArchiver}" ];
       "application/cbr" = [ "${fileArchiver}" ];
