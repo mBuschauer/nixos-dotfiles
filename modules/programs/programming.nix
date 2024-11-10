@@ -17,14 +17,24 @@ in
     liveRestore = false;
   };
 
+  # for creating gpg keys
+  services.pcscd.enable = true;
+  programs.gnupg = {
+    package = pkgs.gnupg;
+    agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryPackage = pkgs.pinentry-curses;
+    };
+  };
 
   services.openssh = {
     enable = true;
     openFirewall = true;
     settings.X11Forwarding = true;
     extraConfig = ''
-        X11UseLocalHost no
-      '';
+      X11UseLocalHost no
+    '';
   };
 
   programs.ssh = {
@@ -35,7 +45,8 @@ in
   programs.tmux.enable = true;
 
 
-  environment.systemPackages = with pkgs; [ 
+
+  environment.systemPackages = with pkgs; [
     rustc
     rustup
     cargo
@@ -48,15 +59,15 @@ in
     #lua
     #zig
     sqlite
-    
-    docker-compose 
+
+    docker-compose
 
     vim
     neovim
     lunarvim
     gedit
 
-    
+
 
     rust-analyzer
     # pkg-config
@@ -68,10 +79,9 @@ in
     devenv
     # direnv
 
-
     # assorted dependencies
     gnat14
-    
+
   ]
   ++ [
     # inputs.tsui.packages."x86_64-linux".tsui # currently broken, not going to fix now.

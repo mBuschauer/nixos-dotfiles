@@ -146,8 +146,8 @@ in
       };
 
       layerrule = [
-        # "noanim,^(wofi)$" # disable animation for wofi pop-in (it looks like shit tho)
-        "animation[fadeIn],^(wofi)$"
+        # "noanim,^(anyrun)$" # disable animation for anyrun pop-in
+        "animation[fadeIn],^(anyrun)$"
       ];
 
       windowrulev2 = [ 
