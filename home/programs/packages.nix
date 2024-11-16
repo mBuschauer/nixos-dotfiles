@@ -27,6 +27,7 @@
     prismlauncher
     qalculate-gtk
     qimgv # image viewer
+    # pqiv # image viewer
     # kdePackages.ark # zip browser
     CuboCore.corearchiver # zip browser
     rofi-wayland

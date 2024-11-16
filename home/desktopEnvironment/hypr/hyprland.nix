@@ -9,8 +9,10 @@ in
     # used for clipboard history (SUPER + V)
     wl-clipboard
     stable.cliphist
+
+    # satty # for screenshot editing (will be implemented at some point)
   ];
-  
+
   services.dunst = {
     enable = true;
     package = pkgs.dunst;
@@ -25,7 +27,7 @@ in
         padding = 8;
         # Horizontal padding
         horizontal_padding = 8;
-        
+
         # Split notifications into multiple lines
         word_wrap = "no";
         # If message too long, add ellipsize to...
@@ -51,14 +53,14 @@ in
 
     };
   };
-  
+
   wayland.windowManager.hyprland = {
     # systemd.variables = ["--all"];
     enable = true;
     # systemd.enable = false;
     # xwayland.enable = false;
     settings = {
-      monitor=[
+      monitor = [
         "HDMI-A-1, preferred, 1920x0, 1"
         "DP-1, preferred, 0x0, 1"
       ];
@@ -67,13 +69,13 @@ in
       #  "HYPRCURSOR_THEME,${cursorName}"
       #  "HYPRCURSOR_SIZE,${toString pointerSize}"
       #];
-      
+
       "exec-once" = [
         "waybar"
         # "hyprctl setcursor ${cursorName} ${toString pointerSize}"
         "wl-paste --watch cliphist store"
         #"kitty -e ncspot"
-        "easyeffects --gapplication-service" 
+        "easyeffects --gapplication-service"
         # "xwaylandvideobridge"
         #"mpd-mpris"
         # "discord --start-minimized" # starts discord before waybar so icon doesnt show up anyway
@@ -108,10 +110,12 @@ in
 
       decoration = {
         rounding = 2;
-        drop_shadow = true;
-        shadow_range = 4;
-        shadow_render_power = 3;
-        "col.shadow" = "rgba(1a1a1aee)";
+        shadow = {
+          enabled = true;
+          range = 4;
+          render_power = 3;
+          color = "rgba(1a1a1aee)";
+        };
 
         blur = {
           enabled = true;
@@ -125,14 +129,14 @@ in
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
 
         animation = [
-            "windows, 1, 7, myBezier"
-            "layersIn, 1, 3, myBezier"
-            "windowsOut, 1, 7, default, popin 80%"
-            "border, 1, 10, default"
-            "borderangle, 1, 8, default"
-            "fade, 1, 7, default"
-            "fadeIn, 1, 3, default"
-            "workspaces, 1, 6, default"
+          "windows, 1, 7, myBezier"
+          "layersIn, 1, 3, myBezier"
+          "windowsOut, 1, 7, default, popin 80%"
+          "border, 1, 10, default"
+          "borderangle, 1, 8, default"
+          "fade, 1, 7, default"
+          "fadeIn, 1, 3, default"
+          "workspaces, 1, 6, default"
         ];
       };
 
@@ -150,7 +154,7 @@ in
         "animation[fadeIn],^(anyrun)$"
       ];
 
-      windowrulev2 = [ 
+      windowrulev2 = [
         "maximize,class:(okular)"
 
         # "maximize,class:(sigil),title:(.*)( - Sigil [std])$"
@@ -158,13 +162,15 @@ in
         "maximize,class:(sigil)"
         "float,class:(CoreArchiver)"
         "float,class:(qimgv)"
-	
-	      # for screensharing under XWayland (like Discord)
-	      # "opacity 0.0 override,class:^(xwaylandvideobridge)$"
-	      # "noanim,class:^(xwaylandvideobridge)$"
-	      # "noinitialfocus,class:^(xwaylandvideobridge)$"
-	      # "maxsize 1 1,class:^(xwaylandvideobridge)$"
-	      # "noblur,class:^(xwaylandvideobridge)$"
+        "float,class:(pqiv)"
+
+
+        # for screensharing under XWayland (like Discord)
+        # "opacity 0.0 override,class:^(xwaylandvideobridge)$"
+        # "noanim,class:^(xwaylandvideobridge)$"
+        # "noinitialfocus,class:^(xwaylandvideobridge)$"
+        # "maxsize 1 1,class:^(xwaylandvideobridge)$"
+        # "noblur,class:^(xwaylandvideobridge)$"
       ];
 
       workspace = [
@@ -181,8 +187,8 @@ in
         # pkgs.writeShellScript "get_nvidia_gpu" ''
         # notify-send 'Screenshot Taken' \"~/Pictures/screenshot-$(date +%Y%m%d%H%M%S).png\" 
         "$mod, P, exec, ${pkgs.writeShellScript "sent_nofification" ''
-          STAMP=$(date +%Y%m%d%H%M%S)
-          SCREENSHOT_PATH=~/Pictures/screenshot-$STAMP.png
+          STAMP=$(date +'%Y-%m-%d_%H-%M-%S')
+          SCREENSHOT_PATH=~/Pictures/Screenshots/Screenshot_$STAMP.png
 
           # Take screenshot with grim, but check if slurp/grim was cancelled
           grim -g "$(slurp)" "$SCREENSHOT_PATH"
@@ -191,12 +197,11 @@ in
             exit 1
           fi
 
-
           ${notification}
 
           # Function to open the Pictures folder
           forward_action() {
-            xdg-open ~/Pictures/
+            xdg-open ~/Pictures/Screenshots
           }
 
           # Function to handle notification dismiss
@@ -219,10 +224,52 @@ in
               echo "No valid action selected."
               ;;
           esac
-        ''}" 
-        
 
-        
+        ''}"
+
+        "$mod, Print, exec, ${pkgs.writeShellScript "active-window" ''
+          w_pos=$(hyprctl activewindow | grep 'at:' | awk '{print $2}' | tr -d ' ')
+          w_size=$(hyprctl activewindow | grep 'size:' | awk '{print $2}' | tr -d ' ' | sed 's/,/x/')
+          geometry="$w_pos $w_size"
+          STAMP=$(date +'%Y-%m-%d_%H-%M-%S')
+
+          SCREENSHOT_PATH=~/Pictures/Screenshots/Screenshot_$STAMP.png
+          ANNOTATED_PATH=~/Pictures/Screenshots/Screenshot_Annotated_$STAMP.png
+
+          # Take a screenshot of the active window
+          grim -g "$geometry" "$SCREENSHOT_PATH"
+          ${notification}
+
+          # Function to open the Pictures folder
+          forward_action() {
+            xdg-open ~/Pictures/Screenshots
+          }
+
+          # Function to handle notification dismiss
+          handle_dismiss() {
+            echo "Notification dismissed!"
+          }
+
+          # Display the notification with actions
+          ACTION=$(dunstify --action="forward,Forward" "Screenshot Taken" "$SCREENSHOT_PATH")
+
+          # Handle the selected action
+          case "$ACTION" in
+            "forward")
+              forward_action
+              ;;
+            "2")  # Dunst returns "2" when the notification is manually dismissed
+              handle_dismiss
+              ;;
+            *)
+              echo "No valid action selected."
+              ;;
+          esac
+
+          return 0
+        ''}"
+
+
         "$mod, Space, togglesplit"
 
         "$mod, K, exec, pkill waybar; sleep 0.5 && waybar"
@@ -231,7 +278,7 @@ in
 
         # "$mod, Q, exec, kitty --hold /home/marco/.config/.pokemon-icat/pokemon-icat"
         "$mod, Q, exec, kitty"
-        
+
         "$mod, C, killactive"
         "$mod, E, exec, dolphin"
         # "$mod, E, exec, kitty -e yazi"
@@ -287,12 +334,14 @@ in
         "$mod, mouse:273, resizewindow"
       ];
     };
-    
-    plugins = builtins.attrValues { inherit (pkgs.hyprlandPlugins)
-      # hyprspace 
-      # split-monitor-workspaces
-      ; 
-    } ++ [
+
+    plugins = builtins.attrValues
+      {
+        inherit (pkgs.hyprlandPlugins)
+          # hyprspace 
+          # split-monitor-workspaces
+          ;
+      } ++ [
       # inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
       # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
     ];

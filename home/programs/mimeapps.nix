@@ -2,8 +2,8 @@
 let
   browser = "firefox.desktop";
   images = "qimgv.desktop";
-  fileExplorer = "org.kde.dolphin.deskop";
-  # fileExplorer = "dolphin.desktop";
+  # fileExplorer = "org.kde.dolphin.deskop";
+  fileExplorer = "dolphin.desktop";
   fileArchiver = "corearchiver.desktop";
   vsCode = "codium.desktop";
 in
