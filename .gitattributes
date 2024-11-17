@@ -2,3 +2,4 @@ settings.nix merge=ours
 modules/hardware/drives.nix merge=ours
 modules/hardware/gpu/default.nix merge=ours
 home/hardware/gpu/default.nix merge=ours
+./home/desktopEnvironment/hypr/waybar/waybar.nix merge=ours

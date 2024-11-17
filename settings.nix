@@ -1,6 +1,6 @@
 { pkgs, ... }:
 rec {
   system = "x86_64-linux";
-  hostname = "MarcoMNix"; # Hostname
+  hostname = "nixos"; # Hostname
   username = "marco"; # Username
 }
