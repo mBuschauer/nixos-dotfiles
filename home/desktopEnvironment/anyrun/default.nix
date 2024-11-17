@@ -13,6 +13,7 @@
         shell
         dictionary
         stdin
+        translate
       ];
       x = { fraction = 0.5; };
       y = { fraction = 0.35; };
@@ -42,6 +43,13 @@
         Config(
           prefix: ":def",
           max_entries: 5,
+        )
+      '';
+      "translate.ron".text = ''
+        Config(
+          prefix: ":",
+          language_delimiter: ">",
+          max_entries: 3,
         )
       '';
     };

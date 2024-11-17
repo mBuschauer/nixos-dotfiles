@@ -7,7 +7,7 @@
     ./hyprland.nix
     ./themes.nix
     ./wallpaper.nix
-    ./waybar.nix
+    ./waybar/waybar.nix
     ./wlogout.nix
   ];
 }

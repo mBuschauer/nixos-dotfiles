@@ -1,8 +1,13 @@
 { config, pkgs, ... }:
 {
   # use new linux kernel
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_10;
+
+  # 6.11 is broken with nvidia stable drivers. Changed to beta and not works.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  boot.kernelParams = [
+    # "initcall_blacklist=simpledrm_platform_driver_init"
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

@@ -64,6 +64,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # aagl = {
+    #   # an-anime-game-launcher
+    #   url = "github:ezKEa/aagl-gtk-on-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    # winapps = {
+    #   url = "github:winapps-org/winapps";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
     # tsui = {
     # url = "github:neuralinkcorp/tsui";
     # inputs.nixpkgs.follows = "nixpkgs";
@@ -78,6 +89,8 @@
     , nixpkgs-stable
     , home-manager
     # , nixos-cosmic
+    # , winapps
+    # , aagl
     , ...
     } @
     inputs:
@@ -111,24 +124,25 @@
           inputs.home-manager.nixosModules.default
           home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users."${settings.username}".imports = [ ./home/default.nix ];
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-              inherit settings;
-              inherit secrets;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users."${settings.username}".imports = [ ./home/default.nix ];
+              extraSpecialArgs = {
+                inherit inputs;
+                inherit settings;
+                inherit secrets;
+              };
+              backupFileExtension = "backupExt";
             };
-            home-manager.backupFileExtension = "backupExt";
           }
-          # # all for installing Cosmic Desktop Alpha 2
-          # {
-          #   nix.settings = {
-          #     substituters = [ "https://cosmic.cachix.org/" ];
-          #     trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
-          #   };
-          # }
           # nixos-cosmic.nixosModules.default
+          
+          # {
+          #   # aagl
+          #   imports = [ aagl.nixosModules.default ];
+          #   nix.settings = aagl.nixConfig; # Set up Cachix
+          # }
         ];
       };
     };

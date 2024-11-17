@@ -10,25 +10,31 @@ let
   });
 in
 {
-  users.users.${settings.username}.extraGroups = [ "docker" ];
-
   # enable docker
+  users.users.${settings.username}.extraGroups = [ "docker" ];
   virtualisation.docker = {
     enable = true;
     liveRestore = false;
   };
 
-  services.tailscale.enable = true;
-  services.tailscale.useRoutingFeatures = "client";
-  # sudo tailscale set --exit-node=xxx
+  # for creating gpg keys
+  services.pcscd.enable = true;
+  programs.gnupg = {
+    package = pkgs.gnupg;
+    agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryPackage = pkgs.pinentry-curses;
+    };
+  };
 
   services.openssh = {
     enable = true;
     openFirewall = true;
     settings.X11Forwarding = true;
     extraConfig = ''
-        X11UseLocalHost no
-      '';
+      X11UseLocalHost no
+    '';
   };
 
   programs.ssh = {
@@ -36,7 +42,11 @@ in
     forwardX11 = true;
   };
 
-  environment.systemPackages = with pkgs; [ 
+  programs.tmux.enable = true;
+
+
+
+  environment.systemPackages = with pkgs; [
     rustc
     rustup
     cargo
@@ -49,15 +59,15 @@ in
     #lua
     #zig
     sqlite
-    
-    docker-compose 
+
+    docker-compose
 
     vim
     neovim
     lunarvim
     gedit
 
-    
+
 
     rust-analyzer
     # pkg-config
@@ -69,10 +79,9 @@ in
     devenv
     # direnv
 
-
     # assorted dependencies
     gnat14
-    
+
   ]
   ++ [
     # inputs.tsui.packages."x86_64-linux".tsui # currently broken, not going to fix now.

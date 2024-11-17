@@ -17,6 +17,9 @@
       vscode-icons-team.vscode-icons # vscode-icons
       dotjoshjohnson.xml # xml tools
       eamodio.gitlens # git lens
+      ms-vscode.cmake-tools # cmake tools
+      ms-vscode.live-server # live preview
+      ms-vscode.makefile-tools # makefile tools
 
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
@@ -40,13 +43,23 @@
         version = "1.16.3";
         sha256 = "sha256-HifPiHIbgsfTldIeN9HaVKGk/ujaZbjHMiLAza/o6J4";
       }
+      # {
+      #   # for assembly support
+      #   name = "asm-code-lens";
+      #   publisher = "maziac";
+      #   version = "2.6.1";
+      #   sha256 = "sha256-XMBBavtkS2b1OkXRD66ZsFzO5LkSTvazLVyEKlzYyG8=";
+      # }
     ];
   };
-
-
   programs.git = {
     enable = true;
     userName = "${secrets.gitUser}";
     userEmail = "${secrets.gitEmail}";
+    signing = { 
+      gpgPath = "${pkgs.gnupg}/bin/gpg";
+      key = "${secrets.gpgFingerprint}"; # gpg --list-keys --fingerprint
+      signByDefault = true;
+    };
   };
 }
