@@ -56,7 +56,14 @@
     enable = true;
     userName = "${secrets.gitUser}";
     userEmail = "${secrets.gitEmail}";
-    signing = { 
+    extraConfig = {
+      merge = {
+        "ours" = {
+          driver = true;
+        };
+      };
+    };
+    signing = {
       gpgPath = "${pkgs.gnupg}/bin/gpg";
       key = "${secrets.gpgFingerprint}"; # gpg --list-keys --fingerprint
       signByDefault = true;

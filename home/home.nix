@@ -16,7 +16,7 @@
     enable = true;
     shellAliases = {
       ls = "lsd";
-      vim = "lvim";
+      # vim = "lvim";
       top = "btm";
       # cat = "bat";
       disk-analysis = "sudo ncdu / --exclude=/mnt";

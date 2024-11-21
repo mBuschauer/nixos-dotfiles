@@ -42,14 +42,14 @@ in
   environment.systemPackages = with pkgs; [
     zoom-us
 
-    libreoffice-fresh
+    stable.libreoffice-fresh
     libsForQt5.okular
 
     ## Task Manager for Linux
     # monitor
     # gnome.gnome-system-monitor
     # kdePackages.plasma-systemmonitor
-    mission-center
+    stable.mission-center
 
     notepad-next
 

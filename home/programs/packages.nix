@@ -6,7 +6,7 @@
     fastfetch
 
     # fun cli programs
-    cava
+    stable.cava
     toipe
     lolcat
     asciiquarium
@@ -51,6 +51,10 @@
     # discord
     webcord # a different discord client
     # vesktop # discord electron wrapper, hardware acceleration doesnt seem to work though
+
+    kdePackages.kclock # alarm app
+    # gnome-clocks # clock app
+
   ] ++ [
     inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo
   ];

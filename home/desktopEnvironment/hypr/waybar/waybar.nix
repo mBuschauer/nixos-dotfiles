@@ -187,6 +187,7 @@
           interval = 3600;
           exec = "wttrbar --location '${secrets.location}' --mph --hide-conditions --date-format %m/%d/%Y";
           return-type = "json";
+          on-click = "xdg-open https://www.accuweather.com";
         };
 
         "disk" = {

@@ -82,14 +82,11 @@ in
       ];
 
       "env" = [
-        "GBM_BACKEND,nvidia-drm"
-        "LIBVA_DRIVER_NAME,nvidia"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "NVD_BACKEND,direct"
+
       ];
 
       cursor = {
-        "no_hardware_cursors" = true;
+        no_hardware_cursors = true;
       };
 
       input = {

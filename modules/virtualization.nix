@@ -54,8 +54,10 @@
   users.users.${settings.username}.extraGroups = [ 
     "libvirtd" 
     "vboxusers" # Adding users to the group vboxusers allows them to use the virtualbox functionality. 
-  ];
+  ]; 
 
+
+  # settings for qemu/kvm
   home-manager.users.${settings.username} = {
     dconf.settings = {
       "org/virt-manager/virt-manager/connections" = {
