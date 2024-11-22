@@ -15,16 +15,18 @@
   ];
 
   boot.initrd = {
+    # enable nfs support on boot
     supportedFilesystems = [ "nfs" ];
     kernelModules = [ "nfs" ];
   };
   users.users.${settings.username}.extraGroups = [ "storage" ];
 
 
-  # add support for external drives
-  services.devmon.enable = true;
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
+  services = {
+    devmon.enable = true; # an automatic device mounting daemon
+    gvfs.enable = true; # Git Virtual File System
+    udisks2.enable = true;
+  };
 
   fileSystems."/mnt/sda1" = {
     device = "/dev/sda1";

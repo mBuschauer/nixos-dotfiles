@@ -10,10 +10,18 @@
       enable = true;
 
       qemu = {
-        package = pkgs.qemu_kvm;
-        swtpm.enable = true;
-        ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
+        package = pkgs.qemu;
+        swtpm = {
+          # tpm emulator
+          enable = true;
+          package = pkgs.swtpm;
+        };
+        ovmf = {
+          # UEFI support for Vms
+          enable = true;
+          packages = [ pkgs.OVMFFull.fd ];
+        };
+
       };
     };
 
@@ -39,7 +47,6 @@
 
   environment.systemPackages = with pkgs; [
     # podman-compose
-    qemu
     spice
     spice-gtk
     spice-protocol
@@ -51,10 +58,10 @@
     bottles # modern wine gui
   ];
 
-  users.users.${settings.username}.extraGroups = [ 
-    "libvirtd" 
+  users.users.${settings.username}.extraGroups = [
+    "libvirtd"
     "vboxusers" # Adding users to the group vboxusers allows them to use the virtualbox functionality. 
-  ]; 
+  ];
 
 
   # settings for qemu/kvm
