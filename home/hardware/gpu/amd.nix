@@ -1,4 +1,6 @@
-{ ... }:
+{ pkgs, ... }:
 {
-  # nothing, shit just work
+  home.packages = with pkgs; [
+    radeontop
+  ];
 }

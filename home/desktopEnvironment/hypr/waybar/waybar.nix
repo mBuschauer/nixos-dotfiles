@@ -154,18 +154,34 @@
           interval = 1;
           on-click = "gpustat";
           exec = pkgs.writeShellScript "get_nvidia_gpu" ''
-            # Construct the JSON object
+            # Fetch GPU usage percentage (requires radeontop)
+            gpu_usage=$(radeontop -d - -l 1 | grep "gpu" | awk '{print $2}' | tr -d '%')
+
+            # Fetch GPU temperature
+            gpu_temp=$(cat /sys/class/drm/card0/device/hwmon/hwmon*/temp1_input 2>/dev/null | awk '{print $1/1000}')
+
+            # Fetch driver version
+            driver_version=$(cat /sys/class/drm/card0/device/driver/module/version 2>/dev/null)
+
+            # Fetch total and used memory
+            vram_total=$(cat /sys/class/drm/card0/device/mem_info_vram_total 2>/dev/null)
+            vram_used=$(cat /sys/class/drm/card0/device/mem_info_vram_used 2>/dev/null)
+
+            # Convert memory from bytes to MiB
+            total_memory=$(echo "$vram_total / 1024 / 1024" | bc)
+            used_memory=$(echo "$vram_used / 1024 / 1024" | bc)
+
+            # Fetch GPU name
+            gpu_name=$(cat /sys/class/drm/card0/device/uevent 2>/dev/null | grep -oP 'DRIVER=amdgpu\n')
+
+            # Create the JSON output
             json_output=$(cat <<EOF
-            {
-              "text": "ERROR",
-              "tooltip": "ERROR"
-            }
+            {"text": "$gpu_usage%","tooltip": "GPU Name: $gpu_name\nUsed Memory: $used_memory MiB / $total_memory MiB\nTemperature: $gpu_temp°C\nDriver Version: $driver_version"}
             EOF
             )
 
             # Output the JSON
             echo "$json_output"
-
           '';
         };
 
