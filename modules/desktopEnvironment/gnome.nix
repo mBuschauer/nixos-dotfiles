@@ -6,8 +6,9 @@
 
   environment.gnome.excludePackages =  with pkgs; [
     gnome-terminal
-    gnome.gnome-software
-    gnome.gnome-music
+    gnome-software
+    gnome-music
+    gnome-maps
     # gnome-photos
     simple-scan
     totem

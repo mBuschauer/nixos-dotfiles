@@ -64,7 +64,7 @@ in
 
     vim
     neovim
-    lunarvim
+    stable.lunarvim
     gedit
 
 

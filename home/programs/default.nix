@@ -2,7 +2,7 @@
 {
   imports = [
     ./chrome.nix
-    ./email.nix
+    # ./email.nix
     ./mimeapps.nix
     ./packages.nix
     ./programming.nix
