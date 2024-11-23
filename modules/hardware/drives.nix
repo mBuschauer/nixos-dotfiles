@@ -21,15 +21,27 @@
   };
   users.users.${settings.username}.extraGroups = [ "storage" ];
 
-
   services = {
     devmon.enable = true; # an automatic device mounting daemon
     gvfs.enable = true; # Git Virtual File System
     udisks2.enable = true;
   };
 
-  fileSystems."/mnt/sda1" = {
-    device = "/dev/sda1";
+
+  
+  fileSystems."/mnt/nvme0n1p3" = {
+    device = "/dev/nvme0n1p3";
+    fsType = "ntfs";
+    options = [
+      "soft" # return errors to client when access is lost, instead of waiting indefinitely
+      "softreval" # use cache even when access is lost
+      "auto"
+      "nofail" # system won't fail if drive doesn't mount
+      "users" # allows any user to mount and unmount
+    ];
+  };
+  fileSystems."/mnt/sda2" = {
+    label = "Backup";
     fsType = "ntfs";
     options = [
       "soft" # return errors to client when access is lost, instead of waiting indefinitely
@@ -40,9 +52,19 @@
     ];
   };
 
-
-  fileSystems."/mnt/nvme0n1p4" = {
-    device = "/dev/nvme0n1p4";
+  fileSystems."/mnt/sdb2" = {
+    label = "Games";
+    fsType = "ntfs";
+    options = [
+      "soft" # return errors to client when access is lost, instead of waiting indefinitely
+      "softreval" # use cache even when access is lost
+      "auto"
+      "nofail" # system won't fail if drive doesn't mount
+      "users" # allows any user to mount and unmount
+    ];
+  };
+  fileSystems."/mnt/sdc2" = {
+    label = "Content";
     fsType = "ntfs";
     options = [
       "soft" # return errors to client when access is lost, instead of waiting indefinitely
@@ -56,45 +78,51 @@
   services.rpcbind.enable = true;
 
   fileSystems."/mnt/Storage" = {
-    device = "//${secrets.nasIP}/Marco";
+    device = "//192.168.0.8/Marco";
     fsType = "cifs";
     options = [
       "noauto"
       "_netdev"
       "x-systemd.automount"
-      "x-systemd.requires=tailscaled.service"
-      "username=${secrets.nasUser}"
-      "password=${secrets.nasPassword}"
-
+      
       "uid=1000"
       "users"
-
-    ];
-  };
-  fileSystems."/mnt/Documents" = {
-    device = "//${secrets.nasIP}/Documents";
-    fsType = "cifs";
-    options = [
-      "noauto"
-      "_netdev"
-      "x-systemd.automount"
-      "x-systemd.requires=tailscaled.service"
+      
       "username=${secrets.nasUser}"
       "password=${secrets.nasPassword}"
-
-      "uid=1000"
-      "users"
-
     ];
   };
+  # fileSystems."/mnt/Documents" = {
+  #  device = "//192.168.0.8/Documents";
+  #  fsType = "cifs";
+  #  options = [
+  #    "noauto"
+  #    "_netdev"
+  #    "x-systemd.automount"
+  #
+  #    "uid=1000"
+  #    "users"
+  #  ];
+  #};
+  #fileSystems."/mnt/Videos" = {
+  #  device = "//192.168.0.8/Videos";
+  #  fsType = "cifs";
+  #  options = [
+  #    "noauto"
+  #    "_netdev"
+  #    "x-systemd.automount"
+  #
+  #    "uid=1000"
+  #    "users"
+  #  ];
+  #};
   fileSystems."/mnt/Calibre" = {
-    device = "${secrets.homeServerIP}:/Calibre";
+    device = "192.168.0.85:/Calibre";
     fsType = "nfs";
     options = [
       "noauto"
       "_netdev"
       "x-systemd.automount"
-      "x-systemd.requires=tailscaled.service"
     ];
   };
 
@@ -111,5 +139,4 @@
   #    /export/Maryland    *(rw,nohide,insecure,no_subtree_check)
   #  '';
   # };
-
 }
