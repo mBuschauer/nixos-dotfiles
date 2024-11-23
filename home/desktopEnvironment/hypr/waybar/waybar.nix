@@ -154,12 +154,18 @@
           interval = 1;
           on-click = "gpustat";
           exec = pkgs.writeShellScript "get_nvidia_gpu" ''
-            {"text": "ERROR","tooltip": "ERROR"}
+            # Construct the JSON object
+            json_output=$(cat <<EOF
+            {
+              "text": "ERROR",
+              "tooltip": "ERROR"
+            }
             EOF
             )
 
             # Output the JSON
-            echo "$json_output" 
+            echo "$json_output"
+
           '';
         };
 
