@@ -17,8 +17,8 @@
         layer = "top";
         position = "top";
         output = [
-          "HDMI-A-1"
-          "DP-1"
+          "DP-2"
+          "DP-3"
         ];
         modules-left = [ "hyprland/workspaces" "custom/arrow10" "custom/waybar-mpris" ];
         modules-center = [ "hyprland/window" ];
