@@ -27,8 +27,6 @@
     udisks2.enable = true;
   };
 
-
-  
   fileSystems."/mnt/nvme0n1p3" = {
     device = "/dev/nvme0n1p3";
     fsType = "ntfs";
@@ -78,46 +76,37 @@
   services.rpcbind.enable = true;
 
   fileSystems."/mnt/Storage" = {
-    device = "//192.168.0.8/Marco";
+    device = "//${secrets.nasIP}/Marco";
     fsType = "cifs";
     options = [
       "noauto"
       "_netdev"
       "x-systemd.automount"
-      
-      "uid=1000"
-      "users"
-      
       "username=${secrets.nasUser}"
       "password=${secrets.nasPassword}"
+
+      "uid=1000"
+      "users"
+
     ];
   };
-  # fileSystems."/mnt/Documents" = {
-  #  device = "//192.168.0.8/Documents";
-  #  fsType = "cifs";
-  #  options = [
-  #    "noauto"
-  #    "_netdev"
-  #    "x-systemd.automount"
-  #
-  #    "uid=1000"
-  #    "users"
-  #  ];
-  #};
-  #fileSystems."/mnt/Videos" = {
-  #  device = "//192.168.0.8/Videos";
-  #  fsType = "cifs";
-  #  options = [
-  #    "noauto"
-  #    "_netdev"
-  #    "x-systemd.automount"
-  #
-  #    "uid=1000"
-  #    "users"
-  #  ];
-  #};
+  fileSystems."/mnt/Documents" = {
+    device = "//${secrets.nasIP}/Documents";
+    fsType = "cifs";
+    options = [
+      "noauto"
+      "_netdev"
+      "x-systemd.automount"
+      "username=${secrets.nasUser}"
+      "password=${secrets.nasPassword}"
+
+      "uid=1000"
+      "users"
+
+    ];
+  };
   fileSystems."/mnt/Calibre" = {
-    device = "192.168.0.85:/Calibre";
+    device = "${secrets.homeServerIP}:/Calibre";
     fsType = "nfs";
     options = [
       "noauto"
@@ -125,18 +114,4 @@
       "x-systemd.automount"
     ];
   };
-
-  # fileSystems."/export/Maryland" = {
-  #  device = "/home/marco/Desktop/Maryland";
-  #  options = [ "bind" ];
-  # };
-
-
-  # services.nfs.server = {
-  #  enable = true;
-  #  exports = ''
-  #    /export            *(rw,fsid=0,no_subtree_check)
-  #    /export/Maryland    *(rw,nohide,insecure,no_subtree_check)
-  #  '';
-  # };
 }
