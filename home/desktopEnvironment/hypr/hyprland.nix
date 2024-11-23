@@ -61,8 +61,8 @@ in
     # xwayland.enable = false;
     settings = {
       monitor = [
-        "HDMI-A-1, preferred, 1920x0, 1"
-        "DP-1, preferred, 0x0, 1"
+        "DP-3, preferred, 1920x0, 1"
+        "DP-2, preferred, 0x0, 1"
       ];
 
       #env = [
