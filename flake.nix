@@ -70,10 +70,10 @@
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    # winapps = {
-    #   url = "github:winapps-org/winapps";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    winapps = {
+      url = "github:winapps-org/winapps";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # tsui = {
     # url = "github:neuralinkcorp/tsui";
@@ -89,7 +89,7 @@
     , nixpkgs-stable
     , home-manager
     # , nixos-cosmic
-    # , winapps
+    , winapps
     # , aagl
     , ...
     } @

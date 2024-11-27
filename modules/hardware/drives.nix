@@ -31,22 +31,14 @@
     device = "/dev/nvme0n1p3";
     fsType = "ntfs";
     options = [
-      "soft" # return errors to client when access is lost, instead of waiting indefinitely
-      "softreval" # use cache even when access is lost
-      "auto"
-      "nofail" # system won't fail if drive doesn't mount
-      "users" # allows any user to mount and unmount
+      "default"
     ];
   };
   fileSystems."/mnt/sda2" = {
     label = "Backup";
     fsType = "ntfs";
     options = [
-      "soft" # return errors to client when access is lost, instead of waiting indefinitely
-      "softreval" # use cache even when access is lost
-      "auto"
-      "nofail" # system won't fail if drive doesn't mount
-      "users" # allows any user to mount and unmount
+      "default"
     ];
   };
 
@@ -54,22 +46,14 @@
     label = "Games";
     fsType = "ntfs";
     options = [
-      "soft" # return errors to client when access is lost, instead of waiting indefinitely
-      "softreval" # use cache even when access is lost
-      "auto"
-      "nofail" # system won't fail if drive doesn't mount
-      "users" # allows any user to mount and unmount
+      "default"
     ];
   };
   fileSystems."/mnt/sdc2" = {
     label = "Content";
     fsType = "ntfs";
     options = [
-      "soft" # return errors to client when access is lost, instead of waiting indefinitely
-      "softreval" # use cache even when access is lost
-      "auto"
-      "nofail" # system won't fail if drive doesn't mount
-      "users" # allows any user to mount and unmount
+      "default"
     ];
   };
 
@@ -109,9 +93,11 @@
     device = "${secrets.homeServerIP}:/Calibre";
     fsType = "nfs";
     options = [
-      "noauto"
       "_netdev"
       "x-systemd.automount"
+
+      "users"
+      "default"
     ];
   };
 }

@@ -1,4 +1,4 @@
-{ pkgs, settings, ... }:
+{ pkgs, settings, inputs, ... }:
 
 {
   virtualisation = {
@@ -56,6 +56,10 @@
     win-virtio
 
     bottles # modern wine gui
+  ] ++
+  [
+    inputs.winapps.packages.${system}.winapps
+    inputs.winapps.packages.${system}.winapps-launcher # optional
   ];
 
   users.users.${settings.username}.extraGroups = [

@@ -154,9 +154,9 @@ in
       windowrulev2 = [
         "maximize,class:(okular)"
 
-        # "maximize,class:(sigil),title:(.*)( - Sigil [std])$"
-        # "maximize,class:(sigil),title:(.*)( - Sigil)$"
-        "maximize,class:(sigil)"
+        "maximize,class:(sigil),title:(.*)( - Sigil [std])$"
+        "maximize,class:(sigil),title:(.*)( - Sigil)$"
+        # "maximize,class:(sigil)"
         "float,class:(CoreArchiver)"
         "float,class:(qimgv)"
         "float,class:(pqiv)"
@@ -181,7 +181,6 @@ in
         "$mod, F, exec, firefox"
         # screenshot
 
-        # pkgs.writeShellScript "get_nvidia_gpu" ''
         # notify-send 'Screenshot Taken' \"~/Pictures/screenshot-$(date +%Y%m%d%H%M%S).png\" 
         "$mod, P, exec, ${pkgs.writeShellScript "sent_nofification" ''
           STAMP=$(date +'%Y-%m-%d_%H-%M-%S')
