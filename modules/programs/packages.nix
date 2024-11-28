@@ -43,7 +43,7 @@
     komikku
 
     sigil
-    jellyfin
+    jellyfin-media-player
 
     ryujinx
 
