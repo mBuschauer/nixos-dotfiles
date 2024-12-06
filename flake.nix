@@ -64,6 +64,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    suyu = {
+      url = "github:Noodlez1232/suyu-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # aagl = {
     #   # an-anime-game-launcher
     #   url = "github:ezKEa/aagl-gtk-on-nix";

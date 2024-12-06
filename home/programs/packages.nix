@@ -55,6 +55,8 @@
     kdePackages.kclock # alarm app
     # gnome-clocks # clock app
 
+    cmd-wrapped
+
   ] ++ [
     inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo
   ];
@@ -211,5 +213,5 @@
       history = true;
     };
   };
-
+  
 }

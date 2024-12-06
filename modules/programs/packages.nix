@@ -62,11 +62,11 @@ in
     sigil-wayland # override because its broken on Nvidia
     jellyfin-wayland # override because its broken on Nvidia
 
-    ryujinx
-
     zip
     unzip
     gzip
+    rar
+    unrar
 
     wget
     bottom
@@ -79,5 +79,10 @@ in
     yazi # terminal file browser
 
     webcamoid
+
+    lime3ds # 3ds emulator
+    dolphin-emu # wii emulator
+  ] ++ [
+    inputs.suyu.packages.${system}.suyu # yuzu successor
   ];
 }
