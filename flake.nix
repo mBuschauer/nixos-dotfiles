@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
 
     hyprland = {
       type = "git";
@@ -65,7 +65,14 @@
     };
 
     suyu = {
+      # switch emulator 
       url = "github:Noodlez1232/suyu-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nvix = {
+      # nixvim configuration
+      url = "github:niksingh710/nvix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -93,9 +100,9 @@
     { nixpkgs
     , nixpkgs-stable
     , home-manager
-    # , nixos-cosmic
-    # , winapps
-    # , aagl
+      # , nixos-cosmic
+      # , winapps
+      # , aagl
     , ...
     } @
     inputs:
@@ -142,7 +149,7 @@
             };
           }
           # nixos-cosmic.nixosModules.default
-          
+
           # {
           #   # aagl
           #   imports = [ aagl.nixosModules.default ];

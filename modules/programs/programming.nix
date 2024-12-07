@@ -64,10 +64,8 @@ in
 
     vim
     neovim
-    stable.lunarvim
+    lunarvim
     gedit
-
-
 
     rust-analyzer
     # pkg-config

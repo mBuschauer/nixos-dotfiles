@@ -65,8 +65,7 @@ in
     zip
     unzip
     gzip
-    rar
-    unrar
+    unar # not unrar
 
     wget
     bottom

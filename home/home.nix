@@ -7,7 +7,7 @@
     homeDirectory = "/home/${settings.username}";
     stateVersion = "24.05";
     sessionVariables = {
-      EDITOR = "lvim";
+      # EDITOR = "lvim";
       TERM = "kitty";
       BROWSER = "firefox";
 
