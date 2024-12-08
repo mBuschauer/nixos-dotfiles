@@ -36,6 +36,7 @@
         )
       '';
       neofetch = "fastfetch";
+      mpd-cli = "ncmpcpp";
       # pokemon-icat = "/home/marco/.config/.pokemon-icat/pokemon-icat";
       # start-wayvnc = "wayvnc 0.0.0.0 --gpu --performance --socket=5900 --render-cursor --max-fps=60 &&";
     };

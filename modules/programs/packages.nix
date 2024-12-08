@@ -15,6 +15,12 @@ let
     '';
   });
 
+  retroarchWithCores = (pkgs.retroarch.withCores (cores: with cores; [
+    desmume
+    dolphin
+    citra
+  ]));
+
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -42,7 +48,11 @@ in
   environment.systemPackages = with pkgs; [
     zoom-us
 
-    stable.libreoffice-fresh
+    onlyoffice-desktopeditors
+    hunspell
+    hunspellDicts.en_US
+
+
     libsForQt5.okular
 
     ## Task Manager for Linux
@@ -79,8 +89,7 @@ in
 
     webcamoid
 
-    lime3ds # 3ds emulator
-    dolphin-emu # wii emulator
+    retroarchWithCores
   ] ++ [
     inputs.suyu.packages.${system}.suyu # yuzu successor
   ];
