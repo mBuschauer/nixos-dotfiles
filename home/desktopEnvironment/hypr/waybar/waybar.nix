@@ -200,16 +200,16 @@
         "network" = {
           interval = 5;
           format-wifi = " {essid} ({signalStrength}%)";
-          format-ethernet = " {bandwidthDownBits} {bandwidthUpBits}";
+          format-ethernet = "  {bandwidthDownBits} {bandwidthUpBits}";
           format-disconnected = "No connection";
-          format-alt = " {ipaddr}/{cidr}";
+          format-alt = "󰈀 {ipaddr}/{cidr}";
           tooltip = false;
         };
 
         "memory" = {
           interval = 5;
-          format = " {percentage}%";
-          format-alt = "  {used:.1f}G/{total:.1f}G";
+          format = "  {percentage}%";
+          format-alt = "  {used:.1f}G/{total:.1f}G";
           states = {
             warning = 70;
             critical = 90;
