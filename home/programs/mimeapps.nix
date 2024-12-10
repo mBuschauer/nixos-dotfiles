@@ -9,7 +9,7 @@ let
 in
 {
 
-  home.packages = with pkgs; [ 
+  home.packages = with pkgs; [
     file
   ];
 
@@ -51,6 +51,12 @@ in
         "application/vnd.comicbook-rar" = [ "${fileArchiver}" ]; # .cbr
         "application/cbz" = [ "okular.desktop" ]; # .cbz
         "application/vnd.comicbook+zip" = [ "okular.desktop" ]; # .cbz
+
+        # set onlyoffice to open .docx, .pptx, .xlsx
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "onlyoffice-desktopeditors.desktop" ];
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation" = [ "onlyoffice-desktopeditors.desktop" ];
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = [ "onlyoffice-desktopeditors.desktop" ];
+
       };
       removed = {
         "application/epub" = [ "okular.desktop" ];
@@ -66,6 +72,7 @@ in
         "image/avif" = [ "okular.desktop" ];
         "text/html" = [ "calibre.desktop" ];
         "application/xml" = [ "chromium.desktop" ];
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "calibre.desktop" ];
       };
     };
     defaultApplications = {
@@ -99,6 +106,11 @@ in
       "application/cbr" = [ "${fileArchiver}" ];
       "application/cbz" = [ "okular.desktop" ];
       "application/xml" = [ "${vsCode}" ];
+
+      # set onlyoffice to open .docx, .pptx, .xlsx
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "onlyoffice-desktopeditors.desktop" ];
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = [ "onlyoffice-desktopeditors.desktop" ];
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = [ "onlyoffice-desktopeditors.desktop" ];
     };
   };
 

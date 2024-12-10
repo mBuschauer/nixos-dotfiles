@@ -154,6 +154,9 @@ in
       windowrulev2 = [
         "maximize,class:(okular)"
 
+        # force all only office windows to open maximized
+        "maximize,class:(ONLYOFFICE Desktop Editors)"
+
         "maximize,class:(sigil),title:(.*)( - Sigil [std])$"
         "maximize,class:(sigil),title:(.*)( - Sigil)$"
         # "maximize,class:(sigil)"
