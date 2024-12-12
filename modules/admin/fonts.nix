@@ -9,6 +9,7 @@
       ibm-plex
       corefonts
       vistafonts
+      fira-code
 
       nerd-fonts.space-mono
       nerd-fonts.jetbrains-mono
@@ -19,9 +20,10 @@
   system.activationScripts = {
     movefonts.text =
       ''
+        rm /home/${settings.username}/.local/share/fonts/*
         mkdir -p /home/${settings.username}/.local/share/fonts
-        cp ${pkgs.corefonts}/share/fonts/truetype/* /home/${settings.username}/.local/share/fonts/
-        cp ${pkgs.vistafonts}/share/fonts/truetype/* /home/${settings.username}/.local/share/fonts/
+        cp ${pkgs.corefonts}/share/fonts/truetype/*.ttf /home/${settings.username}/.local/share/fonts/
+        cp ${pkgs.vistafonts}/share/fonts/truetype/*.ttf /home/${settings.username}/.local/share/fonts/
         chmod 644 /home/${settings.username}/.local/share/fonts/*
       '';
   };

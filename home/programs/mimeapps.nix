@@ -14,7 +14,6 @@ in
   ];
 
 
-
   xdg = {
     configFile."mimeapps.list".force = true;
 
@@ -68,7 +67,7 @@ in
           "application/cbr" = [ "okular.desktop" ];
           "application/vnd.comicbook-rar" = [ "okular.desktop" ];
           "application/pdf" = [ "calibre.desktop" ];
-          "inode/directory" = [ "kitty-open.desktop" ];
+          "inode/directory" = [ "kitty-open.desktop" "nemo.desktop" ];
           "application/directory" = [ "prismlauncher.desktop" ];
           "text/plain" = [ "libreoffice.desktop" ];
           "image/png" = [ "chromium.desktop" ];

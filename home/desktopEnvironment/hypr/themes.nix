@@ -31,7 +31,7 @@
     package = inputs.wezterm.packages.${pkgs.system}.default;
     extraConfig = ''
       return {
-          font = wezterm.font("JetBrainsMono Nerd Font"),
+          font = wezterm.font("Fira Code"),
           font_size = 11.0,
           color_scheme = "Ayu Mirage",
           hide_tab_bar_if_only_one_tab = true,

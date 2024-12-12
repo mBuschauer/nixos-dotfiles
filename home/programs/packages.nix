@@ -98,6 +98,16 @@
       terminal = false;
       icon = "${pkgs.webcord}/share/icons/hicolor/256x256/apps/webcord.png";
     };
+
+    nemo = {
+      name = "nemo";
+      exec = "nemo %U";
+      terminal = false;
+      icon = "${pkgs.nemo}/share/icons/hicolor/32x32/apps/nemo.png";
+      startupNotify = false;
+      type = "Application";
+    };
+
     # hyprsysteminfo = {
     #   name = "HyprSystemInfo";
     #   exec = "hyprsysteminfo";

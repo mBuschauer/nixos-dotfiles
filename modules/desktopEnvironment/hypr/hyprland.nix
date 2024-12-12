@@ -32,7 +32,7 @@
     libnotify
 
     libsForQt5.dolphin
-    # nemo
+    nemo
     # xwaylandvideobridge
 
     sox # for playing a notification sound
