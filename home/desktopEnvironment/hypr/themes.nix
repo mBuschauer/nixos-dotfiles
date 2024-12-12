@@ -21,5 +21,8 @@
     font.name = "JetBrainsMono Nerd Font";
     font.size = 11;
     themeFile = "ayu_mirage";
+    settings = {
+      open_url_with = "default";
+    };
   };
 }

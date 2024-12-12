@@ -264,7 +264,7 @@
         };
 
         "custom/shutdown" = {
-          format = " ";
+          format = "⏻ ";
           on-click = "poweroff";
           tooltip-format = "shutdown";
         };
@@ -276,7 +276,7 @@
         };
 
         "custom/lock" = {
-          format = " ";
+          format = "󰌾 ";
           on-click = "hyprlock";
           tooltip-format = "lock";
         };

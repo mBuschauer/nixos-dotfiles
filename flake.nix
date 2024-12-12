@@ -100,7 +100,7 @@
     { nixpkgs
     , nixpkgs-stable
     , home-manager
-      # , nixos-cosmic
+    # , nixos-cosmic
       # , winapps
       # , aagl
     , ...
