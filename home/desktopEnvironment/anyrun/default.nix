@@ -31,7 +31,7 @@
         Config(
           desktop_actions: false,
           max_entries: 8,
-          terminal: Some("kitty"),
+          terminal: Some("wezterm"),
         )
       '';
       "shell.ron".text = ''

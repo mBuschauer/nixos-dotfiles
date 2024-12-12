@@ -76,6 +76,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    wezterm.url = "github:wez/wezterm?dir=nix";
+
     # aagl = {
     #   # an-anime-game-launcher
     #   url = "github:ezKEa/aagl-gtk-on-nix";

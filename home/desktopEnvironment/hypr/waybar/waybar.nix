@@ -140,7 +140,7 @@
           interval = 5;
           tooltip = true;
           format = "  {usage}%";
-          on-click = "kitty -e btm";
+          on-click = "wezterm -e btm";
           states = {
             warning = 70;
             critical = 90;
@@ -248,13 +248,13 @@
         "custom/groupHardware" = {
           format = "";
           tooltip = false;
-          on-click = "kitty -e btm";
+          on-click = "wezterm -e btm";
         };
 
         "custom/hardware" = {
           format = "  ";
           tooltip = false;
-          on-click = "kitty -e btm";
+          on-click = "wezterm -e btm";
         };
 
         "custom/shutdownmenu" = {

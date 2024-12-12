@@ -32,7 +32,7 @@
     libnotify
 
     libsForQt5.dolphin
-    nemo
+    # nemo
     # xwaylandvideobridge
 
     sox # for playing a notification sound
@@ -68,6 +68,11 @@
         "inode/directory" = [ "kitty-open.deskop" ];
       };
     };
+  };
+
+  nix.settings = {
+    substituters = [ "https://wezterm.cachix.org" ];
+    trusted-public-keys = [ "wezterm.cachix.org-1:kAbhjYUC9qvblTE+s7S+kl5XM1zVa4skO+E/1IDWdH0=" ];
   };
 
   # hint electron apps to use wayland

@@ -8,7 +8,8 @@
     stateVersion = "24.05";
     sessionVariables = {
       # EDITOR = "lvim";
-      TERM = "kitty";
+      # TERM = "kitty";
+      TERM = "wezterm";
       BROWSER = "firefox";
 
       HISTTIMEFORMAT = "%d/%m/%y %T "; # for cmd-wrapped to work

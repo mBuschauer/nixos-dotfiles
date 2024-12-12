@@ -277,7 +277,7 @@ in
         "$mod, R, exec, systemctl --user restart pipewire.service"
 
         # "$mod, Q, exec, kitty --hold /home/marco/.config/.pokemon-icat/pokemon-icat"
-        "$mod, Q, exec, kitty"
+        "$mod, Q, exec, wezterm"
 
         "$mod, C, killactive"
         "$mod, E, exec, dolphin"

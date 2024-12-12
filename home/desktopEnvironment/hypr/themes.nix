@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   home.pointerCursor = {
     gtk.enable = true;
@@ -17,7 +17,7 @@
   };
 
   programs.kitty = {
-    enable = true;
+    enable = false;
     font.name = "JetBrainsMono Nerd Font";
     font.size = 11;
     themeFile = "ayu_mirage";
@@ -25,4 +25,19 @@
       open_url_with = "default";
     };
   };
+
+  programs.wezterm = {
+    enable = true;
+    package = inputs.wezterm.packages.${pkgs.system}.default;
+    extraConfig = ''
+      return {
+          font = wezterm.font("JetBrainsMono Nerd Font"),
+          font_size = 11.0,
+          color_scheme = "Ayu Mirage",
+          hide_tab_bar_if_only_one_tab = true,
+          enable_wayland = true,
+      }
+    '';
+  };
 }
+
