@@ -10,6 +10,7 @@
       corefonts
       vistafonts
       fira-code
+      dejavu_fonts
 
       nerd-fonts.space-mono
       nerd-fonts.jetbrains-mono
@@ -24,6 +25,7 @@
         mkdir -p /home/${settings.username}/.local/share/fonts
         cp ${pkgs.corefonts}/share/fonts/truetype/*.ttf /home/${settings.username}/.local/share/fonts/
         cp ${pkgs.vistafonts}/share/fonts/truetype/*.ttf /home/${settings.username}/.local/share/fonts/
+        cp ${pkgs.dejavu_fonts}/share/fonts/truetype/*.ttf /home/${settings.username}/.local/share/fonts/
         chmod 644 /home/${settings.username}/.local/share/fonts/*
       '';
   };

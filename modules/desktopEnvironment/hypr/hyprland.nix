@@ -56,6 +56,16 @@
         pkgs.xdg-desktop-portal-gtk
       ];
     };
+
+    terminal-exec = {
+      enable = true;
+      package = pkgs.xdg-terminal-exec;
+      settings = {
+        default = [
+          "wezterm.desktop"
+        ];
+      };
+    };
     mime = {
       enable = true;
       defaultApplications = {

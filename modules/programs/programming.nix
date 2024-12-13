@@ -1,14 +1,4 @@
 { config, pkgs, lib, inputs, settings, ... }:
-let
-  # neovim = pkgs.neovim.overrideAttrs (oldAttrs: {
-  #   postInstall = (oldAttrs.postInstall or "") + ''
-  #     substituteInPlace $out/share/applications/nvim.desktop \
-  #       --replace "TryExec=nvim" "" \
-  #       --replace "Terminal=true" "Terminal=false" \
-  #       --replace "Exec=nvim %F" "Exec=kitty -e nvim %F"
-  #   '';
-  # });
-in
 {
   # enable docker
   users.users.${settings.username}.extraGroups = [ "docker" ];
