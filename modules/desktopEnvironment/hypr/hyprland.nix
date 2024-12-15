@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, lib, ... }:
 {
   programs = {
     hyprland = {
@@ -69,13 +69,13 @@
     mime = {
       enable = true;
       defaultApplications = {
-        "inode/directory" = [ "org.kde.dolphin.deskop" ];
+        "inode/directory" = lib.mkForce [ "org.kde.dolphin.deskop" ];
       };
       addedAssociations = {
-        "inode/directory" = [ "org.kde.dolphin.deskop" ];
+        "inode/directory" = lib.mkForce [ "org.kde.dolphin.deskop" ];
       };
       removedAssociations = {
-        "inode/directory" = [ "kitty-open.deskop" ];
+        "inode/directory" = lib.mkForce [ "kitty-open.deskop" ];
       };
     };
   };

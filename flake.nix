@@ -95,6 +95,7 @@
     # };
 
     # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    # nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
   };
 

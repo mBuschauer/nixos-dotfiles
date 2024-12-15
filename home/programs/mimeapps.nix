@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   browser = "firefox.desktop";
   images = "qimgv.desktop";
@@ -47,7 +47,7 @@ in
           "text/plain" = [ "NotepadNext.desktop" ];
           "application/javascript" = [ "${vsCode}" ];
 
-          "inode/directory" = [ "${fileExplorer}" ];
+          "inode/directory" = lib.mkForce [ "${fileExplorer}" ];
           "application/zip" = [ "${fileArchiver}" ];
           "application/cbr" = [ "${fileArchiver}" ]; # .cbr
           "application/vnd.comicbook-rar" = [ "${fileArchiver}" ]; # .cbr
@@ -67,7 +67,7 @@ in
           "application/cbr" = [ "okular.desktop" ];
           "application/vnd.comicbook-rar" = [ "okular.desktop" ];
           "application/pdf" = [ "calibre.desktop" ];
-          "inode/directory" = [ "kitty-open.desktop" "nemo.desktop" ];
+          "inode/directory" = lib.mkForce [ "kitty-open.desktop" "nemo.desktop" ];
           "application/directory" = [ "prismlauncher.desktop" ];
           "text/plain" = [ "libreoffice.desktop" ];
           "image/png" = [ "chromium.desktop" ];
@@ -103,7 +103,7 @@ in
         "application/vnd.comicbook-rar" = [ "${fileArchiver}" ];
         "text/plain" = [ "NotepadNext.desktop" ];
         "application/javascript" = [ "${vsCode}" ];
-        "inode/directory" = [ "${fileExplorer}" ];
+        "inode/directory" = lib.mkForce [ "${fileExplorer}" ];
         "application/zip" = [ "${fileArchiver}" ];
         "application/cbr" = [ "${fileArchiver}" ];
         "application/cbz" = [ "okular.desktop" ];

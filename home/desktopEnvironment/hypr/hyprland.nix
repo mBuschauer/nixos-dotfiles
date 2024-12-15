@@ -71,6 +71,7 @@ in
       #];
 
       "exec-once" = [
+        "swww-daemon"
         "waybar"
         # "hyprctl setcursor ${cursorName} ${toString pointerSize}"
         "wl-paste --watch cliphist store"
