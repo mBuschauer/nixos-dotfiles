@@ -123,7 +123,7 @@
       secrets = import (./. + "/secrets.nix") { inherit pkgs; };
     in
     {
-      nixosConfigurations."${settings.hostname}" = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."${settings.userDetails.hostname}" = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs;
           inherit settings;
@@ -142,7 +142,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users."${settings.username}".imports = [ ./home/default.nix ];
+              users."${settings.userDetails.username}".imports = [ ./home/default.nix ];
               extraSpecialArgs = {
                 inherit inputs;
                 inherit settings;

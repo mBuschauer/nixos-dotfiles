@@ -3,7 +3,7 @@
 
   services.mpd = {
     enable = true;
-    musicDirectory = "/home/${settings.username}/Music/";
+    musicDirectory = "/home/${settings.userDetails.username}/Music/";
   
     extraConfig = ''
       audio_output {

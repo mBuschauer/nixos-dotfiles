@@ -1,7 +1,7 @@
 { config, pkgs, lib, inputs, settings, ... }:
 {
   # enable docker
-  users.users.${settings.username}.extraGroups = [ "docker" ];
+  users.users.${settings.userDetails.username}.extraGroups = [ "docker" ];
   virtualisation.docker = {
     enable = true;
     liveRestore = false;

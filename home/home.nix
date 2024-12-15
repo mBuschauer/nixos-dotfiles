@@ -3,8 +3,8 @@
 {
   programs.home-manager.enable = true;
   home = {
-    username = "${settings.username}";
-    homeDirectory = "/home/${settings.username}";
+    username = "${settings.userDetails.username}";
+    homeDirectory = "/home/${settings.userDetails.username}";
     stateVersion = "24.05";
     sessionVariables = {
       # EDITOR = "lvim";
@@ -46,9 +46,9 @@
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
-    pictures = "/home/${settings.username}/Pictures";
-    download = "/home/${settings.username}/Downloads";
-    documents = "/home/${settings.username}/Documents";
-    desktop = "/home/${settings.username}/Desktop";
+    pictures = "/home/${settings.userDetails.username}/Pictures";
+    download = "/home/${settings.userDetails.username}/Downloads";
+    documents = "/home/${settings.userDetails.username}/Documents";
+    desktop = "/home/${settings.userDetails.username}/Desktop";
   };
 }

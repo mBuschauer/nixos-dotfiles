@@ -19,7 +19,7 @@
     supportedFilesystems = [ "nfs" ];
     kernelModules = [ "nfs" ];
   };
-  users.users.${settings.username}.extraGroups = [ "storage" ];
+  users.users.${settings.userDetails.username}.extraGroups = [ "storage" ];
 
 
   services = {

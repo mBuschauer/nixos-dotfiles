@@ -1,6 +1,7 @@
 { inputs, pkgs, ... }:
 let
   notification = "play -n synth 1.5 sin 1760 synth 1.5 sin fmod 600 vol -20db fade l 0 1.5 1.5";
+  
 in
 {
   home.packages = with pkgs; [

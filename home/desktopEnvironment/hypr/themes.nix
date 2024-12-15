@@ -1,4 +1,13 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, settings, ... }:
+let
+  isKitty = terminalOptions:
+    if builtins.elem "kitty" terminalOptions then true
+    else false;
+
+  isWezterm = terminalOptions:
+    if builtins.elem "wezterm" terminalOptions then true
+    else false;
+in
 {
   home.pointerCursor = {
     gtk.enable = true;
@@ -17,7 +26,7 @@
   };
 
   programs.kitty = {
-    enable = false;
+    enable = isKitty settings.customization.terminal;
     font.name = "JetBrainsMono Nerd Font";
     font.size = 11;
     themeFile = "ayu_mirage";
@@ -27,7 +36,7 @@
   };
 
   programs.wezterm = {
-    enable = true;
+    enable = isWezterm settings.customization.terminal;
     package = inputs.wezterm.packages.${pkgs.system}.default;
     extraConfig = ''
       return {

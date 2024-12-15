@@ -58,14 +58,14 @@
     bottles # modern wine gui
   ];
 
-  users.users.${settings.username}.extraGroups = [
+  users.users.${settings.userDetails.username}.extraGroups = [
     "libvirtd"
     "vboxusers" # Adding users to the group vboxusers allows them to use the virtualbox functionality. 
   ];
 
 
   # settings for qemu/kvm
-  home-manager.users.${settings.username} = {
+  home-manager.users.${settings.userDetails.username} = {
     dconf.settings = {
       "org/virt-manager/virt-manager/connections" = {
         autoconnect = [ "qemu:///system" ];

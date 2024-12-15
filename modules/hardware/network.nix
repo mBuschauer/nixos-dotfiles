@@ -7,7 +7,7 @@
     networkmanager.enable = true;
 
 
-    hostName = "${settings.hostname}"; # Define your hostname.
+    hostName = "${settings.userDetails.hostname}"; # Define your hostname.
 
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -22,7 +22,7 @@
 
 
     # Or disable the firewall altogether.
-    # networking.firewall.enable = false;
+    # firewall.enable = false;
 
   };
 
