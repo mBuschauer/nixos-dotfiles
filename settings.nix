@@ -27,7 +27,6 @@ in
     terminal = config.terminal;
   };
   
-
   # this doesnt work, not sure why
   assertions = [
     (
