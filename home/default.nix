@@ -8,7 +8,9 @@
 
     ./home.nix
 
-    ./desktopEnvironment/hypr
+    ./themes.nix
+
+    ./desktopEnvironment
     # ./desktopEnvironment/gnome.nix
     # ./desktopEnvironment/kde.nix
     # ./desktopEnvironment/cosmic.nix

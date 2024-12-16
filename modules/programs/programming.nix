@@ -7,6 +7,13 @@
     liveRestore = false;
   };
 
+  programs.bash = {
+    completion = {
+      enable = true;
+      package = pkgs.bash-completion;
+    };
+  };
+
   # for creating gpg keys
   services.pcscd.enable = true;
   programs.gnupg = {

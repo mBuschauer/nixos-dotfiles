@@ -7,8 +7,10 @@ let
       username = "marco"; # Username
       gpu = "nvidia"; # supported: {nvidia, amd}
       desktopEnvironment = [
-        # does nothing atp
-        "hyprland"
+        "hyprland" 
+        # "cosmic" # doesnt work
+        # "gnome"
+        # "kde"
       ];
 
       # TODO: Make this set the default terminal, maybe first option is set as default

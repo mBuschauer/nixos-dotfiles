@@ -7,17 +7,32 @@
     homeDirectory = "/home/${settings.userDetails.username}";
     stateVersion = "24.05";
     sessionVariables = {
-      # EDITOR = "lvim";
+      EDITOR = "vim";
       # TERM = "kitty";
       TERM = "wezterm";
       BROWSER = "firefox";
 
       HISTTIMEFORMAT = "%d/%m/%y %T "; # for cmd-wrapped to work
-      HISTFILE = "~/.bash_history";
+      HISTFILE = "/home/${settings.userDetails.username}/.bash_history";
     };
   };
   programs.bash = {
     enable = true;
+    enableCompletion = true;
+    historyControl = [ ];
+    historyFile = "/home/${settings.userDetails.username}/.bash_history";
+    historyFileSize = 100000;
+    historyIgnore = [
+      "sl"
+    ];
+    historySize = 100000;
+
+    bashrcExtra = ''
+      shopt -s histappend  # Append to the history file
+      PROMPT_COMMAND="history -a; history -n; history -r; $PROMPT_COMMAND"
+    '';
+
+
     shellAliases = {
       ls = "lsd";
       # vim = "lvim";
