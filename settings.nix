@@ -29,11 +29,21 @@ in
     terminal = config.terminal;
   };
   
-  # this doesnt work, not sure why
+  # TODO: Make this work
   assertions = [
     (
       assert config.system == "x86_64-linux";
       "Invalid system type. Supported: 'x86_64-linux'."
+    )
+    (
+      # TODO: Make sure that this tests that at least one functioning DE is selected
+      assert config.desktopEnvironment != [];
+      "Empty list for desktopEvironment"
+    )
+        (
+      # TODO: Make sure that this tests that at least one functioning terminal is selected
+      assert config.terminal != [];
+      "Empty list for terminal"
     )
   ];
 }
