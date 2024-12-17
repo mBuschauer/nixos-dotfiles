@@ -13,9 +13,9 @@ let
         # "kde"
       ];
 
-      # TODO: Make this set the default terminal, maybe first option is set as default
       terminal = [ "wezterm" ]; # only supported `wezterm` and `kitty`. There is no error handling if this is left empty. DO NOT LEAVE EMPTY
     };
+
 
 in
 {

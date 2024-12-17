@@ -21,9 +21,6 @@
 
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [ xpadneo ];
-    extraModprobeConfig = ''
-      options bluetooth disable_ertm=Y
-    '';
-    # connect xbox controller
+    extraModprobeConfig = '' options bluetooth disable_ertm=Y ''; # disable Enhanced Retransmission Mode so that controllers work
   };
 }

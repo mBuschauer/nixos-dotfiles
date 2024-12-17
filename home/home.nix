@@ -9,7 +9,7 @@
     sessionVariables = {
       EDITOR = "vim";
       # TERM = "kitty";
-      TERM = "wezterm";
+      TERM = builtins.head settings.customization.terminal;
       BROWSER = "firefox";
 
       HISTTIMEFORMAT = "%d/%m/%y %T "; # for cmd-wrapped to work
