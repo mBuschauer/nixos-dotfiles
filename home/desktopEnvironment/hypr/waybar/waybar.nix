@@ -4,7 +4,7 @@ let
   getEdidName = monitor: builtins.head (builtins.split "," monitor);
 
   # Extract the names
-  edidNames = builtins.map getEdidName monitors;
+  edidNames = builtins.map getEdidName settings.customization.monitors;
 in
 {
 
@@ -23,7 +23,7 @@ in
       mainBar = {
         layer = "top";
         position = "top";
-        output = edidNames settings.customization.monitors;
+        output = edidNames;
         modules-left = [ "hyprland/workspaces" "custom/arrow10" "custom/waybar-mpris" ];
         modules-center = [ "hyprland/window" ];
         modules-right = [

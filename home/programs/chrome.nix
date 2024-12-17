@@ -32,7 +32,7 @@ in
       (createChromiumExtension {
         # Hover Zoom + 
         id = "pccckmaobkjjboncdfnnofkonhgpceea";
-        sha256 = "sha256:0fp3y28l4rq33sd1gbayrag866fdjjqzqj88yymananjlri09y6d";
+        sha256 = "sha256:0w6r56m71bdkyc3yq925g5x4s058sjn5a19p86ighikac3256fln";
         version = "1.0.219";
       })
       (createChromiumExtension {
@@ -44,7 +44,7 @@ in
       (createChromiumExtension {
         # sponsor block
         id = "mnjggcdmjocbbbhaepdhchncahnbgone";
-        sha256 = "sha256:09larpw96byvm1kk5jr5raisk7r0rfwcc8s9ldcr7zhbjvm9lx0w";
+        sha256 = "sha256:0mj0mmv01f422wqm3ad44dd7vp9fxpvpl9dhlimhv2d2vm0wmz4j";
         version = "5.7";
       })
     ];
