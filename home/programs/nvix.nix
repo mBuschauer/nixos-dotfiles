@@ -60,7 +60,10 @@ in
       sessionVariables.EDITOR = "vim";
       shellAliases.gvim = "setsid neovide $@ &>/dev/null";
       shellAliases.gcal = "nvim -c 'Calendar'";
-      packages = [ cfg.pkg ];
+      packages = [ 
+        cfg.pkg 
+        gh
+      ];
     };
   };
 }
