@@ -61,11 +61,7 @@ in
     # systemd.enable = false;
     # xwayland.enable = false;
     settings = {
-      monitor = [
-        "HDMI-A-1, preferred, 1920x0, 1"
-        "DP-1, preferred, 0x0, 1"
-      ];
-
+      monitor = settings.customization.monitors;
       #env = [
       #  "HYPRCURSOR_THEME,${cursorName}"
       #  "HYPRCURSOR_SIZE,${toString pointerSize}"

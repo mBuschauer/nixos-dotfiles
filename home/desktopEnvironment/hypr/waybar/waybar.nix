@@ -1,4 +1,11 @@
-{ pkgs, inputs, secrets, ... }:
+{ pkgs, inputs, settings, secrets, ... }:
+let
+  # Function to extract the EDID name (everything up to the first comma)
+  getEdidName = monitor: builtins.head (builtins.split "," monitor);
+
+  # Extract the names
+  edidNames = builtins.map getEdidName monitors;
+in
 {
 
   home.packages = with pkgs; [
@@ -16,10 +23,7 @@
       mainBar = {
         layer = "top";
         position = "top";
-        output = [
-          "HDMI-A-1"
-          "DP-1"
-        ];
+        output = edidNames settings.customization.monitors;
         modules-left = [ "hyprland/workspaces" "custom/arrow10" "custom/waybar-mpris" ];
         modules-center = [ "hyprland/window" ];
         modules-right = [

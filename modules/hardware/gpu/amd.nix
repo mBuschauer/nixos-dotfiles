@@ -18,7 +18,7 @@
   
   environment.systemPackages = with pkgs; [
     sigil
-    wayland
+    jellyfin-media-player
   ];
 
 }
