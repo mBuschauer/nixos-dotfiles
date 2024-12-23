@@ -282,8 +282,8 @@ in
 
         "$mod, R, exec, systemctl --user restart pipewire.service"
 
-        # "$mod, Q, exec, xdg-terminal-exec bash -c \"cd /home/marco/ ; /home/marco/.config/.pokemon-icat/pokemon-icat; exec bash\""
-        "$mod, Q, exec, xdg-terminal-exec bash -c \"cd /home/marco/; exec bash\""
+        # "$mod, Q, exec, xdg-terminal-exec bash -c \"cd /home/${settings.userDetails.username}/ ; /home/marco/.config/.pokemon-icat/pokemon-icat; exec bash\""
+        "$mod, Q, exec, xdg-terminal-exec bash -c \"cd /home/${settings.userDetails.username}/; exec bash\""
 
         "$mod, C, killactive"
         "$mod, E, exec, dolphin"
