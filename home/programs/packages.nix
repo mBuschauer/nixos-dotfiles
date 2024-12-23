@@ -85,12 +85,12 @@
       icon = "${pkgs.hakuneko}/share/icons/hicolor/256x256/apps/hakuneko-desktop.png";
     };
 
-    # tailscale-tray = {
-    #   name = "Tailscale SysTray";
-    #   exec = "tailray";
-    #   terminal = false;
-    #   icon = "${inputs.tailray.packages.${pkgs.system}.tailray}/icons/tailscale-offline.svg"; # doesnt work, idk why, idc
-    # };
+    tailscale-tray = {
+      name = "Tailscale SysTray";
+      exec = "tailray";
+      terminal = false;
+      icon = "${inputs.tailray.packages.${pkgs.system}.tailray}/share/icons/hicolor/symbolic/apps/tailscale-online.svg";
+    };
 
     discord-webcord = {
       name = "Discord";
