@@ -1,4 +1,13 @@
-{ inputs, config, pkgs, lib, ... }:
+{ inputs, config, pkgs, lib, settings, ... }:
+let
+
+  defaultTerminal = terminalOptions:
+    if builtins.length terminalOptions < 0 then throw "No terminal selected"
+    else if builtins.head terminalOptions == "wezterm" then [ "wezterm.desktop" ]
+    else if builtins.head terminalOptions == "kitty" then [ "kitty.desktop" ]
+    else throw "Incorrect terminal selected";
+
+in
 {
   programs = {
     hyprland = {
@@ -60,12 +69,9 @@
     terminal-exec = {
       enable = true;
       package = pkgs.xdg-terminal-exec;
-      settings = {
-        default = [
-          "wezterm.desktop"
-        ];
-      };
+      settings.default = defaultTerminal settings.customization.terminal;
     };
+    
     mime = {
       enable = true;
       defaultApplications = {
@@ -88,5 +94,6 @@
   # hint electron apps to use wayland
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
   };
 }

@@ -34,7 +34,7 @@
 
     virtualbox.host = {
       enable = true;
-      package = pkgs.stable.virtualbox;
+      package = pkgs.virtualbox;
       enableExtensionPack = true;
       enableHardening = true;
     };

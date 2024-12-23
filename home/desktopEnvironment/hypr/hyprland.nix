@@ -1,7 +1,7 @@
 { inputs, pkgs, settings, ... }:
 let
   notification = "play -n synth 1.5 sin 1760 synth 1.5 sin fmod 600 vol -20db fade l 0 1.5 1.5";
-  
+
 in
 {
   home.packages = with pkgs; [
@@ -80,7 +80,6 @@ in
       ];
 
       "env" = [
-
       ];
 
       cursor = {
@@ -169,10 +168,19 @@ in
         # "noinitialfocus,class:^(xwaylandvideobridge)$"
         # "maxsize 1 1,class:^(xwaylandvideobridge)$"
         # "noblur,class:^(xwaylandvideobridge)$"
+
+        # # enable smart gaps / no gaps when only
+        # "bordersize 0, floating:0, onworkspace:w[tv1]"
+        # "rounding 0, floating:0, onworkspace:w[tv1]"
+        # "bordersize 0, floating:0, onworkspace:f[1]"
+        # "rounding 0, floating:0, onworkspace:f[1]"
       ];
 
       workspace = [
-        "f[1], gapsout:0, gapsin:0, border: 0, rounding:0"
+        "f[1], gapsout:0, gapsin:0, bordersize: 0, rounding:0" # if an app is full screen, show no borders
+
+        # # enable smart gaps / no gaps when only
+        # "w[tv1], gapsout:0, gapsin:0"
       ];
 
 
@@ -274,8 +282,8 @@ in
 
         "$mod, R, exec, systemctl --user restart pipewire.service"
 
-        # "$mod, Q, exec, xdg-terminal-exec --hold /home/marco/.config/.pokemon-icat/pokemon-icat"
-        "$mod, Q, exec, wezterm"
+        # "$mod, Q, exec, xdg-terminal-exec bash -c \"cd /home/marco/ ; /home/marco/.config/.pokemon-icat/pokemon-icat; exec bash\""
+        "$mod, Q, exec, xdg-terminal-exec bash -c \"cd /home/marco/; exec bash\""
 
         "$mod, C, killactive"
         "$mod, E, exec, dolphin"
