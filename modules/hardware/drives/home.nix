@@ -5,6 +5,7 @@
     device = "/dev/nvme0n1p3";
     fsType = "ntfs";
     options = [
+      "nofail"
       "default"
     ];
   };
@@ -12,6 +13,7 @@
     label = "Backup";
     fsType = "ntfs";
     options = [
+      "nofail"
       "default"
     ];
   };
@@ -20,34 +22,38 @@
     label = "Games";
     fsType = "ntfs";
     options = [
+      "nofail"
       "default"
     ];
   };
-  fileSystems."/mnt/sdc2" = {
-    label = "Content";
-    fsType = "ntfs";
-    options = [
-      "default"
-    ];
-  };
+
+  # fileSystems."/mnt/sdc2" = {
+  #   label = "Content";
+  #   fsType = "ntfs";
+  #   options = [
+  #     "nofail"
+  #     "default"
+  #   ];
+  # };
 
   services.rpcbind.enable = true;
 
-  fileSystems."/mnt/Storage" = {
-    device = "//${secrets.nasIP}/Marco";
-    fsType = "cifs";
-    options = [
-      "noauto"
-      "_netdev"
-      "x-systemd.automount"
-      "username=${secrets.nasUser}"
-      "password=${secrets.nasPassword}"
+  # fileSystems."/mnt/Storage" = {
+  #   device = "//${secrets.nasIP}/Marco";
+  #   fsType = "cifs";
+  #   options = [
+  #     "noauto"
+  #     "_netdev"
+  #     "x-systemd.automount"
+  #     "username=${secrets.nasUser}"
+  #     "password=${secrets.nasPassword}"
 
-      "uid=1000"
-      "users"
+  #     "uid=1000"
+  #     "users"
 
-    ];
-  };
+  #   ];
+  # };
+
   fileSystems."/mnt/Documents" = {
     device = "//${secrets.nasIP}/Documents";
     fsType = "cifs";

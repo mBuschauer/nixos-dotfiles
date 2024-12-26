@@ -75,7 +75,6 @@ in
         #"xdg-terminal-exec ncspot"
         "easyeffects --gapplication-service"
 
-        "tailray"
         # "xwaylandvideobridge"
         #"mpd-mpris"
         # "discord --start-minimized" # starts discord before waybar so icon doesnt show up anyway

@@ -19,6 +19,14 @@ in
     jmtpfs # for FTP with android phones
 
     nfs-utils # for mounting nfs drive
+
+    exfatprogs # for exfat support
+
+    xfsprogs # for xfs support
+
+    bcache-tools # for ssd caching
+
+    sysstat
   ];
 
   boot.initrd = {

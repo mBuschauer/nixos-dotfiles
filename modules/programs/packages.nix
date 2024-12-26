@@ -1,12 +1,4 @@
 { config, pkgs, lib, inputs, ... }:
-let
-  retroarchWithCores = (pkgs.retroarch.withCores (cores: with cores; [
-    desmume
-    dolphin
-    citra
-  ]));
-
-in
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -70,9 +62,6 @@ in
     yazi # terminal file browser
 
     webcamoid
-
-    retroarchWithCores
-  ] ++ [
-    inputs.suyu.packages.${system}.suyu # yuzu successor
+    busybox
   ];
 }
