@@ -7,6 +7,11 @@ let
   isWezterm = terminalOptions:
     if builtins.elem "wezterm" terminalOptions then true
     else false;
+
+  isGhostty = terminalOptions:
+    if builtins.elem "ghostty" terminalOptions then [ inputs.ghostty.packages.x86_64-linux.default ]
+    else [ ];
+
 in
 {
   home.pointerCursor = {
@@ -24,6 +29,10 @@ in
       name = "Andromeda";
     };
   };
+
+  home.packages = with pkgs; [ 
+
+  ] ++ isGhostty settings.customization.terminal;
 
   programs.kitty = {
     enable = isKitty settings.customization.terminal;

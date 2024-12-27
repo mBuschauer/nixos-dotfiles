@@ -27,6 +27,8 @@ in
     bcache-tools # for ssd caching
 
     sysstat
+
+    smartmontools
   ];
 
   boot.initrd = {

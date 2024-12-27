@@ -78,6 +78,9 @@
 
     wezterm.url = "github:wez/wezterm?dir=nix";
 
+
+    ghostty.url = "github:ghostty-org/ghostty";
+
     # aagl = {
     #   # an-anime-game-launcher
     #   url = "github:ezKEa/aagl-gtk-on-nix";
@@ -103,7 +106,7 @@
     { nixpkgs
     , nixpkgs-stable
     , home-manager
-    # , nixos-cosmic
+      # , nixos-cosmic
       # , winapps
       # , aagl
     , ...
