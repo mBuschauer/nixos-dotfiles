@@ -55,7 +55,7 @@
     win-spice
     win-virtio
 
-    bottles # modern wine gui
+    stable.bottles # modern wine gui
   ];
 
   users.users.${settings.userDetails.username}.extraGroups = [

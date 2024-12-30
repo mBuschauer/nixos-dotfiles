@@ -83,16 +83,16 @@
   #   ];
   # };
 
-  # fileSystems."/mnt/raid" = {
-  #   device = "192.168.0.117:/raid";
-  #   fsType = "nfs";
-  #   options = [
-  #     "_netdev"
-  #     "x-systemd.automount"
+  fileSystems."/mnt/raid" = {
+    device = "192.168.0.117:/raid";
+    fsType = "nfs";
+    options = [
+      "_netdev"
+      "x-systemd.automount"
 
-  #     "users"
-  #     "default"
-  #     "nofail"
-  #   ];
-  # };
+      "users"
+      "default"
+      "nofail"
+    ];
+  };
 }

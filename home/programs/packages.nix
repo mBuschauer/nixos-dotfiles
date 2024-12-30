@@ -57,6 +57,8 @@
 
     cmd-wrapped
 
+    lunarvim
+
   ] ++ [
     inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo
   ];

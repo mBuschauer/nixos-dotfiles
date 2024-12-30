@@ -70,11 +70,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvix = {
-      # nixvim configuration
-      url = "github:niksingh710/nvix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nvix = {
+    #   # nixvim configuration
+    #   url = "github:niksingh710/nvix/a11cdb4a6d5164c5e30614c7f31f4111ba1c5802";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     wezterm.url = "github:wez/wezterm?dir=nix";
 

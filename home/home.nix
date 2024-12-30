@@ -1,5 +1,15 @@
 { inputs, pkgs, settings, ... }:
-
+let
+  matchFirstElement = list:
+    if builtins.length list == 0 then
+      throw "No default terminal selected in home.nix."
+    else
+      let first = builtins.elemAt list 0; in
+      if first == "wezterm" then "wezterm"
+      else if first == "ghostty" then "ghostty"
+      else if first == "kitty" then "kitty"
+      else throw "Error: unexpected value in the list";
+in
 {
   programs.home-manager.enable = true;
   home = {
@@ -7,9 +17,9 @@
     homeDirectory = "/home/${settings.userDetails.username}";
     stateVersion = "24.05";
     sessionVariables = {
-      EDITOR = "vim";
+      EDITOR = "lvim";
       # TERM = "kitty";
-      TERM = builtins.head settings.customization.terminal;
+      TERM = matchFirstElement settings.customization.terminal;
       BROWSER = "firefox";
 
       HISTTIMEFORMAT = "%d/%m/%y %T "; # for cmd-wrapped to work
