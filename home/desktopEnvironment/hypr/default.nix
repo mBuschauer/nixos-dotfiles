@@ -8,7 +8,7 @@
     ./hyprpaper.nix
     ./hyprland.nix
     ./wallpaper.nix
-    ./waybar/waybar.nix
+    ./waybar
     ./wlogout.nix
   ];
 }

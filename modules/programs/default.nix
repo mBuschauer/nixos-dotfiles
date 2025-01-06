@@ -6,5 +6,7 @@
       ./games.nix
       ./packages.nix
       ./programming.nix
+
+      ./gpu
     ];
 }

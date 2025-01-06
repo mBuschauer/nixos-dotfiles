@@ -28,17 +28,14 @@
   services.rpcbind.enable = true;
 
   fileSystems."/mnt/Storage" = {
-    device = "//${secrets.nasIP}/Marco";
-    fsType = "cifs";
+    device = "${secrets.homeServerIP}:/raid";
+    fsType = "nfs";
     options = [
       "noauto"
       "_netdev"
       "x-systemd.automount"
       "x-systemd.requires=tailscaled.service"
-      "username=${secrets.nasUser}"
-      "password=${secrets.nasPassword}"
-
-      "uid=1000"
+      "nofail"
       "users"
 
     ];
@@ -57,16 +54,6 @@
       "uid=1000"
       "users"
 
-    ];
-  };
-  fileSystems."/mnt/Calibre" = {
-    device = "${secrets.homeServerIP}:/Calibre";
-    fsType = "nfs";
-    options = [
-      "noauto"
-      "_netdev"
-      "x-systemd.automount"
-      "x-systemd.requires=tailscaled.service"
     ];
   };
 

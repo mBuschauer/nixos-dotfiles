@@ -84,7 +84,7 @@
   # };
 
   fileSystems."/mnt/raid" = {
-    device = "192.168.0.117:/raid";
+    device = "192.168.0.85:/raid";
     fsType = "nfs";
     options = [
       "_netdev"

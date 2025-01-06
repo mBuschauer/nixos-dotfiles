@@ -20,7 +20,7 @@ in
     retroarchWithCores
 
   ] ++ [
-    inputs.suyu.packages.${system}.suyu # yuzu successor
+    # inputs.suyu.packages.${system}.suyu # yuzu successor
   ];
 
   # programs.anime-games-launcher.enable = true;
