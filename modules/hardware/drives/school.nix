@@ -31,15 +31,16 @@
     device = "${secrets.homeServerIP}:/raid";
     fsType = "nfs";
     options = [
-      "noauto"
       "_netdev"
       "x-systemd.automount"
       "x-systemd.requires=tailscaled.service"
-      "nofail"
-      "users"
 
+      "users"
+      "default"
+      "nofail"
     ];
   };
+
   fileSystems."/mnt/Documents" = {
     device = "//${secrets.nasIP}/Documents";
     fsType = "cifs";

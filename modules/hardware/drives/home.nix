@@ -70,19 +70,6 @@
     ];
   };
 
-  # fileSystems."/mnt/Calibre" = {
-  #   device = "192.168.0.117:/Calibre";
-  #   fsType = "nfs";
-  #   options = [
-  #     "_netdev"
-  #     "x-systemd.automount"
-
-  #     "users"
-  #     "default"
-  #     "nofail"
-  #   ];
-  # };
-
   fileSystems."/mnt/raid" = {
     device = "192.168.0.85:/raid";
     fsType = "nfs";
