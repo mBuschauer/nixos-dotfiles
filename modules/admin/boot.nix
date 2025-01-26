@@ -2,9 +2,9 @@
 {
   # use new linux kernel
 
-  # 6.11 is broken with nvidia stable drivers. Changed to beta and it works.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
+  # 6.13 is broken with nvidia beta drivers. Changed to 6.12 and it works.
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
 
 
   boot.loader.systemd-boot.enable = true;

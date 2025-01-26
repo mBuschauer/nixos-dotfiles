@@ -3,9 +3,9 @@ let
   config =
     rec {
       system = "x86_64-linux";
-      hostname = "nixos"; # Hostname
+      hostname = "MarcoMNix"; # Hostname
       username = "marco"; # Username
-      gpu = "amd"; # supported: {nvidia, amd}
+      gpu = "nvidia"; # supported: {nvidia, amd}
       desktopEnvironment = [
         "hyprland"
         # "cosmic" # doesnt work
@@ -14,10 +14,10 @@ let
       ];
       # TODO: Make work with waybar
       monitors = [
-        # "HDMI-A-1, preferred, 1920x0, 1"
-        # "DP-1, preferred, 0x0, 1"
-        "DP-3, preferred, 1920x0, 1"
-        "DP-2, preferred, 0x0, 1"
+        "HDMI-A-1, preferred, 1920x0, 1"
+        "DP-1, preferred, 0x0, 1"
+        # "DP-3, preferred, 1920x0, 1"
+        # "DP-2, preferred, 0x0, 1"
       ];
       terminal = [ 
         "wezterm" 
