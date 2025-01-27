@@ -69,7 +69,7 @@
     # openssl
 
     nil
-    nixpkgs-fmt
+    nixfmt-classic
 
     devenv
     # direnv

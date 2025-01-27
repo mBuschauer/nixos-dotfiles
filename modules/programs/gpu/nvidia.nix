@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, settings, ... }:
 let
   # for firefox config
   lock-false = {
@@ -10,24 +10,31 @@ let
     Status = "locked";
   };
 
-
   # this is related to an issue with nvidia, I believe, not wayland but setting backend as xcb seems to fix playback issues
   jellyfin-wayland = pkgs.jellyfin-media-player.overrideAttrs (prevAttrs: {
-    nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ]) ++ [ pkgs.makeBinaryWrapper ];
+    nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ])
+      ++ [ pkgs.makeBinaryWrapper ];
     postInstall = (prevAttrs.postInstall or "") + ''
       wrapProgram $out/bin/jellyfinmediaplayer --set QT_QPA_PLATFORM xcb 
     '';
   });
   # seemed to have trouble rendering on wayland w/ nvidia gpu, setting backend as xcb seems to fix them
   sigil-wayland = pkgs.sigil.overrideAttrs (prevAttrs: {
-    nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ]) ++ [ pkgs.makeBinaryWrapper ];
+    nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ])
+      ++ [ pkgs.makeBinaryWrapper ];
     postInstall = (prevAttrs.postInstall or "") + ''
       wrapProgram $out/bin/sigil --set QT_QPA_PLATFORM xcb 
     '';
   });
-in
-{
-  
+
+  nixpkgs.overlays = [ 
+      (self: super: { btop = super.btop.override { cudaSupport = true; }; }) 
+      (self: super: { btop = super.mission-center.override { cudaSupport = true; }; })
+      (self: super: { btop = super.bottom.override { cudaSupport = true; }; })
+    ];
+
+in {
+
   environment.systemPackages = with pkgs; [
     # more nvidia bullshit
     egl-wayland
@@ -36,6 +43,11 @@ in
 
     sigil-wayland # override because its broken on Nvidia
     jellyfin-wayland # override because its broken on Nvidia
+
+    # in theory, should let nvidia gpu show up in these apps, idk though
+    mission-center
+    bottom
+    btop
   ];
 
   programs.firefox = {

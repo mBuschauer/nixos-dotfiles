@@ -115,11 +115,11 @@
 
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs;
       overlay-stable = final: prev: {
         stable = import nixpkgs-stable {
           inherit system;
-          config.allowUnfree = true;
+          config.allowUnfree = true; 
         };
       };
       settings = import (./. + "/settings.nix") { inherit pkgs; };

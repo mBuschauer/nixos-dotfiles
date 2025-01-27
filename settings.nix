@@ -31,6 +31,7 @@ in
   userDetails = {
     hostname = config.hostname;
     username = config.username;
+    system = config.system;
   };
   customization = {
     gpu = config.gpu;

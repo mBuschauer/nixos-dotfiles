@@ -32,12 +32,6 @@
 
     libsForQt5.okular
 
-    ## Task Manager for Linux
-    # monitor
-    # gnome.gnome-system-monitor
-    # kdePackages.plasma-systemmonitor
-    stable.mission-center
-
     notepad-next
 
     teams-for-linux # electron client for microsoft teams
@@ -52,7 +46,6 @@
     unar # not unrar
 
     wget
-    bottom
     bat
 
     nitch # mini neofetch

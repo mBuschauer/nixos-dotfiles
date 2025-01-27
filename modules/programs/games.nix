@@ -8,6 +8,8 @@ let
 
 in
 {
+  programs.gamemode.enable = true;
+
   programs.steam = {
     enable = true;
     package = pkgs.steam;
