@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   # Enable AMDGPU Drivers
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu-pro" ];
@@ -8,16 +7,18 @@
     enable = true;
     #driSupport = true;
 
-    extraPackages = with pkgs; [
-      amdvlk
-      # rocmPackages.clr.icd
-      #mesa
-    ];
+    extraPackages = with pkgs;
+      [
+        amdvlk
+        # rocmPackages.clr.icd
+        #mesa
+      ];
 
   };
-  
-  environment.systemPackages = with pkgs; [
-    
-  ];
+
+  environment.systemPackages = with pkgs;
+    [
+
+    ];
 
 }

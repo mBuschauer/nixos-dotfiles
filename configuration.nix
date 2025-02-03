@@ -2,17 +2,35 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, settings, ... }:
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./modules
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./modules
+  ];
+
+  assertions = [
+    {
+      assertion = settings.userDetails.system == "x86_64-linux";
+      message = "Invalid system type. Supported: 'x86_64-linux'.";
+    }
+    {
+      assertion = settings.customization.desktopEnvironment != [ ];
+      message = "Empty list for desktopEvironment";
+    }
+    {
+      assertion = settings.customization.terminal != [ ];
+      message = "Empty list for terminal";
+    }
+    {
+      assertion = (settings.customization.gpu == "amd" || settings.customization.gpu == "nvidia");
+      message = "Unsupported GPU selected, found '${settings.customization.gpu}'";
+    }
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

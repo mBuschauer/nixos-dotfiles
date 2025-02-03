@@ -1,13 +1,11 @@
-{ config, pkgs, lib, ... }:
-{
+{ config, pkgs, lib, ... }: {
   services.xserver.videoDrivers = [ "nvidia" ];
-
 
   boot = {
     initrd.kernelModules = [
       "nvidia"
       "nvidia_modeset"
-      "nvidia_uvm" # enables cuda support apparently? 
+      "nvidia_uvm" # enables cuda support apparently?
       "nvidia_drm"
     ];
     kernelParams = [
@@ -19,6 +17,10 @@
   };
   hardware.graphics = {
     enable = true;
+    extraPackages = with pkgs;
+      [
+
+      ];
   };
 
   hardware.nvidia = {

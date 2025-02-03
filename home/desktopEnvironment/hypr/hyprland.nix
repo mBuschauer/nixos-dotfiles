@@ -1,9 +1,9 @@
 { inputs, pkgs, settings, ... }:
 let
-  notification = "play -n synth 1.5 sin 1760 synth 1.5 sin fmod 600 vol -20db fade l 0 1.5 1.5";
+  notification =
+    "play -n synth 1.5 sin 1760 synth 1.5 sin fmod 600 vol -20db fade l 0 1.5 1.5";
 
-in
-{
+in {
   home.packages = with pkgs; [
     dmenu-rs # seems to be a dunst dependency?
 
@@ -11,7 +11,9 @@ in
     wl-clipboard
     stable.cliphist
 
-    # satty # for screenshot editing (will be implemented at some point)
+    satty # for screenshot editing (will be implemented at some point)
+
+    # kando
   ];
 
   services.dunst = {
@@ -80,12 +82,9 @@ in
         # "discord --start-minimized" # starts discord before waybar so icon doesnt show up anyway
       ];
 
-      "env" = [
-      ];
+      "env" = [ ];
 
-      cursor = {
-        no_hardware_cursors = true;
-      };
+      cursor = { no_hardware_cursors = true; };
 
       input = {
         sensitivity = -0.2;
@@ -140,13 +139,21 @@ in
         preserve_split = true;
       };
 
-      misc = {
-        force_default_wallpaper = 0;
-      };
+      misc = { force_default_wallpaper = 0; };
 
       layerrule = [
         # "noanim,^(anyrun)$" # disable animation for anyrun pop-in
         "animation[fadeIn],^(anyrun)$"
+      ];
+
+      windowrule = [
+        # "noblur, kando"
+        # "opaque, kando"
+        # "size 100% 100%, kando"
+        # "noborder, kando"
+        # "noanim, kando"
+        # "float, kando"
+        # "pin, kando"
       ];
 
       windowrulev2 = [
@@ -161,7 +168,6 @@ in
         "float,class:(CoreArchiver)"
         "float,class:(qimgv)"
         "float,class:(pqiv)"
-
 
         # for screensharing under XWayland (like Discord)
         # "opacity 0.0 override,class:^(xwaylandvideobridge)$"
@@ -184,98 +190,99 @@ in
         # "w[tv1], gapsout:0, gapsin:0"
       ];
 
-
       "$mod" = "SUPER";
       bind = [
         #"$mod, SPACE, overview:toggle"
         "$mod, F, exec, firefox"
-        # screenshot
 
-        # pkgs.writeShellScript "get_nvidia_gpu" ''
-        # notify-send 'Screenshot Taken' \"~/Pictures/screenshot-$(date +%Y%m%d%H%M%S).png\" 
-        "$mod, P, exec, ${pkgs.writeShellScript "sent_nofification" ''
-          STAMP=$(date +'%Y-%m-%d_%H-%M-%S')
-          SCREENSHOT_PATH=~/Pictures/Screenshots/Screenshot_$STAMP.png
+        # "CTRL, Space, global, kando:example-menu"
 
-          # Take screenshot with grim, but check if slurp/grim was cancelled
-          grim -g "$(slurp)" "$SCREENSHOT_PATH"
-          if [ $? -ne 0 ]; then
-            echo "Screenshot cancelled or failed."
-            exit 1
-          fi
+        "$mod, P, exec, ${
+          pkgs.writeShellScript "sent_nofification" ''
+            STAMP=$(date +'%Y-%m-%d_%H-%M-%S')
+            SCREENSHOT_PATH=~/Pictures/Screenshots/Screenshot_$STAMP.png
 
-          ${notification}
+            # Take screenshot with grim, but check if slurp/grim was cancelled
+            grim -g "$(slurp)" "$SCREENSHOT_PATH"
+            if [ $? -ne 0 ]; then
+              echo "Screenshot cancelled or failed."
+              exit 1
+            fi
 
-          # Function to open the Pictures folder
-          forward_action() {
-            xdg-open ~/Pictures/Screenshots
-          }
+            ${notification}
 
-          # Function to handle notification dismiss
-          handle_dismiss() {
-            echo "Notification dismissed!"
-          }
+            # Function to open the Pictures folder
+            forward_action() {
+              xdg-open ~/Pictures/Screenshots
+            }
 
-          # Display the notification with actions
-          ACTION=$(dunstify --action="forward,Forward" "Screenshot Taken" "$SCREENSHOT_PATH")
+            # Function to handle notification dismiss
+            handle_dismiss() {
+              echo "Notification dismissed!"
+            }
 
-          # Handle the selected action
-          case "$ACTION" in
-            "forward")
-              forward_action
-              ;;
-            "2")  # Dunst returns "2" when the notification is manually dismissed
-              handle_dismiss
-              ;;
-            *)
-              echo "No valid action selected."
-              ;;
-          esac
+            # Display the notification with actions
+            ACTION=$(dunstify --action="forward,Forward" "Screenshot Taken" "$SCREENSHOT_PATH")
 
-        ''}"
+            # Handle the selected action
+            case "$ACTION" in
+              "forward")
+                forward_action
+                ;;
+              "2")  # Dunst returns "2" when the notification is manually dismissed
+                handle_dismiss
+                ;;
+              *)
+                echo "No valid action selected."
+                ;;
+            esac
 
-        "$mod, Print, exec, ${pkgs.writeShellScript "active-window" ''
-          w_pos=$(hyprctl activewindow | grep 'at:' | awk '{print $2}' | tr -d ' ')
-          w_size=$(hyprctl activewindow | grep 'size:' | awk '{print $2}' | tr -d ' ' | sed 's/,/x/')
-          geometry="$w_pos $w_size"
-          STAMP=$(date +'%Y-%m-%d_%H-%M-%S')
+          ''
+        }"
 
-          SCREENSHOT_PATH=~/Pictures/Screenshots/Screenshot_$STAMP.png
-          ANNOTATED_PATH=~/Pictures/Screenshots/Screenshot_Annotated_$STAMP.png
+        "$mod, Print, exec, ${
+          pkgs.writeShellScript "active-window" ''
+            w_pos=$(hyprctl activewindow | grep 'at:' | awk '{print $2}' | tr -d ' ')
+            w_size=$(hyprctl activewindow | grep 'size:' | awk '{print $2}' | tr -d ' ' | sed 's/,/x/')
+            geometry="$w_pos $w_size"
+            STAMP=$(date +'%Y-%m-%d_%H-%M-%S')
 
-          # Take a screenshot of the active window
-          grim -g "$geometry" "$SCREENSHOT_PATH"
-          ${notification}
+            SCREENSHOT_PATH=~/Pictures/Screenshots/Screenshot_$STAMP.png
+            ANNOTATED_PATH=~/Pictures/Screenshots/Screenshot_Annotated_$STAMP.png
 
-          # Function to open the Pictures folder
-          forward_action() {
-            xdg-open ~/Pictures/Screenshots
-          }
+            # Take a screenshot of the active window
+            grim -g "$geometry" "$SCREENSHOT_PATH"
+            ${notification}
 
-          # Function to handle notification dismiss
-          handle_dismiss() {
-            echo "Notification dismissed!"
-          }
+            # Function to open the Pictures folder
+            forward_action() {
+              xdg-open ~/Pictures/Screenshots
+            }
 
-          # Display the notification with actions
-          ACTION=$(dunstify --action="forward,Forward" "Screenshot Taken" "$SCREENSHOT_PATH")
+            # Function to handle notification dismiss
+            handle_dismiss() {
+              echo "Notification dismissed!"
+            }
 
-          # Handle the selected action
-          case "$ACTION" in
-            "forward")
-              forward_action
-              ;;
-            "2")  # Dunst returns "2" when the notification is manually dismissed
-              handle_dismiss
-              ;;
-            *)
-              echo "No valid action selected."
-              ;;
-          esac
+            # Display the notification with actions
+            ACTION=$(dunstify --action="forward,Forward" "Screenshot Taken" "$SCREENSHOT_PATH")
 
-          return 0
-        ''}"
+            # Handle the selected action
+            case "$ACTION" in
+              "forward")
+                forward_action
+                ;;
+              "2")  # Dunst returns "2" when the notification is manually dismissed
+                handle_dismiss
+                ;;
+              *)
+                echo "No valid action selected."
+                ;;
+            esac
 
+            return 0
+          ''
+        }"
 
         "$mod, Space, togglesplit"
 
@@ -284,7 +291,8 @@ in
         "$mod, R, exec, systemctl --user restart pipewire.service"
 
         # "$mod, Q, exec, xdg-terminal-exec bash -c \"cd /home/${settings.userDetails.username}/ ; /home/marco/.config/.pokemon-icat/pokemon-icat; exec bash\""
-        "$mod, Q, exec, xdg-terminal-exec bash -c \"cd /home/${settings.userDetails.username}/; exec bash\""
+        ''
+          $mod, Q, exec, xdg-terminal-exec bash -c "cd /home/${settings.userDetails.username}/; exec bash"''
 
         "$mod, C, killactive"
         "$mod, E, exec, dolphin"
@@ -336,19 +344,15 @@ in
         "$mod, SUPER_L, exec, pkill anyrun || anyrun"
 
       ];
-      bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
-      ];
+      bindm = [ "$mod, mouse:272, movewindow" "$mod, mouse:273, resizewindow" ];
     };
 
-    plugins = builtins.attrValues
-      {
-        inherit (pkgs.hyprlandPlugins)
-          # hyprspace 
-          # split-monitor-workspaces
-          ;
-      } ++ [
+    plugins = builtins.attrValues {
+      inherit (pkgs.hyprlandPlugins)
+      # hyprspace 
+      # split-monitor-workspaces
+      ;
+    } ++ [
       # inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
       # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
     ];

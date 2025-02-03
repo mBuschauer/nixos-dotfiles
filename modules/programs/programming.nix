@@ -77,6 +77,8 @@
     # assorted dependencies
     gnat14
 
+    godot_4
+
   ]
   ++ [
     # inputs.tsui.packages."x86_64-linux".tsui # currently broken, not going to fix now.
