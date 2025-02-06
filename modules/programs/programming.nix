@@ -14,6 +14,14 @@
     };
   };
 
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama;
+    acceleration = "cuda";
+    home = "/mnt/sda1/ollama";
+    models = "${config.services.ollama.home}/models";
+  };
+
   # for creating gpg keys
   services.pcscd.enable = true;
   programs.gnupg = {

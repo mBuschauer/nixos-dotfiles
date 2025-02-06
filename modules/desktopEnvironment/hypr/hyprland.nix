@@ -2,21 +2,18 @@
 let
 
   defaultTerminal = terminalOptions:
-    if builtins.length terminalOptions < 0 then throw "No terminal selected"
-    else if builtins.head terminalOptions == "wezterm" then [ "wezterm.desktop" ]
-    else if builtins.head terminalOptions == "kitty" then [ "kitty.desktop" ]
-    else throw "Incorrect terminal selected";
+    if builtins.length terminalOptions < 0 then
+      throw "No terminal selected"
+    else if builtins.head terminalOptions == "wezterm" then
+      [ "wezterm.desktop" ]
+    else if builtins.head terminalOptions == "kitty" then
+      [ "kitty.desktop" ]
+    else
+      throw "Incorrect terminal selected";
+  
+  browser = "firefox.desktop";
 
-in
-{
-  programs = {
-    hyprland = {
-      enable = false;
-      xwayland.enable = true;
-      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-      portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
-    };
-  };
+in {
 
   environment.systemPackages = with pkgs; [
     # hyprcursor
@@ -53,32 +50,34 @@ in
   };
 
   xdg = {
-    portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
-      config = {
-        hyprland.default = [ "hyprland" ];
-      };
+    # portal = {
+    #   enable = true;
+    #   xdgOpenUsePortal = true;
+    #   config = { hyprland.default = [ "hyprland" ]; };
 
-      extraPortals = [
-        inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
-        pkgs.xdg-desktop-portal-gtk
-      ];
-    };
+    #   extraPortals = [
+    #     inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland
+    #     pkgs.xdg-desktop-portal-gtk
+    #   ];
+    # };
 
     terminal-exec = {
       enable = true;
       package = pkgs.xdg-terminal-exec;
       settings.default = defaultTerminal settings.customization.terminal;
     };
-    
+
     mime = {
       enable = true;
       defaultApplications = {
         "inode/directory" = lib.mkForce [ "org.kde.dolphin.deskop" ];
+        # "x-scheme-handler/http" = [ "${browser}" ];
+        # "x-scheme-handler/https" = [ "${browser}" ];
       };
       addedAssociations = {
         "inode/directory" = lib.mkForce [ "org.kde.dolphin.deskop" ];
+        # "x-scheme-handler/http" = [ "${browser}" ];
+        # "x-scheme-handler/https" = [ "${browser}" ];
       };
       removedAssociations = {
         "inode/directory" = lib.mkForce [ "kitty-open.deskop" ];
@@ -88,7 +87,8 @@ in
 
   nix.settings = {
     substituters = [ "https://wezterm.cachix.org" ];
-    trusted-public-keys = [ "wezterm.cachix.org-1:kAbhjYUC9qvblTE+s7S+kl5XM1zVa4skO+E/1IDWdH0=" ];
+    trusted-public-keys =
+      [ "wezterm.cachix.org-1:kAbhjYUC9qvblTE+s7S+kl5XM1zVa4skO+E/1IDWdH0=" ];
   };
 
   # hint electron apps to use wayland

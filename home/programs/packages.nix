@@ -48,8 +48,8 @@
 
     p7zip # for 7z support
 
-    # discord
-    webcord # a different discord client
+    discord
+    # webcord # a different discord client
     # vesktop # discord electron wrapper, hardware acceleration doesnt seem to work though
 
     kdePackages.kclock # alarm app
@@ -94,12 +94,12 @@
       icon = "${inputs.tailray.packages.${pkgs.system}.tailray}/share/icons/hicolor/symbolic/apps/tailscale-online.svg";
     };
 
-    discord-webcord = {
-      name = "Discord";
-      exec = "webcord";
-      terminal = false;
-      icon = "${pkgs.webcord}/share/icons/hicolor/256x256/apps/webcord.png";
-    };
+    # discord-webcord = {
+    #   name = "Discord";
+    #   exec = "webcord";
+    #   terminal = false;
+    #   icon = "${pkgs.webcord}/share/icons/hicolor/256x256/apps/webcord.png";
+    # };
 
     nemo = {
       name = "nemo";

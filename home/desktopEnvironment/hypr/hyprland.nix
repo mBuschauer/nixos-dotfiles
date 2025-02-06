@@ -60,6 +60,12 @@ in {
   wayland.windowManager.hyprland = {
     # systemd.variables = ["--all"];
     enable = true;
+
+    xwayland.enable = true;
+    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+    portalPackage =
+      inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
+
     # systemd.enable = false;
     # xwayland.enable = false;
     settings = {
