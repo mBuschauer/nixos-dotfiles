@@ -8,9 +8,11 @@ let
       [ "wezterm.desktop" ]
     else if builtins.head terminalOptions == "kitty" then
       [ "kitty.desktop" ]
+    else if builtins.head terminalOptions == "ghostty" then
+      [ "ghostty.desktop" ] # this is not set up properly yet / tested
     else
-      throw "Incorrect terminal selected";
-  
+      [ ];
+
   browser = "firefox.desktop";
 
 in {

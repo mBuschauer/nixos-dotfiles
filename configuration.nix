@@ -27,6 +27,10 @@
       message = "Empty list for terminal";
     }
     {
+      assertion = (builtins.elem "kitty" settings.customization.terminal || builtins.elem "wezterm" settings.customization.terminal || builtins.elem "ghostty" settings.customization.terminal);
+      message = "No valid terminal emulator selected.";
+    }
+    {
       assertion = (settings.customization.gpu == "amd" || settings.customization.gpu == "nvidia");
       message = "Unsupported GPU selected, found '${settings.customization.gpu}'";
     }
