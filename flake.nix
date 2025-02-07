@@ -81,6 +81,9 @@
 
     ghostty.url = "github:ghostty-org/ghostty";
 
+
+    # foundryvtt.url = "github:reckenrode/nix-foundryvtt";
+
     # aagl = {
     #   # an-anime-game-launcher
     #   url = "github:ezKEa/aagl-gtk-on-nix";
@@ -139,6 +142,7 @@
             }
           )
           ./configuration.nix
+          # inputs.foundryvtt.nixosModules.foundryvtt
           inputs.home-manager.nixosModules.default
           home-manager.nixosModules.home-manager
           {

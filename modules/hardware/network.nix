@@ -30,6 +30,7 @@
   services.tailscale.useRoutingFeatures = "both";
   # sudo tailscale set --exit-node=xxx
 
+  programs.firejail.enable = true;
 
   environment.systemPackages = with pkgs; [
     traceroute

@@ -1,4 +1,4 @@
-{ pkgs, configs, inputs, aagl, ... }:
+{ pkgs, configs, inputs, aagl, settings, ... }:
 let
   retroarchWithCores = (pkgs.retroarch.withCores (cores: with cores; [
     desmume
@@ -20,10 +20,23 @@ in
   environment.systemPackages = with pkgs; [
     heroic
     retroarchWithCores
+    
+    wineWow64Packages.base
+    winetricks
 
   ] ++ [
     # inputs.suyu.packages.${system}.suyu # yuzu successor
   ];
+
+  # services.foundryvtt = {
+  #   enable = true;
+  #   # hostName = settings.userDetails.hostname;
+  #   package = inputs.foundryvtt.packages.${pkgs.system}.foundryvtt_12;
+  #   minifyStaticFiles = true;
+  #   # proxyPort = 8080;
+  #   # proxySSL = true;
+  #   # upnp = false;
+  # };
 
   # programs.anime-games-launcher.enable = true;
 }

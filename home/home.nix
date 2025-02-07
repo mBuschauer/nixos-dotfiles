@@ -15,7 +15,7 @@ in
   home = {
     username = "${settings.userDetails.username}";
     homeDirectory = "/home/${settings.userDetails.username}";
-    stateVersion = "24.05";
+    stateVersion = settings.userDetails.state_version;
     sessionVariables = {
       EDITOR = "lvim";
       # TERM = "kitty";

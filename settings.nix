@@ -5,6 +5,7 @@ let
     hostname = "MarcoMNix"; # Hostname
     username = "marco"; # Username
     gpu = "nvidia"; # supported: {nvidia, amd}
+    state_version = "24.11";
     desktopEnvironment = [
       "hyprland"
       # "cosmic" # doesnt work
@@ -19,9 +20,10 @@ let
       # "DP-2, preferred, 0x0, 1"
     ];
     terminal = [
+      # "kitty"
       "wezterm"
       # "ghostty"  
-    ]; # only supported `wezterm` and `kitty` (and `ghostty`). There is no error handling if this is left empty. DO NOT LEAVE EMPTY
+    ]; # only supported `wezterm` and `kitty` (and `ghostty`). There is no error handling if this is filled with wrong information.
   };
 
 in {
@@ -29,6 +31,7 @@ in {
     hostname = config.hostname;
     username = config.username;
     system = config.system;
+    state_version = config.state_version;
   };
   customization = {
     gpu = config.gpu;

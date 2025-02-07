@@ -20,7 +20,7 @@ in
       (createChromiumExtension {
         # ublock origin
         id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";
-        sha256 = "sha256:06k70762vh79ak1d2gsrx9faadzj0gjqa4yz9x7vk9m7k85jp69p";
+        sha256 = "sha256:0ycnkna72n969crgxfy2lc1qbndjqrj46b9gr5l9b7pgfxi5q0ll";
         version = "1.59.0";
       })
       (createChromiumExtension {
@@ -32,19 +32,19 @@ in
       (createChromiumExtension {
         # Hover Zoom + 
         id = "pccckmaobkjjboncdfnnofkonhgpceea";
-        sha256 = "sha256:0w6r56m71bdkyc3yq925g5x4s058sjn5a19p86ighikac3256fln";
+        sha256 = "sha256:0ki0ggljak07slrd0n0lgs6s29a2db6dc6gxvmsn3z6jdikm7j2q";
         version = "1.0.219";
       })
       (createChromiumExtension {
         # bitwarden 
         id = "nngceckbapebfimnlniiiahkandclblb";
-        sha256 = "sha256:0yssxmn6hkp6l1r3c0vnw4jsz4r9sdw356prbydg1n1samzhhqyk";
+        sha256 = "sha256:1c59lmxj786w7vnynsmyd9b65c19vn7agnncbr7yz0kbf35yw7iw";
         version = "2024.8.1";
       })
       (createChromiumExtension {
         # sponsor block
         id = "mnjggcdmjocbbbhaepdhchncahnbgone";
-        sha256 = "sha256:0mj0mmv01f422wqm3ad44dd7vp9fxpvpl9dhlimhv2d2vm0wmz4j";
+        sha256 = "sha256:07g8278s55wzzjb7im3lirmq7aq0pb3zfgw8xly0wczwjz3mhzb6";
         version = "5.7";
       })
     ];

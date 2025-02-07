@@ -1,12 +1,9 @@
-{ config, pkgs, lib, inputs, ... }:
-{
+{ config, pkgs, lib, inputs, ... }: {
   nixpkgs.config.allowUnfree = true;
 
   programs.thunar = {
     enable = false;
-    plugins = with pkgs.xfce; [
-      thunar-volman
-    ];
+    plugins = with pkgs.xfce; [ thunar-volman ];
   };
 
   #services.onedrive = {
@@ -21,14 +18,12 @@
   #  ];
   #};
 
-
   environment.systemPackages = with pkgs; [
     zoom-us
 
     onlyoffice-desktopeditors
     hunspell
     hunspellDicts.en_US
-
 
     libsForQt5.okular
 
