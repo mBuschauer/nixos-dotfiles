@@ -3,7 +3,7 @@
   programs.vscode = {
     enable = true;
     # package = pkgs.vscodium; # doensn't support microsoft extensions
-    package = pkgs.vscode;
+    package = pkgs.stable.vscode;
     extensions = with pkgs.vscode-extensions; [
       ms-python.debugpy # Python Debugger
       ms-vscode-remote.remote-containers # Dev Containers
@@ -21,6 +21,11 @@
       ms-vscode.live-server # live preview
       ms-vscode.makefile-tools # makefile tools
 
+      tamasfe.even-better-toml #toml markup
+
+      ocamllabs.ocaml-platform # ocaml support
+      badochov.ocaml-formatter # ocaml formatter
+
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         # good formatter for python
@@ -29,13 +34,13 @@
         version = "2024.0.0";
         sha256 = "37d6d46763ada1846d2c468a47274510f392f28922d44e339ab8f5baf6aa0703";
       }
-      {
-        # bend language support
-        name = "Bend";
-        publisher = "rohanvashisht";
-        version = "0.2.14";
-        sha256 = "63c73c0791f33082fbfc81c54dc8b2ac08a5a482226c1598b2c25e3b37f8252a";
-      }
+      # {
+      #   # bend language support
+      #   name = "Bend";
+      #   publisher = "rohanvashisht";
+      #   version = "0.2.14";
+      #   sha256 = "63c73c0791f33082fbfc81c54dc8b2ac08a5a482226c1598b2c25e3b37f8252a";
+      # }
       {
         # sftp support
         name = "SFTP";

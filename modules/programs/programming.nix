@@ -4,6 +4,7 @@
   users.users.${settings.userDetails.username}.extraGroups = [ "docker" ];
   virtualisation.docker = {
     enable = true;
+    enableNvidia = if settings.customization.gpu == "nvidia" then true else false;
     liveRestore = false;
   };
 
