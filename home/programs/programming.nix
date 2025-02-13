@@ -24,7 +24,6 @@
       tamasfe.even-better-toml #toml markup
 
       ocamllabs.ocaml-platform # ocaml support
-      badochov.ocaml-formatter # ocaml formatter
 
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {

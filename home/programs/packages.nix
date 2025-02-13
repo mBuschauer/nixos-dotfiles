@@ -59,6 +59,9 @@
 
     lunarvim
 
+    lshw-gui
+
+
   ] ++ [
     inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo
   ];
@@ -93,6 +96,13 @@
       terminal = false;
       icon = "${inputs.tailray.packages.${pkgs.system}.tailray}/share/icons/hicolor/symbolic/apps/tailscale-online.svg";
     };
+
+    lshw-gui = {
+      name = "lshw-gui";
+      exec = "gtk-lshw";
+      terminal = false;
+    };
+
 
     # discord-webcord = {
     #   name = "Discord";

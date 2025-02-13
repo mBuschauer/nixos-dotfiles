@@ -51,7 +51,7 @@
 
     webcamoid
     busybox
-
+    
     stable.texliveFull # for editing latex
   ];
 }
