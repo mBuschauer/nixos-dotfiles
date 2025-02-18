@@ -3,7 +3,7 @@
   programs.vscode = {
     enable = true;
     # package = pkgs.vscodium; # doensn't support microsoft extensions
-    package = pkgs.stable.vscode;
+    package = pkgs.vscode;
     extensions = with pkgs.vscode-extensions; [
       ms-python.debugpy # Python Debugger
       ms-vscode-remote.remote-containers # Dev Containers
@@ -13,7 +13,7 @@
       jnoortheen.nix-ide #nix IDE
       ms-python.python # Python
       ms-python.vscode-pylance # vscode-pylance
-      rust-lang.rust-analyzer # rust-analyzer
+      pkgs.stable.vscode-extensions.rust-lang.rust-analyzer # rust-analyzer
       vscode-icons-team.vscode-icons # vscode-icons
       dotjoshjohnson.xml # xml tools
       eamodio.gitlens # git lens
@@ -57,6 +57,11 @@
     ];
   };
 
+  home.packages = with pkgs; [
+    ocamlPackages.ocp-indent # for vscode indenting
+    ocamlPackages.ocaml-lsp # for ocaml lsp
+  ];
+
 
   programs.gh = {
     enable = true;
@@ -76,7 +81,7 @@
       };
     };
     signing = {
-      gpgPath = "${pkgs.gnupg}/bin/gpg";
+      signer = "${pkgs.gnupg}/bin/gpg";
       key = "${secrets.gpgFingerprint}"; # gpg --list-keys --fingerprint
       signByDefault = true;
     };

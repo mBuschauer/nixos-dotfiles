@@ -7,6 +7,7 @@
 
     # fun cli programs
     stable.cava
+
     toipe
     lolcat
     asciiquarium
@@ -60,6 +61,8 @@
     lunarvim
 
     lshw-gui
+
+    audacity
 
 
   ] ++ [
