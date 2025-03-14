@@ -88,9 +88,12 @@ in {
   };
 
   nix.settings = {
-    substituters = [ "https://wezterm.cachix.org" ];
-    trusted-public-keys =
-      [ "wezterm.cachix.org-1:kAbhjYUC9qvblTE+s7S+kl5XM1zVa4skO+E/1IDWdH0=" ];
+    substituters =
+      [ "https://hyprland.cachix.org" "https://wezterm.cachix.org" ];
+    trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "wezterm.cachix.org-1:kAbhjYUC9qvblTE+s7S+kl5XM1zVa4skO+E/1IDWdH0="
+    ];
   };
 
   # hint electron apps to use wayland

@@ -10,4 +10,11 @@
     ];
   };
 
+  # users.groups.nixosvmtest = {};
+  # users.users.nixosvmtest = {
+  #   isSystemUser = true;
+  #   initialPassword = "test";
+  #   group = "nixosvmtest";
+  # };
+
 }

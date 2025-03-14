@@ -17,7 +17,7 @@
           package = pkgs.swtpm;
         };
         ovmf = {
-          # UEFI support for Vms
+          # UEFI support for VMs
           enable = true;
           packages = [ pkgs.OVMFFull.fd ];
         };
@@ -33,10 +33,24 @@
     #};
 
     virtualbox.host = {
-      enable = true;
+      enable = false;
       package = pkgs.virtualbox;
       enableExtensionPack = true;
       enableHardening = true;
+    };
+
+    vmVariant = {
+      # following configuration is added only when building VM with build-vm
+      virtualisation = {
+        memorySize = 4096; # Use 2048MiB memory.
+        cores = 4;
+      };
+    };
+    vmVariantWithBootLoader = {
+      virtualisation = {
+        memorySize = 4096; # Use 2048MiB memory.
+        cores = 4;
+      };
     };
   };
 
@@ -60,9 +74,8 @@
 
   users.users.${settings.userDetails.username}.extraGroups = [
     "libvirtd"
-    "vboxusers" # Adding users to the group vboxusers allows them to use the virtualbox functionality. 
+    "vboxusers" # Adding users to the group vboxusers allows them to use the virtualbox functionality.
   ];
-
 
   # settings for qemu/kvm
   home-manager.users.${settings.userDetails.username} = {

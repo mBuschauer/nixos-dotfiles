@@ -13,11 +13,12 @@ let
 in {
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [ 
-    # nss
-    # nssTools 
-    # eid-mw 
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      # nss
+      # nssTools 
+      # eid-mw 
+    ];
 
   programs.firefox = {
     enable = true;

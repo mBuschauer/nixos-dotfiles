@@ -19,7 +19,7 @@ let
     '';
   });
   # seemed to have trouble rendering on wayland w/ nvidia gpu, setting backend as xcb seems to fix them
-  sigil-wayland = pkgs.sigil.overrideAttrs (prevAttrs: {
+  sigil-wayland = pkgs.stable.sigil.overrideAttrs (prevAttrs: {
     nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ])
       ++ [ pkgs.makeBinaryWrapper ];
     postInstall = (prevAttrs.postInstall or "") + ''

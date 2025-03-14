@@ -60,6 +60,7 @@
   home.packages = with pkgs; [
     ocamlPackages.ocp-indent # for vscode indenting
     ocamlPackages.ocaml-lsp # for ocaml lsp
+    ocamlPackages.ocamlformat-rpc-lib # i dont even know anymore
   ];
 
 
