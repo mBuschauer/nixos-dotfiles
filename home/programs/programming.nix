@@ -72,6 +72,7 @@
 
   programs.git = {
     enable = true;
+    lfs.enable = true;
     userName = "${secrets.gitUser}";
     userEmail = "${secrets.gitEmail}";
     extraConfig = {

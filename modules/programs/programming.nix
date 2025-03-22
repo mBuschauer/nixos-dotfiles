@@ -16,7 +16,7 @@
   };
 
   services.ollama = {
-    enable = true;
+    enable = false;
     package = pkgs.ollama;
     acceleration = "cuda";
     home = "/mnt/sda1/ollama";

@@ -16,6 +16,11 @@
       url = "https://github.com/Alexays/Waybar";
     };
 
+    hyprpanel = {
+      url = "github:Jas-SinghFSU/HyprPanel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -78,9 +83,7 @@
 
     wezterm.url = "github:wez/wezterm?dir=nix";
 
-
     ghostty.url = "github:ghostty-org/ghostty";
-
 
     # foundryvtt.url = "github:reckenrode/nix-foundryvtt";
 
@@ -105,69 +108,63 @@
 
   };
 
-  outputs =
-    { nixpkgs
-    , nixpkgs-stable
-    , home-manager
-      # , nixos-cosmic
-      # , winapps
-      # , aagl
-    , ...
-    } @
-    inputs:
+  outputs = { nixpkgs, nixpkgs-stable, home-manager
+    # , nixos-cosmic
+    # , winapps
+    # , aagl
+    , hyprpanel # hyprpanel
+    , ... # ...
+    }@inputs:
 
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs;
+
       overlay-stable = final: prev: {
         stable = import nixpkgs-stable {
           inherit system;
-          config.allowUnfree = true; 
+          config.allowUnfree = true;
         };
       };
       settings = import (./. + "/settings.nix") { inherit pkgs; };
       secrets = import (./. + "/secrets.nix") { inherit pkgs; };
-    in
-    {
-      nixosConfigurations."${settings.userDetails.hostname}" = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs;
-          inherit settings;
-          inherit secrets;
-        };
-        modules = [
-          ({ config, pkgs, ... }:
+    in {
+      nixosConfigurations."${settings.userDetails.hostname}" =
+        nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs;
+            inherit settings;
+            inherit secrets;
+          };
+          modules = [
+            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-stable ]; })
+            ./configuration.nix
+            # inputs.foundryvtt.nixosModules.foundryvtt
+            inputs.home-manager.nixosModules.default
+            home-manager.nixosModules.home-manager
             {
-              nixpkgs.overlays = [ overlay-stable ];
-            }
-          )
-          ./configuration.nix
-          # inputs.foundryvtt.nixosModules.foundryvtt
-          inputs.home-manager.nixosModules.default
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users."${settings.userDetails.username}".imports = [ ./home/default.nix ];
-              extraSpecialArgs = {
-                inherit inputs;
-                inherit settings;
-                inherit secrets;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users."${settings.userDetails.username}".imports =
+                  [ ./home/default.nix ];
+                extraSpecialArgs = {
+                  inherit inputs;
+                  inherit settings;
+                  inherit secrets;
+                };
+                backupFileExtension = "backupExt";
               };
-              backupFileExtension = "backupExt";
-            };
-          }
-          # nixos-cosmic.nixosModules.default
+            }
+            # nixos-cosmic.nixosModules.default
 
-          # {
-          #   # aagl
-          #   imports = [ aagl.nixosModules.default ];
-          #   nix.settings = aagl.nixConfig; # Set up Cachix
-          # }
-        ];
-      };
+            # {
+            #   # aagl
+            #   imports = [ aagl.nixosModules.default ];
+            #   nix.settings = aagl.nixConfig; # Set up Cachix
+            # }
+          ];
+        };
     };
-
 
 }

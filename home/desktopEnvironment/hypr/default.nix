@@ -9,6 +9,7 @@
     ./hyprland.nix
     ./wallpaper.nix
     ./waybar
+    # ./hyprpanel.nix
     ./wlogout.nix
   ];
 }

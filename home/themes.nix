@@ -53,6 +53,8 @@ in
           font_size = 11.0,
           color_scheme = "Ayu Mirage",
           hide_tab_bar_if_only_one_tab = true,
+          check_for_updates = false,
+          
       }
     '';
   };
