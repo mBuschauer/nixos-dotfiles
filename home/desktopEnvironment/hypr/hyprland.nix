@@ -204,9 +204,12 @@ in {
         # "CTRL, Space, global, kando:example-menu"
 
         "$mod, P, exec, ${
-          pkgs.writeShellScript "sent_nofification" ''
-            STAMP=$(date +'%Y-%m-%d_%H-%M-%S')
-            SCREENSHOT_PATH=~/Pictures/Screenshots/Screenshot_$STAMP.png
+          pkgs.writeShellScript "sent_notification" ''
+            TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
+            MONTH_YEAR=$(date +'%B_%Y')  # e.g., April_2025
+            SCREENSHOT_DIR=~/Pictures/Screenshots/$MONTH_YEAR
+            mkdir -p "$SCREENSHOT_DIR"
+            SCREENSHOT_PATH="$SCREENSHOT_DIR/Screenshot_$TIMESTAMP.png"
 
             # Take screenshot with grim, but check if slurp/grim was cancelled
             grim -g "$(slurp)" "$SCREENSHOT_PATH"
@@ -217,9 +220,9 @@ in {
 
             ${notification}
 
-            # Function to open the Pictures folder
+            # Function to open the folder where screenshot was saved
             forward_action() {
-              xdg-open ~/Pictures/Screenshots
+              xdg-open "$SCREENSHOT_DIR"
             }
 
             # Function to handle notification dismiss
@@ -242,27 +245,28 @@ in {
                 echo "No valid action selected."
                 ;;
             esac
-
           ''
         }"
-
         "$mod, Print, exec, ${
           pkgs.writeShellScript "active-window" ''
             w_pos=$(hyprctl activewindow | grep 'at:' | awk '{print $2}' | tr -d ' ')
             w_size=$(hyprctl activewindow | grep 'size:' | awk '{print $2}' | tr -d ' ' | sed 's/,/x/')
             geometry="$w_pos $w_size"
-            STAMP=$(date +'%Y-%m-%d_%H-%M-%S')
 
-            SCREENSHOT_PATH=~/Pictures/Screenshots/Screenshot_$STAMP.png
-            ANNOTATED_PATH=~/Pictures/Screenshots/Screenshot_Annotated_$STAMP.png
+            TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
+            MONTH_YEAR=$(date +'%B_%Y')
+            SCREENSHOT_DIR=~/Pictures/Screenshots/$MONTH_YEAR
+            mkdir -p "$SCREENSHOT_DIR"
+            SCREENSHOT_PATH="$SCREENSHOT_DIR/Screenshot_$TIMESTAMP.png"
+            ANNOTATED_PATH="$SCREENSHOT_DIR/Screenshot_Annotated_$TIMESTAMP.png"
 
             # Take a screenshot of the active window
             grim -g "$geometry" "$SCREENSHOT_PATH"
             ${notification}
 
-            # Function to open the Pictures folder
+            # Function to open the folder where screenshot was saved
             forward_action() {
-              xdg-open ~/Pictures/Screenshots
+              xdg-open "$SCREENSHOT_DIR"
             }
 
             # Function to handle notification dismiss
@@ -278,7 +282,7 @@ in {
               "forward")
                 forward_action
                 ;;
-              "2")  # Dunst returns "2" when the notification is manually dismissed
+              "2")
                 handle_dismiss
                 ;;
               *)
