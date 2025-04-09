@@ -20,12 +20,13 @@ in
   environment.systemPackages = with pkgs; [
     heroic
     retroarchWithCores
+
+    suyu
     
     wineWow64Packages.base
     winetricks
 
   ] ++ [
-    # inputs.suyu.packages.${system}.suyu # yuzu successor
   ];
 
   # services.foundryvtt = {

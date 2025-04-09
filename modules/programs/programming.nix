@@ -20,7 +20,7 @@
     package = pkgs.ollama;
     acceleration = "cuda";
     home = "/mnt/sda1/ollama";
-    models = "${config.services.ollama.home}/models";
+    models = "${config.services.ollama.home}/models"; # references home (/mnt/sda1/ollama/models)
   };
 
   # for creating gpg keys

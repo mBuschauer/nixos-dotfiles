@@ -13,9 +13,25 @@ let
     };
   createChromiumExtension = createChromiumExtensionFor
     (lib.versions.major pkgs.ungoogled-chromium.version);
+
+
+  braveWithWebGL = (pkgs.brave.override {
+    enableVulkan = true;
+    vulkanSupport = true;
+  }).overrideAttrs (prevAttrs: {
+    nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ])
+      ++ [ pkgs.makeBinaryWrapper ];
+
+    postInstall = (prevAttrs.postInstall or "") + ''
+      wrapProgram $out/bin/brave \
+        --add-flags "--enable-features=Vulkan" \
+        --set ozone-platform x11
+    '';
+  });
+
 in {
   programs.chromium = {
-    enable = true;
+    enable = false;
     package = pkgs.ungoogled-chromium.override { enableWideVine = true; };
     commandLineArgs = [
       # "--enable-features=AcceleratedVideoEncoder"
@@ -31,4 +47,6 @@ in {
       { id = "mnjggcdmjocbbbhaepdhchncahnbgone"; } # sponsor block
     ];
   };
+
+  home.packages = with pkgs; [ braveWithWebGL ];
 }
