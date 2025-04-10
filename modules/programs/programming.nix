@@ -1,10 +1,19 @@
 { config, pkgs, lib, inputs, settings, ... }:
+let
+ollamaGPU = if settings.customization.gpu == "nvidia" then pkgs.ollama-cuda
+            else if settings.customization.gpu == "amd" then pkgs.ollama-rocm
+            else pkgs.ollama;
+
+ollamaAcceleration = if settings.customization.gpu == "nvidia" then "cuda" 
+                      else if settings.customization.gpu == "amd" then "rocm" 
+                      else null;
+in
 {
   # enable docker
   users.users.${settings.userDetails.username}.extraGroups = [ "docker" ];
   virtualisation.docker = {
     enable = true;
-    enableNvidia = if settings.customization.gpu == "nvidia" then true else false;
+    # enableNvidia = if settings.customization.gpu == "nvidia" then true else false;
     liveRestore = false;
   };
 
@@ -17,8 +26,8 @@
 
   services.ollama = {
     enable = false;
-    package = pkgs.ollama;
-    acceleration = "cuda";
+    package = ollamaGPU;
+    acceleration = ollamaAcceleration;
     home = "/mnt/sda1/ollama";
     models = "${config.services.ollama.home}/models"; # references home (/mnt/sda1/ollama/models)
   };
