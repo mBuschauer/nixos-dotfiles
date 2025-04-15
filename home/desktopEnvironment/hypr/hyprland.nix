@@ -83,6 +83,8 @@ in {
         #"xdg-terminal-exec ncspot"
         "easyeffects --gapplication-service"
 
+        "nwg-dock-hyprland"
+
         # "xwaylandvideobridge"
         #"mpd-mpris"
         # "discord --start-minimized" # starts discord before waybar so icon doesnt show up anyway

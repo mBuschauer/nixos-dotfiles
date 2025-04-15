@@ -40,6 +40,7 @@ in
     font.size = 11;
     themeFile = "ayu_mirage";
     settings = {
+      cursor_trail = 3; 
       open_url_with = "default";
     };
   };

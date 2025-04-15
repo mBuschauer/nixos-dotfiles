@@ -9,6 +9,7 @@
     ./hyprland.nix
     ./wallpaper.nix
     ./waybar
+    ./nwg-dock
     # ./hyprpanel.nix
     ./wlogout.nix
   ];
