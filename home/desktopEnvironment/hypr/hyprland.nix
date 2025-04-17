@@ -83,7 +83,7 @@ in {
         #"xdg-terminal-exec ncspot"
         "easyeffects --gapplication-service"
 
-        "nwg-dock-hyprland"
+        # "nwg-dock-hyprland -c anyrun -i 36 -lp start -p bottom -a start -mb 10"
 
         # "xwaylandvideobridge"
         #"mpd-mpris"
