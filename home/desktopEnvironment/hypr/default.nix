@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./anyrun
+    # ./anyrun
     
     ./hypridle.nix
     ./hyprlock.nix
@@ -9,7 +9,7 @@
     ./hyprland.nix
     ./wallpaper.nix
     ./waybar
-    ./nwg-dock
+    # ./nwg-dock
     # ./hyprpanel.nix
     ./wlogout.nix
   ];

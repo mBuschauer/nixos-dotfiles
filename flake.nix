@@ -106,7 +106,7 @@
     # , nixos-cosmic
     # , winapps
     # , aagl
-    , hyprpanel # hyprpanel
+    # , hyprpanel
     , ... # ...
     }@inputs:
 

@@ -25,6 +25,7 @@
       showResultsImmediately = true;
       maxEntries = null;
     };
+
     extraCss = builtins.readFile (./. + "/style-dark.css");
     extraConfigFiles = {
       "applications.ron".text = ''

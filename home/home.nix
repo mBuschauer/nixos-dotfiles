@@ -1,4 +1,4 @@
-{ inputs, pkgs, settings, ... }:
+{ inputs, pkgs, settings, lib, ... }:
 let
   matchFirstElement = list:
     if builtins.length list == 0 then
@@ -44,7 +44,7 @@ in
 
 
     shellAliases = {
-      ls = "lsd";
+      ls = lib.mkForce "lsd";
       # vim = "lvim";
       top = "btm";
       # cat = "bat";

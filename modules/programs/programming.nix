@@ -100,7 +100,6 @@ in
   ]
   ++ [
     # inputs.tsui.packages."x86_64-linux".tsui # currently broken, not going to fix now.
-    # inputs.anyrun.packages."x86_64-linux".anyrun
   ];
 
 }
