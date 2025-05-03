@@ -26,6 +26,7 @@ in
       HISTFILE = "/home/${settings.userDetails.username}/.bash_history";
     };
   };
+
   programs.bash = {
     enable = true;
     enableCompletion = true;

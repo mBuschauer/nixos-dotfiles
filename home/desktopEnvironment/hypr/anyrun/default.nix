@@ -1,11 +1,7 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, lib, ... }:
 {
-  imports = [
-    inputs.anyrun.homeManagerModules.default
-  ];
-
   programs.anyrun = {
-    enable = true;
+    enable = lib.mkForce true;
     config = {
       plugins = with inputs.anyrun.packages.${pkgs.system}; [
         applications

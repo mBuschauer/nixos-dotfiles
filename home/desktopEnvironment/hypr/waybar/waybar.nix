@@ -14,6 +14,7 @@ in
     waybar-mpris
     glxinfo
     bc
+    jq
     # pw-volume
   ];
   programs.waybar = {
