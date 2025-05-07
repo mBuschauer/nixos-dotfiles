@@ -89,6 +89,7 @@ in {
       };
       Preferences = {
         "extensions.pocket.enabled" = lock-false;
+        "browser.tabs.groups.enabled" = true;
         "browser.topsites.contile.enabled" = lock-false;
         "browser.urlbar.showSearchSuggestionsFirst" = lock-false;
         "browser.newtabpage.activity-stream.feeds.section.topstories" =
