@@ -170,7 +170,7 @@ in
 
         "network" = {
           interval = 5;
-          format-wifi = " {essid} ({signalStrength}%)";
+          format-wifi = "   {essid} ({signalStrength}%)";
           format-ethernet = "  {bandwidthDownBits} {bandwidthUpBits}";
           format-disconnected = "No connection";
           format-alt = "󰈀 {ipaddr}/{cidr}";
