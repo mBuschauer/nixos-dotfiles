@@ -42,7 +42,7 @@
 
     gimp # gimp
 
-    ventoy # to create bootable drives
+    # ventoy # to create bootable drives
     gparted # alternative to disks
 
     hakuneko

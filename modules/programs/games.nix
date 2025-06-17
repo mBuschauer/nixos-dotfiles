@@ -21,7 +21,7 @@ in
     heroic
     retroarchWithCores
 
-    suyu
+    # suyu
     
     wineWow64Packages.base
     winetricks

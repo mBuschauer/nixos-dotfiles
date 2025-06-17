@@ -170,11 +170,12 @@ in
 
         "network" = {
           interval = 5;
-          format-wifi = "   {essid} ({signalStrength}%)";
-          format-ethernet = "  {bandwidthDownBits} {bandwidthUpBits}";
+          format-wifi = "    {essid} ({signalStrength}%)";
+          format-ethernet = "  {ipaddr}/{cidr}";
           format-disconnected = "No connection";
           format-alt = "󰈀 {ipaddr}/{cidr}";
-          tooltip = false;
+          tooltip = true;
+          tooltip-format = "{bandwidthDownBits} {bandwidthUpBits}";
         };
 
         "memory" = {
