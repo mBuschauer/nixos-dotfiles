@@ -81,6 +81,9 @@
           driver = true;
         };
       };
+      submodule = {
+        recurse = true;
+      };
     };
     signing = {
       signer = "${pkgs.gnupg}/bin/gpg";

@@ -53,6 +53,8 @@
     # webcord # a different discord client
     # vesktop # discord electron wrapper, hardware acceleration doesnt seem to work though
 
+    stable.slack
+
     kdePackages.kclock # alarm app
     # gnome-clocks # clock app
 
@@ -65,6 +67,8 @@
     audacity
 
     # whatsapp-for-linux
+
+    feishin # subsonic player (desktop client)
 
   ] ++ [
     inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo
