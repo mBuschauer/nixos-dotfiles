@@ -22,6 +22,8 @@ in
     retroarchWithCores
 
     # suyu
+    ryubing
+    nsz
     
     wineWow64Packages.base
     winetricks

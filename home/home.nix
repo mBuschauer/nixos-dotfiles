@@ -67,6 +67,57 @@ in
       # pokemon-icat = "/home/marco/.config/.pokemon-icat/pokemon-icat";
       # start-wayvnc = "wayvnc 0.0.0.0 --gpu --performance --socket=5900 --render-cursor --max-fps=60 &&";
       restart-network = "sudo systemctl restart NetworkManager.service";
+      nmcli-fzf = ''
+        set -euo pipefail
+
+        # 1) Grab the full selected line (BSSID + everything else)
+        selected=$(nmcli --color yes \
+            -f 'bssid,in-use,signal,bars,freq,rate,security,ssid' \
+            device wifi list --rescan yes \
+          | fzf --ansi \
+                --with-nth=2.. \
+                --reverse \
+                --cycle \
+                --header-lines=1 \
+                --margin='1,2,1,2' \
+                --color='16,gutter:-1' \
+                --header='Select Wi-Fi network:' \
+        )
+
+        # 2) If nothing was chosen, exit
+        if [[ -z "$selected" ]]; then
+          echo "No network selected. Exiting."
+          exit 1
+        fi
+
+        # 3) Extract BSSID and SSID separately
+        #    Field 1 is the BSSID (MAC)
+        bssid=$(awk '{print $1}' <<< "$selected")
+
+        # Remove cols 1-7, then trim leading spaces to get the SSID
+        ssid=$(awk '{
+            $1=$2=$3=$4=$5=$6=$7="";
+            sub(/^[[:space:]]+/, "");
+            print
+          }' <<< "$selected")
+
+        # 4) Try to connect by BSSID (silent), falling back to --ask on failure
+        echo "Please wait while connecting to \"$ssid\"…"
+        if nmcli device wifi connect "$bssid" &>/dev/null; then
+          echo "Connected to “$ssid”."
+        else
+          echo "Silent connect failed; prompting for credentials…"
+          if nmcli -a device wifi connect "$bssid"; then
+            echo "Connected to “$ssid”."
+          else
+            echo "Failed to connect to “$ssid”."
+            printf "\nPress any key to close.\n" && read -n1 -r
+            exit 1
+          fi
+        fi
+        # 5) Pause so you can see any messages
+        printf "\nPress any key to close.\n" && read -n1 -r
+      '';
     };
   };
 

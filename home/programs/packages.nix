@@ -45,7 +45,7 @@
     # ventoy # to create bootable drives
     gparted # alternative to disks
 
-    hakuneko
+    # hakuneko
 
     p7zip # for 7z support
 
@@ -69,6 +69,8 @@
     # whatsapp-for-linux
 
     feishin # subsonic player (desktop client)
+
+    fzf
 
   ] ++ [
     inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo

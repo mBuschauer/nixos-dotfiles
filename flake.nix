@@ -36,6 +36,9 @@
     hyprpaper = {
       url = "github:hyprwm/hyprpaper";
     };
+    hyprpolkitagent = {
+      url = "github:hyprwm/hyprpolkitagent";
+    };
 
     hyprsysteminfo.url = "github:hyprwm/hyprsysteminfo";
 

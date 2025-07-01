@@ -63,8 +63,6 @@ in {
 
     xwayland.enable = true;
     package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-    portalPackage =
-      inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland;
 
     # systemd.enable = false;
     # xwayland.enable = false;
@@ -88,6 +86,7 @@ in {
         # "xwaylandvideobridge"
         #"mpd-mpris"
         # "discord --start-minimized" # starts discord before waybar so icon doesnt show up anyway
+        "systemctl --user start hyprpolkitagent" # start polkit
       ];
 
       "env" = [ ];
