@@ -45,7 +45,7 @@ in {
 
     sox # for playing a notification sound
 
-    inputs.hyprpolkitagent.packages."${pkgs.system}".hyprpolkitagent
+    xdg-desktop-portal-gtk
   ];
 
   qt = {
@@ -56,20 +56,14 @@ in {
   xdg = {
     portal = {
       enable = true;
-      # xdgOpenUsePortal = true;
-      # config = { hyprland.default = [ "hyprland" ]; };
-
-      extraPortals = [
-        inputs.hyprland.packages."${pkgs.system}".xdg-desktop-portal-hyprland
-        pkgs.xdg-desktop-portal-gtk
-      ];
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
       config = {
-        common.default = [ "gtk" ]; # for all desktops
-        hyprland.default = [ "gtk" "hyprland" ]; # specifically for Hyprland sessions
-        hyprland."org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        common = {
+          default = "hyprland";
+          filechooser = "gtk";
+        };
       };
     };
-
     terminal-exec = {
       enable = true;
       package = pkgs.xdg-terminal-exec;

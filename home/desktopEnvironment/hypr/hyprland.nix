@@ -14,7 +14,27 @@ in {
     satty # for screenshot editing (will be implemented at some point)
 
     # kando
+    inputs.hyprpolkitagent.packages."${pkgs.system}".hyprpolkitagent
+    xdg-desktop-portal-gtk
   ];
+
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config = {
+      common = {
+        default = [ "hyprland" "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      };
+      hyprland = {
+        default = [ "hyprland" "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      };
+    };
+  };
 
   services.dunst = {
     enable = true;
