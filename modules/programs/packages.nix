@@ -30,7 +30,7 @@
     notepad-next
 
     teams-for-linux # electron client for microsoft teams
-
+    joplin-desktop
     mpv
 
     komikku

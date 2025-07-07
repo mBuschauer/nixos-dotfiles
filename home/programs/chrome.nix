@@ -31,8 +31,9 @@ let
 
 in {
   programs.chromium = {
-    enable = false;
-    package = pkgs.ungoogled-chromium.override { enableWideVine = true; };
+    enable = true;
+    # package = pkgs.ungoogled-chromium.override { enableWideVine = true; };
+    package = pkgs.chromium.override { enableWideVine = true; };
     commandLineArgs = [
       # "--enable-features=AcceleratedVideoEncoder"
       # "--ignore-gpu-blocklist"

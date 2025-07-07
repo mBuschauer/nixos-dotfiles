@@ -87,7 +87,6 @@ in
         # 2) If nothing was chosen, exit
         if [[ -z "$selected" ]]; then
           echo "No network selected. Exiting."
-          exit 1
         fi
 
         # 3) Extract BSSID and SSID separately
@@ -112,7 +111,6 @@ in
           else
             echo "Failed to connect to “$ssid”."
             printf "\nPress any key to close.\n" && read -n1 -r
-            exit 1
           fi
         fi
         # 5) Pause so you can see any messages
