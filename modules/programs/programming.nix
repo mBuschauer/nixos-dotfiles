@@ -97,6 +97,9 @@ in
 
     godot_4
 
+    tio # screen/minicom alternative
+    lazygit
+
   ]
   ++ [
     # inputs.tsui.packages."x86_64-linux".tsui # currently broken, not going to fix now.

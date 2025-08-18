@@ -19,18 +19,16 @@
       sysctl."net.ipv4.tcp_wmem" = "4096  65536   33554432";
     };
 
-    plymouth.enable = true;
+    # plymouth.enable = true; 
   };
 
-  services = {
-    greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          command =
-            "${pkgs.greetd.tuigreet}/bin/tuigreet --time -r --asterisks --cmd Hyprland";
-          # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time -r --asterisks";
-        };
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command =
+          "${pkgs.tuigreet}/bin/tuigreet --time -r --asterisks --cmd Hyprland";
+        # command = "${pkgs.tuigreet}/bin/tuigreet --time -r --asterisks";
       };
     };
   };

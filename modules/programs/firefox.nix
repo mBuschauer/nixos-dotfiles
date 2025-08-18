@@ -75,15 +75,20 @@ in {
           installation_mode = "force_installed";
         };
         # Always active Window - Always Visible
-        "{4b7825da-0dd1-44f9-9717-bee5b2408af6}" = {
-          install_url =
-            "https://addons.mozilla.org/firefox/downloads/latest/always-visible/latest.xpi";
-          installation_mode = "normal_installed";
-        };
+        # "{4b7825da-0dd1-44f9-9717-bee5b2408af6}" = {
+        #   install_url =
+        #     "https://addons.mozilla.org/firefox/downloads/latest/always-visible/latest.xpi";
+        #   installation_mode = "normal_installed";
+        # };
         # wikiwand
         "jid1-D7momAzRw417Ag@jetpack" = {
           install_url =
             "https://addons.mozilla.org/firefox/downloads/latest/wikiwand-wikipedia-modernized/latest.xpi";
+          installation_mode = "normal_installed";
+        };
+        "@react-devtools" = {
+          install_url =
+            "https://addons.mozilla.org/firefox/downloads/latest/react-devtools/latest.xpi";
           installation_mode = "normal_installed";
         };
       };

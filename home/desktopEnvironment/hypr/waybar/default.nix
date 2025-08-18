@@ -8,6 +8,7 @@ in
 {
   imports =
     [
+      ./dunst.nix
       ./waybar.nix
       (matchString settings.customization.gpu)
     ];

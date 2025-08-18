@@ -8,6 +8,12 @@ let
 in
 {
 
+  wayland.windowManager.hyprland = {
+    settings."exec-once" = [ 
+      "waybar"
+    ];
+  };
+
   home.packages = with pkgs; [
     gpustat
     wttrbar

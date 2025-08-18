@@ -11,19 +11,25 @@
       yzhang.markdown-all-in-one # markdown-all-in-one
       bbenoist.nix # nix
       jnoortheen.nix-ide #nix IDE
+      brettm12345.nixfmt-vscode # nixfmt
+  
       ms-python.python # Python
       ms-python.vscode-pylance # vscode-pylance
       pkgs.stable.vscode-extensions.rust-lang.rust-analyzer # rust-analyzer
       vscode-icons-team.vscode-icons # vscode-icons
       dotjoshjohnson.xml # xml tools
-      eamodio.gitlens # git lens
+      mhutchie.git-graph # git graph
       ms-vscode.cmake-tools # cmake tools
       ms-vscode.live-server # live preview
       ms-vscode.makefile-tools # makefile tools
 
       tamasfe.even-better-toml #toml markup
+      # ocamllabs.ocaml-platform # ocaml support
 
-      ocamllabs.ocaml-platform # ocaml support
+      tomoki1207.pdf # vscode-pdf
+
+      ms-vscode-remote.remote-ssh
+      ms-vscode-remote.remote-ssh-edit
 
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
@@ -40,13 +46,13 @@
       #   version = "0.2.14";
       #   sha256 = "63c73c0791f33082fbfc81c54dc8b2ac08a5a482226c1598b2c25e3b37f8252a";
       # }
-      {
-        # sftp support
-        name = "SFTP";
-        publisher = "Natizyskunk";
-        version = "1.16.3";
-        sha256 = "sha256-HifPiHIbgsfTldIeN9HaVKGk/ujaZbjHMiLAza/o6J4";
-      }
+      # {
+      #   # sftp support
+      #   name = "SFTP";
+      #   publisher = "Natizyskunk";
+      #   version = "1.16.3";
+      #   sha256 = "sha256-HifPiHIbgsfTldIeN9HaVKGk/ujaZbjHMiLAza/o6J4";
+      # }
       # {
       #   # for assembly support
       #   name = "asm-code-lens";

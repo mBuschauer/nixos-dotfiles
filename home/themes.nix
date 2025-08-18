@@ -47,7 +47,9 @@ in
 
   programs.wezterm = {
     enable = isWezterm settings.customization.terminal;
-    package = inputs.wezterm.packages.${pkgs.system}.default;
+    # package = inputs.wezterm.packages.${pkgs.system}.default;
+    package = pkgs.wezterm;
+
     extraConfig = ''
       return {
           font = wezterm.font("Fira Code"),
@@ -55,7 +57,6 @@ in
           color_scheme = "Ayu Mirage",
           hide_tab_bar_if_only_one_tab = true,
           check_for_updates = false,
-          
       }
     '';
   };

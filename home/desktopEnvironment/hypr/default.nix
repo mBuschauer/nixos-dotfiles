@@ -2,6 +2,8 @@
 {
   imports = [
     ./anyrun
+
+    # ./eww
     
     ./hypridle.nix
     ./hyprlock.nix
