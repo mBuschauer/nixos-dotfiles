@@ -6,13 +6,10 @@ let
   # fileExplorer = "dolphin.desktop";
   fileArchiver = "corearchiver.desktop";
   vsCode = "codium.desktop";
-in
-{
+  videos = "mpv.desktop";
+in {
 
-  home.packages = with pkgs; [
-    file
-  ];
-
+  home.packages = with pkgs; [ file ];
 
   xdg = {
     configFile."mimeapps.list".force = true;
@@ -42,6 +39,9 @@ in
           "image/webp" = [ "${images}" ];
           "image/avif" = [ "${images}" ];
 
+          "video/x-matroska" = [ "${videos}" ];
+          "video/mp4" = [ "${videos}" ];
+
           "application/epub" = [ "sigil.desktop" ];
           "application/epub+zip" = [ "sigil.desktop" ];
           "text/plain" = [ "NotepadNext.desktop" ];
@@ -55,9 +55,12 @@ in
           "application/vnd.comicbook+zip" = [ "okular.desktop" ]; # .cbz
 
           # set onlyoffice to open .docx, .pptx, .xlsx
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "onlyoffice-desktopeditors.desktop" ];
-          "application/vnd.openxmlformats-officedocument.presentationml.presentation" = [ "onlyoffice-desktopeditors.desktop" ];
-          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = [ "onlyoffice-desktopeditors.desktop" ];
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
+            [ "onlyoffice-desktopeditors.desktop" ];
+          "application/vnd.openxmlformats-officedocument.presentationml.presentation" =
+            [ "onlyoffice-desktopeditors.desktop" ];
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" =
+            [ "onlyoffice-desktopeditors.desktop" ];
 
         };
         removed = {
@@ -67,14 +70,16 @@ in
           "application/cbr" = [ "okular.desktop" ];
           "application/vnd.comicbook-rar" = [ "okular.desktop" ];
           "application/pdf" = [ "calibre.desktop" ];
-          "inode/directory" = lib.mkForce [ "kitty-open.desktop" "nemo.desktop" ];
+          "inode/directory" =
+            lib.mkForce [ "kitty-open.desktop" "nemo.desktop" ];
           "application/directory" = [ "prismlauncher.desktop" ];
           "text/plain" = [ "libreoffice.desktop" ];
           "image/png" = [ "chromium.desktop" ];
           "image/avif" = [ "okular.desktop" ];
           "text/html" = [ "calibre.desktop" ];
           "application/xml" = [ "chromium.desktop" ];
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "calibre.desktop" ];
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
+            [ "calibre.desktop" ];
         };
       };
       defaultApplications = {
@@ -98,6 +103,9 @@ in
         "image/webp" = [ "${images}" ];
         "image/avif" = [ "${images}" ];
 
+        "video/x-matroska" = [ "${videos}" ];
+        "video/mp4" = [ "${videos}" ];
+
         "application/epub" = [ "sigil.desktop" ];
         "application/epub+zip" = [ "sigil.desktop" ];
         "application/vnd.comicbook-rar" = [ "${fileArchiver}" ];
@@ -110,9 +118,12 @@ in
         "application/xml" = [ "${vsCode}" ];
 
         # set onlyoffice to open .docx, .pptx, .xlsx
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "onlyoffice-desktopeditors.desktop" ];
-        "application/vnd.openxmlformats-officedocument.presentationml.presentation" = [ "onlyoffice-desktopeditors.desktop" ];
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = [ "onlyoffice-desktopeditors.desktop" ];
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
+          [ "onlyoffice-desktopeditors.desktop" ];
+        "application/vnd.openxmlformats-officedocument.presentationml.presentation" =
+          [ "onlyoffice-desktopeditors.desktop" ];
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" =
+          [ "onlyoffice-desktopeditors.desktop" ];
       };
     };
   };

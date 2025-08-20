@@ -277,7 +277,7 @@ in {
 
         "$mod, K, exec, pkill waybar; sleep 0.5 && waybar"
 
-        "$mod, R, exec, systemctl --user restart pipewire.service"
+        # "$mod, R, exec, systemctl --user restart pipewire.service"
 
         # "$mod, Q, exec, xdg-terminal-exec bash -c \"cd /home/${settings.userDetails.username}/ ; /home/marco/.config/.pokemon-icat/pokemon-icat; exec bash\""
         ''

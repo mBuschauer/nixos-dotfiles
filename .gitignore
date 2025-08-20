@@ -1,4 +1,3 @@
-settings.nix
 secrets.nix
 hardware-configuration.nix
 *.lock
