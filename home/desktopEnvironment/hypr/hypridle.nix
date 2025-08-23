@@ -16,15 +16,18 @@ in
       listener = [
         {
           timeout = 600; # 10 min
+          # timeout = 5;
           on-timeout = "notify-send \"Locking in 2 Minutes\" \"at $(date -d '+2 minutes' +%H:%M)\" && ${notification}";
 
         }
         {
+          # timeout = 15;
           timeout = 900; # 15 min
           on-timeout = "hyprlock";
         }
 
         {
+          # timeout = 30;
           timeout = 1200; # 20 min
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";

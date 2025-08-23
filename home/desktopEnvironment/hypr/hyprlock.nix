@@ -2,7 +2,8 @@
 {
   programs.hyprlock = {
     enable = true;
-    package = inputs.hyprlock.packages."${pkgs.system}".hyprlock;
+    # package = inputs.hyprlock.packages."${pkgs.system}".hyprlock;
+    package = pkgs.hyprlock;
     settings = {
       input-field = [
         {
@@ -11,7 +12,7 @@
           outline_thickness = 3;
           dots_size = 0.26;
           dots_spacing = 0.64;
-          fade_on_tempty = true;
+          fade_on_empty = true;
           placeholder_text = "<i>Password...</i>";
           hide_input = false;
           position = "0, 100";

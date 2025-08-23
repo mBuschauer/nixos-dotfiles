@@ -6,8 +6,7 @@
     fastfetch
 
     # fun cli programs
-    stable.cava
-
+    cava
     toipe
     lolcat
     asciiquarium
@@ -43,8 +42,11 @@
     gimp # gimp
 
     # ventoy # to create bootable drives
-    stable.gparted # alternative to disks
+
+    
+    libsForQt5.partitionmanager # alternative to disks
     parted
+    gparted
     tparted
 
     # hakuneko

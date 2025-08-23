@@ -126,6 +126,10 @@ in {
 
       misc = { force_default_wallpaper = 0; };
 
+      debug = {
+        disable_logs = false;
+      };
+
       layerrule = [
         # "noanim,^(anyrun)$" # disable animation for anyrun pop-in
         "animation[fadeIn],^(anyrun)$"
@@ -334,6 +338,7 @@ in {
 
       ];
       bindm = [ "$mod, mouse:272, movewindow" "$mod, mouse:273, resizewindow" ];
+    
     };
 
     plugins = builtins.attrValues {

@@ -9,7 +9,7 @@ in
 {
   
   environment.systemPackages = with pkgs; [
-    stable.sigil
+    sigil
     jellyfin-media-player
 
     mission-center

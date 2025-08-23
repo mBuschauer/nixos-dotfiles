@@ -11,7 +11,7 @@
       [
         amdvlk
         # rocmPackages.clr.icd
-        #mesa
+        mesa
       ];
 
   };

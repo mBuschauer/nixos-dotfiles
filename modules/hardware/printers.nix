@@ -1,16 +1,18 @@
-{ pkgs, ... }:
-
+{ pkgs, settings, ... }:
 {
   # enable printing
   services.printing = {
-    enable = false; # disabled because of CUPs vulnerability 
+    enable = settings.customization.cups_enabled; 
     drivers = with pkgs; [gutenprint hplip];
-    openFirewall = false; # disabled because of CUPs vulnerability 
+    openFirewall = settings.customization.cups_enabled;
   };
 
   services.avahi  = {
-    enable = false; # disabled because of CUPs vulnerability 
+    enable = settings.customization.cups_enabled;
+    ipv4 = true;
+    ipv6 = true;
     nssmdns4 = true;
-    openFirewall = false; # disabled because of CUPs vulnerability 
+    nssmdns6 = true;
+    openFirewall = settings.customization.cups_enabled;
   };
 }

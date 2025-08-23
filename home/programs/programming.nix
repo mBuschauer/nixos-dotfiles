@@ -3,7 +3,7 @@
   programs.vscode = {
     enable = true;
     # package = pkgs.vscodium; # doensn't support microsoft extensions
-    package = pkgs.vscode;
+    package = pkgs.stable.vscode;
     profiles.default.extensions = with pkgs.vscode-extensions; [
       ms-python.debugpy # Python Debugger
       ms-vscode-remote.remote-containers # Dev Containers

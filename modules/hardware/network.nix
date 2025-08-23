@@ -6,14 +6,14 @@
     # Enable networking
     networkmanager.enable = true;
 
-
     hostName = "${settings.userDetails.hostname}"; # Define your hostname.
 
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-    firewall.enable = true;
-    # Open ports in the firewall.
+    enableIPv6 = true;
+
     firewall = {
+      enable = true;
       allowedTCPPorts = [ ];
       allowedUDPPorts = [ ];
       checkReversePath = "loose";
@@ -25,10 +25,12 @@
     # firewall.enable = false;
 
   };
-
-  services.tailscale.enable = true;
-  services.tailscale.useRoutingFeatures = "both";
-  # sudo tailscale set --exit-node=xxx
+  
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both";
+    # sudo tailscale set --exit-node=xxx
+  };
 
   programs.firejail.enable = true;
 
