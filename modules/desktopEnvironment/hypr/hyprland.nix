@@ -21,8 +21,8 @@ in {
     # hyprcursor
 
     qt5.qtwayland
-    libsForQt5.qt5ct
-    libsForQt5.qt5.qtimageformats
+    kdePackages.qt6ct
+    kdePackages.qtimageformats
 
     qt6.qtwayland
 
@@ -39,7 +39,7 @@ in {
     # swaync
     libnotify
 
-    libsForQt5.dolphin
+    kdePackages.dolphin
     nemo
     # xwaylandvideobridge
 

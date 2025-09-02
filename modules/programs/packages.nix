@@ -25,7 +25,7 @@
     hunspell
     hunspellDicts.en_US
 
-    libsForQt5.okular
+    kdePackages.okular
 
     notepad-next
 

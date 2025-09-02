@@ -11,7 +11,7 @@ let
   };
 
   # this is related to an issue with nvidia, I believe, not wayland but setting backend as xcb seems to fix playback issues
-  jellyfin-wayland = pkgs.jellyfin-media-player.overrideAttrs (prevAttrs: {
+  jellyfin-wayland = pkgs.stable.jellyfin-media-player.overrideAttrs (prevAttrs: {
     nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ])
       ++ [ pkgs.makeBinaryWrapper ];
     postInstall = (prevAttrs.postInstall or "") + ''

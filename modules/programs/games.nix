@@ -28,6 +28,9 @@ in
     wineWow64Packages.base
     winetricks
 
+    prismlauncher
+    jdk21
+
   ] ++ [
   ];
 

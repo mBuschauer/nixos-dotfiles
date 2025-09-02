@@ -82,13 +82,9 @@
     # inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    # nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    # nixpkgs.follows = "nixos-cosmic/nixpkgs";
-
   };
 
   outputs = { nixpkgs, nixpkgs-stable, home-manager
-    # , nixos-cosmic
     # , winapps
     # , aagl
     # , hyprpanel
@@ -135,7 +131,6 @@
                 backupFileExtension = "backupExt";
               };
             }
-            # nixos-cosmic.nixosModules.default
 
             # {
             #   # aagl

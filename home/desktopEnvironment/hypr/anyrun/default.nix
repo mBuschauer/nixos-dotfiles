@@ -10,6 +10,7 @@
         dictionary
         stdin
         translate
+        websearch
       ];
       x = { fraction = 0.5; };
       y = { fraction = 0.35; };
@@ -47,6 +48,19 @@
           prefix: ":",
           language_delimiter: ">",
           max_entries: 3,
+        )
+      '';
+      "websearch.ron".text = ''
+        Config(
+          prefix: "?",
+          // Options: Google, Ecosia, Bing, DuckDuckGo, Custom
+          //
+          // Custom engines can be defined as such:
+          // Custom(
+          //   name: "Searx",
+          //   url: "searx.be/?q={}",
+          // )
+          engines: [Google],
         )
       '';
     };

@@ -24,7 +24,6 @@
     calibre
 
     spotify
-    prismlauncher
     qalculate-gtk
     qimgv # image viewer
     # pqiv # image viewer
@@ -43,8 +42,8 @@
 
     # ventoy # to create bootable drives
 
-    
-    libsForQt5.partitionmanager # alternative to disks
+    xorg.xhost
+    kdePackages.partitionmanager # alternative to disks
     parted
     gparted
     tparted
