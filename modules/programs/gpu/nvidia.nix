@@ -48,6 +48,8 @@ in {
     mission-center
     bottom
     btop
+
+    nvitop
   ];
 
   programs.firefox = {

@@ -1,7 +1,8 @@
-{ inputs, pkgs, lib, ... }:
-{
+{ inputs, pkgs, lib, ... }: {
+
   programs.anyrun = {
-    enable = lib.mkForce true;
+    enable = true;
+    package = inputs.anyrun.packages.${pkgs.system}.anyrun;
     config = {
       plugins = with inputs.anyrun.packages.${pkgs.system}; [
         applications
@@ -17,19 +18,41 @@
       hideIcons = false;
       ignoreExclusiveZones = false;
       layer = "overlay";
-      hidePluginInfo = false;
+      hidePluginInfo = true;
       closeOnClick = true;
       showResultsImmediately = true;
       maxEntries = null;
+      keybinds = [
+        {
+          key = "Escape";
+          action = "close";
+        }
+        {
+          key = "Return";
+          action = "select";
+        }
+        {
+          key = "Up";
+          action = "up";
+        }
+        {
+          key = "Down";
+          action = "down";
+        }
+      ];
     };
 
     extraCss = builtins.readFile (./. + "/style-dark.css");
+
     extraConfigFiles = {
       "applications.ron".text = ''
         Config(
           desktop_actions: false,
           max_entries: 8,
-          terminal: Some("wezterm"),
+          terminal: Some(Terminal(
+            command: "wezterm",
+            args: "-e {}",
+          )),
         )
       '';
       "shell.ron".text = ''

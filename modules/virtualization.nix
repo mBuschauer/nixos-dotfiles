@@ -2,7 +2,10 @@
 
 {
   virtualisation = {
-    # waydroid.enable = true;
+    waydroid = {
+      enable = false;
+      package = pkgs.waydroid;
+    };
 
     spiceUSBRedirection.enable = true;
 
@@ -69,7 +72,7 @@
     win-spice
     win-virtio
 
-    stable.bottles # modern wine gui
+    # (pkgs.bottles.override { removeWarningPopup = true; }) # modern wine gui
   ];
 
   users.users.${settings.userDetails.username}.extraGroups = [

@@ -16,38 +16,30 @@
       url = "https://github.com/Alexays/Waybar";
     };
 
-    hyprpanel = {
-      url = "github:Jas-SinghFSU/HyprPanel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # hyprpanel = {
+    #   url = "github:Jas-SinghFSU/HyprPanel";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hypridle = {
-      url = "github:hyprwm/hypridle";
-    };
-    hyprlock = {
-      url = "github:hyprwm/hyprlock";
-    };
+    hypridle = { url = "github:hyprwm/hypridle"; };
+    hyprlock = { url = "github:hyprwm/hyprlock"; };
 
-    hyprpaper = {
-      url = "github:hyprwm/hyprpaper";
-    };
-    hyprpolkitagent = {
-      url = "github:hyprwm/hyprpolkitagent";
-    };
+    hyprpaper = { url = "github:hyprwm/hyprpaper"; };
+    hyprpolkitagent = { url = "github:hyprwm/hyprpolkitagent"; };
 
     hyprsysteminfo.url = "github:hyprwm/hyprsysteminfo";
 
     swww.url = "github:LGFae/swww";
 
-    anyrun = {
-      url = "github:anyrun-org/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # anyrun = {
+    #   url = "github:anyrun-org/anyrun/";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     tailray = {
       url = "github:NotAShelf/tailray";
@@ -62,7 +54,7 @@
 
     wezterm.url = "github:wez/wezterm?dir=nix";
 
-    ghostty.url = "github:ghostty-org/ghostty";
+    # ghostty.url = "github:ghostty-org/ghostty";
 
     # foundryvtt.url = "github:reckenrode/nix-foundryvtt";
 
@@ -121,8 +113,16 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users."${settings.userDetails.username}".imports =
-                  [ ./home/default.nix ];
+
+                users."${settings.userDetails.username}".imports = [
+                  # ({ modulesPath, ... }: {
+                  #   # disable default home-manager anyrun module
+                  #   disabledModules = [ "${modulesPath}/programs/anyrun.nix" ]; 
+                  # })
+                  # inputs.anyrun.homeManagerModules.anyrun # enable flake home-manager module
+
+                  ./home/default.nix
+                ];
                 extraSpecialArgs = {
                   inherit inputs;
                   inherit settings;
@@ -136,7 +136,7 @@
             #   # aagl
             #   imports = [ aagl.nixosModules.default ];
             #   nix.settings = aagl.nixConfig; # Set up Cachix
-            # }
+            # }z
           ];
         };
     };

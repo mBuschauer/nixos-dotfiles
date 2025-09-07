@@ -1,7 +1,8 @@
 { ... }:
 {
   imports = [
-    ./anyrun
+    # ./anyrun
+    ./rofi
 
     # ./eww
     

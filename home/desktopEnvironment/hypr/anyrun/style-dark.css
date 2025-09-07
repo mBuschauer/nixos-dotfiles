@@ -1,45 +1,63 @@
+/* Global font reset */
 * {
-    all: unset;
-    font-size: 1.2rem;
-  }
-  
-  #window,
-  #match,
-  #entry,
-  #plugin,
-  #main {
-    background: transparent;
-  }
-  
-  #match.activatable {
-    border-radius: 3px;
-    margin: 2px 0;
-    padding: 4px;
-  }
+  all: unset;
+  font-size: 1.2rem;
+}
 
-  #match.activatable:first-child {
-    margin-top: 12px;
-  }
-  #match.activatable:last-child {
-    margin-bottom: 0;
-  }
-  
-  #match:hover {
-    background: rgba(255, 255, 255, 0.05);
-  }
-  #match:selected {
-    background: rgba(255, 255, 255, 0.1);
-  }
-  
-  #entry {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 12px 8px;
-  }
-  
-  box#main {
-    background: rgba(40, 40, 40, 1);
-    border-radius: 10px;
-    padding: 10px;
-  }
+/* Window & containers */
+window {
+  background: transparent;
+}
+
+box.main {
+  background: rgba(40, 40, 40, 1);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.matches {
+  height: 100%;
+  max-height: 45vh;    /* <= tweak this */
+}
+
+
+.matches,
+list.plugin {
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+/* Entry (search box) */
+text {
+  min-height: 30px;
+  padding: 8px; /* smaller than before */
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 8px;
+}
+
+.match {
+  background: transparent;
+  border-radius: 4px;
+  margin: 0;       /* even spacing between results */
+  padding: 1px 8px;    /* small consistent padding inside */
+  align-items: center; /* keeps icons/text vertically centered */
+}
+
+.match:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.match:selected {
+  background: rgba(255, 255, 255, 0.1);
+  animation: fade 0.1s linear;
+}
+
+@keyframes fade {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
