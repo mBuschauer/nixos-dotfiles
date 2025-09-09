@@ -33,7 +33,7 @@
     joplin-desktop
     mpv
 
-    komikku
+    # komikku
 
     zip
     unzip

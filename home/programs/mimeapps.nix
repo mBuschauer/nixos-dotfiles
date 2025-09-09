@@ -2,8 +2,8 @@
 let
   browser = "firefox.desktop";
   images = "qimgv.desktop";
-  fileExplorer = "org.kde.dolphin.deskop";
-  # fileExplorer = "dolphin.desktop";
+  # fileExplorer = "org.kde.dolphin.deskop";
+  fileExplorer = "nemo.desktop";
   fileArchiver = "corearchiver.desktop";
   vsCode = "codium.desktop";
   videos = "mpv.desktop";
@@ -12,8 +12,11 @@ in {
   home.packages = with pkgs; [ file ];
 
   xdg = {
-    configFile."mimeapps.list".force = true;
-
+    configFile."mimeapps.list" = {
+      enable = true;
+      force = true;
+    };
+    mime.enable = true;
     mimeApps = {
       enable = true;
       associations = {

@@ -21,6 +21,13 @@ in {
     # kando
     inputs.hyprpolkitagent.packages."${pkgs.system}".hyprpolkitagent
     xdg-desktop-portal-gtk
+
+    sox # for playing a notification sound
+
+    grim
+    slurp
+
+    grimblast
   ];
 
   xdg.portal = {
@@ -196,90 +203,10 @@ in {
           pkgs.writeShellScript "sent_notification" ''
             TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
             MONTH_YEAR=$(date +'%B_%Y')  # e.g., April_2025
-            SCREENSHOT_DIR=~/Pictures/Screenshots/$MONTH_YEAR
+            SCREENSHOT_DIR=/home/${settings.userDetails.username}/Pictures/Screenshots/$MONTH_YEAR
             mkdir -p "$SCREENSHOT_DIR"
-            SCREENSHOT_PATH="$SCREENSHOT_DIR/Screenshot_$TIMESTAMP.png"
-
-            # Take screenshot with grim, but check if slurp/grim was cancelled
-            grim -g "$(slurp)" "$SCREENSHOT_PATH"
-            if [ $? -ne 0 ]; then
-              echo "Screenshot cancelled or failed."
-              exit 1
-            fi
-
-            ${notification}
-
-            # Function to open the folder where screenshot was saved
-            forward_action() {
-              xdg-open "$SCREENSHOT_DIR"
-            }
-
-            # Function to handle notification dismiss
-            handle_dismiss() {
-              echo "Notification dismissed!"
-            }
-
-            # Display the notification with actions
-            ACTION=$(dunstify --action="forward,Forward" "Screenshot Taken" "$SCREENSHOT_PATH")
-
-            # Handle the selected action
-            case "$ACTION" in
-              "forward")
-                forward_action
-                ;;
-              "2")  # Dunst returns "2" when the notification is manually dismissed
-                handle_dismiss
-                ;;
-              *)
-                echo "No valid action selected."
-                ;;
-            esac
-          ''
-        }"
-        "$mod, Print, exec, ${
-          pkgs.writeShellScript "active-window" ''
-            w_pos=$(hyprctl activewindow | grep 'at:' | awk '{print $2}' | tr -d ' ')
-            w_size=$(hyprctl activewindow | grep 'size:' | awk '{print $2}' | tr -d ' ' | sed 's/,/x/')
-            geometry="$w_pos $w_size"
-
-            TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
-            MONTH_YEAR=$(date +'%B_%Y')
-            SCREENSHOT_DIR=~/Pictures/Screenshots/$MONTH_YEAR
-            mkdir -p "$SCREENSHOT_DIR"
-            SCREENSHOT_PATH="$SCREENSHOT_DIR/Screenshot_$TIMESTAMP.png"
-            ANNOTATED_PATH="$SCREENSHOT_DIR/Screenshot_Annotated_$TIMESTAMP.png"
-
-            # Take a screenshot of the active window
-            grim -g "$geometry" "$SCREENSHOT_PATH"
-            ${notification}
-
-            # Function to open the folder where screenshot was saved
-            forward_action() {
-              xdg-open "$SCREENSHOT_DIR"
-            }
-
-            # Function to handle notification dismiss
-            handle_dismiss() {
-              echo "Notification dismissed!"
-            }
-
-            # Display the notification with actions
-            ACTION=$(dunstify --action="forward,Forward" "Screenshot Taken" "$SCREENSHOT_PATH")
-
-            # Handle the selected action
-            case "$ACTION" in
-              "forward")
-                forward_action
-                ;;
-              "2")
-                handle_dismiss
-                ;;
-              *)
-                echo "No valid action selected."
-                ;;
-            esac
-
-            return 0
+            
+            XDG_SCREENSHOTS_DIR=$SCREENSHOT_DIR grimblast --notify --openfile --freeze copysave area
           ''
         }"
 
@@ -294,7 +221,7 @@ in {
           $mod, Q, exec, xdg-terminal-exec bash -c "cd /home/${settings.userDetails.username}/; exec bash"''
 
         "$mod, C, killactive"
-        "$mod, E, exec, dolphin"
+        "$mod, E, exec, nemo"
         # "$mod, E, exec, xdg-terminal-exec yazi"
         "$mod, Z, togglefloating"
 

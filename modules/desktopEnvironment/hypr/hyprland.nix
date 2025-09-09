@@ -40,7 +40,7 @@ in {
     libnotify
 
     kdePackages.dolphin
-    nemo
+    # stable.libsForQt5.dolphin
     # xwaylandvideobridge
 
     sox # for playing a notification sound
@@ -48,10 +48,7 @@ in {
     xdg-desktop-portal-gtk
   ];
 
-  qt = {
-    enable = true;
-    platformTheme = "qt5ct";
-  };
+  programs.dconf.enable = true;
 
   xdg = {
     portal = {

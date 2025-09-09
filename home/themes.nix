@@ -1,19 +1,20 @@
 { pkgs, inputs, settings, ... }:
 let
   isKitty = terminalOptions:
-    if builtins.elem "kitty" terminalOptions then true
-    else false;
+    if builtins.elem "kitty" terminalOptions then true else false;
 
   isWezterm = terminalOptions:
-    if builtins.elem "wezterm" terminalOptions then true
-    else false;
+    if builtins.elem "wezterm" terminalOptions then true else false;
 
   isGhostty = terminalOptions:
-    if builtins.elem "ghostty" terminalOptions then [ inputs.ghostty.packages.x86_64-linux.default ]
-    else [ ];
+    if builtins.elem "ghostty" terminalOptions then true else false;
 
-in
-{
+  variant = "mocha";
+  accent = "mauve";
+  kvantumThemePackage =
+    pkgs.catppuccin-kvantum.override { inherit variant accent; };
+
+in {
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
@@ -25,14 +26,45 @@ in
   gtk = {
     enable = true;
     theme = {
-      package = pkgs.andromeda-gtk-theme;
-      name = "Andromeda";
+      # package = pkgs.andromeda-gtk-theme;
+      # name = "Andromeda";
+      package = pkgs.sweet;
+      name = "Sweet-Dark";
+    };
+    iconTheme = {
+      package = pkgs.candy-icons;
+      name = "candy-icons";
     };
   };
 
-  home.packages = with pkgs; [ 
+  qt = {
+    enable = true;
+    platformTheme.name = "qt5ct";
+    style.name = "kvantum";
+    style.package = kvantumThemePackage;
+  };
 
-  ] ++ isGhostty settings.customization.terminal;
+  xdg.configFile = {
+    "Kvantum/kvantum.kvconfig".text = ''
+      [General]
+      theme=catppuccin-${variant}-${accent}
+    '';
+
+    "Kvantum/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}.kvconfig".source =
+      "${kvantumThemePackage}/share/Kvantum/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}.kvconfig";
+    "Kvantum/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}.svg".source =
+      "${kvantumThemePackage}/share/Kvantum/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}.svg";
+  };
+
+  home.packages = with pkgs; [
+    gtk3
+    libsForQt5.qt5ct
+    libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.qtstyleplugins
+    qt6Packages.qt6ct
+    qt6.qtwayland
+    qt5.qtwayland
+  ];
 
   programs.kitty = {
     enable = isKitty settings.customization.terminal;
@@ -40,7 +72,7 @@ in
     font.size = 11;
     themeFile = "ayu_mirage";
     settings = {
-      cursor_trail = 3; 
+      cursor_trail = 3;
       open_url_with = "default";
     };
   };
@@ -59,6 +91,17 @@ in
           check_for_updates = false,
       }
     '';
+  };
+
+  programs.ghostty = {
+    enable = isGhostty settings.customization.terminal;
+    package = pkgs.ghostty;
+    enableBashIntegration = true;
+    settings = {
+      theme = "catppuccin-mocha";
+      font-size = 12;
+      # keybind = [  ];
+    };
   };
 }
 

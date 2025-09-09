@@ -1,89 +1,89 @@
-{ inputs, pkgs, ... }:
-{
+{ inputs, pkgs, ... }: {
 
-  home.packages = with pkgs; [
-    wl-clipboard
-    fastfetch
+  home.packages = with pkgs;
+    [
+      wl-clipboard
+      fastfetch
 
-    # fun cli programs
-    cava
-    toipe
-    lolcat
-    asciiquarium
-    sl
-    peaclock
-    cmatrix
+      # fun cli programs
+      cava
+      toipe
+      lolcat
+      asciiquarium
+      sl
+      peaclock
+      cmatrix
 
-    ncspot
-    ncdu
-    ncmpcpp
-    mpc-cli
-    dconf # idk why this is needed now
-    imagemagick
-    mpg123
-    calibre
+      ncspot
+      ncdu
+      ncmpcpp
+      mpc-cli
+      dconf # idk why this is needed now
+      imagemagick
+      mpg123
+      calibre
 
-    spotify
-    qalculate-gtk
-    qimgv # image viewer
-    # pqiv # image viewer
-    # kdePackages.ark # zip browser
-    CuboCore.corearchiver # zip browser
-    # localsend
+      spotify
+      qalculate-gtk
+      qimgv # image viewer
+      # pqiv # image viewer
+      # kdePackages.ark # zip browser
+      CuboCore.corearchiver # zip browser
+      # localsend
 
+      # caligula # disk/iso imager
 
-    # caligula # disk/iso imager
+      handbrake
+      mkvtoolnix
 
-    handbrake
-    mkvtoolnix
+      gimp # gimp
 
-    gimp # gimp
+      # ventoy # to create bootable drives
 
-    # ventoy # to create bootable drives
+      xorg.xhost
+      kdePackages.partitionmanager # alternative to disks
+      parted
+      gparted
+      tparted
 
-    xorg.xhost
-    kdePackages.partitionmanager # alternative to disks
-    parted
-    gparted
-    tparted
+      # hakuneko
 
-    # hakuneko
+      p7zip # for 7z support
 
-    p7zip # for 7z support
+      discord
+      # webcord # a different discord client
+      # vesktop # discord electron wrapper, hardware acceleration doesnt seem to work though
 
-    discord
-    # webcord # a different discord client
-    # vesktop # discord electron wrapper, hardware acceleration doesnt seem to work though
+      stable.slack
 
-    stable.slack
+      kdePackages.kclock # alarm app
+      # gnome-clocks # clock app
 
-    kdePackages.kclock # alarm app
-    # gnome-clocks # clock app
+      cmd-wrapped
 
-    cmd-wrapped
+      lunarvim
 
-    lunarvim
+      lshw-gui
 
-    lshw-gui
+      audacity
 
-    audacity
+      # whatsapp-for-linux
 
-    # whatsapp-for-linux
+      feishin # subsonic player (desktop client)
 
-    feishin # subsonic player (desktop client)
+      fzf
 
-    fzf
+      nemo
 
-  ] ++ [
-    inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo
-  ];
+      glib
+      gsettings-desktop-schemas
+      dconf-editor
 
-  imports = [
-    inputs.tailray.homeManagerModules.default
-  ];
+    ] ++ [ inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo ];
+
+  imports = [ inputs.tailray.homeManagerModules.default ];
 
   services.tailray.enable = true;
-
 
   programs.ncspot = {
     enable = true;
@@ -94,19 +94,33 @@
     };
   };
 
-  xdg.desktopEntries = {
-    hakunektwo = {
-      name = "Hakunektwo";
-      exec = "hakuneko --no-sandbox";
-      terminal = false;
-      icon = "${pkgs.hakuneko}/share/icons/hicolor/256x256/apps/hakuneko-desktop.png";
+  dconf.settings = {
+    "org/cinnamon/nemo/preferences" = {
+      # Shows the location entry by default (what your command toggles)
+      # always-use-location-entry = true;
+
+      # If your Nemo has this key, it makes new windows start in the last visited folder
+      # (Not all Nemo versions expose it — see note below.)
+      start-with-last-tab = true;
+      startup-with-last-visited-location = true;
     };
+  };
+
+  xdg.desktopEntries = {
+    # hakunektwo = {
+    #   name = "Hakunektwo";
+    #   exec = "hakuneko --no-sandbox";
+    #   terminal = false;
+    #   icon = "${pkgs.hakuneko}/share/icons/hicolor/256x256/apps/hakuneko-desktop.png";
+    # };
 
     tailscale-tray = {
       name = "Tailscale SysTray";
       exec = "tailray";
       terminal = false;
-      icon = "${inputs.tailray.packages.${pkgs.system}.tailray}/share/icons/hicolor/symbolic/apps/tailscale-online.svg";
+      icon = "${
+          inputs.tailray.packages.${pkgs.system}.tailray
+        }/share/icons/hicolor/symbolic/apps/tailscale-online.svg";
     };
 
     lshw-gui = {
@@ -114,7 +128,6 @@
       exec = "gtk-lshw";
       terminal = false;
     };
-
 
     # discord-webcord = {
     #   name = "Discord";
@@ -127,7 +140,8 @@
       name = "nemo";
       exec = "nemo %U";
       terminal = false;
-      icon = "${pkgs.nemo}/share/icons/hicolor/32x32/apps/nemo.png";
+      # icon = "${pkgs.nemo}/share/icons/hicolor/32x32/apps/nemo.png";
+      icon = "nemo";
       startupNotify = false;
       type = "Application";
     };
@@ -142,10 +156,12 @@
       name = "CoreArchiver";
       comment = "Archiver for C Suite, to create and extract archives.";
       exec = "corearchiver %F";
-      icon = "${pkgs.CuboCore.corearchiver}/share/icons/hicolor/scalable/apps/org.cubocore.CoreArchiver.svg";
+      icon =
+        "${pkgs.CuboCore.corearchiver}/share/icons/hicolor/scalable/apps/org.cubocore.CoreArchiver.svg";
       terminal = false;
       startupNotify = true;
-      categories = [ "Qt" "Utility" "FileTools" "Archiving" "Compression" "X-CSuite" ];
+      categories =
+        [ "Qt" "Utility" "FileTools" "Archiving" "Compression" "X-CSuite" ];
       mimeType = [
         "application/x-cpio"
         "application/x-shar"
@@ -190,14 +206,7 @@
     enable = true;
     settings = {
       classic = false;
-      blocks = [
-        "permission"
-        "user"
-        "group"
-        "size"
-        "date"
-        "name"
-      ];
+      blocks = [ "permission" "user" "group" "size" "date" "name" ];
       color = {
         when = "never";
         theme = "default";
@@ -229,7 +238,6 @@
     };
   };
 
-
   programs.tofi = {
     enable = false;
     settings = {
@@ -247,5 +255,5 @@
       history = true;
     };
   };
-  
+
 }

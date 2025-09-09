@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
@@ -14,10 +13,10 @@
       "emoji"
     ];
     plugins = with pkgs; [
-			(rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; })
+      (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; })
       rofi-emoji
       # (rofi-emoji.override { rofi-unwrapped = rofi-wayland-unwrapped; })
-		];
+    ];
     terminal = "${pkgs.wezterm}/bin/wezterm";
     extraConfig = {
       drun-display-format = "{icon} {name}";
@@ -35,9 +34,10 @@
       display-ssh = " SSH";
       display-emoji = "󰞅 Emojis";
       sidebar-mode = true;
-      
+
       show-icons = true;
-      icon-theme = "Papirus";
+      # icon-theme = "Papirus";
+      icon-theme = "candy-icons";
 
       kb-mode-next = "Right";
       kb-mode-previous = "Left";
@@ -45,7 +45,12 @@
       kb-move-char-back = "";
     };
     theme = ./dotfiles/themes/catppuccin-transparent.rasi;
+    # theme = ./dotfiles/themes/sidebar-v2.rasi;
   };
+  home.packages = with pkgs; [
+    papirus-icon-theme
+    candy-icons
+  ];
 
   # xdg.configFile."rofi" = {
   #   source = ./dotfiles;
