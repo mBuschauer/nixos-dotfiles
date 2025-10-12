@@ -27,7 +27,7 @@ in {
     grim
     slurp
 
-    grimblast
+    stable.grimblast
   ];
 
   xdg.portal = {

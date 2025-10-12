@@ -1,7 +1,13 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  nixpkgs.overlays = [
+    (self: super: { rofi = super.rofi.override { waylandSupport = true; }; })
+    (self: super: { rofi-unwrapped = super.rofi-unwrapped.override { waylandSupport = true; }; })
+  ];
+in {
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    package = pkgs.rofi;
     font = "JetBrainsMono Nerd Font 12";
     location = "center";
     modes = [
@@ -13,7 +19,8 @@
       "emoji"
     ];
     plugins = with pkgs; [
-      (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; })
+      rofi-calc
+      # (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; })
       rofi-emoji
       # (rofi-emoji.override { rofi-unwrapped = rofi-wayland-unwrapped; })
     ];
@@ -39,18 +46,16 @@
       # icon-theme = "Papirus";
       icon-theme = "candy-icons";
 
-      kb-mode-next = "Right";
-      kb-mode-previous = "Left";
-      kb-move-char-forward = "";
-      kb-move-char-back = "";
+      # kb-mode-next = "Right";
+      # kb-mode-previous = "Left";
+      # kb-move-char-forward = "";
+      # kb-move-char-back = "";
     };
+    # theme = ./dotfiles/themes/catppuccin.rasi;
     theme = ./dotfiles/themes/catppuccin-transparent.rasi;
     # theme = ./dotfiles/themes/sidebar-v2.rasi;
   };
-  home.packages = with pkgs; [
-    papirus-icon-theme
-    candy-icons
-  ];
+  home.packages = with pkgs; [ papirus-icon-theme candy-icons ];
 
   # xdg.configFile."rofi" = {
   #   source = ./dotfiles;

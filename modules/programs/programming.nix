@@ -59,7 +59,8 @@ in
 
   programs.tmux.enable = true;
 
-
+  # programs.nix-ld.enable = true;
+  # programs.nix-ld.libraries = with pkgs; [ icu openssl zlib ];
 
   environment.systemPackages = with pkgs; [
     rustc
@@ -99,6 +100,8 @@ in
 
     tio # screen/minicom alternative
     lazygit
+
+    unityhub
 
   ]
   ++ [

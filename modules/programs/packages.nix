@@ -17,6 +17,8 @@
   #    "*/10 * * * *      marco    onedrive --single-directory \"Maryland\" --dry-run --sync" # every 10 minutes, sync the Maryland dir in Onedrive
   #  ];
   #};
+  
+  programs.nix-ld.enable = true;
 
   environment.systemPackages = with pkgs; [
     zoom-us
@@ -56,5 +58,9 @@
 
     fd
     ripgrep
+
+    obsidian
+    fstl
+    phoronix-test-suite
   ];
 }

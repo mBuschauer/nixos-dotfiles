@@ -1,43 +1,45 @@
-{ inputs, pkgs, secrets, lib, ... }:
-{
+{ inputs, pkgs, secrets, lib, ... }: {
   programs.vscode = {
     enable = true;
     # package = pkgs.vscodium; # doensn't support microsoft extensions
     package = pkgs.stable.vscode;
-    profiles.default.extensions = with pkgs.vscode-extensions; [
-      ms-python.debugpy # Python Debugger
-      ms-vscode-remote.remote-containers # Dev Containers
-      ms-azuretools.vscode-docker # docker
-      yzhang.markdown-all-in-one # markdown-all-in-one
-      bbenoist.nix # nix
-      jnoortheen.nix-ide #nix IDE
-      brettm12345.nixfmt-vscode # nixfmt
-  
-      ms-python.python # Python
-      ms-python.vscode-pylance # vscode-pylance
-      pkgs.stable.vscode-extensions.rust-lang.rust-analyzer # rust-analyzer
-      vscode-icons-team.vscode-icons # vscode-icons
-      dotjoshjohnson.xml # xml tools
-      mhutchie.git-graph # git graph
-      ms-vscode.cmake-tools # cmake tools
-      ms-vscode.live-server # live preview
-      ms-vscode.makefile-tools # makefile tools
+    profiles.default.extensions = with pkgs.vscode-extensions;
+      [
+        ms-python.debugpy # Python Debugger
+        ms-vscode-remote.remote-containers # Dev Containers
+        ms-azuretools.vscode-docker # docker
+        yzhang.markdown-all-in-one # markdown-all-in-one
+        bbenoist.nix # nix
+        jnoortheen.nix-ide # nix IDE
+        brettm12345.nixfmt-vscode # nixfmt
 
-      tamasfe.even-better-toml #toml markup
-      # ocamllabs.ocaml-platform # ocaml support
+        ms-python.python # Python
+        ms-python.vscode-pylance # vscode-pylance
+        pkgs.stable.vscode-extensions.rust-lang.rust-analyzer # rust-analyzer
+        vscode-icons-team.vscode-icons # vscode-icons
+        dotjoshjohnson.xml # xml tools
+        mhutchie.git-graph # git graph
+        ms-vscode.cmake-tools # cmake tools
+        ms-vscode.live-server # live preview
+        ms-vscode.makefile-tools # makefile tools
 
-      tomoki1207.pdf # vscode-pdf
+        tamasfe.even-better-toml # toml markup
+        # ocamllabs.ocaml-platform # ocaml support
+        mattn.lisp # LISP Support 
 
-      ms-vscode-remote.remote-ssh
-      ms-vscode-remote.remote-ssh-edit
+        tomoki1207.pdf # vscode-pdf
 
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      {
+        ms-vscode-remote.remote-ssh
+        ms-vscode-remote.remote-ssh-edit
+        ms-dotnettools.csharp
+
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
         # good formatter for python
         name = "autopep8";
         publisher = "ms-python";
         version = "2024.0.0";
-        sha256 = "37d6d46763ada1846d2c468a47274510f392f28922d44e339ab8f5baf6aa0703";
+        sha256 =
+          "37d6d46763ada1846d2c468a47274510f392f28922d44e339ab8f5baf6aa0703";
       }
       # {
       #   # bend language support
@@ -60,15 +62,21 @@
       #   version = "2.6.1";
       #   sha256 = "sha256-XMBBavtkS2b1OkXRD66ZsFzO5LkSTvazLVyEKlzYyG8=";
       # }
-    ];
+      ];
   };
 
   home.packages = with pkgs; [
-    ocamlPackages.ocp-indent # for vscode indenting
-    ocamlPackages.ocaml-lsp # for ocaml lsp
-    ocamlPackages.ocamlformat-rpc-lib # i dont even know anymore
+    # ocamlPackages.ocp-indent # for vscode indenting
+    # ocamlPackages.ocaml-lsp # for ocaml lsp
+    # ocamlPackages.ocamlformat-rpc-lib # i dont even know anymore
+
+    cmucl_binary # LSIP
+    dotnet-sdk_9
+    csharp-ls # c# lsp
+    icu
   ];
 
+  home.sessionVariables = { DOTNET_ROOT = "${pkgs.dotnet-sdk_9}"; };
 
   programs.gh = {
     enable = true;
@@ -82,14 +90,8 @@
     userName = "${secrets.gitUser}";
     userEmail = "${secrets.gitEmail}";
     extraConfig = {
-      merge = {
-        "ours" = {
-          driver = true;
-        };
-      };
-      submodule = {
-        recurse = true;
-      };
+      merge = { "ours" = { driver = true; }; };
+      submodule = { recurse = true; };
     };
     signing = {
       signer = "${pkgs.gnupg}/bin/gpg";

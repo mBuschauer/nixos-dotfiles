@@ -26,8 +26,8 @@ in {
 
     qt6.qtwayland
 
-    rofi-wayland
-
+    rofi
+    
     gnome-icon-theme
     kdePackages.breeze-icons
 

@@ -21,12 +21,12 @@
       dconf # idk why this is needed now
       imagemagick
       mpg123
-      calibre
+      stable.calibre
 
       spotify
       qalculate-gtk
       qimgv # image viewer
-      # pqiv # image viewer
+      gthumb # image viewer
       # kdePackages.ark # zip browser
       CuboCore.corearchiver # zip browser
       # localsend
@@ -79,7 +79,9 @@
       gsettings-desktop-schemas
       dconf-editor
 
-    ] ++ [ inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo ];
+    ] ++ [ 
+      # inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo 
+    ];
 
   imports = [ inputs.tailray.homeManagerModules.default ];
 

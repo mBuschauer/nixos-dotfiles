@@ -2,9 +2,8 @@
   # use new linux kernel
 
   boot = {
-    # 6.13 is broken with nvidia beta drivers. Changed to 6.12 and it works.
     kernelPackages = pkgs.linuxPackages_latest;
-    # kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
+    # kernelPackages = pkgs.linuxPackages_zen;
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;

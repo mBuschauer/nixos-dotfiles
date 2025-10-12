@@ -25,7 +25,8 @@ in
   ];
   programs.waybar = {
     enable = true;
-    package = inputs.waybar.packages."${pkgs.system}".waybar;
+    package = pkgs.waybar;
+    # package = inputs.waybar.packages."${pkgs.system}".waybar;
     settings = {
       mainBar = {
         layer = "top";
