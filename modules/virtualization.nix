@@ -19,11 +19,11 @@
           enable = true;
           package = pkgs.swtpm;
         };
-        ovmf = {
-          # UEFI support for VMs
-          enable = true;
-          packages = [ pkgs.OVMFFull.fd ];
-        };
+        # ovmf = {
+        #   # UEFI support for VMs
+        #   enable = true;
+        #   packages = [ pkgs.OVMFFull.fd ];
+        # };
 
       };
     };

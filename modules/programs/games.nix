@@ -19,7 +19,7 @@ in
   };
   environment.systemPackages = with pkgs; [
     heroic
-    retroarchWithCores
+    # retroarchWithCores
 
     # suyu
     ryubing

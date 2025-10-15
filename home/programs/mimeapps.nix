@@ -4,7 +4,8 @@ let
   images = "org.gnome.gThumb.desktop";
   # fileExplorer = "org.kde.dolphin.deskop";
   fileExplorer = "nemo.desktop";
-  fileArchiver = "corearchiver.desktop";
+  # fileArchiver = "corearchiver.desktop";
+  fileArchiver = "org.kde.ark.desktop";
   vsCode = "codium.desktop";
   videos = "mpv.desktop";
 in {
