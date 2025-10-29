@@ -28,13 +28,12 @@
 
     hypridle = { url = "github:hyprwm/hypridle"; };
     hyprlock = { url = "github:hyprwm/hyprlock"; };
-
     hyprpaper = { url = "github:hyprwm/hyprpaper"; };
     hyprpolkitagent = { url = "github:hyprwm/hyprpolkitagent"; };
-
     hyprsysteminfo.url = "github:hyprwm/hyprsysteminfo";
+    hyprpwcenter.url = "github:hyprwm/hyprpwcenter";
 
-    swww.url = "github:LGFae/swww";
+    # swww.url = "github:LGFae/swww";
 
     # anyrun = {
     #   url = "github:anyrun-org/anyrun/";

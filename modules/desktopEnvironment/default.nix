@@ -1,7 +1,7 @@
 { settings, ... }:
 let
   hasHyprland = deOptions:
-    if builtins.elem "hyprland" deOptions then [ ./hypr ]
+    if builtins.elem "hyprland" deOptions then [ ./hyprland.nix ]
     else [ ];
 
   hasGnome = deOptions:

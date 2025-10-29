@@ -3,7 +3,8 @@
     package = pkgs.clamav;
     # Run the clamd daemon so on-demand scans are fast with `clamdscan`
     daemon = {
-      enable = true;
+      # Do NOT keep the daemon in memory
+      enable = false;
       settings = {
         # Logging
         LogSyslog = true;

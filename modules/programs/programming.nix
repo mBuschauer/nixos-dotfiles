@@ -101,7 +101,7 @@ in
     tio # screen/minicom alternative
     lazygit
 
-    unityhub
+    # unityhub
 
   ]
   ++ [

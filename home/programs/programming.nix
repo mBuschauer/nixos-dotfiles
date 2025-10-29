@@ -25,7 +25,7 @@
 
         tamasfe.even-better-toml # toml markup
         # ocamllabs.ocaml-platform # ocaml support
-        mattn.lisp # LISP Support 
+        mattn.lisp # LISP Support
 
         tomoki1207.pdf # vscode-pdf
 
@@ -87,9 +87,11 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userName = "${secrets.gitUser}";
-    userEmail = "${secrets.gitEmail}";
-    extraConfig = {
+    settings = {
+      user = {
+        name = "${secrets.gitUser}";
+        email = "${secrets.gitEmail}";
+      };
       merge = { "ours" = { driver = true; }; };
       submodule = { recurse = true; };
     };

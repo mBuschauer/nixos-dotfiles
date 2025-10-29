@@ -80,7 +80,8 @@
       dconf-editor
 
     ] ++ [ 
-      # inputs.hyprsysteminfo.packages."x86_64-linux".hyprsysteminfo 
+      # inputs.hyprsysteminfo.packages.${system}.default 
+      inputs.hyprpwcenter.packages.${system}.default
     ];
 
   imports = [ inputs.tailray.homeManagerModules.default ];
