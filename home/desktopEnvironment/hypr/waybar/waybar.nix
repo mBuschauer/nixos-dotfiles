@@ -18,7 +18,7 @@ in
     gpustat
     wttrbar
     waybar-mpris
-    glxinfo
+    mesa-demos
     bc
     jq
     # pw-volume

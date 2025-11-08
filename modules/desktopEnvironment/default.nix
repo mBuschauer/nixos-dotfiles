@@ -15,10 +15,15 @@ let
   hasCosmic = deOptions:
     if builtins.elem "cosmic" deOptions then [ ./cosmic.nix ]
     else [ ];
+  
+  hasCinnamon = deOptions:
+    if builtins.elem "cinnamon" deOptions then [ ./cinnamon.nix ]
+    else [ ];
 in
 {
   imports = hasHyprland settings.customization.desktopEnvironment ++
     hasGnome settings.customization.desktopEnvironment ++ 
     hasKDE settings.customization.desktopEnvironment ++ 
-    hasCosmic settings.customization.desktopEnvironment;
+    hasCosmic settings.customization.desktopEnvironment ++
+    hasCinnamon settings.customization.desktopEnvironment;
 }

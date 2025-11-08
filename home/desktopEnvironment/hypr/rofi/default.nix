@@ -13,10 +13,11 @@ in {
     modes = [
       "drun"
       # "run"
-      "filebrowser"
+      # "filebrowser"
       # "window"
-      "calc"
-      "emoji"
+      # "calc"
+      # "emoji"
+      # "clipboard:cliphist-rofi"
     ];
     plugins = with pkgs; [
       rofi-calc
@@ -40,6 +41,7 @@ in {
       display-calc = " Calculator";
       display-ssh = " SSH";
       display-emoji = "󰞅 Emojis";
+      display-clipboard = " Clipboard";
       sidebar-mode = true;
 
       show-icons = true;

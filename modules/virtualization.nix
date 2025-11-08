@@ -13,17 +13,12 @@
       enable = true;
 
       qemu = {
-        package = pkgs.qemu;
+        package = pkgs.qemu_full;
         swtpm = {
           # tpm emulator
           enable = true;
           package = pkgs.swtpm;
         };
-        # ovmf = {
-        #   # UEFI support for VMs
-        #   enable = true;
-        #   packages = [ pkgs.OVMFFull.fd ];
-        # };
 
       };
     };
@@ -70,7 +65,7 @@
     virt-manager
     virt-viewer
     win-spice
-    win-virtio
+    virtio-win
 
     # (pkgs.bottles.override { removeWarningPopup = true; }) # modern wine gui
   ];
@@ -89,4 +84,13 @@
       };
     };
   };
+
+  # kvm kernel flags for AMD & AMD cpus what want to run a Mac VM
+  boot.extraModprobeConfig = ''
+    options kvm_amd nested=1
+    options kvm_intel nested=1
+    options kvm_intel emulate_invalid_guest_state=0
+    options kvm ignore_msrs=1 report_ignored_msrs=0
+  '';
+
 }

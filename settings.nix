@@ -11,6 +11,7 @@ let
       # "cosmic" # doesnt work
       # "gnome"
       # "kde"
+      # "cinnamon"
     ];
     # TODO: Make work with waybar
     monitors = [

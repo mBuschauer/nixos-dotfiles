@@ -17,7 +17,7 @@
       ncspot
       ncdu
       ncmpcpp
-      mpc-cli
+      mpc
       dconf # idk why this is needed now
       imagemagick
       mpg123
@@ -79,8 +79,9 @@
       gsettings-desktop-schemas
       dconf-editor
 
-    ] ++ [ 
-      # inputs.hyprsysteminfo.packages.${system}.default 
+      hyprsysteminfo
+    ] ++ [
+      # inputs.hyprsysteminfo.packages.${system}.default
       inputs.hyprpwcenter.packages.${system}.default
     ];
 
@@ -154,7 +155,7 @@
     #   exec = "hyprsysteminfo";
     #   terminal = false;
     # };
-    
+
     # corearchiver = {
     #   type = "Application";
     #   name = "CoreArchiver";

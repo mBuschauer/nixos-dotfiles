@@ -8,7 +8,7 @@
       font-awesome
       ibm-plex
       corefonts
-      vistafonts
+      vista-fonts
       fira-code
       dejavu_fonts
 
@@ -24,7 +24,7 @@
         mkdir -p /home/${settings.userDetails.username}/.local/share/fonts
         rm /home/${settings.userDetails.username}/.local/share/fonts/*
         cp ${pkgs.corefonts}/share/fonts/truetype/*.ttf /home/${settings.userDetails.username}/.local/share/fonts/
-        cp ${pkgs.vistafonts}/share/fonts/truetype/*.ttf /home/${settings.userDetails.username}/.local/share/fonts/
+        cp ${pkgs.vista-fonts}/share/fonts/truetype/*.ttf /home/${settings.userDetails.username}/.local/share/fonts/
         cp ${pkgs.dejavu_fonts}/share/fonts/truetype/*.ttf /home/${settings.userDetails.username}/.local/share/fonts/
         chmod 644 /home/${settings.userDetails.username}/.local/share/fonts/*
       '';

@@ -265,7 +265,7 @@ in {
       bindr = [
         # "$mod, $mod_L, exec, pkill wofi || wofi --show drun --insensitive --allow-images"
         # "$mod, $mod_L, exec, pkill fuzzel || fuzzel"
-        "$mod, V, exec, pkill wofi || cliphist list | wofi --dmenu --insensitive | cliphist decode | wl-copy"
+        "$mod, V, exec, pkill rofi || rofi -modi clipboard:cliphist-rofi -show clipboard"
         # "$mod, V, exec, pkill anyrun || cliphist list | anyrun --plugins libstdin.so | cliphist decode | wl-copy" # no work
         "$mod, SUPER_L, exec, ${close-menu} || ${open-menu}"
 
