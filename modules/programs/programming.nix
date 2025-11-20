@@ -1,14 +1,19 @@
 { config, pkgs, lib, inputs, settings, ... }:
 let
-ollamaGPU = if settings.customization.gpu == "nvidia" then pkgs.ollama-cuda
-            else if settings.customization.gpu == "amd" then pkgs.ollama-rocm
-            else pkgs.ollama;
+  ollamaGPU = if settings.customization.gpu == "nvidia" then
+    pkgs.ollama-cuda
+  else if settings.customization.gpu == "amd" then
+    pkgs.ollama-rocm
+  else
+    pkgs.ollama;
 
-ollamaAcceleration = if settings.customization.gpu == "nvidia" then "cuda" 
-                      else if settings.customization.gpu == "amd" then "rocm" 
-                      else null;
-in
-{
+  ollamaAcceleration = if settings.customization.gpu == "nvidia" then
+    "cuda"
+  else if settings.customization.gpu == "amd" then
+    "rocm"
+  else
+    null;
+in {
   # enable docker
   users.users.${settings.userDetails.username}.extraGroups = [ "docker" ];
   virtualisation.docker = {
@@ -29,7 +34,8 @@ in
     package = ollamaGPU;
     acceleration = ollamaAcceleration;
     home = "/mnt/sda1/ollama";
-    models = "${config.services.ollama.home}/models"; # references home (/mnt/sda1/ollama/models)
+    models =
+      "${config.services.ollama.home}/models"; # references home (/mnt/sda1/ollama/models)
   };
 
   # for creating gpg keys
@@ -62,55 +68,56 @@ in
   # programs.nix-ld.enable = true;
   # programs.nix-ld.libraries = with pkgs; [ icu openssl zlib ];
 
-  environment.systemPackages = with pkgs; [
-    rustc
-    rustup
-    cargo
+  environment.systemPackages = with pkgs;
+    [
+      rustc
+      rustup
+      cargo
 
-    python311
+      python311
 
-    jdk21
-    jdk17
-    jdk8
-    #lua
-    #zig
-    sqlite
+      jdk21
+      jdk17
+      jdk8
+      #lua
+      #zig
+      sqlite
 
-    docker-compose
+      docker-compose
 
-    vim
-    # neovim
-    lunarvim
-    gedit
+      vim
+      # neovim
+      lunarvim
+      gedit
 
-    rust-analyzer
-    # pkg-config
-    # openssl
+      rust-analyzer
+      # pkg-config
+      # openssl
 
-    nil
-    nixfmt-classic
+      nil
+      nixfmt-classic
 
-    devenv
-    # direnv
+      devenv
+      # direnv
 
-    # assorted dependencies
-    gnat14
+      # assorted dependencies
+      gnat14
 
-    godot_4
+      godot_4
 
-    tio # screen/minicom alternative
-    lazygit
+      tio # screen/minicom alternative
+      lazygit
 
-    # unityhub
+      # unityhub
 
-    # fpga stuff
-    iverilog
-    gtkwave
+      # fpga stuff
+      iverilog
+      gtkwave
+      apio
 
-  ]
-  ++ [
-    # inputs.tsui.packages."x86_64-linux".tsui # currently broken, not going to fix now.
-  ];
-
+    ] ++ [
+      # inputs.tsui.packages."x86_64-linux".tsui # currently broken, not going to fix now.
+    ];
+  services.udev.packages = with pkgs; [ apio-udev-rules ]; # for FPGA work  (ftdi)
 }
 

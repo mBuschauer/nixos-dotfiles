@@ -48,11 +48,10 @@ in {
       background = [{
         monitor = "";
         path = "${wallpapers}/8bit/blackhole_universe.png";
-        blur_size = 4;
+        blur_size = 2;
         blur_passes = 3; # 0 disables blurring
-        noise = 1.0117;
         contrast = 1.3; # vibrant
-        brightness = 0.8;
+        brightness = 1;
         vibrancy = 0.21;
         vibrancy_darkness = 0;
       }];
