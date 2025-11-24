@@ -3,10 +3,14 @@ let
   notification =
     "play -n synth 1.5 sin 1760 synth 1.5 sin fmod 600 vol -20db fade l 0 1.5 1.5";
 
-    open-menu = "rofi -show drun";
-    close-menu = "pkill rofi";
+    # open-menu = "rofi -show drun";
+    # close-menu = "pkill rofi";
+    # open-clipboard = "rofi -modi clipboard:cliphist-rofi -show clipboard";
     # open-menu = "anyrun";
     # close-menu = "pkill anyrun";
+    open-menu = "vicinae toggle";
+    close-menu = "vicinae close";
+    open-clipboard = "vicinae vicinae://extensions/vicinae/clipboard/history";
 
 in {
   home.packages = with pkgs; [
@@ -145,31 +149,21 @@ in {
       layerrule = [
         # "noanim,^(anyrun)$" # disable animation for anyrun pop-in
         # "animation[fadeIn],^(anyrun)$"
-        "noanim,^(rofi)$" # disable animation for rofi pop-in
+        # "noanim,^(rofi)$" # disable animation for rofi pop-in
       ];
 
       windowrule = [
-        # "noblur, kando"
-        # "opaque, kando"
-        # "size 100% 100%, kando"
-        # "noborder, kando"
-        # "noanim, kando"
-        # "float, kando"
-        # "pin, kando"
-      ];
-
-      windowrulev2 = [
-        "maximize,class:(okular)"
+        "match:class okular, maximize on"
 
         # force all only office windows to open maximized
-        "maximize,class:(ONLYOFFICE Desktop Editors)"
+        "match:class ONLYOFFICE Desktop Editors, maximize on"
 
-        "maximize,class:(sigil),title:(.*)( - Sigil [std])$"
-        "maximize,class:(sigil),title:(.*)( - Sigil)$"
-        # "maximize,class:(sigil)"
-        "float,class:(CoreArchiver)"
-        "float,class:(qimgv)"
-        "float,class:(pqiv)"
+        "match:title (.*)( - Sigil [std])$, maximize on"
+        "match:title (.*)( - Sigil)$, maximize on"
+
+        "match:class CoreArchiver, float on"
+        "match:class qimgv, float on"
+        "match:class pqiv, float on"
 
         # for screensharing under XWayland (like Discord)
         # "opacity 0.0 override,class:^(xwaylandvideobridge)$"
@@ -265,7 +259,7 @@ in {
       bindr = [
         # "$mod, $mod_L, exec, pkill wofi || wofi --show drun --insensitive --allow-images"
         # "$mod, $mod_L, exec, pkill fuzzel || fuzzel"
-        "$mod, V, exec, pkill rofi || rofi -modi clipboard:cliphist-rofi -show clipboard"
+        "$mod, V, exec, ${close-menu} || ${open-clipboard}"
         # "$mod, V, exec, pkill anyrun || cliphist list | anyrun --plugins libstdin.so | cliphist decode | wl-copy" # no work
         "$mod, SUPER_L, exec, ${close-menu} || ${open-menu}"
 

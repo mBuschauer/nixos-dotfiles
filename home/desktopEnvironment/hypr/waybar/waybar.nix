@@ -239,7 +239,7 @@ in
         "custom/shutdownmenu" = {
           format = "󰍜 ";
           tooltip = false;
-          on-click = "wlogout -b 2";
+          # on-click = "wlogout -b 2";
         };
 
         "custom/shutdown" = {

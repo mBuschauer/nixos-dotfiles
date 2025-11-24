@@ -116,6 +116,7 @@ in
         # 5) Pause so you can see any messages
         printf "\nPress any key to close.\n" && read -n1 -r
       '';
+      open = "xdg-open";
     };
   };
 

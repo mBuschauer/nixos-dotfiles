@@ -17,7 +17,7 @@
   #    "*/10 * * * *      marco    onedrive --single-directory \"Maryland\" --dry-run --sync" # every 10 minutes, sync the Maryland dir in Onedrive
   #  ];
   #};
-  
+
   programs.nix-ld.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -53,7 +53,7 @@
 
     webcamoid
     busybox
-    
+
     stable.texliveFull # for editing latex
 
     fd
@@ -61,6 +61,7 @@
 
     obsidian
     fstl
-    phoronix-test-suite
+    # phoronix-test-suite
   ];
+
 }

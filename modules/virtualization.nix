@@ -1,74 +1,74 @@
 { pkgs, settings, ... }:
 
 {
-  virtualisation = {
-    waydroid = {
-      enable = false;
-      package = pkgs.waydroid;
-    };
+  # virtualisation = {
+  #   waydroid = {
+  #     enable = false;
+  #     package = pkgs.waydroid;
+  #   };
 
-    spiceUSBRedirection.enable = true;
+  #   spiceUSBRedirection.enable = true;
 
-    libvirtd = {
-      enable = true;
+  #   libvirtd = {
+  #     enable = true;
 
-      qemu = {
-        package = pkgs.qemu_full;
-        swtpm = {
-          # tpm emulator
-          enable = true;
-          package = pkgs.swtpm;
-        };
+  #     qemu = {
+  #       package = pkgs.qemu_full;
+  #       swtpm = {
+  #         # tpm emulator
+  #         enable = true;
+  #         package = pkgs.swtpm;
+  #       };
 
-      };
-    };
+  #     };
+  #   };
 
-    #podman = {
-    #  enable = true;
+  #   #podman = {
+  #   #  enable = true;
 
-    #  dockerCompat = true;
-    #  defaultNetwork.settings.dns_enabled = true;
-    #};
+  #   #  dockerCompat = true;
+  #   #  defaultNetwork.settings.dns_enabled = true;
+  #   #};
 
-    virtualbox.host = {
-      enable = false;
-      package = pkgs.virtualbox;
-      enableExtensionPack = true;
-      enableHardening = true;
-    };
+  #   virtualbox.host = {
+  #     enable = false;
+  #     package = pkgs.virtualbox;
+  #     enableExtensionPack = true;
+  #     enableHardening = true;
+  #   };
 
-    vmVariant = {
-      # following configuration is added only when building VM with build-vm
-      virtualisation = {
-        memorySize = 4096; # Use 2048MiB memory.
-        cores = 4;
-      };
-    };
-    vmVariantWithBootLoader = {
-      virtualisation = {
-        memorySize = 4096; # Use 2048MiB memory.
-        cores = 4;
-      };
-    };
-  };
+  #   vmVariant = {
+  #     # following configuration is added only when building VM with build-vm
+  #     virtualisation = {
+  #       memorySize = 4096; # Use 2048MiB memory.
+  #       cores = 4;
+  #     };
+  #   };
+  #   vmVariantWithBootLoader = {
+  #     virtualisation = {
+  #       memorySize = 4096; # Use 2048MiB memory.
+  #       cores = 4;
+  #     };
+  #   };
+  # };
 
-  programs.virt-manager = {
-    enable = true; # front end for qemu
-    package = pkgs.virt-manager;
-  };
+  # programs.virt-manager = {
+  #   enable = true; # front end for qemu
+  #   package = pkgs.virt-manager;
+  # };
 
-  environment.systemPackages = with pkgs; [
-    # podman-compose
-    spice
-    spice-gtk
-    spice-protocol
-    virt-manager
-    virt-viewer
-    win-spice
-    virtio-win
+  # environment.systemPackages = with pkgs; [
+  #   # podman-compose
+  #   spice
+  #   spice-gtk
+  #   spice-protocol
+  #   virt-manager
+  #   virt-viewer
+  #   win-spice
+  #   virtio-win
 
-    # (pkgs.bottles.override { removeWarningPopup = true; }) # modern wine gui
-  ];
+  #   # (pkgs.bottles.override { removeWarningPopup = true; }) # modern wine gui
+  # ];
 
   users.users.${settings.userDetails.username}.extraGroups = [
     "libvirtd"

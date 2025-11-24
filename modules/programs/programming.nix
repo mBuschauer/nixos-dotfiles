@@ -74,7 +74,7 @@ in {
       rustup
       cargo
 
-      python311
+      python313
 
       jdk21
       jdk17

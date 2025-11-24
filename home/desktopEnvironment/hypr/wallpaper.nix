@@ -9,7 +9,7 @@ in {
 
   wayland.windowManager.hyprland.settings."exec-once" = [
     # "hyprpaper"
-    # "swww-daemon"
+    # "swww-daemon"h
   ];
 
   services.hyprpaper = {

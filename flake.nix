@@ -71,6 +71,8 @@
     # inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    vicinae.url = "github:vicinaehq/vicinae";
+
   };
 
   outputs = { nixpkgs, nixpkgs-stable, home-manager
@@ -101,7 +103,12 @@
             inherit secrets;
           };
           modules = [
-            ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-stable ]; })
+            ({ config, pkgs, ... }: {
+              nixpkgs.overlays = [ 
+                  overlay-stable 
+                  # (import ./overlays/ollama-cuda.nix) 
+              ];
+            })
             ./configuration.nix
             inputs.home-manager.nixosModules.default
             home-manager.nixosModules.home-manager
@@ -116,9 +123,10 @@
                   #   disabledModules = [ "${modulesPath}/programs/anyrun.nix" ]; 
                   # })
                   # inputs.anyrun.homeManagerModules.anyrun # enable flake home-manager module
-
+                  inputs.vicinae.homeManagerModules.default # enable vicinae home-manager module
                   ./home/default.nix
                 ];
+
                 extraSpecialArgs = {
                   inherit inputs;
                   inherit settings;
@@ -132,7 +140,7 @@
             #   # aagl
             #   imports = [ aagl.nixosModules.default ];
             #   nix.settings = aagl.nixConfig; # Set up Cachix
-            # }z
+            # }
           ];
         };
     };

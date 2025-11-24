@@ -25,16 +25,19 @@ safe_trash() {
 # Move files to the trash, with checks
 safe_trash "/etc/nixos/home"
 safe_trash "/etc/nixos/modules"
+safe_trash "/etc/nixos/overlays"
+
 safe_trash "/etc/nixos/configuration.nix"
 safe_trash "/etc/nixos/flake.nix"
 safe_trash "/etc/nixos/settings.nix"
 safe_trash "/etc/nixos/secrets.nix"
 
 echo "Removed old configuration"
-
 # Copy the new files and directories
 sudo cp -r ./home /etc/nixos/
 sudo cp -r ./modules /etc/nixos/
+sudo cp -r ./overlays /etc/nixos/
+
 sudo cp ./configuration.nix /etc/nixos
 sudo cp ./flake.nix /etc/nixos
 sudo cp ./settings.nix /etc/nixos
