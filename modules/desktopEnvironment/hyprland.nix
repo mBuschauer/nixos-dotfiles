@@ -39,7 +39,7 @@ in {
     # swaync
     libnotify
 
-    kdePackages.dolphin
+    # kdePackages.dolphin
     # stable.libsForQt5.dolphin
     # xwaylandvideobridge
 
@@ -67,22 +67,6 @@ in {
       settings.default = defaultTerminal settings.customization.terminal;
     };
 
-    mime = {
-      enable = true;
-      defaultApplications = {
-        "inode/directory" = lib.mkForce [ "org.kde.dolphin.deskop" ];
-        # "x-scheme-handler/http" = [ "${browser}" ];
-        # "x-scheme-handler/https" = [ "${browser}" ];
-      };
-      addedAssociations = {
-        "inode/directory" = lib.mkForce [ "org.kde.dolphin.deskop" ];
-        # "x-scheme-handler/http" = [ "${browser}" ];
-        # "x-scheme-handler/https" = [ "${browser}" ];
-      };
-      removedAssociations = {
-        "inode/directory" = lib.mkForce [ "kitty-open.deskop" ];
-      };
-    };
   };
 
 
