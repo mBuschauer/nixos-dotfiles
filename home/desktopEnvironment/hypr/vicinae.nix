@@ -1,4 +1,8 @@
-{ pkgs, config, inputs, ... }: {
+{ pkgs, config, inputs, ... }:
+let
+
+  mkVicinaeExtension = inputs.vicinae.packages.${pkgs.system}.mkVicinaeExtension;
+in {
   services.vicinae = {
     enable = true;
     autoStart = true;
@@ -17,16 +21,26 @@
     };
     # Installing (vicinae) extensions declaratively
     extensions = [
-      (inputs.vicinae.mkVicinaeExtension.${pkgs.system} {
-        inherit pkgs;
+      (mkVicinaeExtension {
         pname = "nix";
-        src = pkgs.fetchFromGitHub { # You can also specify different sources other than github
+        src = pkgs.fetchFromGitHub {
           owner = "vicinaehq";
           repo = "extensions";
-          rev = "610459553a20cf510fa414844f0d094f14ae9643"; # If the extension has no releases use the latest commit hash
+          rev = "610459553a20cf510fa414844f0d094f14ae9643";
           sha256 = "sha256-z4SqRFhJzAlBhNzgX7wHNZtEDnu5PIypYkBWOJtjyuA=";
-        } + "/extensions/nix"; # If the extension is in a subdirectory you can add ` + "/subdir"` between the brace and the semicolon here
+        }
+          + "/extensions/nix"; # If the extension is in a subdirectory you can add ` + "/subdir"` between the brace and the semicolon here
       })
+      # (mkVicinaeExtension {
+      #   pname = "pokedex";
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "raycast";
+      #     repo = "extensions";
+      #     rev = "b8c8fcd7ebd441a5452b396923f2a40e879565ba";
+      #     sha256 = "sha256-z4SqRFhJzAlBhNzgX7wHNZtEDnu5PIypYkBWOJtjyuA=";
+      #   }
+      #     + "/extensions/pokedex"; # If the extension is in a subdirectory you can add ` + "/subdir"` between the brace and the semicolon here
+      # })
     ];
   };
 
