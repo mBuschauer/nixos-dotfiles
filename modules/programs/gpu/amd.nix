@@ -9,14 +9,9 @@ let
   ];
 in {
 
-  environment.systemPackages = with pkgs; [
-    sigil
+  environment.systemPackages = with pkgs;
+    [
 
-    # jellyfin-media-player
-
-    mission-center
-    bottom
-    btop
-  ];
+    ];
 
 }

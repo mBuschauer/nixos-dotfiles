@@ -20,6 +20,8 @@
 
   programs.nix-ld.enable = true;
 
+  nixpkgs.config.permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
+
   environment.systemPackages = with pkgs; [
     zoom-us
 
@@ -62,6 +64,14 @@
     obsidian
     fstl
     # phoronix-test-suite
+
+    jellyfin-media-player
+    sigil
+    
+    
+    mission-center
+    bottom
+    btop
   ];
 
 }
