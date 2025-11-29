@@ -107,6 +107,7 @@
               nixpkgs.overlays = [ 
                   overlay-stable 
                   # (import ./overlays/ollama-cuda.nix) 
+                  (import ./overlays/jellyfin-qt6.nix)
               ];
             })
             ./configuration.nix
