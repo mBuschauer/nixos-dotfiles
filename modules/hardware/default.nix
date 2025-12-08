@@ -5,7 +5,7 @@
       ./audio.nix
       ./bluetooth.nix
       ./hardware.nix
-      ./network.nix
+      ./network
       ./printers.nix
       # ./security.nix
 

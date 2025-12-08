@@ -150,6 +150,18 @@
       type = "Application";
     };
 
+    jellyfin = {
+      name = "Jellyfin Media Player (qt6)";
+      exec = "hyprctl dispatch exec jellyfinmediaplayer";
+      comment = "Desktop client for Jellyfin";
+      terminal = false;
+      icon = "com.github.iwalton3.jellyfin-media-player";
+      startupNotify = false;
+      type = "Application";
+      categories = ["AudioVideo" "Video" "Player" "TV"];
+
+    };
+
     # hyprsysteminfo = {
     #   name = "HyprSystemInfo";
     #   exec = "hyprsysteminfo";
