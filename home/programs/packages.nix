@@ -98,6 +98,10 @@
     };
   };
 
+  programs.obs-studio = {
+    enable = true;
+  };
+
   dconf.settings = {
     "org/cinnamon/nemo/preferences" = {
       # Shows the location entry by default (what your command toggles)

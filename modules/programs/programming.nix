@@ -8,6 +8,13 @@ let
     pkgs.ollama;
 
 in {
+
+  nix.settings = {
+    substituters = [ "https://cache.nixos-cuda.org" ];
+    trusted-public-keys =
+      [ "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" ];
+  };
+
   # enable docker
   users.users.${settings.userDetails.username}.extraGroups = [ "docker" ];
   virtualisation.docker = {
@@ -111,6 +118,7 @@ in {
     ] ++ [
       # inputs.tsui.packages."x86_64-linux".tsui # currently broken, not going to fix now.
     ];
-  services.udev.packages = with pkgs; [ apio-udev-rules ]; # for FPGA work  (ftdi)
+  services.udev.packages = with pkgs;
+    [ apio-udev-rules ]; # for FPGA work  (ftdi)
 }
 

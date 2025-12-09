@@ -1,7 +1,8 @@
 { pkgs, lib, ... }:
 let
   browser = "firefox.desktop";
-  images = "org.gnome.gThumb.desktop";
+  # images = "org.gnome.gThumb.desktop";
+  images = "qimgv.desktop";
   # fileExplorer = "org.kde.dolphin.deskop";
   fileExplorer = "nemo.desktop";
   # fileArchiver = "corearchiver.desktop";
