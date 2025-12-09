@@ -65,6 +65,7 @@
       ];
       userSettings = {
         "window.openFoldersInNewWindow" = "on";
+        "workbench.iconTheme" = "vscode-icons";
       };
     };
   };
