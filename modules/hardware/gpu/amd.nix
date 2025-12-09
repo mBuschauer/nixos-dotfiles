@@ -10,7 +10,10 @@
     extraPackages = with pkgs;
       [
         # amdvlk
-        # rocmPackages.clr.icd
+        rocmPackages.clr
+        rocmPackages.clr.icd
+        rocmPackages.rocminfo
+        rocmPackages.rocm-smi
         mesa
       ];
 

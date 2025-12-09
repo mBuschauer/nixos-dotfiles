@@ -7,12 +7,6 @@ let
   else
     pkgs.ollama;
 
-  ollamaAcceleration = if settings.customization.gpu == "nvidia" then
-    "cuda"
-  else if settings.customization.gpu == "amd" then
-    "rocm"
-  else
-    null;
 in {
   # enable docker
   users.users.${settings.userDetails.username}.extraGroups = [ "docker" ];
@@ -32,7 +26,6 @@ in {
   services.ollama = {
     enable = false;
     package = ollamaGPU;
-    acceleration = ollamaAcceleration;
     home = "/mnt/sda1/ollama";
     models =
       "${config.services.ollama.home}/models"; # references home (/mnt/sda1/ollama/models)
