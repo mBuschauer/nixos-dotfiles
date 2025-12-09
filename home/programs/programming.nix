@@ -3,8 +3,8 @@
     enable = true;
     # package = pkgs.vscodium; # doensn't support microsoft extensions
     package = pkgs.stable.vscode;
-    profiles.default.extensions = with pkgs.vscode-extensions;
-      [
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
         ms-python.debugpy # Python Debugger
         ms-vscode-remote.remote-containers # Dev Containers
         ms-azuretools.vscode-docker # docker
@@ -33,36 +33,40 @@
         ms-vscode-remote.remote-ssh-edit
         ms-dotnettools.csharp
 
-      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
-        # good formatter for python
-        name = "autopep8";
-        publisher = "ms-python";
-        version = "2024.0.0";
-        sha256 =
-          "37d6d46763ada1846d2c468a47274510f392f28922d44e339ab8f5baf6aa0703";
-      }
-      # {
-      #   # bend language support
-      #   name = "Bend";
-      #   publisher = "rohanvashisht";
-      #   version = "0.2.14";
-      #   sha256 = "63c73c0791f33082fbfc81c54dc8b2ac08a5a482226c1598b2c25e3b37f8252a";
-      # }
-      # {
-      #   # sftp support
-      #   name = "SFTP";
-      #   publisher = "Natizyskunk";
-      #   version = "1.16.3";
-      #   sha256 = "sha256-HifPiHIbgsfTldIeN9HaVKGk/ujaZbjHMiLAza/o6J4";
-      # }
-      # {
-      #   # for assembly support
-      #   name = "asm-code-lens";
-      #   publisher = "maziac";
-      #   version = "2.6.1";
-      #   sha256 = "sha256-XMBBavtkS2b1OkXRD66ZsFzO5LkSTvazLVyEKlzYyG8=";
-      # }
+        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
+          # good formatter for python
+          name = "autopep8";
+          publisher = "ms-python";
+          version = "2024.0.0";
+          sha256 =
+            "37d6d46763ada1846d2c468a47274510f392f28922d44e339ab8f5baf6aa0703";
+        }
+        # {
+        #   # bend language support
+        #   name = "Bend";
+        #   publisher = "rohanvashisht";
+        #   version = "0.2.14";
+        #   sha256 = "63c73c0791f33082fbfc81c54dc8b2ac08a5a482226c1598b2c25e3b37f8252a";
+        # }
+        # {
+        #   # sftp support
+        #   name = "SFTP";
+        #   publisher = "Natizyskunk";
+        #   version = "1.16.3";
+        #   sha256 = "sha256-HifPiHIbgsfTldIeN9HaVKGk/ujaZbjHMiLAza/o6J4";
+        # }
+        # {
+        #   # for assembly support
+        #   name = "asm-code-lens";
+        #   publisher = "maziac";
+        #   version = "2.6.1";
+        #   sha256 = "sha256-XMBBavtkS2b1OkXRD66ZsFzO5LkSTvazLVyEKlzYyG8=";
+        # }
       ];
+      userSettings = {
+        "window.openFoldersInNewWindow" = "on";
+      };
+    };
   };
 
   home.packages = with pkgs; [
