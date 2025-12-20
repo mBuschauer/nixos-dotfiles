@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     hyprland = {
       type = "git";
@@ -71,7 +71,7 @@
     # inputs.nixpkgs.follows = "nixpkgs";
     # };
 
-    vicinae.url = "github:vicinaehq/vicinae";
+    # vicinae.url = "github:vicinaehq/vicinae";
 
   };
 
@@ -107,7 +107,7 @@
               nixpkgs.overlays = [ 
                   overlay-stable 
                   # (import ./overlays/ollama-cuda.nix) 
-                  (import ./overlays/jellyfin-qt6.nix)
+                  # (import ./overlays/jellyfin-qt6.nix)
               ];
             })
             ./configuration.nix
@@ -124,7 +124,7 @@
                   #   disabledModules = [ "${modulesPath}/programs/anyrun.nix" ]; 
                   # })
                   # inputs.anyrun.homeManagerModules.anyrun # enable flake home-manager module
-                  inputs.vicinae.homeManagerModules.default # enable vicinae home-manager module
+                  # inputs.vicinae.homeManagerModules.default # enable vicinae home-manager module
                   ./home/default.nix
                 ];
 

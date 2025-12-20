@@ -33,7 +33,7 @@
     settings = {
       default_session = {
         command =
-          "${pkgs.tuigreet}/bin/tuigreet --time -r --asterisks --cmd Hyprland";
+          "${pkgs.tuigreet}/bin/tuigreet --time -r --asterisks --cmd start-hyprland";
         # command = "${pkgs.tuigreet}/bin/tuigreet --time -r --asterisks";
       };
     };

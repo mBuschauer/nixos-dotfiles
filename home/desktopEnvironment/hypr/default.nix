@@ -11,7 +11,7 @@
     ./hyprland.nix
     ./wallpaper.nix
     ./waybar
-    ./vicinae.nix
+    # ./vicinae.nix
     # ./nwg-dock
     # ./hyprpanel.nix
     # ./wlogout.nix

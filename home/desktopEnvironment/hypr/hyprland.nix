@@ -3,14 +3,14 @@ let
   notification =
     "play -n synth 1.5 sin 1760 synth 1.5 sin fmod 600 vol -20db fade l 0 1.5 1.5";
 
-    # open-menu = "rofi -show drun";
-    # close-menu = "pkill rofi";
-    # open-clipboard = "rofi -modi clipboard:cliphist-rofi -show clipboard";
+    open-menu = "rofi -show drun";
+    close-menu = "pkill rofi";
+    open-clipboard = "rofi -modi clipboard:cliphist-rofi -show clipboard";
     # open-menu = "anyrun";
     # close-menu = "pkill anyrun";
-    open-menu = "vicinae toggle";
-    close-menu = "vicinae close";
-    open-clipboard = "vicinae vicinae://extensions/vicinae/clipboard/history";
+    # open-menu = "vicinae toggle";
+    # close-menu = "vicinae close";
+    # open-clipboard = "vicinae vicinae://extensions/vicinae/clipboard/history";
 
 in {
   home.packages = with pkgs; [
@@ -18,7 +18,7 @@ in {
 
     # used for clipboard history (SUPER + V)
     wl-clipboard
-    stable.cliphist
+    cliphist
 
     satty # for screenshot editing (will be implemented at some point)
 
@@ -31,7 +31,7 @@ in {
     grim
     slurp
 
-    stable.grimblast
+    grimblast
   ];
 
   xdg.portal = {
@@ -200,7 +200,7 @@ in {
             SCREENSHOT_DIR=/home/${settings.userDetails.username}/Pictures/Screenshots/$MONTH_YEAR
             mkdir -p "$SCREENSHOT_DIR"
             
-            XDG_SCREENSHOTS_DIR=$SCREENSHOT_DIR grimblast --notify --openfile --freeze copysave area
+            XDG_SCREENSHOTS_DIR=$SCREENSHOT_DIR grimblast --notify -o --freeze copysave area
           ''
         }"
 

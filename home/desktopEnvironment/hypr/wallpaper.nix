@@ -17,9 +17,9 @@ in {
     package = inputs.hyprpaper.packages.${pkgs.system}.default;
     settings = {
       preload = [
-        "${wallpapers}/8bit/galaxies.png"
-        "${wallpapers}/8bit/city_night_skyline.png"
-        "${wallpapers}/8bit/dune_nightsky.png"
+        # "${wallpapers}/8bit/galaxies.png"
+        # "${wallpapers}/8bit/night_skyline.png"
+        # "${wallpapers}/8bit/dune_nightsky.png"
         "${wallpapers}/8bit/blackhole_universe.png"
       ];
       wallpaper = [ ",${wallpapers}/8bit/blackhole_universe.png" ];

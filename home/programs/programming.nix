@@ -66,6 +66,8 @@
       userSettings = {
         "window.openFoldersInNewWindow" = "on";
         "workbench.iconTheme" = "vscode-icons";
+        "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python";
+        "[nix]"."editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
       };
     };
   };
@@ -75,8 +77,8 @@
     # ocamlPackages.ocaml-lsp # for ocaml lsp
     # ocamlPackages.ocamlformat-rpc-lib # i dont even know anymore
 
-    cmucl_binary # LSIP
-    dotnet-sdk_9
+    # cmucl_binary # LSIP
+    # dotnet-sdk_9
     csharp-ls # c# lsp
     icu
   ];

@@ -13,14 +13,14 @@ let
   nixpkgs.overlays = [
     (final: prev: {
       # this is related to an issue with nvidia, I believe, not wayland but setting backend as xcb seems to fix playback issues
-      jellyfin-media-player = prev.jellyfin-media-player.overrideAttrs
-        (prevAttrs: {
-          nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ])
-            ++ [ prev.makeBinaryWrapper ];
-          postInstall = (prevAttrs.postInstall or "") + ''
-            wrapProgram $out/bin/jellyfinmediaplayer --set QT_QPA_PLATFORM xcb
-          '';
-        });
+      # jellyfin-media-player = prev.jellyfin-media-player.overrideAttrs
+      #   (prevAttrs: {
+      #     nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ])
+      #       ++ [ prev.makeBinaryWrapper ];
+      #     postInstall = (prevAttrs.postInstall or "") + ''
+      #       wrapProgram $out/bin/jellyfinmediaplayer --set QT_QPA_PLATFORM xcb
+      #     '';
+      #   });
       # seemed to have trouble rendering on wayland w/ nvidia gpu, setting backend as xcb seems to fix them
       sigil = prev.sigil.overrideAttrs (prevAttrs: {
         nativeBuildInputs = (prevAttrs.nativeBuildInputs or [ ])
