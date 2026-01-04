@@ -24,7 +24,7 @@ in {
       enable = true;
       associations = {
         added = {
-          "application/pdf" = [ ${okular} ];
+          "application/pdf" = [ "${okular}" ];
           "x-scheme-handler/http" = [ "${browser}" ];
           "x-scheme-handler/https" = [ "${browser}" ];
           "x-scheme-handler/chrome" = [ "${browser}" ];
@@ -57,8 +57,8 @@ in {
           "application/zip" = [ "${fileArchiver}" ];
           "application/cbr" = [ "${fileArchiver}" ]; # .cbr
           "application/vnd.comicbook-rar" = [ "${fileArchiver}" ]; # .cbr
-          "application/cbz" = [ ${okular} ]; # .cbz
-          "application/vnd.comicbook+zip" = [ ${okular} ]; # .cbz
+          "application/cbz" = [ "${okular}" ]; # .cbz
+          "application/vnd.comicbook+zip" = [ "${okular}" ]; # .cbz
 
           # set onlyoffice to open .docx, .pptx, .xlsx
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
@@ -70,18 +70,18 @@ in {
 
         };
         removed = {
-          "application/epub" = [ ${okular} ];
-          "application/epub+zip" = [ ${okular} ];
+          "application/epub" = [ "${okular}" ];
+          "application/epub+zip" = [ "${okular}" ];
           "application/zip" = [ "prism.desktop" ];
-          "application/cbr" = [ ${okular} ];
-          "application/vnd.comicbook-rar" = [ ${okular} ];
+          "application/cbr" = [ "${okular}" ];
+          "application/vnd.comicbook-rar" = [ "${okular}" ];
           "application/pdf" = [ "calibre.desktop" "brave-browser.desktop" ];
           "inode/directory" =
             lib.mkForce [ "kitty-open.desktop" "nemo.desktop" ];
           "application/directory" = [ "prismlauncher.desktop" ];
           "text/plain" = [ "libreoffice.desktop" ];
           "image/png" = [ "chromium.desktop" ];
-          "image/avif" = [ ${okular} ];
+          "image/avif" = [ "${okular}" ];
           "text/html" = [ "calibre.desktop" ];
           "application/xml" = [ "chromium.desktop" ];
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
@@ -89,7 +89,7 @@ in {
         };
       };
       defaultApplications = {
-        "application/pdf" = [ ${okular} ];
+        "application/pdf" = [ "${okular}" ];
         "x-scheme-handler/http" = [ "${browser}" ];
         "x-scheme-handler/https" = [ "${browser}" ];
         "x-scheme-handler/chrome" = [ "${browser}" ];
@@ -120,7 +120,7 @@ in {
         "inode/directory" = lib.mkForce [ "${fileExplorer}" ];
         "application/zip" = [ "${fileArchiver}" ];
         "application/cbr" = [ "${fileArchiver}" ];
-        "application/cbz" = [ ${okular} ];
+        "application/cbz" = [ "${okular}" ];
         "application/xml" = [ "${vsCode}" ];
 
         # set onlyoffice to open .docx, .pptx, .xlsx
