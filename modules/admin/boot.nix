@@ -1,11 +1,11 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   # use new linux kernel
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     # kernelPackages = pkgs.linuxPackages_zen;
     loader = {
-      systemd-boot.enable = true;
+      # systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
     # kernel = {
@@ -27,7 +27,6 @@
     '';
   };
 
-
   services.greetd = {
     enable = true;
     settings = {
@@ -39,4 +38,12 @@
     };
   };
 
+  environment.systemPackages = with pkgs; [ sbctl ];
+
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
 }

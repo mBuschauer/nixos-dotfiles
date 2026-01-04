@@ -9,6 +9,7 @@ let
   fileArchiver = "org.kde.ark.desktop";
   vsCode = "codium.desktop";
   videos = "mpv.desktop";
+  okular = "org.kde.okular.desktop";
 in {
 
   home.packages = with pkgs; [ file ];
@@ -23,7 +24,7 @@ in {
       enable = true;
       associations = {
         added = {
-          "application/pdf" = [ "okular.desktop" ];
+          "application/pdf" = [ ${okular} ];
           "x-scheme-handler/http" = [ "${browser}" ];
           "x-scheme-handler/https" = [ "${browser}" ];
           "x-scheme-handler/chrome" = [ "${browser}" ];
@@ -56,8 +57,8 @@ in {
           "application/zip" = [ "${fileArchiver}" ];
           "application/cbr" = [ "${fileArchiver}" ]; # .cbr
           "application/vnd.comicbook-rar" = [ "${fileArchiver}" ]; # .cbr
-          "application/cbz" = [ "okular.desktop" ]; # .cbz
-          "application/vnd.comicbook+zip" = [ "okular.desktop" ]; # .cbz
+          "application/cbz" = [ ${okular} ]; # .cbz
+          "application/vnd.comicbook+zip" = [ ${okular} ]; # .cbz
 
           # set onlyoffice to open .docx, .pptx, .xlsx
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
@@ -69,18 +70,18 @@ in {
 
         };
         removed = {
-          "application/epub" = [ "okular.desktop" ];
-          "application/epub+zip" = [ "okular.desktop" ];
+          "application/epub" = [ ${okular} ];
+          "application/epub+zip" = [ ${okular} ];
           "application/zip" = [ "prism.desktop" ];
-          "application/cbr" = [ "okular.desktop" ];
-          "application/vnd.comicbook-rar" = [ "okular.desktop" ];
-          "application/pdf" = [ "calibre.desktop" ];
+          "application/cbr" = [ ${okular} ];
+          "application/vnd.comicbook-rar" = [ ${okular} ];
+          "application/pdf" = [ "calibre.desktop" "brave-browser.desktop" ];
           "inode/directory" =
             lib.mkForce [ "kitty-open.desktop" "nemo.desktop" ];
           "application/directory" = [ "prismlauncher.desktop" ];
           "text/plain" = [ "libreoffice.desktop" ];
           "image/png" = [ "chromium.desktop" ];
-          "image/avif" = [ "okular.desktop" ];
+          "image/avif" = [ ${okular} ];
           "text/html" = [ "calibre.desktop" ];
           "application/xml" = [ "chromium.desktop" ];
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
@@ -88,7 +89,7 @@ in {
         };
       };
       defaultApplications = {
-        "application/pdf" = [ "okular.desktop" ];
+        "application/pdf" = [ ${okular} ];
         "x-scheme-handler/http" = [ "${browser}" ];
         "x-scheme-handler/https" = [ "${browser}" ];
         "x-scheme-handler/chrome" = [ "${browser}" ];
@@ -119,7 +120,7 @@ in {
         "inode/directory" = lib.mkForce [ "${fileExplorer}" ];
         "application/zip" = [ "${fileArchiver}" ];
         "application/cbr" = [ "${fileArchiver}" ];
-        "application/cbz" = [ "okular.desktop" ];
+        "application/cbz" = [ ${okular} ];
         "application/xml" = [ "${vsCode}" ];
 
         # set onlyoffice to open .docx, .pptx, .xlsx

@@ -23,7 +23,7 @@ in {
   programs.firefox = {
     enable = true;
     # package = pkgs.firefox.override { pkcs11Modules = [ pkgs.eid-mw ]; };
-    package = pkgs.firefox;
+    package = pkgs.stable.firefox;
     wrapperConfig = { MOZ_ENABLE_WAYLAND = "1"; };
     policies = {
       DisableTelemetry = true;

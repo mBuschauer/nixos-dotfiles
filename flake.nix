@@ -6,9 +6,8 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/Hyprland";
-      submodules = true;
+      url = "github:hyprwm/Hyprland";
+      # submodules = true;
     };
 
     waybar = {
@@ -42,6 +41,13 @@
 
     tailray = {
       url = "github:NotAShelf/tailray";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.0.0";
+
+      # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -104,12 +110,15 @@
           };
           modules = [
             ({ config, pkgs, ... }: {
-              nixpkgs.overlays = [ 
-                  overlay-stable 
-                  # (import ./overlays/ollama-cuda.nix) 
-                  # (import ./overlays/jellyfin-qt6.nix)
+              nixpkgs.overlays = [
+                overlay-stable
+                # (import ./overlays/ollama-cuda.nix) 
+                # (import ./overlays/jellyfin-qt6.nix)
               ];
             })
+
+            inputs.lanzaboote.nixosModules.lanzaboote
+
             ./configuration.nix
             inputs.home-manager.nixosModules.default
             home-manager.nixosModules.home-manager

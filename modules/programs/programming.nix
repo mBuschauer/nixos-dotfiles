@@ -64,9 +64,9 @@ in {
 
   environment.systemPackages = with pkgs;
     [
-      rustc
-      rustup
-      cargo
+      stable.rustc
+      stable.rustup
+      stable.cargo
 
       python313
 

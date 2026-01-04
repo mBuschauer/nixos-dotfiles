@@ -24,7 +24,6 @@ in {
 
     # kando
     inputs.hyprpolkitagent.packages."${pkgs.system}".hyprpolkitagent
-    xdg-desktop-portal-gtk
 
     sox # for playing a notification sound
 
@@ -57,7 +56,8 @@ in {
     enable = true;
 
     xwayland.enable = true;
-    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
     # systemd.enable = false;
     # xwayland.enable = false;
@@ -94,7 +94,7 @@ in {
 
       general = {
         gaps_in = 1;
-        gaps_out = 1;
+        gaps_out = 0;
         border_size = 1;
         "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
@@ -252,6 +252,7 @@ in {
 
         ",F11,fullscreen,1"
         "$mod,F11,fullscreen,2"
+        "$mod, o, pin"
         # ",F1,overview:toggle" # for hyprspace
         # ",F1,hyprexpo:expo,toggle" # for hyprexpo
       ];

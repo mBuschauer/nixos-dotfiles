@@ -5,6 +5,7 @@ in {
     [
       # inputs.swww.packages.${pkgs.system}.swww
       # waypaper
+      # inputs.hyprpaper.packages.${pkgs.system}.default
     ];
 
   wayland.windowManager.hyprland.settings."exec-once" = [
@@ -16,13 +17,13 @@ in {
     enable = true;
     package = inputs.hyprpaper.packages.${pkgs.system}.default;
     settings = {
-      preload = [
-        # "${wallpapers}/8bit/galaxies.png"
-        # "${wallpapers}/8bit/night_skyline.png"
-        # "${wallpapers}/8bit/dune_nightsky.png"
-        "${wallpapers}/8bit/blackhole_universe.png"
+      wallpaper = [
+        {
+          monitor = "";
+          path = "${wallpapers}/8bit/blackhole_universe.png";
+          fit_mode = "cover";
+        }
       ];
-      wallpaper = [ ",${wallpapers}/8bit/blackhole_universe.png" ];
     };
   };
 }
