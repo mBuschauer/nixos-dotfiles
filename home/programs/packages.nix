@@ -28,7 +28,7 @@
       qimgv # image viewer
       gthumb # image viewer
       kdePackages.ark # zip browser
-      # CuboCore.corearchiver # zip browser
+      CuboCore.corearchiver # zip browser
       # localsend
 
       # caligula # disk/iso imager
@@ -80,14 +80,23 @@
       dconf-editor
 
       hyprsysteminfo
+
+      cheese
+
+      wineWow64Packages.full
+      # wineWow64Packages.wayland
+      winetricks
+
     ] ++ [
       # inputs.hyprsysteminfo.packages.${system}.default
       inputs.hyprpwcenter.packages.${system}.default
     ];
 
   imports = [ inputs.tailray.homeManagerModules.default ];
-
-  services.tailray.enable = true;
+  services.tailray = {
+    enable = true;
+    theme = "dark";
+  };
 
   programs.ncspot = {
     enable = true;
@@ -100,6 +109,11 @@
 
   programs.obs-studio = {
     enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-backgroundremoval
+      wlrobs
+      obs-vaapi
+    ];
   };
 
   dconf.settings = {
@@ -124,7 +138,7 @@
 
     tailscale-tray = {
       name = "Tailscale SysTray";
-      exec = "tailray";
+      exec = "TAILRAY_THEME=dark tailray";
       terminal = false;
       icon = "${
           inputs.tailray.packages.${pkgs.system}.tailray
@@ -172,54 +186,53 @@
     #   terminal = false;
     # };
 
-    # corearchiver = {
-    #   type = "Application";
-    #   name = "CoreArchiver";
-    #   comment = "Archiver for C Suite, to create and extract archives.";
-    #   exec = "corearchiver %F";
-    #   icon =
-    #     "${pkgs.CuboCore.corearchiver}/share/icons/hicolor/scalable/apps/org.cubocore.CoreArchiver.svg";
-    #   terminal = false;
-    #   startupNotify = true;
-    #   categories =
-    #     [ "Qt" "Utility" "FileTools" "Archiving" "Compression" "X-CSuite" ];
-    #   mimeType = [
-    #     "application/x-cpio"
-    #     "application/x-shar"
-    #     "application/x-tar"
-    #     "application/x-compressed-tar"
-    #     "application/octet-stream"
-    #     "application/x-xz-compressed-tar"
-    #     "application/x-lzma-compressed-tar"
-    #     "application/x-lz4-compressed-tar"
-    #     "application/x-bzip-compressed-tar"
-    #     "application/x-tarz"
-    #     "application/x-cd-image"
-    #     "application/zip"
-    #     "application/x-archive"
-    #     "application/x-xar"
-    #     "application/x-7z-compressed"
-    #     "application/x-lzip"
-    #     "application/x-lz4"
-    #     "text/x-uuencode"
-    #     "application/x-lzop"
-    #     "application/gzip"
-    #     "application/x-bzip"
-    #     "application/x-lzma"
-    #     "application/x-xz"
-    #     "application/x-lrzip"
-    #   ];
-    #   actions = {
-    #     CreateArchive = {
-    #       name = "Add to archive";
-    #       exec = "corearchiver %F";
-    #     };
-    #     ExtractArchive = {
-    #       name = "Extract archive";
-    #       exec = "corearchiver %F";
-    #     };
-    #   };
-    # };
+    corearchiver = {
+      type = "Application";
+      name = "CoreArchiver";
+      comment = "Archiver for C Suite, to create and extract archives.";
+      exec = "corearchiver %F";
+      icon ="${pkgs.CuboCore.corearchiver}/share/icons/hicolor/scalable/apps/cc.cubocore.CoreArchiver.svg";
+      terminal = false;
+      startupNotify = true;
+      categories =
+        [ "Qt" "Utility" "FileTools" "Archiving" "Compression" "X-CSuite" ];
+      mimeType = [
+        "application/x-cpio"
+        "application/x-shar"
+        "application/x-tar"
+        "application/x-compressed-tar"
+        "application/octet-stream"
+        "application/x-xz-compressed-tar"
+        "application/x-lzma-compressed-tar"
+        "application/x-lz4-compressed-tar"
+        "application/x-bzip-compressed-tar"
+        "application/x-tarz"
+        "application/x-cd-image"
+        "application/zip"
+        "application/x-archive"
+        "application/x-xar"
+        "application/x-7z-compressed"
+        "application/x-lzip"
+        "application/x-lz4"
+        "text/x-uuencode"
+        "application/x-lzop"
+        "application/gzip"
+        "application/x-bzip"
+        "application/x-lzma"
+        "application/x-xz"
+        "application/x-lrzip"
+      ];
+      actions = {
+        CreateArchive = {
+          name = "Add to archive";
+          exec = "corearchiver %F";
+        };
+        ExtractArchive = {
+          name = "Extract archive";
+          exec = "corearchiver %F";
+        };
+      };
+    };
 
   };
 

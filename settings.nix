@@ -8,7 +8,7 @@ let
     state_version = "24.05";
     desktopEnvironment = [
       "hyprland"
-      # "cosmic" # doesnt work
+      # "cosmic"
       # "gnome"
       # "kde"
     ];

@@ -4,34 +4,35 @@
     # package = pkgs.vscodium; # doensn't support microsoft extensions
     package = pkgs.stable.vscode;
     profiles.default = {
-      extensions = with pkgs.vscode-extensions; [
-        ms-python.debugpy # Python Debugger
-        ms-vscode-remote.remote-containers # Dev Containers
-        ms-azuretools.vscode-docker # docker
-        yzhang.markdown-all-in-one # markdown-all-in-one
-        bbenoist.nix # nix
-        jnoortheen.nix-ide # nix IDE
-        brettm12345.nixfmt-vscode # nixfmt
+      extensions = with pkgs.vscode-extensions;
+        [
+          ms-python.debugpy # Python Debugger
+          ms-vscode-remote.remote-containers # Dev Containers
+          ms-azuretools.vscode-docker # docker
+          yzhang.markdown-all-in-one # markdown-all-in-one
+          bbenoist.nix # nix
+          jnoortheen.nix-ide # nix IDE
+          brettm12345.nixfmt-vscode # nixfmt
 
-        ms-python.python # Python
-        ms-python.vscode-pylance # vscode-pylance
-        pkgs.stable.vscode-extensions.rust-lang.rust-analyzer # rust-analyzer
-        vscode-icons-team.vscode-icons # vscode-icons
-        dotjoshjohnson.xml # xml tools
-        mhutchie.git-graph # git graph
-        ms-vscode.cmake-tools # cmake tools
-        ms-vscode.live-server # live preview
-        ms-vscode.makefile-tools # makefile tools
+          ms-python.python # Python
+          ms-python.vscode-pylance # vscode-pylance
+          pkgs.stable.vscode-extensions.rust-lang.rust-analyzer # rust-analyzer
+          vscode-icons-team.vscode-icons # vscode-icons
+          dotjoshjohnson.xml # xml tools
+          mhutchie.git-graph # git graph
+          ms-vscode.cmake-tools # cmake tools
+          ms-vscode.live-server # live preview
+          ms-vscode.makefile-tools # makefile tools
 
-        tamasfe.even-better-toml # toml markup
-        # ocamllabs.ocaml-platform # ocaml support
-        mattn.lisp # LISP Support
+          tamasfe.even-better-toml # toml markup
+          # ocamllabs.ocaml-platform # ocaml support
+          mattn.lisp # LISP Support
 
-        tomoki1207.pdf # vscode-pdf
+          tomoki1207.pdf # vscode-pdf
 
-        ms-vscode-remote.remote-ssh
-        ms-vscode-remote.remote-ssh-edit
-        ms-dotnettools.csharp
+          ms-vscode-remote.remote-ssh
+          ms-vscode-remote.remote-ssh-edit
+          ms-dotnettools.csharp
 
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
           # good formatter for python
@@ -62,12 +63,16 @@
         #   version = "2.6.1";
         #   sha256 = "sha256-XMBBavtkS2b1OkXRD66ZsFzO5LkSTvazLVyEKlzYyG8=";
         # }
-      ];
+        ];
       userSettings = {
         "window.openFoldersInNewWindow" = "on";
         "workbench.iconTheme" = "vscode-icons";
         "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python";
-        "[nix]"."editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
+        "[nix]"."editor"."defaultFormatter" = "brettm12345.nixfmt-vscode";
+        "[nix]"."editor"."formatOnSave" = false;
+        "[ javascript ]"."editor"."defaultFormatter" = "esbenp.prettier-vscode";
+        "[javascriptreact]"."editor"."defaultFormatter" = "esbenp.prettier-vscode";
+        "[markdown]"."editor"."defaultFormatter" = "yzhang.markdown-all-in-one";
       };
     };
   };
@@ -81,6 +86,8 @@
     # dotnet-sdk_9
     csharp-ls # c# lsp
     icu
+
+    alejandra
   ];
 
   home.sessionVariables = { DOTNET_ROOT = "${pkgs.dotnet-sdk_9}"; };

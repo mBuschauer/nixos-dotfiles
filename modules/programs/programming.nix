@@ -89,7 +89,7 @@ in {
       # openssl
 
       nil
-      nixfmt-classic
+      nixfmt
 
       devenv
       # direnv

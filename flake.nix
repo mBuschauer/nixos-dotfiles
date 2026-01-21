@@ -40,7 +40,7 @@
     # };
 
     tailray = {
-      url = "github:NotAShelf/tailray";
+      url = "github:mBuschauer/tailray";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -5,6 +5,8 @@ let
 
   # Extract the names
   edidNames = builtins.map getEdidName settings.customization.monitors;
+
+  sinkSwitch = pkgs.writeShellScript "sink_switch" ''  '';
 in
 {
 
@@ -105,6 +107,7 @@ in
           input_delay = 1;
           format-icons = [ "▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
           on-click = "easyeffects";
+          # on-click = "hyprctl dispatch exec \"[workspace special:sinkswitch] wezterm --class wezterm-sinkswitch start -- ${sinkSwitch}\"";
         };
 
         "custom/waybar-mpris" = {

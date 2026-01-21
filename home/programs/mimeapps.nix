@@ -5,8 +5,8 @@ let
   images = "qimgv.desktop";
   # fileExplorer = "org.kde.dolphin.deskop";
   fileExplorer = "nemo.desktop";
-  # fileArchiver = "corearchiver.desktop";
-  fileArchiver = "org.kde.ark.desktop";
+  fileArchiver = "corearchiver.desktop";
+  # fileArchiver = "org.kde.ark.desktop";
   vsCode = "codium.desktop";
   videos = "mpv.desktop";
   okular = "org.kde.okular.desktop";

@@ -10,7 +10,7 @@
     spiceUSBRedirection.enable = true;
 
     libvirtd = {
-      enable = false;
+      enable = true;
 
       qemu = {
         package = pkgs.qemu_full;
@@ -53,7 +53,7 @@
   };
 
   programs.virt-manager = {
-    enable = false; # front end for qemu
+    enable = true; # front end for qemu
     package = pkgs.virt-manager;
   };
 
@@ -62,8 +62,6 @@
     spice
     spice-gtk
     spice-protocol
-    virt-manager
-    virt-viewer
     win-spice
     virtio-win
 
