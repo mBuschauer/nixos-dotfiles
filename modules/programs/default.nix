@@ -1,12 +1,14 @@
-{ ... }:
+{ settings, ... }:
 {
-  imports =
-    [
-      ./firefox.nix
-      ./games.nix
-      ./packages.nix
-      ./programming.nix
+  imports = [
+    ./firefox.nix
+    ./games.nix
+    ./packages.nix
+    ./programming.nix
+    ./gpu
 
-      ./gpu
-    ];
+    ./chrome.nix
+    ./mimeapps.nix
+
+  ];
 }

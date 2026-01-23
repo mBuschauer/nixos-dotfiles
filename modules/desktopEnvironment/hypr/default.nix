@@ -15,5 +15,7 @@
     # ./nwg-dock
     # ./hyprpanel.nix
     # ./wlogout.nix
+
+    ./gpu
   ];
 }

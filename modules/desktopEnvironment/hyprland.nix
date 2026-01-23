@@ -1,7 +1,15 @@
-{ inputs, config, pkgs, lib, settings, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  lib,
+  settings,
+  ...
+}:
 let
 
-  defaultTerminal = terminalOptions:
+  defaultTerminal =
+    terminalOptions:
     if builtins.length terminalOptions < 0 then
       throw "No terminal selected"
     else if builtins.head terminalOptions == "wezterm" then
@@ -15,7 +23,8 @@ let
 
   browser = "firefox.desktop";
 
-in {
+in
+{
 
   environment.systemPackages = with pkgs; [
     # hyprcursor
@@ -27,7 +36,7 @@ in {
     qt6.qtwayland
 
     rofi
-    
+
     gnome-icon-theme
     kdePackages.breeze-icons
 
@@ -69,7 +78,6 @@ in {
 
   };
 
-
   nix.settings = {
     builders-use-substitutes = true;
     substituters = [
@@ -90,4 +98,9 @@ in {
     NIXOS_OZONE_WL = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
   };
+
+  home-manager.users."${settings.userDetails.username}".imports = [
+    ./hypr
+  ];
+
 }

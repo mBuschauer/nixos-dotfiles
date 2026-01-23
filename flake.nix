@@ -134,6 +134,7 @@
                   # })
                   # inputs.anyrun.homeManagerModules.anyrun # enable flake home-manager module
                   # inputs.vicinae.homeManagerModules.default # enable vicinae home-manager module
+                  inputs.tailray.homeManagerModules.default # enable tailray home-manager module
                   ./home/default.nix
                 ];
 
