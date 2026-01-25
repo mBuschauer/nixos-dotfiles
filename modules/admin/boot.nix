@@ -4,10 +4,7 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     # kernelPackages = pkgs.linuxPackages_zen;
-    loader = {
-      # systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
+
     # kernel = {
     #   # modify TCP buffer size
     #   sysctl."net.core.rmem_max" = 33554432;
@@ -36,14 +33,5 @@
         # command = "${pkgs.tuigreet}/bin/tuigreet --time -r --asterisks";
       };
     };
-  };
-
-  environment.systemPackages = with pkgs; [ sbctl ];
-
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl";
   };
 }

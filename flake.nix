@@ -46,8 +46,6 @@
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
-
-      # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -116,8 +114,6 @@
                 # (import ./overlays/jellyfin-qt6.nix)
               ];
             })
-
-            inputs.lanzaboote.nixosModules.lanzaboote
 
             ./configuration.nix
             inputs.home-manager.nixosModules.default
