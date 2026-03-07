@@ -1,12 +1,12 @@
 { pkgs, config, inputs, ... }:
 let
 
-  mkVicinaeExtension = inputs.vicinae.packages.${pkgs.system}.mkVicinaeExtension;
+  mkVicinaeExtension = inputs.vicinae.packages.${pkgs.stdenv.hostPlatform.system}.mkVicinaeExtension;
 in {
   services.vicinae = {
     enable = true;
     autoStart = true;
-    # pacakge = inputs.vicinae.packages."${pkgs.system}".default;
+    # pacakge = inputs.vicinae.packages.${pkgs.stdenv.hostPlatform.system}.default;
     settings = {
       faviconService = "twenty"; # twenty | google | none
       font.size = 11;

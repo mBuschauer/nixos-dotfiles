@@ -117,6 +117,7 @@ in
         printf "\nPress any key to close.\n" && read -n1 -r
       '';
       open = "xdg-open";
+      taildrop = "tailscale file get --wait --verbose ~/Downloads/";
     };
   };
 

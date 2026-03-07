@@ -1,20 +1,30 @@
-{ pkgs, inputs, settings, ... }:
+{
+  pkgs,
+  inputs,
+  settings,
+  lib,
+  ...
+}:
 let
-  isKitty = terminalOptions:
-    if builtins.elem "kitty" terminalOptions then true else false;
+  isKitty = terminalOptions: if builtins.elem "kitty" terminalOptions then true else false;
 
-  isWezterm = terminalOptions:
-    if builtins.elem "wezterm" terminalOptions then true else false;
+  isWezterm = terminalOptions: if builtins.elem "wezterm" terminalOptions then true else false;
 
-  isGhostty = terminalOptions:
-    if builtins.elem "ghostty" terminalOptions then true else false;
+  isGhostty = terminalOptions: if builtins.elem "ghostty" terminalOptions then true else false;
 
   variant = "mocha";
   accent = "mauve";
-  kvantumThemePackage =
-    pkgs.catppuccin-kvantum.override { inherit variant accent; };
+  kvantumThemePackage = pkgs.catppuccin-kvantum.override { inherit variant accent; };
 
-in {
+  catppuccin-papirus = pkgs.catppuccin-papirus-folders.override {
+    flavor = variant;
+    accent = accent;
+  };
+
+  capitalize = s: (lib.toUpper (lib.substring 0 1 s)) + (lib.substring 1 (lib.stringLength s) s);
+
+in
+{
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
@@ -26,16 +36,34 @@ in {
   gtk = {
     enable = true;
     theme = {
-      # package = pkgs.andromeda-gtk-theme;
-      # name = "Andromeda";
       package = pkgs.sweet;
       name = "Sweet-Dark";
+      # name = "Catppuccin-${capitalize variant}-Standard-${capitalize accent}-Dark";
+      # package = pkgs.catppuccin-gtk.override {
+      #   accents = [ accent ];
+      #   size = "standard";
+      #   variant = variant;
+      # };
     };
     iconTheme = {
-      package = pkgs.candy-icons;
-      name = "candy-icons";
+      # package = pkgs.candy-icons;
+      # name = "candy-icons";
+      name = "Papirus-Dark";
+      package = catppuccin-papirus;
     };
   };
+
+  # dconf.settings = {
+  #   "org/gnome/desktop/interface" = {
+  #     gtk-theme = "Catppuccin-${capitalize variant}-Standard-${capitalize accent}-Dark";
+  #     color-scheme = "prefer-dark";
+  #   };
+
+  #   # For Gnome shell
+  #   "org/gnome/shell/extensions/user-theme" = {
+  #     name = "Catppuccin-${capitalize variant}-Standard-${capitalize accent}-Dark";
+  #   };
+  # };
 
   qt = {
     enable = true;
@@ -45,10 +73,9 @@ in {
   };
 
   xdg.configFile = {
-    "Kvantum/kvantum.kvconfig".text = ''
-      [General]
-      theme=catppuccin-${variant}-${accent}
-    '';
+    "Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
+      General.theme = "Catppuccin-${capitalize variant}-${capitalize accent}";
+    };
 
     "Kvantum/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}.kvconfig".source =
       "${kvantumThemePackage}/share/Kvantum/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}.kvconfig";
@@ -64,6 +91,10 @@ in {
     qt6Packages.qt6ct
     qt6.qtwayland
     qt5.qtwayland
+
+    kvantumThemePackage
+    libsForQt5.qtstyleplugin-kvantum
+    # papirus-folders
   ];
 
   programs.kitty = {
@@ -79,7 +110,7 @@ in {
 
   programs.wezterm = {
     enable = isWezterm settings.customization.terminal;
-    # package = inputs.wezterm.packages.${pkgs.system}.default;
+    # package = inputs.wezterm.packages.${pkgs.stdenv.hostPlatform.system}.default;
     package = pkgs.wezterm;
 
     extraConfig = ''
@@ -104,4 +135,3 @@ in {
     };
   };
 }
-

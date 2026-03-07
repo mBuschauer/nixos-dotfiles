@@ -203,6 +203,7 @@ in
           "[javascriptreact]"."editor"."defaultFormatter" = "esbenp.prettier-vscode";
           "[markdown]"."editor"."defaultFormatter" = "yzhang.markdown-all-in-one";
           "[css]"."editor"."defaultFormatter" = "vscode.css-language-features";
+          "[latex]"."editor"."wordWrap" = "on";
 
         };
       };

@@ -3,9 +3,9 @@ let wallpapers = ./wallpapers;
 in {
   home.packages = with pkgs;
     [
-      # inputs.swww.packages.${pkgs.system}.swww
+      # inputs.swww.packages.${pkgs.stdenv.hostPlatform.system}.swww
       # waypaper
-      # inputs.hyprpaper.packages.${pkgs.system}.default
+      # inputs.hyprpaper.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
   wayland.windowManager.hyprland.settings."exec-once" = [
@@ -15,7 +15,7 @@ in {
 
   services.hyprpaper = {
     enable = true;
-    package = inputs.hyprpaper.packages.${pkgs.system}.default;
+    package = inputs.hyprpaper.packages.${pkgs.stdenv.hostPlatform.system}.default;
     settings = {
       wallpaper = [
         {

@@ -23,14 +23,15 @@ in {
     satty # for screenshot editing (will be implemented at some point)
 
     # kando
-    inputs.hyprpolkitagent.packages."${pkgs.system}".hyprpolkitagent
+    inputs.hyprpolkitagent.packages.${pkgs.stdenv.hostPlatform.system}.hyprpolkitagent
 
     sox # for playing a notification sound
 
-    grim
-    slurp
+    # grim
+    # slurp
+    wayvnc
 
-    grimblast
+    inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
   ];
 
   xdg.portal = {
@@ -204,7 +205,7 @@ in {
           ''
         }"
 
-        "$mod, Space, togglesplit"
+        "$mod, Space, layoutmsg, togglesplit"
 
         "$mod, K, exec, pkill waybar; sleep 0.5 && waybar"
 
@@ -275,8 +276,8 @@ in {
       # split-monitor-workspaces
       ;
     } ++ [
-      # inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
-      # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+      # inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
+      # inputs.Hyprspace.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
     ];
   };
 }

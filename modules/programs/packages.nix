@@ -34,19 +34,20 @@
       zoom-us
 
       onlyoffice-desktopeditors
+      # libreoffice-fresh
       hunspell
       hunspellDicts.en_US
 
       kdePackages.okular
 
-      notepad-next
+      kdePackages.kate
 
       teams-for-linux # electron client for microsoft teams
-      joplin-desktop
+      # joplin-desktop
       mpv
 
       # komikku
-
+      
       zip
       unzip
       gzip
@@ -118,7 +119,7 @@
 
       # ventoy # to create bootable drives
 
-      xorg.xhost
+      xhost
       kdePackages.partitionmanager # alternative to disks
       parted
       gparted
@@ -165,10 +166,11 @@
       # wineWow64Packages.wayland
       winetricks
 
+      pandoc
     ]
     ++ [
-      # inputs.hyprsysteminfo.packages.${system}.default
-      inputs.hyprpwcenter.packages.${system}.default
+      # inputs.hyprsysteminfo.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.hyprpwcenter.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
   programs.obs-studio = {
@@ -211,9 +213,23 @@
         exec = "env TAILRAY_THEME=dark tailray";
         terminal = false;
         icon = "${
-          inputs.tailray.packages.${pkgs.system}.tailray
+          inputs.tailray.packages.${pkgs.stdenv.hostPlatform.system}.tailray
         }/share/icons/hicolor/symbolic/apps/tailscale-online.svg";
       };
+
+      # notepad = {
+      #   name = "Notepad";
+      #   comment = "Edit text files";
+      #   exec = "env GTK_THEME=Adwaita:light gedit %U";
+      #   terminal = false;
+      #   type = "Application";
+      #   startupNotify = true;
+      #   mimeType = [
+      #     "text/plain"
+      #     "application/x-zerosize"
+      #   ];
+      #   icon = "notepadqq";
+      # };
 
       lshw-gui = {
         name = "lshw-gui";
@@ -308,6 +324,15 @@
             exec = "corearchiver %F";
           };
         };
+      };
+
+      whatsapp-web = {
+        name = "Whatsapp Web";
+        exec = "xdg-open https://web.whatsapp.com/";
+        terminal = false;
+        icon = "whatsapp-for-linux";
+        startupNotify = false;
+        type = "Application";
       };
 
     };

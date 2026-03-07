@@ -27,8 +27,8 @@ in
   ];
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar;
-    # package = inputs.waybar.packages."${pkgs.system}".waybar;
+    # package = pkgs.waybar;
+    package = inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.waybar;
     settings = {
       mainBar = {
         layer = "top";

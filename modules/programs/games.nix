@@ -1,13 +1,35 @@
-{ pkgs, configs, inputs, aagl, settings, ... }:
+{
+  pkgs,
+  configs,
+  inputs,
+  aagl,
+  settings,
+  ...
+}:
 let
-  retroarchWithCores = (pkgs.retroarch.withCores (cores: with cores; [
-    desmume
-    dolphin
-    citra
-  ]));
+  retroarchWithCores = (
+    pkgs.retroarch.withCores (
+      cores: with cores; [
+        desmume
+        dolphin
+        citra
+      ]
+    )
+  );
 
 in
 {
+  home-manager.users.${settings.userDetails.username} = {
+    programs.retroarch = {
+      enable = false;
+      package = pkgs.retroarch-bare;
+      cores = {
+        citra.enable = true;
+        dolphin.enable = true;
+        desmume.enable = true;
+      };
+    };
+  };
   programs.gamemode.enable = true;
 
   programs.steam = {
@@ -18,27 +40,32 @@ in
       gamescope
     ];
   };
-  environment.systemPackages = with pkgs; [
-    heroic
-    # retroarchWithCores
 
-    # suyu
-    ryubing
-    nsz
-    
-    # wineWow64Packages.base
-    # winetricks
+  environment.systemPackages =
+    with pkgs;
+    [
+      # retroarchWithCores
+      azahar
+      heroic
 
-    prismlauncher
-    jdk21
+      # suyu
+      ryubing
+      nsz
 
-  ] ++ [
-  ];
+      # wineWow64Packages.base
+      # winetricks
+
+      prismlauncher
+      jdk21
+
+    ]
+    ++ [
+    ];
 
   # services.foundryvtt = {
   #   enable = true;
   #   # hostName = settings.userDetails.hostname;
-  #   package = inputs.foundryvtt.packages.${pkgs.system}.foundryvtt_12;
+  #   package = inputs.foundryvtt.packages.${pkgs.stdenv.hostPlatform.system}.foundryvtt_12;
   #   minifyStaticFiles = true;
   #   # proxyPort = 8080;
   #   # proxySSL = true;

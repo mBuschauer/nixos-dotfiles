@@ -2,9 +2,9 @@
 
   programs.anyrun = {
     enable = true;
-    package = inputs.anyrun.packages.${pkgs.system}.anyrun;
+    package = inputs.anyrun.packages.${pkgs.stdenv.hostPlatform.system}.anyrun;
     config = {
-      plugins = with inputs.anyrun.packages.${pkgs.system}; [
+      plugins = with inputs.anyrun.packages.${pkgs.stdenv.hostPlatform.system}; [
         applications
         rink
         shell

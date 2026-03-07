@@ -15,7 +15,7 @@ in {
       # "run"
       # "filebrowser"
       # "window"
-      # "calc"
+      "calc"
       # "emoji"
       # "clipboard:cliphist-rofi"
     ];
@@ -45,8 +45,8 @@ in {
       sidebar-mode = true;
 
       show-icons = true;
-      # icon-theme = "Papirus";
-      icon-theme = "candy-icons";
+      icon-theme = "Papirus-Dark";
+      # icon-theme = "candy-icons";
 
       # kb-mode-next = "Right";
       # kb-mode-previous = "Left";
@@ -57,7 +57,7 @@ in {
     theme = ./dotfiles/themes/catppuccin-transparent.rasi;
     # theme = ./dotfiles/themes/sidebar-v2.rasi;
   };
-  home.packages = with pkgs; [ papirus-icon-theme candy-icons ];
+  # home.packages = with pkgs; [ candy-icons ];
 
   # xdg.configFile."rofi" = {
   #   source = ./dotfiles;

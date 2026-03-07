@@ -7,7 +7,12 @@
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
       # submodules = true;
+    };
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     waybar = {
@@ -25,12 +30,30 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hypridle = { url = "github:hyprwm/hypridle"; };
-    hyprlock = { url = "github:hyprwm/hyprlock"; };
-    hyprpaper = { url = "github:hyprwm/hyprpaper"; };
-    hyprpolkitagent = { url = "github:hyprwm/hyprpolkitagent"; };
-    hyprsysteminfo.url = "github:hyprwm/hyprsysteminfo";
-    hyprpwcenter.url = "github:hyprwm/hyprpwcenter";
+    hypridle = {
+      url = "github:hyprwm/hypridle";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprlock = {
+      url = "github:hyprwm/hyprlock";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprpaper = {
+      url = "github:hyprwm/hyprpaper";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprpolkitagent = {
+      url = "github:hyprwm/hyprpolkitagent";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprsysteminfo = {
+      url = "github:hyprwm/hyprsysteminfo";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprpwcenter = {
+      url = "github:hyprwm/hyprpwcenter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # swww.url = "github:LGFae/swww";
 
@@ -40,7 +63,7 @@
     # };
 
     tailray = {
-      url = "github:mBuschauer/tailray";
+      url = "github:NotAShelf/tailray";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -79,11 +102,15 @@
 
   };
 
-  outputs = { nixpkgs, nixpkgs-stable, home-manager
-    # , winapps
-    # , aagl
-    # , hyprpanel
-    , ... # ...
+  outputs =
+    {
+      nixpkgs,
+      nixpkgs-stable,
+      home-manager,
+      # , winapps
+      # , aagl
+      # , hyprpanel
+      ... # ...
     }@inputs:
 
     let
@@ -98,58 +125,62 @@
       };
       settings = import (./. + "/settings.nix") { inherit pkgs; };
       secrets = import (./. + "/secrets.nix") { inherit pkgs; };
-    in {
-      nixosConfigurations."${settings.userDetails.hostname}" =
-        nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            inherit settings;
-            inherit secrets;
-          };
-          modules = [
-            ({ config, pkgs, ... }: {
+    in
+    {
+      nixosConfigurations."${settings.userDetails.hostname}" = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+          inherit inputs;
+          inherit settings;
+          inherit secrets;
+        };
+        modules = [
+          (
+            { config, pkgs, ... }:
+            {
               nixpkgs.overlays = [
                 overlay-stable
-                # (import ./overlays/ollama-cuda.nix) 
+                # (import ./overlays/ollama-cuda.nix)
                 # (import ./overlays/jellyfin-qt6.nix)
+                (import ./overlays/catppuccin-papirus-16x16.nix)
               ];
-            })
-
-            ./configuration.nix
-            inputs.home-manager.nixosModules.default
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-
-                users."${settings.userDetails.username}".imports = [
-                  # ({ modulesPath, ... }: {
-                  #   # disable default home-manager anyrun module
-                  #   disabledModules = [ "${modulesPath}/programs/anyrun.nix" ]; 
-                  # })
-                  # inputs.anyrun.homeManagerModules.anyrun # enable flake home-manager module
-                  # inputs.vicinae.homeManagerModules.default # enable vicinae home-manager module
-                  inputs.tailray.homeManagerModules.default # enable tailray home-manager module
-                  ./home/default.nix
-                ];
-
-                extraSpecialArgs = {
-                  inherit inputs;
-                  inherit settings;
-                  inherit secrets;
-                };
-                backupFileExtension = "backupExt";
-              };
             }
+          )
 
-            # {
-            #   # aagl
-            #   imports = [ aagl.nixosModules.default ];
-            #   nix.settings = aagl.nixConfig; # Set up Cachix
-            # }
-          ];
-        };
+          ./configuration.nix
+          inputs.home-manager.nixosModules.default
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+
+              users."${settings.userDetails.username}".imports = [
+                # ({ modulesPath, ... }: {
+                #   # disable default home-manager anyrun module
+                #   disabledModules = [ "${modulesPath}/programs/anyrun.nix" ];
+                # })
+                # inputs.anyrun.homeManagerModules.anyrun # enable flake home-manager module
+                # inputs.vicinae.homeManagerModules.default # enable vicinae home-manager module
+                inputs.tailray.homeManagerModules.default # enable tailray home-manager module
+                ./home/default.nix
+              ];
+
+              extraSpecialArgs = {
+                inherit inputs;
+                inherit settings;
+                inherit secrets;
+              };
+              backupFileExtension = "backupExt";
+            };
+          }
+
+          # {
+          #   # aagl
+          #   imports = [ aagl.nixosModules.default ];
+          #   nix.settings = aagl.nixConfig; # Set up Cachix
+          # }
+        ];
+      };
     };
 
 }
