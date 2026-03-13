@@ -14,7 +14,7 @@ in
     mdadm # for managing RAID arrays in Linux
     lvm2 # for LVM support
 
-    udiskie # for automatic mounting of USB drives
+    # udiskie # for automatic mounting of USB drives
 
     jmtpfs # for FTP with android phones
 

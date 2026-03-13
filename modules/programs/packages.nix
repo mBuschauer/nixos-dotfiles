@@ -167,6 +167,8 @@
       winetricks
 
       pandoc
+      pv
+      poppler-utils
     ]
     ++ [
       # inputs.hyprsysteminfo.packages.${pkgs.stdenv.hostPlatform.system}.default

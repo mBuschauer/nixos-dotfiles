@@ -12,22 +12,31 @@
       fira-code
       dejavu_fonts
 
+      noto-fonts-color-emoji
+
       nerd-fonts.space-mono
       nerd-fonts.jetbrains-mono
       nerd-fonts.dejavu-sans-mono
     ];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        emoji = [
+          "Noto Color Emoji"
+        ];
+      };
+    };
   };
 
   system.activationScripts = {
-    movefonts.text =
-      ''
-        mkdir -p /home/${settings.userDetails.username}/.local/share/fonts
-        rm /home/${settings.userDetails.username}/.local/share/fonts/*
-        cp ${pkgs.corefonts}/share/fonts/truetype/*.ttf /home/${settings.userDetails.username}/.local/share/fonts/
-        cp ${pkgs.vista-fonts}/share/fonts/truetype/*.ttf /home/${settings.userDetails.username}/.local/share/fonts/
-        cp ${pkgs.dejavu_fonts}/share/fonts/truetype/*.ttf /home/${settings.userDetails.username}/.local/share/fonts/
-        chmod 644 /home/${settings.userDetails.username}/.local/share/fonts/*
-      '';
+    movefonts.text = ''
+      mkdir -p /home/${settings.userDetails.username}/.local/share/fonts
+      rm /home/${settings.userDetails.username}/.local/share/fonts/*
+      cp ${pkgs.corefonts}/share/fonts/truetype/*.ttf /home/${settings.userDetails.username}/.local/share/fonts/
+      cp ${pkgs.vista-fonts}/share/fonts/truetype/*.ttf /home/${settings.userDetails.username}/.local/share/fonts/
+      cp ${pkgs.dejavu_fonts}/share/fonts/truetype/*.ttf /home/${settings.userDetails.username}/.local/share/fonts/
+      chmod 644 /home/${settings.userDetails.username}/.local/share/fonts/*
+    '';
   };
 
   environment.sessionVariables = rec {
