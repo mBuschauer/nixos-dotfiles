@@ -5,10 +5,15 @@
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
+    package = pkgs.pipewire;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
     audio.enable = true;
+    wireplumber = {
+      enable = true;
+      extraConfig = { };
+    };
 
     extraConfig.pipewire."92-low-latency" = {
       "context.properties" = {

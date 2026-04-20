@@ -91,7 +91,6 @@ in
 
       vim
       # neovim
-      lunarvim
       gedit
 
       rust-analyzer
@@ -107,23 +106,23 @@ in
       # assorted dependencies
       gnat14
 
-      godot_4
+      # godot_4
 
       tio # screen/minicom alternative
-      lazygit
+      # lazygit
 
       # unityhub
 
       # fpga stuff
-      iverilog
-      gtkwave
-      apio
+      # iverilog
+      # gtkwave
+      # apio
 
     ]
     ++ [
       # inputs.tsui.packages."x86_64-linux".tsui # currently broken, not going to fix now.
     ];
-  services.udev.packages = with pkgs; [ apio-udev-rules ]; # for FPGA work  (ftdi)
+  # services.udev.packages = with pkgs; [ apio-udev-rules ]; # for FPGA work  (ftdi)
 
   home-manager.users."${settings.userDetails.username}" = {
     programs.vscode = {

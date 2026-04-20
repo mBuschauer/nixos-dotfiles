@@ -10,7 +10,7 @@ in
   environment.systemPackages = with pkgs; [
     gnome-disk-utility # gui for disk partitioning
 
-    ntfs3g
+    # ntfs3g
     mdadm # for managing RAID arrays in Linux
     lvm2 # for LVM support
 

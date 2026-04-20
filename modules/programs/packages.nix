@@ -47,7 +47,7 @@
       mpv
 
       # komikku
-      
+
       zip
       unzip
       gzip
@@ -102,7 +102,7 @@
       mpg123
       stable.calibre
 
-      spotify
+      # spotify
       qalculate-gtk
       qimgv # image viewer
       gthumb # image viewer
@@ -115,7 +115,7 @@
       handbrake
       mkvtoolnix
 
-      gimp # gimp
+      # gimp # gimp
 
       # ventoy # to create bootable drives
 
@@ -139,8 +139,6 @@
       # gnome-clocks # clock app
 
       cmd-wrapped
-
-      lunarvim
 
       lshw-gui
 
@@ -176,7 +174,8 @@
     ];
 
   programs.obs-studio = {
-    enable = true;
+    # enable = true;
+    enable = false;
     package = pkgs.obs-studio;
     enableVirtualCamera = true;
     plugins = with pkgs.obs-studio-plugins; [
@@ -200,6 +199,30 @@
         use_nerdfont = true;
         volnorm = true;
       };
+    };
+
+    programs.lazyvim = {
+      enable = true;
+
+      extras = {
+        lang.nix.enable = true;
+        lang.python = {
+          enable = true;
+          installDependencies = true; # Install ruff
+          installRuntimeDependencies = true; # Install python3
+        };
+        lang.docker.enable = true;
+        lang.rust.enable = true;
+        lang.toml.enable = true;
+        lang.docker-compose.enable = true;
+      };
+
+      # Additional packages (optional)
+      extraPackages = with pkgs; [
+        nixd # Nix LSP
+        alejandra # Nix formatter
+      ];
+
     };
 
     xdg.desktopEntries = {

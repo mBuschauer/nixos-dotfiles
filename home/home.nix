@@ -17,7 +17,7 @@ in
     homeDirectory = "/home/${settings.userDetails.username}";
     stateVersion = settings.userDetails.state_version;
     sessionVariables = {
-      EDITOR = "lvim";
+      EDITOR = "nvim";
       # TERM = "kitty";
       TERM = matchFirstElement settings.customization.terminal;
       BROWSER = "firefox";

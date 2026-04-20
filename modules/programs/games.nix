@@ -49,8 +49,8 @@ in
       heroic
 
       # suyu
-      ryubing
-      nsz
+      # ryubing
+      # nsz
 
       # wineWow64Packages.base
       # winetricks

@@ -18,6 +18,7 @@
     waybar = {
       type = "git";
       url = "https://github.com/Alexays/Waybar";
+      # url = "https://github.com/mBuschauer/Waybar";
     };
 
     # hyprpanel = {
@@ -72,6 +73,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # nvix = {
     #   # nixvim configuration
     #   url = "github:niksingh710/nvix/a11cdb4a6d5164c5e30614c7f31f4111ba1c5802";
@@ -79,6 +85,8 @@
     # };
 
     wezterm.url = "github:wez/wezterm?dir=nix";
+
+    lazyvim.url = "github:pfassina/lazyvim-nix";
 
     # ghostty.url = "github:ghostty-org/ghostty";
 
@@ -139,9 +147,12 @@
             {
               nixpkgs.overlays = [
                 overlay-stable
+                inputs.nix-cachyos-kernel.overlays.default
+
                 # (import ./overlays/ollama-cuda.nix)
                 # (import ./overlays/jellyfin-qt6.nix)
                 (import ./overlays/catppuccin-papirus-16x16.nix)
+                # (import ./overlays/libldac-dec.nix)
               ];
             }
           )
@@ -162,6 +173,7 @@
                 # inputs.anyrun.homeManagerModules.anyrun # enable flake home-manager module
                 # inputs.vicinae.homeManagerModules.default # enable vicinae home-manager module
                 inputs.tailray.homeManagerModules.default # enable tailray home-manager module
+                inputs.lazyvim.homeManagerModules.default # enable lazyvim hm module
                 ./home/default.nix
               ];
 
