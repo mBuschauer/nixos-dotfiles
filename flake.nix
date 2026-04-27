@@ -90,6 +90,11 @@
 
     # ghostty.url = "github:ghostty-org/ghostty";
 
+    cbr2cbz = {
+      url = "github:mBuschauer/cbr2cbz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # aagl = {
     #   # an-anime-game-launcher
     #   url = "github:ezKEa/aagl-gtk-on-nix";

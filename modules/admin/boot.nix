@@ -1,11 +1,31 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  cachy-kernel = pkgs.cachyosKernels.linux-cachyos-latest.override {
+    pname = "linux-cachyos-bore-x86_64-v3";
 
-  nix.settings.substituters = [ "https://attic.xuyh0120.win/lantian" ];
-  nix.settings.trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+    # Customize CachyOS settings
+    cpusched = "bore";
+    lto = "thin";
+    processorOpt = "x86_64-v3";
+    hzTicks = "1000";
+    bbr3 = true;
+    hardened = false;
+  };
+in
+{
+  # nix.settings = {
+  #   substituters = [ "https://attic.xuyh0120.win/lantian" ];
+  #   trusted-public-keys = [ "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc=" ];
+  # };
 
   boot = {
     # kernelPackages = pkgs.linuxPackages_latest;
-    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+    kernelPackages = pkgs.linuxKernel.packagesFor cachy-kernel;
 
     # kernel = {
     #   # modify TCP buffer size
@@ -17,7 +37,7 @@
     #   sysctl."net.ipv4.tcp_wmem" = "4096  65536   33554432";
     # };
 
-    # plymouth.enable = true; 
+    # plymouth.enable = true;
   };
 
   nix = {
@@ -30,8 +50,7 @@
     enable = true;
     settings = {
       default_session = {
-        command =
-          "${pkgs.tuigreet}/bin/tuigreet --time -r --asterisks --cmd start-hyprland";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time -r --asterisks --cmd start-hyprland";
         # command = "${pkgs.tuigreet}/bin/tuigreet --time -r --asterisks";
       };
     };

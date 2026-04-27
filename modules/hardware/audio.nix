@@ -27,6 +27,8 @@
 
   };
 
+  environment.systemPackages = with pkgs; [ pavucontrol ];
+
   home-manager.users.${settings.userDetails.username} = {
     services.mpd = {
       enable = true;

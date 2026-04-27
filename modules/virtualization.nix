@@ -10,7 +10,7 @@
     spiceUSBRedirection.enable = true;
 
     libvirtd = {
-      # enable = true;
+      enable = true;
       package = pkgs.libvirt;
 
       qemu = {
