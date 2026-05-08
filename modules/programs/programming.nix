@@ -98,6 +98,7 @@ in
       # openssl
 
       nil
+      nixd
       nixfmt
 
       devenv
@@ -117,7 +118,6 @@ in
       # iverilog
       # gtkwave
       # apio
-
     ]
     ++ [
       # inputs.tsui.packages."x86_64-linux".tsui # currently broken, not going to fix now.
@@ -203,9 +203,15 @@ in
           "[markdown]"."editor"."defaultFormatter" = "yzhang.markdown-all-in-one";
           "[css]"."editor"."defaultFormatter" = "vscode.css-language-features";
           "[latex]"."editor"."wordWrap" = "on";
-
+          "nixEnvSelector"."useFlakes" =  true;
+          "[json]"."editor"."defaultFormatter" = "vscode.json-language-features";
         };
       };
+    };
+
+    programs.zed-editor = {
+      enable = true;
+      package = pkgs.zed-editor;
     };
 
     home.packages = with pkgs; [
@@ -249,6 +255,7 @@ in
         };
       };
       signing = {
+        format = "openpgp";
         signer = "${pkgs.gnupg}/bin/gpg";
         key = "${secrets.gpgFingerprint}"; # gpg --list-keys --fingerprint
         signByDefault = true;

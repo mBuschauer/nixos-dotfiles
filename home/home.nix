@@ -124,6 +124,7 @@ in
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
+    setSessionVariables = false;
     pictures = "/home/${settings.userDetails.username}/Pictures";
     download = "/home/${settings.userDetails.username}/Downloads";
     documents = "/home/${settings.userDetails.username}/Documents";

@@ -94,6 +94,10 @@
       url = "github:mBuschauer/cbr2cbz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    jellyfin-desktop = {
+      url = "github:mBuschauer/jellyfin-desktop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # aagl = {
     #   # an-anime-game-launcher
@@ -155,7 +159,7 @@
                 inputs.nix-cachyos-kernel.overlays.default
 
                 # (import ./overlays/ollama-cuda.nix)
-                # (import ./overlays/jellyfin-qt6.nix)
+                (import ./overlays/jellyfin-qt6.nix)
                 (import ./overlays/catppuccin-papirus-16x16.nix)
                 # (import ./overlays/libldac-dec.nix)
               ];

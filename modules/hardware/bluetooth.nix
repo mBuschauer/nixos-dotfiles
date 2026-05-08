@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }:
+{
   # Enable Bluetooth
   hardware.bluetooth = {
     enable = true;
@@ -24,6 +25,11 @@
     };
   };
   services.blueman.enable = true;
+
+  systemd.user.services.blueman-applet.serviceConfig.ExecStart = lib.mkForce [
+    ""
+    "${pkgs.blueman}/bin/blueman-applet"
+  ];
 
   # Enable the xpadneo driver for Xbox One wireless controllers
   # if not working, try running `sudo btmgmt le on`

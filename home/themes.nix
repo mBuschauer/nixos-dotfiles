@@ -3,6 +3,7 @@
   inputs,
   settings,
   lib,
+  config,
   ...
 }:
 let
@@ -51,6 +52,7 @@ in
       name = "Papirus-Dark";
       package = catppuccin-papirus;
     };
+    gtk4.theme = config.gtk.theme;
   };
 
   # dconf.settings = {

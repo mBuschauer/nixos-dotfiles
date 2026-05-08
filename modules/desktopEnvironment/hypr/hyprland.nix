@@ -1,18 +1,23 @@
-{ inputs, pkgs, settings, ... }:
+{
+  inputs,
+  pkgs,
+  settings,
+  ...
+}:
 let
-  notification =
-    "play -n synth 1.5 sin 1760 synth 1.5 sin fmod 600 vol -20db fade l 0 1.5 1.5";
+  notification = "play -n synth 1.5 sin 1760 synth 1.5 sin fmod 600 vol -20db fade l 0 1.5 1.5";
 
-    open-menu = "rofi -show drun";
-    close-menu = "pkill rofi";
-    open-clipboard = "rofi -modi clipboard:cliphist-rofi -show clipboard";
-    # open-menu = "anyrun";
-    # close-menu = "pkill anyrun";
-    # open-menu = "vicinae toggle";
-    # close-menu = "vicinae close";
-    # open-clipboard = "vicinae vicinae://extensions/vicinae/clipboard/history";
+  open-menu = "rofi -show drun";
+  close-menu = "pkill rofi";
+  open-clipboard = "rofi -modi clipboard:cliphist-rofi -show clipboard";
+  # open-menu = "anyrun";
+  # close-menu = "pkill anyrun";
+  # open-menu = "vicinae toggle";
+  # close-menu = "vicinae close";
+  # open-clipboard = "vicinae vicinae://extensions/vicinae/clipboard/history";
 
-in {
+in
+{
   home.packages = with pkgs; [
     dmenu-rs # seems to be a dunst dependency?
 
@@ -42,11 +47,17 @@ in {
     ];
     config = {
       common = {
-        default = [ "hyprland" "gtk" ];
+        default = [
+          "hyprland"
+          "gtk"
+        ];
         "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
       };
       hyprland = {
-        default = [ "hyprland" "gtk" ];
+        default = [
+          "hyprland"
+          "gtk"
+        ];
         "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
       };
     };
@@ -58,7 +69,8 @@ in {
 
     xwayland.enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
     # systemd.enable = false;
     # xwayland.enable = false;
@@ -86,7 +98,9 @@ in {
 
       "env" = [ ];
 
-      cursor = { no_hardware_cursors = true; };
+      cursor = {
+        no_hardware_cursors = true;
+      };
 
       input = {
         sensitivity = -0.2;
@@ -141,7 +155,9 @@ in {
         preserve_split = true;
       };
 
-      misc = { force_default_wallpaper = 0; };
+      misc = {
+        force_default_wallpaper = 0;
+      };
 
       debug = {
         disable_logs = false;
@@ -194,16 +210,14 @@ in {
 
         # "CTRL, Space, global, kando:example-menu"
 
-        "$mod, P, exec, ${
-          pkgs.writeShellScript "sent_notification" ''
-            TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
-            MONTH_YEAR=$(date +'%B_%Y')  # e.g., April_2025
-            SCREENSHOT_DIR=/home/${settings.userDetails.username}/Pictures/Screenshots/$MONTH_YEAR
-            mkdir -p "$SCREENSHOT_DIR"
-            
-            XDG_SCREENSHOTS_DIR=$SCREENSHOT_DIR grimblast --notify -o --freeze copysave area
-          ''
-        }"
+        "$mod, P, exec, ${pkgs.writeShellScript "sent_notification" ''
+          TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
+          MONTH_YEAR=$(date +'%B_%Y')  # e.g., April_2025
+          SCREENSHOT_DIR=/home/${settings.userDetails.username}/Pictures/Screenshots/$MONTH_YEAR
+          mkdir -p "$SCREENSHOT_DIR"
+
+          XDG_SCREENSHOTS_DIR=$SCREENSHOT_DIR grimblast --notify -o --freeze copysave area
+        ''}"
 
         "$mod, Space, layoutmsg, togglesplit"
 
@@ -212,8 +226,7 @@ in {
         # "$mod, R, exec, systemctl --user restart pipewire.service"
 
         # "$mod, Q, exec, xdg-terminal-exec bash -c \"cd /home/${settings.userDetails.username}/ ; /home/marco/.config/.pokemon-icat/pokemon-icat; exec bash\""
-        ''
-          $mod, Q, exec, xdg-terminal-exec bash -c "cd /home/${settings.userDetails.username}/; exec bash"''
+        ''$mod, Q, exec, xdg-terminal-exec bash -c "cd /home/${settings.userDetails.username}/; exec bash"''
 
         "$mod, C, killactive"
         "$mod, E, exec, nemo"
@@ -266,18 +279,23 @@ in {
         "$mod, SUPER_L, exec, ${close-menu} || ${open-menu}"
 
       ];
-      bindm = [ "$mod, mouse:272, movewindow" "$mod, mouse:273, resizewindow" ];
-    
+      bindm = [
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+      ];
+
     };
 
-    plugins = builtins.attrValues {
-      inherit (pkgs.hyprlandPlugins)
-      # hyprspace 
-      # split-monitor-workspaces
-      ;
-    } ++ [
-      # inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
-      # inputs.Hyprspace.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
-    ];
+    plugins =
+      builtins.attrValues {
+        inherit (pkgs.hyprlandPlugins)
+          # hyprspace
+          # split-monitor-workspaces
+          ;
+      }
+      ++ [
+        # inputs.split-monitor-workspaces.packages.${pkgs.stdenv.hostPlatform.system}.split-monitor-workspaces
+        # inputs.Hyprspace.packages.${pkgs.stdenv.hostPlatform.system}.Hyprspace
+      ];
   };
 }

@@ -74,8 +74,8 @@
       fstl
       # phoronix-test-suite
 
-      # jellyfin-desktop
-      delfin
+      # delfin
+      foliate
 
       sigil
 
@@ -169,11 +169,13 @@
       pandoc
       pv
       poppler-utils
+      tor-browser
     ]
     ++ [
       # inputs.hyprsysteminfo.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.hyprpwcenter.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.cbr2cbz.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.jellyfin-desktop.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
   programs.obs-studio = {
@@ -282,17 +284,22 @@
         type = "Application";
       };
 
-      jellyfin = {
-        name = "Jellyfin Media Player (delfin)";
-        exec = "hyprctl dispatch exec delfin";
-        comment = "Desktop client for Jellyfin";
-        terminal = false;
-        icon = "com.github.iwalton3.jellyfin-media-player";
-        startupNotify = false;
-        type = "Application";
-        categories = ["AudioVideo" "Video" "Player" "TV"];
+      # jellyfin = {
+      #   name = "Jellyfin Media Player (delfin)";
+      #   exec = "hyprctl dispatch exec delfin";
+      #   comment = "Desktop client for Jellyfin";
+      #   terminal = false;
+      #   icon = "com.github.iwalton3.jellyfin-media-player";
+      #   startupNotify = false;
+      #   type = "Application";
+      #   categories = [
+      #     "AudioVideo"
+      #     "Video"
+      #     "Player"
+      #     "TV"
+      #   ];
 
-      };
+      # };
 
       # hyprsysteminfo = {
       #   name = "HyprSystemInfo";
