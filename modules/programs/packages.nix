@@ -219,7 +219,7 @@
         lang.docker.enable = true;
         lang.rust.enable = true;
         lang.toml.enable = true;
-        lang.docker-compose.enable = true;
+        # lang.docker-compose.enable = true;
       };
 
       # Additional packages (optional)

@@ -193,18 +193,20 @@ in
             # }
           ];
         userSettings = {
-          "window.openFoldersInNewWindow" = "on";
+          "window"."openFoldersInNewWindow" = "on";
           "workbench.iconTheme" = "vscode-icons";
           "python.defaultInterpreterPath" = "/run/current-system/sw/bin/python";
-          "[nix]"."editor"."defaultFormatter" = "brettm12345.nixfmt-vscode";
-          "[nix]"."editor"."formatOnSave" = false;
-          "[ javascript ]"."editor"."defaultFormatter" = "esbenp.prettier-vscode";
-          "[javascriptreact]"."editor"."defaultFormatter" = "esbenp.prettier-vscode";
-          "[markdown]"."editor"."defaultFormatter" = "yzhang.markdown-all-in-one";
-          "[css]"."editor"."defaultFormatter" = "vscode.css-language-features";
-          "[latex]"."editor"."wordWrap" = "on";
-          "nixEnvSelector"."useFlakes" =  true;
-          "[json]"."editor"."defaultFormatter" = "vscode.json-language-features";
+          "[nix]"."editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
+          "[nix]"."editor.formatOnSave" = false;
+          "[ javascript ]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+          "[javascriptreact]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+          "[markdown]"."editor.defaultFormatter" = "yzhang.markdown-all-in-one";
+          "[css]"."editor.defaultFormatter" = "vscode.css-language-features";
+          "[latex]"."editor.wordWrap" = "on";
+          "nixEnvSelector.useFlakes" =  true;
+          "[json].editor.defaultFormatter" = "vscode.json-language-features";
+          "cmake.configureOnEdit" = false;
+          "cmake.configureOnOpen" = false;
         };
       };
     };

@@ -6,12 +6,12 @@
 }:
 let
   cachy-kernel = pkgs.cachyosKernels.linux-cachyos-latest.override {
-    pname = "linux-cachyos-bore-x86_64-v3";
+    pname = "linux-cachyos-bore-native";
 
     # Customize CachyOS settings
     cpusched = "bore";
     lto = "thin";
-    processorOpt = "x86_64-v3";
+    processorOpt = "native";
     hzTicks = "1000";
     bbr3 = true;
     hardened = false;
