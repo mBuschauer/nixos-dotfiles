@@ -207,6 +207,7 @@ in
           "[json].editor.defaultFormatter" = "vscode.json-language-features";
           "cmake.configureOnEdit" = false;
           "cmake.configureOnOpen" = false;
+          "[typescriptreact]"."editor.defaultFormatter" = "vscode.typescript-language-features";
         };
       };
     };

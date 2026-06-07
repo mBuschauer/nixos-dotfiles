@@ -48,7 +48,11 @@ in
 
   services.greetd = {
     enable = true;
-    settings = {
+    settings = rec {
+      initial_session = {
+        command = "start-hyprland";
+        user = "marco";
+      };
       default_session = {
         command = "${pkgs.tuigreet}/bin/tuigreet --time -r --asterisks --cmd start-hyprland";
         # command = "${pkgs.tuigreet}/bin/tuigreet --time -r --asterisks";

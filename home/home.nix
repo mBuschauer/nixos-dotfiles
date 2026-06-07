@@ -65,7 +65,7 @@ in
       neofetch = "fastfetch";
       mpd-cli = "ncmpcpp";
       # pokemon-icat = "/home/marco/.config/.pokemon-icat/pokemon-icat";
-      start-wayvnc = "hyprctl -i 0 dispatch exec wayvnc 0.0.0.0 --gpu --performance --socket=5900 --render-cursor --max-fps=60";
+      # start-wayvnc = "hyprctl -i 0 dispatch exec wayvnc 0.0.0.0 --gpu --performance --socket=5900 --render-cursor --max-fps=60";
       restart-network = "sudo systemctl restart NetworkManager.service";
       nmcli-fzf = ''
         set -euo pipefail
@@ -118,6 +118,7 @@ in
       '';
       open = "xdg-open";
       taildrop = "tailscale file get --wait --verbose ~/Downloads/";
+      hyprland-vnc = "hyprctl -i 0 dispatch exec \"wayvnc 0.0.0.0 5900 --gpu --show-performance --render-cursor --max-fps=60\"";
     };
   };
 

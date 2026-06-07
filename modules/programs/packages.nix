@@ -179,8 +179,8 @@
     ];
 
   programs.obs-studio = {
-    # enable = true;
-    enable = false;
+    enable = true;
+    # enable = false;
     package = pkgs.obs-studio;
     enableVirtualCamera = true;
     plugins = with pkgs.obs-studio-plugins; [

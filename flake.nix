@@ -95,7 +95,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     jellyfin-desktop = {
-      url = "github:mBuschauer/jellyfin-desktop";
+      url = "github:mBuschauer/jellyfin-desktop-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

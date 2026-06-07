@@ -197,7 +197,7 @@ in
 
       workspace = [
         "f[1], gapsout:0, gapsin:0, bordersize: 0, rounding:0" # if an app is full screen, show no borders
-
+        "99, monitor:HEADLESS-1" # Park a workspace on the headless so windows have somewhere to live
         # # enable smart gaps / no gaps when only
         # "w[tv1], gapsout:0, gapsin:0"
       ];
