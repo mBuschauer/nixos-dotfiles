@@ -31,13 +31,13 @@ in
     };
   };
   programs.gamemode.enable = true;
+  programs.gamescope.enable = true;
 
   programs.steam = {
     enable = true;
     package = pkgs.steam;
     extraPackages = with pkgs; [
       mangohud # MANGOHUD_CONFIG=fps=1,font_size=18,cpu_stats=0,gpu_stats=0,ram=0 MANGOHUD=1 %command%
-      gamescope
     ];
   };
 

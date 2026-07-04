@@ -69,7 +69,7 @@
     };
 
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
+      url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -159,7 +159,8 @@
                 inputs.nix-cachyos-kernel.overlays.default
 
                 # (import ./overlays/ollama-cuda.nix)
-                (import ./overlays/jellyfin-qt6.nix)
+                (import ./overlays/rofi-latest.nix)
+                # (import ./overlays/jellyfin-qt6.nix)
                 (import ./overlays/catppuccin-papirus-16x16.nix)
                 # (import ./overlays/libldac-dec.nix)
               ];

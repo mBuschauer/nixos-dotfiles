@@ -215,7 +215,8 @@ in
           SCREENSHOT_DIR=/home/${settings.userDetails.username}/Pictures/Screenshots/$MONTH_YEAR
           mkdir -p "$SCREENSHOT_DIR"
 
-          XDG_SCREENSHOTS_DIR=$SCREENSHOT_DIR grimblast --notify -o --freeze copysave area
+          # XDG_SCREENSHOTS_DIR=$SCREENSHOT_DIR grimblast --notify -o --freeze copysave area
+          XDG_SCREENSHOTS_DIR=$SCREENSHOT_DIR grimblast --notify -o copysave area
         ''}"
 
         "$mod, Space, layoutmsg, togglesplit"

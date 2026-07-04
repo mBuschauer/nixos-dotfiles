@@ -1,13 +1,10 @@
 { pkgs, ... }:
 let
-  nixpkgs.overlays = [
-    (self: super: { rofi = super.rofi.override { waylandSupport = true; }; })
-    (self: super: { rofi-unwrapped = super.rofi-unwrapped.override { waylandSupport = true; }; })
-  ];
+
 in {
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi;
+    package = pkgs.rofi-next;
     font = "JetBrainsMono Nerd Font 12";
     location = "center";
     modes = [

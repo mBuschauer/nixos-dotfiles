@@ -204,10 +204,11 @@ in
           "[css]"."editor.defaultFormatter" = "vscode.css-language-features";
           "[latex]"."editor.wordWrap" = "on";
           "nixEnvSelector.useFlakes" =  true;
-          "[json].editor.defaultFormatter" = "vscode.json-language-features";
+          "[json]"."editor.defaultFormatter" = "vscode.json-language-features";
           "cmake.configureOnEdit" = false;
           "cmake.configureOnOpen" = false;
           "[typescriptreact]"."editor.defaultFormatter" = "vscode.typescript-language-features";
+          "[typescript]"."editor.defaultFormatter" = "vscode.typescript-language-features";
         };
       };
     };

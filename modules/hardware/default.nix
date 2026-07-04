@@ -1,5 +1,8 @@
 { ... }:
 {
+
+  powerManagement.cpuFreqGovernor = "performance";
+  
   imports =
     [
       ./audio.nix
