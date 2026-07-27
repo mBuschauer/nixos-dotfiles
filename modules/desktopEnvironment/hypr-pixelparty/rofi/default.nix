@@ -1,7 +1,5 @@
 { pkgs, ... }:
-let
-
-in {
+{
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-next;

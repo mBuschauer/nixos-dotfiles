@@ -203,12 +203,15 @@ in
           "[markdown]"."editor.defaultFormatter" = "yzhang.markdown-all-in-one";
           "[css]"."editor.defaultFormatter" = "vscode.css-language-features";
           "[latex]"."editor.wordWrap" = "on";
-          "nixEnvSelector.useFlakes" =  true;
-          "[json]"."editor.defaultFormatter" = "vscode.json-language-features";
+          "nixEnvSelector.useFlakes" = true;
           "cmake.configureOnEdit" = false;
           "cmake.configureOnOpen" = false;
           "[typescriptreact]"."editor.defaultFormatter" = "vscode.typescript-language-features";
           "[typescript]"."editor.defaultFormatter" = "vscode.typescript-language-features";
+          "[json]"."editor.defaultFormatter" = "vscode.json-language-features";
+          "[yaml]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
+          "claudeCode.preferredLocation" = "panel";
+
         };
       };
     };

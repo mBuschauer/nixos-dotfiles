@@ -1,12 +1,13 @@
 { inputs, pkgs, ... }:
-let wallpapers = ./wallpapers;
-in {
-  home.packages = with pkgs;
-    [
-      # inputs.swww.packages.${pkgs.stdenv.hostPlatform.system}.swww
-      # waypaper
-      # inputs.hyprpaper.packages.${pkgs.stdenv.hostPlatform.system}.default
-    ];
+let
+  wallpapers = ./wallpapers;
+in
+{
+  home.packages = with pkgs; [
+    # inputs.swww.packages.${pkgs.stdenv.hostPlatform.system}.swww
+    # waypaper
+    # inputs.hyprpaper.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
 
   wayland.windowManager.hyprland.settings."exec-once" = [
     # "hyprpaper"

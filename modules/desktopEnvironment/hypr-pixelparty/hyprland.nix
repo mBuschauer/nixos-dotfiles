@@ -15,29 +15,41 @@ let
   # open-menu = "vicinae toggle";
   # close-menu = "vicinae close";
   # open-clipboard = "vicinae vicinae://extensions/vicinae/clipboard/history";
-
 in
 {
-  home.packages = with pkgs; [
-    dmenu-rs # seems to be a dunst dependency?
+  home = {
+    packages = with pkgs; [
+      dmenu-rs # seems to be a dunst dependency?
 
-    # used for clipboard history (SUPER + V)
-    wl-clipboard
-    cliphist
+      # used for clipboard history (SUPER + V)
+      wl-clipboard
+      cliphist
 
-    satty # for screenshot editing (will be implemented at some point)
+      # kando
+      inputs.hyprpolkitagent.packages.${pkgs.stdenv.hostPlatform.system}.hyprpolkitagent
+      hyprcursor
 
-    # kando
-    inputs.hyprpolkitagent.packages.${pkgs.stdenv.hostPlatform.system}.hyprpolkitagent
+      sox # for playing a notification sound
 
-    sox # for playing a notification sound
+      # grim
+      # slurp
+      wayvnc
 
-    # grim
-    # slurp
-    wayvnc
-
-    inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
-  ];
+      inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
+    ];
+    pointerCursor = {
+      enable = true;
+      gtk.enable = true;
+      x11.enable = true;
+      package = pkgs.catppuccin-cursors.mochaDark;
+      name = "catppuccin-mocha-dark-cursors";
+      size = 24;
+      hyprcursor = {
+        enable = true;
+        size = 24;
+      };
+    };
+  };
 
   xdg.portal = {
     enable = true;
@@ -76,10 +88,6 @@ in
     # xwayland.enable = false;
     settings = {
       monitor = settings.customization.monitors;
-      #env = [
-      #  "HYPRCURSOR_THEME,${cursorName}"
-      #  "HYPRCURSOR_SIZE,${toString pointerSize}"
-      #];
 
       "exec-once" = [
         "swww-daemon"
@@ -95,8 +103,6 @@ in
         # "discord --start-minimized" # starts discord before waybar so icon doesnt show up anyway
         "systemctl --user start hyprpolkitagent" # start polkit
       ];
-
-      "env" = [ ];
 
       cursor = {
         no_hardware_cursors = true;

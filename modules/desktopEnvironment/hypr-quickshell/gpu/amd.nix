@@ -1,0 +1,4 @@
+{ ... }:
+{
+  # nothing, shit just work
+}

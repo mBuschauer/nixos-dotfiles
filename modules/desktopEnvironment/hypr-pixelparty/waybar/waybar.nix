@@ -335,8 +335,6 @@ in
         };
       };
     };
-
-
     style = builtins.readFile (./. + "/style.css");
   };
 }

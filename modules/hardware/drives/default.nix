@@ -16,7 +16,7 @@ in
 
     # udiskie # for automatic mounting of USB drives
 
-    jmtpfs # for FTP with android phones
+    simple-mtpfs # for MTP with android phones
 
     nfs-utils # for mounting nfs drive
 
