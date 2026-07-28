@@ -1,19 +1,32 @@
-{ pkgs, inputs, settings, secrets, ... }:
+{
+  pkgs,
+  inputs,
+  settings,
+  secrets,
+  lib,
+  ...
+}:
 let
-  # Function to extract the EDID name (everything up to the first comma)
-  getEdidName = monitor: builtins.head (builtins.split "," monitor);
+  inherit (lib.generators) mkLuaInline;
 
-  # Extract the names
+  getEdidName = monitor: monitor.output;
   edidNames = builtins.map getEdidName settings.customization.monitors;
 
-  sinkSwitch = pkgs.writeShellScript "sink_switch" ''  '';
+  sinkSwitch = pkgs.writeShellScript "sink_switch" "";
 in
 {
 
   wayland.windowManager.hyprland = {
-    settings."exec-once" = [ 
-      "waybar"
-    ];
+    settings.on = {
+      _args = [
+        "hyprland.start"
+        (mkLuaInline ''
+          function()
+            hl.exec_cmd("waybar")
+          end'')
+      ];
+    };
+
   };
 
   home.packages = with pkgs; [
@@ -27,14 +40,18 @@ in
   ];
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar;
-    # package = inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.waybar;
+    # package = pkgs.waybar;
+    package = inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.waybar;
     settings = {
       mainBar = {
         layer = "top";
         position = "top";
         output = edidNames;
-        modules-left = [ "hyprland/workspaces" "custom/arrow10" "custom/waybar-mpris" ];
+        modules-left = [
+          "hyprland/workspaces"
+          "custom/arrow10"
+          "custom/waybar-mpris"
+        ];
         modules-center = [ "hyprland/window" ];
         modules-right = [
           "group/hardware"
@@ -105,7 +122,16 @@ in
           waves = false;
           noise_reduction = 0.4;
           input_delay = 1;
-          format-icons = [ "▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
+          format-icons = [
+            "▁"
+            "▂"
+            "▃"
+            "▄"
+            "▅"
+            "▆"
+            "▇"
+            "█"
+          ];
           on-click = "easyeffects";
           # on-click = "hyprctl dispatch exec \"[workspace special:sinkswitch] wezterm --class wezterm-sinkswitch start -- ${sinkSwitch}\"";
         };
@@ -226,7 +252,6 @@ in
           tooltip = false;
         };
 
-
         "custom/groupHardware" = {
           format = "";
           tooltip = false;
@@ -265,7 +290,7 @@ in
 
         "custom/logout" = {
           format = "󰗽 ";
-          on-click = "hyprctl dispatch exit";
+          on-click = "hyprshutdown";
           tooltip-format = "logout";
         };
 

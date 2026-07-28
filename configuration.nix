@@ -2,10 +2,18 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, settings, ... }:
+{
+  config,
+  pkgs,
+  settings,
+  ...
+}:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   imports = [
     # Include the results of the hardware scan.
@@ -27,12 +35,22 @@
       message = "Empty list for terminal";
     }
     {
-      assertion = (builtins.elem "kitty" settings.customization.terminal || builtins.elem "wezterm" settings.customization.terminal || builtins.elem "ghostty" settings.customization.terminal);
+      assertion = (
+        builtins.elem "kitty" settings.customization.terminal
+        || builtins.elem "wezterm" settings.customization.terminal
+        || builtins.elem "ghostty" settings.customization.terminal
+      );
       message = "No valid terminal emulator selected.";
     }
     {
       assertion = (settings.customization.gpu == "amd" || settings.customization.gpu == "nvidia");
       message = "Unsupported GPU selected, found '${settings.customization.gpu}'";
+    }
+    {
+      assertion = builtins.all (
+        m: builtins.isAttrs m && (m ? output) && m.output != ""
+      ) settings.customization.monitors;
+      message = "Each entry in customization.monitors must be an attrset with a non-empty 'output' (e.g. { output = \"DP-1\"; mode = \"preferred\"; position = \"0x0\"; scale = 1; }).";
     }
   ];
 

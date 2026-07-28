@@ -1,24 +1,24 @@
-{ pkgs, settings, secrets, ... }:
+{
+  pkgs,
+  settings,
+  secrets,
+  ...
+}:
 {
   fileSystems."/mnt/sda1" = {
     device = "/dev/sda1";
     fsType = "ntfs";
     options = [
-      "soft" # return errors to client when access is lost, instead of waiting indefinitely
-      "softreval" # use cache even when access is lost
       "auto"
       "nofail" # system won't fail if drive doesn't mount
       "users" # allows any user to mount and unmount
     ];
   };
 
-
   fileSystems."/mnt/nvme0n1p4" = {
     device = "/dev/nvme0n1p4";
     fsType = "ntfs";
     options = [
-      "soft" # return errors to client when access is lost, instead of waiting indefinitely
-      "softreval" # use cache even when access is lost
       "auto"
       "nofail" # system won't fail if drive doesn't mount
       "users" # allows any user to mount and unmount
@@ -62,7 +62,6 @@
   #  device = "/home/marco/Desktop/Maryland";
   #  options = [ "bind" ];
   # };
-
 
   # services.nfs.server = {
   #  enable = true;

@@ -14,7 +14,7 @@
       package = pkgs.libvirt;
 
       qemu = {
-        package = pkgs.qemu_full;
+        package = pkgs.qemu_kvm.override { cephSupport = false; };
         swtpm = {
           # tpm emulator
           enable = true;

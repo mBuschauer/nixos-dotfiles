@@ -15,21 +15,32 @@ let
     ];
     # TODO: Make work with waybar
     monitors = [
-      "HDMI-A-1, preferred, 1920x0, 1"
-      "DP-1, preferred, 0x0, 1"
-      # "DP-3, preferred, 1920x0, 1"
-      # "DP-2, preferred, 0x0, 1"
+      {
+        output = "HDMI-A-1";
+        mode = "preferred";
+        position = "1920x0";
+        scale = 1;
+      }
+      {
+        output = "DP-1";
+        mode = "preferred";
+        position = "0x0";
+        scale = 1;
+      }
+      # { output = "DP-3"; mode = "preferred"; position = "1920x0"; scale = 1; }
+      # { output = "DP-2"; mode = "preferred"; position = "0x0";    scale = 1; }
     ];
     terminal = [
       # "kitty"
       "wezterm"
-      # "ghostty"  
+      # "ghostty"
     ]; # only supported `wezterm` and `kitty` (and `ghostty`). There is no error handling if this is filled with wrong information.
     printers = false;
     enableSecureboot = false;
   };
 
-in {
+in
+{
   userDetails = {
     hostname = config.hostname;
     username = config.username;

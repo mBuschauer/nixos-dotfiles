@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
@@ -12,6 +12,10 @@
     };
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprshutdown = {
+      url = "github:hyprwm/hyprshutdown";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # quickshell = {

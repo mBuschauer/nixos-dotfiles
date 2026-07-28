@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 let
   braveWithWebGL =
-    (pkgs.brave.override {
+    (pkgs.stable.brave.override {
       enableVulkan = true;
       vulkanSupport = true;
     }).overrideAttrs

@@ -12,6 +12,9 @@
       fira-code
       dejavu_fonts
 
+      noto-fonts
+      adwaita-fonts
+
       noto-fonts-color-emoji
 
       nerd-fonts.space-mono
@@ -21,9 +24,10 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        emoji = [
-          "Noto Color Emoji"
-        ];
+        monospace = [ "JetBrainsMono Nerd Font" ];
+        sansSerif = [ "Noto Sans" ];
+        serif = [ "Noto Serif" ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
   };
@@ -39,12 +43,13 @@
     '';
   };
 
-  environment.sessionVariables = rec {
-    FONTCONFIG_FILE = "${pkgs.fontconfig.out}/etc/fonts/fonts.conf";
-    FONTCONFIG_PATH = "${pkgs.fontconfig.out}/etc/fonts";
-    # FONTCONFIG_FILE = "/etc/fonts/fonts.conf";
-    # FONTCONFIG_PATH = "/etc/fonts";
-  };
+  # environment.sessionVariables = rec {
+  #   FONTCONFIG_FILE = "${pkgs.fontconfig.out}/etc/fonts/fonts.conf";
+  #   FONTCONFIG_PATH = "${pkgs.fontconfig.out}/etc/fonts";
+  #   # FONTCONFIG_FILE = "/etc/fonts/fonts.conf";
+  #   # FONTCONFIG_PATH = "/etc/fonts";
+  # };
+
   environment.systemPackages = with pkgs; [
     fontconfig
   ];

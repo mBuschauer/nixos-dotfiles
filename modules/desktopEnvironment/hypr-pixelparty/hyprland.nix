@@ -2,19 +2,30 @@
   inputs,
   pkgs,
   settings,
+  lib,
   ...
 }:
 let
+  inherit (lib.generators) mkLuaInline;
+  inherit (lib) range concatMap;
+
+  wsBinds = concatMap (i: [
+    {
+      _args = [
+        (mkLuaInline ''mod .. " + ${toString i}"'')
+        (mkLuaInline "hl.dsp.focus({ workspace = ${toString i} })")
+      ];
+    }
+    {
+      _args = [
+        (mkLuaInline ''mod .. " + SHIFT + ${toString i}"'')
+        (mkLuaInline "hl.dsp.window.move({ workspace = ${toString i} })")
+      ];
+    }
+  ]) (range 1 9);
+  
   notification = "play -n synth 1.5 sin 1760 synth 1.5 sin fmod 600 vol -20db fade l 0 1.5 1.5";
 
-  open-menu = "rofi -show drun";
-  close-menu = "pkill rofi";
-  open-clipboard = "rofi -modi clipboard:cliphist-rofi -show clipboard";
-  # open-menu = "anyrun";
-  # close-menu = "pkill anyrun";
-  # open-menu = "vicinae toggle";
-  # close-menu = "vicinae close";
-  # open-clipboard = "vicinae vicinae://extensions/vicinae/clipboard/history";
 in
 {
   home = {
@@ -27,6 +38,7 @@ in
 
       # kando
       inputs.hyprpolkitagent.packages.${pkgs.stdenv.hostPlatform.system}.hyprpolkitagent
+      inputs.hyprshutdown.packages.${pkgs.stdenv.hostPlatform.system}.hyprshutdown
       hyprcursor
 
       sox # for playing a notification sound
@@ -83,213 +95,365 @@ in
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    configType = "hyprlang";
+    configType = "lua";
     # systemd.enable = false;
     # xwayland.enable = false;
     settings = {
+      mod = {
+        _var = "SUPER";
+      };
+      close_menu = {
+        _var = "pkill rofi";
+      };
+      open_menu = {
+        _var = "rofi -show drun";
+      };
+      open_clipboard = {
+        _var = "rofi -modi clipboard:cliphist-rofi -show clipboard";
+      };
+
       monitor = settings.customization.monitors;
 
-      "exec-once" = [
-        "swww-daemon"
-        # "hyprctl setcursor ${cursorName} ${toString pointerSize}"
-        "wl-paste --watch cliphist store"
-        #"xdg-terminal-exec ncspot"
-        "easyeffects --gapplication-service"
-
-        # "nwg-dock-hyprland -c anyrun -i 36 -lp start -p bottom -a start -mb 10"
-
-        # "xwaylandvideobridge"
-        #"mpd-mpris"
-        # "discord --start-minimized" # starts discord before waybar so icon doesnt show up anyway
-        "systemctl --user start hyprpolkitagent" # start polkit
-      ];
-
-      cursor = {
-        no_hardware_cursors = true;
-      };
-
-      input = {
-        sensitivity = -0.2;
-        follow_mouse = 2;
-      };
-
-      general = {
-        gaps_in = 1;
-        gaps_out = 0;
-        border_size = 1;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
-        resize_on_border = false;
-        layout = "dwindle";
-        allow_tearing = true;
-      };
-
-      decoration = {
-        rounding = 2;
-        shadow = {
-          enabled = true;
-          range = 4;
-          render_power = 3;
-          color = "rgba(1a1a1aee)";
-        };
-
-        blur = {
-          enabled = true;
-          size = 3;
-          passes = 1;
-        };
-      };
-
-      animations = {
-        enabled = true;
-        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-
-        animation = [
-          "windows, 1, 7, myBezier"
-          "layersIn, 1, 3, myBezier"
-          "windowsOut, 1, 7, default, popin 80%"
-          "border, 1, 10, default"
-          "borderangle, 1, 8, default"
-          "fade, 1, 7, default"
-          "fadeIn, 1, 3, default"
-          "workspaces, 1, 6, default"
+      on = {
+        _args = [
+          "hyprland.start"
+          (mkLuaInline ''
+            function()
+              hl.exec_cmd("wl-paste --watch cliphist store")
+              hl.exec_cmd("easyeffects --gapplication-service")
+              hl.exec_cmd("systemctl --user start hyprpolkitagent")
+            end'')
         ];
       };
 
-      dwindle = {
-        preserve_split = true;
+      config = {
+        cursor.no_hardware_cursors = true;
+
+        input = {
+          sensitivity = -0.2;
+          follow_mouse = 2;
+        };
+
+        general = {
+          gaps_in = 1;
+          gaps_out = 0;
+          border_size = 1;
+          col = {
+            active_border = {
+              colors = [
+                "rgba(33ccffee)"
+                "rgba(00ff99ee)"
+              ];
+              angle = 45;
+            };
+            inactive_border = "rgba(595959aa)";
+          };
+          resize_on_border = false;
+          layout = "dwindle";
+          allow_tearing = true;
+        };
+
+        decoration = {
+          rounding = 2;
+          shadow = {
+            enabled = true;
+            range = 4;
+            render_power = 3;
+            color = "rgba(1a1a1aee)";
+          };
+          blur = {
+            enabled = true;
+            size = 3;
+            passes = 1;
+          };
+        };
+
+        animations.enabled = true;
+        dwindle.preserve_split = true;
+        misc.force_default_wallpaper = 0;
+        debug.disable_logs = false;
       };
 
-      misc = {
-        force_default_wallpaper = 0;
+      curve = {
+        _args = [
+          "myBezier"
+          {
+            type = "bezier";
+            points = [
+              [
+                0.05
+                0.9
+              ]
+              [
+                0.1
+                1.05
+              ]
+            ];
+          }
+        ];
       };
 
-      debug = {
-        disable_logs = false;
-      };
-
-      layerrule = [
-        # "noanim,^(anyrun)$" # disable animation for anyrun pop-in
-        # "animation[fadeIn],^(anyrun)$"
-        # "noanim,^(rofi)$" # disable animation for rofi pop-in
+      animation = [
+        {
+          leaf = "windows";
+          enabled = true;
+          speed = 7;
+          bezier = "myBezier";
+        }
+        {
+          leaf = "layersIn";
+          enabled = true;
+          speed = 3;
+          bezier = "myBezier";
+        }
+        {
+          leaf = "windowsOut";
+          enabled = true;
+          speed = 7;
+          bezier = "default";
+          style = "popin 80%";
+        }
+        {
+          leaf = "border";
+          enabled = true;
+          speed = 10;
+          bezier = "default";
+        }
+        {
+          leaf = "borderangle";
+          enabled = true;
+          speed = 8;
+          bezier = "default";
+        }
+        {
+          leaf = "fade";
+          enabled = true;
+          speed = 7;
+          bezier = "default";
+        }
+        {
+          leaf = "fadeIn";
+          enabled = true;
+          speed = 3;
+          bezier = "default";
+        }
+        {
+          leaf = "workspaces";
+          enabled = true;
+          speed = 6;
+          bezier = "default";
+        }
       ];
 
-      windowrule = [
-        "match:class okular, maximize on"
-
-        # force all only office windows to open maximized
-        "match:class ONLYOFFICE Desktop Editors, maximize on"
-
-        "match:title (.*)( - Sigil [std])$, maximize on"
-        "match:title (.*)( - Sigil)$, maximize on"
-
-        "match:class CoreArchiver, float on"
-        "match:class qimgv, float on"
-        "match:class pqiv, float on"
-
-        # for screensharing under XWayland (like Discord)
-        # "opacity 0.0 override,class:^(xwaylandvideobridge)$"
-        # "noanim,class:^(xwaylandvideobridge)$"
-        # "noinitialfocus,class:^(xwaylandvideobridge)$"
-        # "maxsize 1 1,class:^(xwaylandvideobridge)$"
-        # "noblur,class:^(xwaylandvideobridge)$"
-
-        # # enable smart gaps / no gaps when only
-        # "bordersize 0, floating:0, onworkspace:w[tv1]"
-        # "rounding 0, floating:0, onworkspace:w[tv1]"
-        # "bordersize 0, floating:0, onworkspace:f[1]"
-        # "rounding 0, floating:0, onworkspace:f[1]"
-      ];
-
-      workspace = [
-        "f[1], gapsout:0, gapsin:0, bordersize: 0, rounding:0" # if an app is full screen, show no borders
-        "99, monitor:HEADLESS-1" # Park a workspace on the headless so windows have somewhere to live
-        # # enable smart gaps / no gaps when only
-        # "w[tv1], gapsout:0, gapsin:0"
-      ];
-
-      "$mod" = "SUPER";
       bind = [
-        #"$mod, SPACE, overview:toggle"
-        "$mod, F, exec, firefox"
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + F"'')
+            (mkLuaInline ''hl.dsp.exec_cmd("firefox")'')
+          ];
+        }
 
-        # "CTRL, Space, global, kando:example-menu"
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + P"'')
+            (mkLuaInline ''
+              hl.dsp.exec_cmd([[
+                MONTH_YEAR=$(date +'%B_%Y')
+                SCREENSHOT_DIR="$HOME/Pictures/Screenshots/$YEAR_MONTH"
+                mkdir -p "$SCREENSHOT_DIR"
+                XDG_SCREENSHOTS_DIR="$SCREENSHOT_DIR" grimblast --notify -o copysave area
+              ]])'')
+          ];
+        }
 
-        "$mod, P, exec, ${pkgs.writeShellScript "sent_notification" ''
-          TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
-          MONTH_YEAR=$(date +'%B_%Y')  # e.g., April_2025
-          SCREENSHOT_DIR=/home/${settings.userDetails.username}/Pictures/Screenshots/$MONTH_YEAR
-          mkdir -p "$SCREENSHOT_DIR"
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + Space"'')
+            (mkLuaInline ''hl.dsp.layout("togglesplit")'')
+          ];
+        }
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + K"'')
+            (mkLuaInline ''hl.dsp.exec_cmd("pkill waybar; sleep 0.5 && waybar")'')
+          ];
+        }
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + Q"'')
+            (mkLuaInline ''hl.dsp.exec_cmd([[xdg-terminal-exec bash -c "cd $HOME/; exec bash"]])'')
+          ];
+        }
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + C"'')
+            (mkLuaInline "hl.dsp.window.close()")
+          ];
+        }
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + E"'')
+            (mkLuaInline ''hl.dsp.exec_cmd("nemo")'')
+          ];
+        }
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + Z"'')
+            (mkLuaInline ''hl.dsp.window.float({ action = "toggle" })'')
+          ];
+        }
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + O"'')
+            (mkLuaInline ''hl.dsp.window.pin({ action = "toggle" })'')
+          ];
+        }
 
-          # XDG_SCREENSHOTS_DIR=$SCREENSHOT_DIR grimblast --notify -o --freeze copysave area
-          XDG_SCREENSHOTS_DIR=$SCREENSHOT_DIR grimblast --notify -o copysave area
-        ''}"
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + left"'')
+            (mkLuaInline ''hl.dsp.focus({ direction = "left" })'')
+          ];
+        }
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + right"'')
+            (mkLuaInline ''hl.dsp.focus({ direction = "right" })'')
+          ];
+        }
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + up"'')
+            (mkLuaInline ''hl.dsp.focus({ direction = "up" })'')
+          ];
+        }
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + down"'')
+            (mkLuaInline ''hl.dsp.focus({ direction = "down" })'')
+          ];
+        }
 
-        "$mod, Space, layoutmsg, togglesplit"
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + mouse_down"'')
+            (mkLuaInline ''hl.dsp.focus({ workspace = "e+1" })'')
+          ];
+        }
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + mouse_up"'')
+            (mkLuaInline ''hl.dsp.focus({ workspace = "e-1" })'')
+          ];
+        }
 
-        "$mod, K, exec, pkill waybar; sleep 0.5 && waybar"
+        # Fullscreen. Old ",F11,fullscreen,1" -> mode 1 = maximize.
+        {
+          _args = [
+            "F11"
+            (mkLuaInline ''hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" })'')
+          ];
+        }
+        # Old "$mod,F11,fullscreen,2" -> old mode 2 = "fake" fullscreen (window fills
+        # the screen but the client isn't told). No 1:1 named mode now; regular
+        # fullscreen is closest. For exact fake behavior use
+        # hl.dsp.window.fullscreen_state({ internal = ..., client = ... }).
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + F11"'')
+            (mkLuaInline ''hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" })'')
+          ];
+        }
 
-        # "$mod, R, exec, systemctl --user restart pipewire.service"
+        # Release binds (old `bindr`) -> fire on key release
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + V"'')
+            (mkLuaInline ''hl.dsp.exec_cmd(close_menu .. " || " .. open_clipboard)'')
+            { release = true; }
+          ];
+        }
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + SUPER_L"'')
+            (mkLuaInline ''hl.dsp.exec_cmd(close_menu .. " || " .. open_menu)'')
+            { release = true; }
+          ];
+        }
 
-        # "$mod, Q, exec, xdg-terminal-exec bash -c \"cd /home/${settings.userDetails.username}/ ; /home/marco/.config/.pokemon-icat/pokemon-icat; exec bash\""
-        ''$mod, Q, exec, xdg-terminal-exec bash -c "cd /home/${settings.userDetails.username}/; exec bash"''
+        # Mouse binds (old `bindm`)
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + mouse:272"'')
+            (mkLuaInline "hl.dsp.window.drag()")
+            { mouse = true; }
+          ];
+        }
+        {
+          _args = [
+            (mkLuaInline ''mod .. " + mouse:273"'')
+            (mkLuaInline "hl.dsp.window.resize()")
+            { mouse = true; }
+          ];
+        }
+      ]
+      ++ wsBinds;
 
-        "$mod, C, killactive"
-        "$mod, E, exec, nemo"
-        # "$mod, E, exec, xdg-terminal-exec yazi"
-        "$mod, Z, togglefloating"
-
-        # move focus with mainMod  + arrow keys
-        "$mod, left, movefocus, l"
-        "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
-        "$mod, down, movefocus, d"
-
-        # switch workspaces with mainMod + [0-9]
-        "$mod, 1, workspace, 1"
-        "$mod, 2, workspace, 2"
-        "$mod, 3, workspace, 3"
-        "$mod, 4, workspace, 4"
-        "$mod, 5, workspace, 5"
-        "$mod, 6, workspace, 6"
-        "$mod, 7, workspace, 7"
-        "$mod, 8, workspace, 8"
-        "$mod, 9, workspace, 9"
-
-        # move active window to a worksapce with mainMod + SHIFT + [0-9]
-        "$mod SHIFT, 1, movetoworkspace, 1"
-        "$mod SHIFT, 2, movetoworkspace, 2"
-        "$mod SHIFT, 3, movetoworkspace, 3"
-        "$mod SHIFT, 4, movetoworkspace, 4"
-        "$mod SHIFT, 5, movetoworkspace, 5"
-        "$mod SHIFT, 6, movetoworkspace, 6"
-        "$mod SHIFT, 7, movetoworkspace, 7"
-        "$mod SHIFT, 8, movetoworkspace, 8"
-        "$mod SHIFT, 9, movetoworkspace, 9"
-
-        "$mod, mouse_down, workspace, e+1"
-        "$mod, mouse_up, workspace, e-1"
-
-        ",F11,fullscreen,1"
-        "$mod,F11,fullscreen,2"
-        "$mod, o, pin"
-        # ",F1,overview:toggle" # for hyprspace
-        # ",F1,hyprexpo:expo,toggle" # for hyprexpo
+      #============ WINDOW RULES ============#
+      window_rule = [
+        {
+          name = "okular-max";
+          match.class = "okular";
+          maximize = true;
+        }
+        {
+          name = "onlyoffice-max";
+          match.class = "ONLYOFFICE Desktop Editors";
+          maximize = true;
+        }
+        {
+          name = "sigil-std-max";
+          match.title = "(.*)( - Sigil [std])$";
+          maximize = true;
+        }
+        {
+          name = "sigil-max";
+          match.title = "(.*)( - Sigil)$";
+          maximize = true;
+        }
+        {
+          name = "corearchiver-float";
+          match.class = "CoreArchiver";
+          float = true;
+        }
+        {
+          name = "qimgv-float";
+          match.class = "qimgv";
+          float = true;
+        }
+        {
+          name = "pqiv-float";
+          match.class = "pqiv";
+          float = true;
+        }
       ];
 
-      bindr = [
-        # "$mod, $mod_L, exec, pkill wofi || wofi --show drun --insensitive --allow-images"
-        # "$mod, $mod_L, exec, pkill fuzzel || fuzzel"
-        "$mod, V, exec, ${close-menu} || ${open-clipboard}"
-        # "$mod, V, exec, pkill anyrun || cliphist list | anyrun --plugins libstdin.so | cliphist decode | wl-copy" # no work
-        "$mod, SUPER_L, exec, ${close-menu} || ${open-menu}"
-
+      #============ WORKSPACE RULES ============#
+      workspace_rule = [
+        # If an app is fullscreen, show no borders/gaps/rounding.
+        {
+          workspace = "f[1]";
+          gaps_out = 0;
+          gaps_in = 0;
+          border_size = 0;
+          no_rounding = true;
+        }
+        # Park a workspace on the headless output so windows have somewhere to live.
+        {
+          workspace = "99";
+          monitor = "HEADLESS-1";
+        }
       ];
-      bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
-      ];
-
     };
 
     plugins =

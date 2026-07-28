@@ -1,14 +1,27 @@
-{ inputs, pkgs, settings, lib, ... }:
+{
+  inputs,
+  pkgs,
+  settings,
+  lib,
+  ...
+}:
 let
-  matchFirstElement = list:
+  matchFirstElement =
+    list:
     if builtins.length list == 0 then
       throw "No default terminal selected in home.nix."
     else
-      let first = builtins.elemAt list 0; in
-      if first == "wezterm" then "wezterm"
-      else if first == "ghostty" then "ghostty"
-      else if first == "kitty" then "kitty"
-      else throw "Error: unexpected value in the list";
+      let
+        first = builtins.elemAt list 0;
+      in
+      if first == "wezterm" then
+        "wezterm"
+      else if first == "ghostty" then
+        "ghostty"
+      else if first == "kitty" then
+        "kitty"
+      else
+        throw "Error: unexpected value in the list";
 in
 {
   programs.home-manager.enable = true;
@@ -17,6 +30,7 @@ in
     homeDirectory = "/home/${settings.userDetails.username}";
     stateVersion = settings.userDetails.state_version;
     sessionVariables = {
+      XDG_CONFIG_HOME = "$HOME/.config";
       EDITOR = "nvim";
       # TERM = "kitty";
       TERM = matchFirstElement settings.customization.terminal;
@@ -43,14 +57,13 @@ in
       PROMPT_COMMAND="history -a; history -n; history -r; $PROMPT_COMMAND"
     '';
 
-
     shellAliases = {
       ls = lib.mkForce "lsd";
       # vim = "lvim";
       top = "btm";
       # cat = "bat";
       disk-analysis = "sudo ncdu / --exclude=/mnt";
-      # edit-config = "cd /etc/nixos/ && sudo lvim"; 
+      # edit-config = "cd /etc/nixos/ && sudo lvim";
       update-config = "sudo nixos-rebuild switch";
       upgrade-config = ''
         (

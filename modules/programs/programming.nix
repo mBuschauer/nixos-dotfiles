@@ -37,8 +37,8 @@ in
   services.ollama = {
     enable = false;
     package = ollamaGPU;
-    home = "/mnt/sda1/ollama";
-    models = "${config.services.ollama.home}/models"; # references home (/mnt/sda1/ollama/models)
+    # home = "/mnt/sda1/ollama";
+    # modelsDir = "${config.services.ollama.home}/models"; # references home (/mnt/sda1/ollama/models)
   };
 
   # for creating gpg keys
