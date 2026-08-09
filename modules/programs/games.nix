@@ -29,6 +29,17 @@ in
         desmume.enable = true;
       };
     };
+    programs.mangohud = {
+      enable = true;
+      package = pkgs.mangohud;
+      settings = {
+        fps = true;
+        font_size = 18;
+        cpu_stats = false;
+        gpu_stats = false;
+        ram = false;
+      };
+    };
   };
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;

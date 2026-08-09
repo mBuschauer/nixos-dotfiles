@@ -1,0 +1,10 @@
+hl.window_rule({ name = "okular-max", match = { class = "okular" }, maximize = true })
+hl.window_rule({ name = "onlyoffice-max", match = { class = "ONLYOFFICE Desktop Editors" }, maximize = true })
+hl.window_rule({ name = "sigil-std-max", match = { title = "(.*)( %- Sigil %[std%])$" }, maximize = true })
+hl.window_rule({ name = "sigil-max", match = { title = "(.*)( %- Sigil)$" }, maximize = true })
+hl.window_rule({ name = "corearchiver-float", match = { class = "CoreArchiver" }, float = true })
+hl.window_rule({ name = "qimgv-float", match = { class = "qimgv" }, float = true })
+hl.window_rule({ name = "pqiv-float", match = { class = "pqiv" }, float = true })
+
+hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0, border_size = 0, no_rounding = true })
+hl.workspace_rule({ workspace = "99", monitor = "HEADLESS-1" })

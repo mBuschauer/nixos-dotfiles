@@ -1,0 +1,5 @@
+hl.on("hyprland.start", function()
+	hl.exec_cmd("wl-paste --watch cliphist store > /tmp/wl-clipboard.log 2>&1")
+	hl.exec_cmd("easyeffects --gapplication-service")
+	hl.exec_cmd("systemctl --user start hyprpolkitagent")
+end)
