@@ -7,7 +7,6 @@
       global = {
         follow = "mouse";
         shrink = "yes";
-        # mouse = true;
         notification_height = 0;
 
         # Text and seperator padding
@@ -30,12 +29,15 @@
         mouse_right_click = "close_menu";
 
         dmenu = "${pkgs.dmenu-rs}/bin/dmenu -l 10 -w 10 -p dunst";
-        # dmenu = "${pkgs.wofi}/bin/wofi --demnu --prompt \"dunst\" --insensitive";
-        # Browser
-        browser = "${pkgs.firefox}/bin/firefox -new-tab";
-        # Always run scripts
-        always_run_script = true;
-        # Print notification on startup
+        browser = "${pkgs.firefox}/bin/firefox -new-tab"; # Always run scripts
+        always_run_script = true; # Print notification on startup
+      };
+
+      "silence-jetski-agents" = {
+        desktop_entry = "antigravity-ide";
+        summary = "Jetski";
+        skip_display = true;
+        history_ignore = true;
       };
 
     };

@@ -6,7 +6,7 @@ in {
   programs.hyprlock = {
     enable = true;
     package = inputs.hyprlock.packages.${pkgs.stdenv.hostPlatform.system}.hyprlock;
-    # package = pkgs.hyprlock;
+    # package = pkgs.hyprlock;m
     settings = {
       input-field = [{
         monitor = "";

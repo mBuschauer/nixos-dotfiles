@@ -118,10 +118,10 @@ in
       # iverilog
       # gtkwave
       # apio
-    ]
-    ++ [
-      # inputs.tsui.packages."x86_64-linux".tsui # currently broken, not going to fix now.
+      inputs.antigravity-nix.packages.x86_64-linux.google-antigravity-ide # IDE
+      inputs.antigravity-nix.packages.x86_64-linux.google-antigravity-cli # CLI
     ];
+    
   # services.udev.packages = with pkgs; [ apio-udev-rules ]; # for FPGA work  (ftdi)
 
   home-manager.users."${settings.userDetails.username}" = {

@@ -7,24 +7,24 @@ in
     enable = true;
     package = inputs.hypridle.packages.${pkgs.stdenv.hostPlatform.system}.hypridle;
     settings = {
+      general = {
+        lock_cmd = "pidof hyprlock || hyprlock";
+      };
       listener = [
         {
           timeout = 600; # 10 min
           # timeout = 5;
-          on-timeout = "notify-send \"Locking in 2 Minutes\" \"at $(date -d '+5 minutes' +%H:%M)\" && ${notification}";
+          on-timeout = "notify-send \"Locking in 2 Minutes\" \"at $(date -d '+2 minutes' +%H:%M)\" && ${notification}";
 
         }
         {
-          # timeout = 15;
-          timeout = 900; # 15 min
+          timeout = 720; # 12 min
           on-timeout = "loginctl lock-session";
         }
 
         {
-          # timeout = 30;
-          timeout = 1200; # 20 min
-          on-timeout = "hyprctl dispatch 'hl.dsp.dpms({ action = \"disable\" })'";
-          on-resume = "hyprctl dispatch 'hl.dsp.dpms({ action = \"enable\" })'";
+          timeout = 900; # 15 min
+          # on-timeout = "systemctl suspend";
         }
       ];
     };

@@ -6,7 +6,7 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     hyprland = {
-      url = "github:hyprwm/Hyprland";
+      url = "github:hyprwm/Hyprland/91f29f23bb691462f8aa6171b964069aebc37910";
       inputs.nixpkgs.follows = "nixpkgs";
       # submodules = true;
     };
@@ -124,6 +124,11 @@
     # };
 
     # vicinae.url = "github:vicinaehq/vicinae";
+
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
 
