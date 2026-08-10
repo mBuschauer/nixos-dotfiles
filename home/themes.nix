@@ -30,7 +30,7 @@ in
     enable = true;
     theme = {
       package = pkgs.orchis-theme;
-      name = "Orchis-dark";
+      name = "Orchis-Purple-Dark";
       # name = "Catppuccin-${capitalize variant}-Standard-${capitalize accent}-Dark";
       # package = pkgs.catppuccin-gtk.override {
       #   accents = [ accent ];
