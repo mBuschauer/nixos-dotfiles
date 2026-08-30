@@ -35,9 +35,9 @@ hl.bind(vars.mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind("F11", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 hl.bind(vars.mod .. " + F11", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 
--- release binds (old bindr)
-hl.bind(vars.mod .. " + V", hl.dsp.exec_cmd(close_menu .. " || " .. open_clipboard), { release = true })
-hl.bind(vars.mod .. " + SUPER_L", hl.dsp.exec_cmd(close_menu .. " || " .. open_menu), { release = true })
+hl.bind(vars.mod .. " + V", hl.dsp.exec_cmd(close_menu .. " || " .. open_clipboard))
+
+hl.bind(vars.mod .. " + SUPER_L", hl.dsp.exec_cmd(close_menu .. " || " .. open_menu), {long_press = true})
 
 -- mouse binds (old bindm)
 hl.bind(vars.mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })

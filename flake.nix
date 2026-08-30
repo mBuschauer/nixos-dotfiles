@@ -6,7 +6,7 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/91f29f23bb691462f8aa6171b964069aebc37910";
+      url = "github:hyprwm/Hyprland/";
       inputs.nixpkgs.follows = "nixpkgs";
       # submodules = true;
     };

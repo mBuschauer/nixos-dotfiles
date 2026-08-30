@@ -40,6 +40,23 @@ in
         ram = false;
       };
     };
+    programs.lutris = {
+      enable = true;
+
+      extraPackages = with pkgs; [
+        winetricks
+        umu-launcher
+      ];
+
+      winePackages = with pkgs; [
+        wineWow64Packages.full
+      ];
+
+      protonPackages = with pkgs; [
+        proton-ge-bin
+      ];
+      defaultWinePackage = pkgs.proton-ge-bin;
+    };
   };
   programs.gamemode.enable = true;
   programs.gamescope.enable = true;
@@ -48,7 +65,7 @@ in
     enable = true;
     package = pkgs.steam;
     extraPackages = with pkgs; [
-      mangohud # MANGOHUD_CONFIG=fps=1,font_size=18,cpu_stats=0,gpu_stats=0,ram=0 MANGOHUD=1 %command%
+      # mangohud # MANGOHUD_CONFIG=fps=1,font_size=18,cpu_stats=0,gpu_stats=0,ram=0 MANGOHUD=1 %command%
     ];
   };
 
@@ -65,6 +82,8 @@ in
 
       # wineWow64Packages.base
       # winetricks
+
+      hydralauncher
 
       prismlauncher
       jdk21

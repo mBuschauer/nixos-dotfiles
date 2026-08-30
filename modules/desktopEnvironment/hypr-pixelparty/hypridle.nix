@@ -14,16 +14,18 @@ in
         {
           timeout = 600; # 10 min
           # timeout = 5;
-          on-timeout = "notify-send \"Locking in 2 Minutes\" \"at $(date -d '+2 minutes' +%H:%M)\" && ${notification}";
+          on-timeout = "notify-send \"Locking in 5 Minutes\" \"at $(date -d '+5 minutes' +%H:%M)\" && ${notification}";
 
         }
         {
           timeout = 720; # 12 min
-          on-timeout = "loginctl lock-session";
+          # on-timeout = "loginctl lock-session";
         }
 
         {
           timeout = 900; # 15 min
+          on-timeout = "hyprctl dispatch 'hl.dsp.dpms({ action = \"disable\" })'";
+          on-resume = "hyprctl dispatch 'hl.dsp.dpms({ action = \"enable\" })'";
           # on-timeout = "systemctl suspend";
         }
       ];

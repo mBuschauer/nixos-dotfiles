@@ -211,6 +211,7 @@ in
           "[json]"."editor.defaultFormatter" = "vscode.json-language-features";
           "[yaml]"."editor.defaultFormatter" = "esbenp.prettier-vscode";
           "claudeCode.preferredLocation" = "panel";
+          "workbench.browser.openLocalhostLinks" = false;
 
         };
       };

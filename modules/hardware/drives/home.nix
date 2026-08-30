@@ -6,7 +6,6 @@
     fsType = "ntfs";
     options = [
       "nofail"
-      "default"
     ];
   };
   fileSystems."/mnt/sda2" = {
@@ -14,7 +13,6 @@
     fsType = "ntfs";
     options = [
       "nofail"
-      "default"
     ];
   };
 
@@ -23,7 +21,6 @@
     fsType = "ntfs";
     options = [
       "nofail"
-      "default"
     ];
   };
 
