@@ -6,10 +6,12 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/";
+      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hyprutils.follows = "hyprutils";
       # submodules = true;
     };
+    hyprutils.url = "github:hyprwm/hyprutils";
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -98,10 +100,6 @@
 
     # ghostty.url = "github:ghostty-org/ghostty";
 
-    cbr2cbz = {
-      url = "github:mBuschauer/cbr2cbz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     jellyfin-desktop = {
       url = "github:mBuschauer/jellyfin-desktop-flake";
       inputs.nixpkgs.follows = "nixpkgs";

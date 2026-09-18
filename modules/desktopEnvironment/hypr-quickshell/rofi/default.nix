@@ -41,7 +41,6 @@
 
       show-icons = true;
       icon-theme = "Papirus-Dark";
-      # icon-theme = "candy-icons";
 
       # kb-mode-next = "Right";
       # kb-mode-previous = "Left";
@@ -52,7 +51,6 @@
     theme = ./dotfiles/themes/catppuccin-transparent.rasi;
     # theme = ./dotfiles/themes/sidebar-v2.rasi;
   };
-  # home.packages = with pkgs; [ candy-icons ];
 
   # xdg.configFile."rofi" = {
   #   source = ./dotfiles;

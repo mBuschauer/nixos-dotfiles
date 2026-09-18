@@ -6,9 +6,9 @@ let
     src = prev.fetchFromGitHub {
       owner = "davatorium";
       repo = "rofi";
-      rev = "b447eba2fc57f8673be324296a6f459d33d37c46";
+      rev = "7575b70967c6ea747ecdeb4e54dc88fbf3939e6d";
       fetchSubmodules = true;
-      hash = "sha256-heXj9ZBT/7o0u2cqZQIHpggOPGI3vskKzlZvPhms+co=";
+      hash = "sha256-wBgVWkrSS5po/J5GzkoAOWrBdW5wjR5MuC0dlGT8dNI=";
     };
   });
 in

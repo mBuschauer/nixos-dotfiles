@@ -4,7 +4,6 @@
     ./gpu
     ./rofi
     ./wallpapers
-    ./waybar
     ./quickshell
     ./dunst.nix
     ./hypridle.nix

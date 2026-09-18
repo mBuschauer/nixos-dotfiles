@@ -15,6 +15,7 @@ let
     hzTicks = "1000";
     bbr3 = true;
     hardened = false;
+    autoModules = false;
   };
 in
 {

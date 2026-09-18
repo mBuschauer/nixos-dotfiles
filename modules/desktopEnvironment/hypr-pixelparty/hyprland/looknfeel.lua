@@ -18,8 +18,16 @@ hl.config({
 		shadow = { enabled = true, range = 4, render_power = 3, color = "rgba(1a1a1aee)" },
 		blur = { enabled = true, size = 3, passes = 1 },
 	},
-	misc = { focus_on_activate = true, force_default_wallpaper = 0 },
+	misc = { 
+		key_press_enables_dpms = true,
+		mouse_move_enables_dpms = true,
+		focus_on_activate = true, 
+		force_default_wallpaper = 0 
+	},
 	animations = { enabled = true },
 	dwindle = { preserve_split = true },
-	debug = { disable_logs = false },
+	debug = {
+		disable_logs = false,
+		gl_debugging = true,
+	},
 })

@@ -30,6 +30,8 @@ in
       wayvnc
 
       inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
+
+      wlopm
     ];
     pointerCursor = {
       enable = true;

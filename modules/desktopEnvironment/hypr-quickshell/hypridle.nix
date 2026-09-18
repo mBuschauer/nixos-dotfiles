@@ -10,7 +10,7 @@ in
       general = {
         lock_cmd = "hyprlock";
         # ignore_dbus_inhibit = true; # whether to ignore dbus-sent idle inhibit events (e.g. from firefox)
-        #before_sleep_cmd = "pidof hyprlock || hyprlock";
+        # before_sleep_cmd = "pidof hyprlock || hyprlock";
         # after_sleep_cmd = "hyprctl dispatch dpms on";
       };
       listener = [
@@ -22,15 +22,15 @@ in
         }
         {
           # timeout = 15;
-          timeout = 900; # 15 min
-          on-timeout = "hyprlock";
+          timeout = 720; # 12 min
+          on-timeout = "loginctl lock-session"
         }
 
         {
           # timeout = 30;
-          timeout = 1200; # 20 min
+          timeout = 900; # 15 min
           on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
+          # on-resume = "hyprctl dispatch dpms on";
         }
       ];
     };

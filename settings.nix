@@ -2,31 +2,41 @@
 let
   config = rec {
     system = "x86_64-linux";
-    hostname = "nixos"; # Hostname
+    hostname = "MarcoMNix"; # Hostname
     username = "marco"; # Username
-    gpu = "amd"; # supported: {nvidia, amd}
-    state_version = "24.05";
+    gpu = "nvidia"; # supported: {nvidia, amd}
+    state_version = "24.11";
     desktopEnvironment = [
       "hyprland"
       # "cosmic" # doesnt work
       # "gnome"
       # "kde"
+      # "cinnamon"
     ];
     # TODO: Make work with waybar
     monitors = [
       {
-        output = "DP-2";
+        output = "HDMI-A-1";
+        mode = "preferred";
+        position = "1920x0";
+        scale = 1;
+      }
+      {
+        output = "DP-1";
         mode = "preferred";
         position = "0x0";
         scale = 1;
       }
+      # { output = "DP-3"; mode = "preferred"; position = "1920x0"; scale = 1; }
+      # { output = "DP-2"; mode = "preferred"; position = "0x0";    scale = 1; }
     ];
     terminal = [
+      # "kitty"
       "wezterm"
       # "ghostty"
-    ]; # only supported `wezterm` and `kitty` (and `ghostty`). There is no error handling if this is left empty. DO NOT LEAVE EMPTY
-    printers = true;
-    enableSecureboot = true;
+    ]; # only supported `wezterm` and `kitty` (and `ghostty`). There is no error handling if this is filled with wrong information.
+    printers = false;
+    enableSecureboot = false;
   };
 
 in

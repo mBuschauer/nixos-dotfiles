@@ -116,6 +116,7 @@
 
       handbrake
       mkvtoolnix
+      stable.subtitleedit
 
       # gimp # gimp
 
@@ -174,7 +175,6 @@
     ++ [
       # inputs.hyprsysteminfo.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.hyprpwcenter.packages.${pkgs.stdenv.hostPlatform.system}.default
-      inputs.cbr2cbz.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.jellyfin-desktop.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 

@@ -72,7 +72,7 @@ in
 
           cd /etc/nixos || exit 1
           sudo nix flake update
-          sudo nixos-rebuild switch
+          sudo nixos-rebuild boot
         )
       '';
       neofetch = "fastfetch";

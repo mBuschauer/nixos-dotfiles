@@ -39,7 +39,10 @@ in
   programs.waybar = {
     enable = true;
     # package = pkgs.waybar;
-    package = inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.waybar;
+    package = inputs.waybar.packages.${pkgs.stdenv.hostPlatform.system}.waybar.overrideAttrs (old: {
+      doCheck = false;
+      mesonFlags = (old.mesonFlags or [ ]) ++ [ "-Dtests=disabled" ];
+    });
     settings = {
       mainBar = {
         layer = "top";

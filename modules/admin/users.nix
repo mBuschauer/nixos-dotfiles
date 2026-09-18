@@ -4,7 +4,12 @@
   users.users.${settings.userDetails.username} = {
     isNormalUser = true;
     description = "${settings.userDetails.username}";
-    extraGroups = [ "networkmanager" "wheel" "audio"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+      "dialout"
+    ];
     packages = [
       # pkgs.home-manager
     ];

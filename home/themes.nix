@@ -24,6 +24,46 @@ let
 
   capitalize = s: (lib.toUpper (lib.substring 0 1 s)) + (lib.substring 1 (lib.stringLength s) s);
 
+  conflux = pkgs.stdenvNoCC.mkDerivation {
+    pname = "conflux-icon-theme";
+    version = "0-unstable-2026-09-13";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "MoshiurRahmanAdib";
+      repo = "Conflux-Icon-Theme";
+      rev = "d64da34e6e81dd9a08ca068d55038b0578b1ba98";
+      hash = "sha256-jmm+k7S1w02iEbUhviyKViBxbdJFnusvSKVA6hA1l0A=";
+    };
+
+    nativeBuildInputs = [ pkgs.gtk3 ];
+    dontDropIconThemeCache = true;
+
+    installPhase = ''
+      mkdir -p $out/share/icons/Conflux
+      cp -a . $out/share/icons/Conflux
+      rm -rf $out/share/icons/Conflux/{Workspace,.github,.gitignore,LICENSE,*.md,*.png}
+      find $out/share/icons/Conflux -xtype l -delete
+      gtk-update-icon-cache $out/share/icons/Conflux
+    '';
+  };
+
+  orchis-kde = pkgs.stdenvNoCC.mkDerivation {
+    pname = "orchis-kde";
+    version = "0-unstable-2025-10-18";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "vinceliuice";
+      repo = "Orchis-kde";
+      rev = "b2a96919eee40264e79db402b915f926436100ad";
+      hash = "sha256-mO1AVrnXNdg3Rftj0cQWef/RrBgSDy5kaMHagwKywEo=";
+    };
+
+    installPhase = ''
+      mkdir -p $out/share/Kvantum
+      cp -a Kvantum/* $out/share/Kvantum/
+    '';
+  };
+
 in
 {
   gtk = {
@@ -31,65 +71,38 @@ in
     theme = {
       package = pkgs.orchis-theme;
       name = "Orchis-Purple-Dark";
-      # name = "Catppuccin-${capitalize variant}-Standard-${capitalize accent}-Dark";
-      # package = pkgs.catppuccin-gtk.override {
-      #   accents = [ accent ];
-      #   size = "standard";
-      #   variant = variant;
-      # };
     };
     iconTheme = {
-      # package = pkgs.candy-icons;
-      # name = "candy-icons";
-      name = "Papirus-Dark";
-      package = catppuccin-papirus;
+      name = "Conflux";
+      package = conflux;
     };
     gtk4.theme = config.gtk.theme;
   };
-
-  # dconf.settings = {
-  #   "org/gnome/desktop/interface" = {
-  #     gtk-theme = "Catppuccin-${capitalize variant}-Standard-${capitalize accent}-Dark";
-  #     color-scheme = "prefer-dark";
-  #   };
-
-  #   # For Gnome shell
-  #   "org/gnome/shell/extensions/user-theme" = {
-  #     name = "Catppuccin-${capitalize variant}-Standard-${capitalize accent}-Dark";
-  #   };
-  # };
 
   qt = {
     enable = true;
     platformTheme.name = "qt5ct";
     style.name = "kvantum";
-    style.package = kvantumThemePackage;
-  };
-
-  xdg.configFile = {
-    "Kvantum/kvantum.kvconfig".source = (pkgs.formats.ini { }).generate "kvantum.kvconfig" {
-      General.theme = "Catppuccin-${capitalize variant}-${capitalize accent}";
-    };
-
-    "Kvantum/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}.kvconfig".source =
-      "${kvantumThemePackage}/share/Kvantum/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}.kvconfig";
-    "Kvantum/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}.svg".source =
-      "${kvantumThemePackage}/share/Kvantum/catppuccin-${variant}-${accent}/catppuccin-${variant}-${accent}.svg";
+    style.package = pkgs.libsForQt5.qtstyleplugin-kvantum;
   };
 
   home.packages = with pkgs; [
     gtk3
     libsForQt5.qt5ct
-    libsForQt5.qtstyleplugin-kvantum
-    libsForQt5.qtstyleplugins
     qt6Packages.qt6ct
     qt6.qtwayland
     qt5.qtwayland
 
-    kvantumThemePackage
-    libsForQt5.qtstyleplugin-kvantum
-    # papirus-folders
+    pkgs.qt6Packages.qtstyleplugin-kvantum
   ];
+
+  xdg.configFile = {
+    "Kvantum/Orchis".source = "${orchis-kde}/share/Kvantum/Orchis";
+    "Kvantum/kvantum.kvconfig".text = ''
+      [General]
+      theme=OrchisDark
+    '';
+  };
 
   programs.kitty = {
     enable = isKitty settings.customization.terminal;
