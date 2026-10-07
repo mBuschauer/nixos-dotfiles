@@ -33,8 +33,6 @@
     # inputs.nixgl.packages.${pkgs.stdenv.hostPlatform.system}.nixGLNvidia
   ];
 
-  # hardware.nvidia-container-toolkit.enable = true;
-
   hardware.nvidia = {
 
     # Modesetting is required.

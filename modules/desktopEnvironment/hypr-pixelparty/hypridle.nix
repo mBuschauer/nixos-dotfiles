@@ -3,6 +3,8 @@ let
   notification = "play -n synth 1.5 sin 1760 synth 1.5 sin fmod 600 vol -20db fade l 0 1.5 1.5";
 in
 {
+  services.hyprsunset.enable = true;
+
   services.hypridle = {
     enable = true;
     package = inputs.hypridle.packages.${pkgs.stdenv.hostPlatform.system}.hypridle;
@@ -18,13 +20,14 @@ in
         }
         {
           timeout = 720; # 12 min
-          on-timeout = "loginctl lock-session";
+          on-timeout = "loginctl lock-session && ${notification}";
         }
-
         {
           timeout = 900; # 15 min
-          on-timeout = "wlopm --off '*'";
-          on-resume  = "wlopm --on '*'";
+          on-timeout = "hyprctl hyprsunset gamma 0";
+          on-resume = "hyprctl hyprsunset gamma 100";
+          # on-timeout = "wlopm --off '*'";
+          # on-resume  = "wlopm --on '*'";
         }
       ];
     };

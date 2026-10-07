@@ -1,5 +1,4 @@
 { pkgs, settings, ... }:
-
 {
   virtualisation = {
     waydroid = {
@@ -69,11 +68,13 @@
     # winboat
 
     # (pkgs.bottles.override { removeWarningPopup = true; }) # modern wine gui
+    docker-compose
   ];
 
   users.users.${settings.userDetails.username}.extraGroups = [
     "libvirtd"
     "vboxusers" # Adding users to the group vboxusers allows them to use the virtualbox functionality.
+    "docker"
   ];
 
   # settings for qemu/kvm
@@ -93,5 +94,17 @@
     options kvm_intel emulate_invalid_guest_state=0
     options kvm ignore_msrs=1 report_ignored_msrs=0
   '';
+
+  hardware.nvidia-container-toolkit.enable = if settings.customization.gpu == "nvidia" then true else false;
+
+  virtualisation = {
+    docker = {
+      enable = true;
+      liveRestore = false;
+    };
+    oci-containers = {
+      backend = "docker";
+    };
+  };
 
 }

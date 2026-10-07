@@ -83,10 +83,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-cachyos-kernel = {
-      url = "github:xddxdd/nix-cachyos-kernel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nix-cachyos-kernel = {
+    #   url = "github:xddxdd/nix-cachyos-kernel/b21e2ad2d1a0e031e6fe7f02a8bdaf010f922887";
+    #   # inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # nvix = {
     #   # nixvim configuration
@@ -167,7 +167,7 @@
             {
               nixpkgs.overlays = [
                 overlay-stable
-                inputs.nix-cachyos-kernel.overlays.default
+                # inputs.nix-cachyos-kernel.overlays.default
 
                 # (import ./overlays/ollama-cuda.nix)
                 (import ./overlays/rofi-latest.nix)

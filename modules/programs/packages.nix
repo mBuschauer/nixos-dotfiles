@@ -65,8 +65,6 @@
       webcamoid
       busybox
 
-      stable.texliveFull # for editing latex
-
       fd
       ripgrep
 

@@ -131,7 +131,7 @@ in
       '';
       open = "xdg-open";
       taildrop = "tailscale file get --wait --verbose ~/Downloads/";
-      hyprland-vnc = "hyprctl -i 0 dispatch exec \"wayvnc 0.0.0.0 5900 --gpu --show-performance --render-cursor --max-fps=60\"";
+      hyprland-vnc = "hyprctl -i 0 eval 'hl.exec_cmd(\"wayvnc 0.0.0.0 5900 --gpu --show-performance --render-cursor --max-fps=60\")'";
     };
   };
 

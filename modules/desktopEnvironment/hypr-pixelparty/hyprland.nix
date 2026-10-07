@@ -10,6 +10,7 @@ let
 
 in
 {
+
   home = {
     packages = with pkgs; [
       dmenu-rs # seems to be a dunst dependency?
@@ -31,7 +32,6 @@ in
 
       inputs.hyprland-contrib.packages.${pkgs.stdenv.hostPlatform.system}.grimblast
 
-      wlopm
     ];
     pointerCursor = {
       enable = true;
@@ -79,7 +79,7 @@ in
     portalPackage =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     configType = "lua";
- 
+
     settings.monitor = settings.customization.monitors;
     extraLuaFiles = {
       vars.content = ./hyprland/vars.lua;

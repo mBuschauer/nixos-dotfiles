@@ -5,18 +5,18 @@
   ...
 }:
 let
-  cachy-kernel = pkgs.cachyosKernels.linux-cachyos-latest.override {
-    pname = "linux-cachyos-bore-native";
+  # cachy-kernel = pkgs.cachyosKernels.linux-cachyos-latest.override {
+  #   pname = "linux-cachyos-bore-native";
 
-    # Customize CachyOS settings
-    cpusched = "bore";
-    lto = "thin";
-    processorOpt = "native";
-    hzTicks = "1000";
-    bbr3 = true;
-    hardened = false;
-    autoModules = false;
-  };
+  #   # Customize CachyOS settings
+  #   cpusched = "bore";
+  #   lto = "thin";
+  #   processorOpt = "native";
+  #   hzTicks = "1000";
+  #   bbr3 = true;
+  #   hardened = false;
+  #   autoModules = false;
+  # };
 in
 {
   # nix.settings = {
@@ -25,8 +25,8 @@ in
   # };
 
   boot = {
-    # kernelPackages = pkgs.linuxPackages_latest;
-    kernelPackages = pkgs.linuxKernel.packagesFor cachy-kernel;
+    kernelPackages = pkgs.linuxPackages_latest;
+    # kernelPackages = pkgs.linuxKernel.packagesFor cachy-kernel;
 
     # kernel = {
     #   # modify TCP buffer size

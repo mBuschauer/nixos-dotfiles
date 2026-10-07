@@ -4,7 +4,7 @@
     ./firefox.nix
     ./games.nix
     ./packages.nix
-    ./programming.nix
+    ./programming
     ./gpu
 
     ./chrome.nix
