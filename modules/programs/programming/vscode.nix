@@ -3,8 +3,40 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
+let
+  overleaf-theme = pkgs.vscode-utils.buildVscodeExtension {
+    pname = "overleaf-theme";
+    version = "1.0.0";
+    src = inputs.overleaf-theme;
+    sourceRoot = "source";
+    vscodeExtPublisher = "marco";
+    vscodeExtName = "overleaf-theme";
+    vscodeExtUniqueId = "marco.overleaf-theme";
+  };
+  latex-workshop = pkgs.vscode-extensions.james-yu.latex-workshop.overrideAttrs (old: {
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.jq ];
+    # this patch adds auto closing
+    postPatch = (old.postPatch or "") + ''
+      f=syntax/latex-language-configuration.json
+
+      jq '
+        .autoClosingPairs |= (
+          map(
+            if   . == ["\\[", ""] then ["\\[", "\\]"]
+            elif . == ["\\(", ""] then ["\\(", "\\)"]
+            else . end
+          ) + [["$", "$"]]
+        )
+      ' "$f" > "$f.tmp" && mv "$f.tmp" "$f"
+
+      # Fail the build if upstream changes the file and the patch stops applying
+      jq -e '.autoClosingPairs | any(. == ["\\[", "\\]"])' "$f" > /dev/null
+    '';
+  });
+in
 {
   options.programs.vscode.profiles = lib.mkOption {
     type = lib.types.attrsOf (
@@ -26,17 +58,21 @@
             esbenp.prettier-vscode
 
             ms-azuretools.vscode-docker
+
+            ms-vscode-remote.remote-ssh
+            ms-vscode-remote.remote-ssh-edit
           ];
           userSettings = {
             "[nix]"."editor.defaultFormatter" = "jnoortheen.nix-ide";
             "[nix]"."editor.formatOnSave" = false;
-            "nixEnvSelector.useFlakes" = true;
 
             "window.openFoldersInNewWindow" = lib.mkDefault "on";
 
             "claudeCode.preferredLocation" = "panel";
             "workbench.browser.openLocalhostLinks" = false;
+
             "workbench.iconTheme" = lib.mkDefault "vscode-icons";
+            "vsicons.dontShowNewVersionMessage" = true;
 
             "chat.disableAIFeatures" = true;
 
@@ -98,21 +134,13 @@
         };
       };
       latex = {
-        extensions =
-          with pkgs.vscode-extensions;
-          [
-            james-yu.latex-workshop
-            valentjn.vscode-ltex
-          ]
-          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-            {
-              name = "overleaf-theme";
-              publisher = "ariqahmer";
-              version = "0.0.1";
-              sha256 = "sha256-mwqaXkOGVUNZ5i4M0KxRIUFzNjxvQTDZWj3/7o59g/Q=";
-            }
-          ];
+        extensions = with pkgs.vscode-extensions; [
+          latex-workshop
+          valentjn.vscode-ltex
+          overleaf-theme
+        ];
         userSettings = {
+          "workbench.experimental.modernUI" = false;
           "[latex]"."editor.wordWrap" = "on";
           "latex-workshop.latex.autoClean.run" = "onBuilt";
           "latex-workshop.latex.clean.method" = "glob";
@@ -136,14 +164,50 @@
             "*.synctex.gz(busy)"
           ];
           "latex-workshop.view.pdf.viewer" = "tab";
+          "latex-workshop.view.pdf.color.light.backgroundColor" = "#495365";
+          "latex-workshop.formatting.latex" = "tex-fmt";
 
-          "workbench.colorTheme" = "Overleaf Theme";
-          "workbench.preferredLightColorTheme" = "Overleaf Theme";
-          "workbench.preferredDarkColorTheme" = "Overleaf Theme";
+          "workbench.colorTheme" = "mbuschauer.overleaf";
+          "workbench.preferredLightColorTheme" = "mbuschauer.overleaf";
+          "workbench.preferredDarkColorTheme" = "mbuschauer.overleaf";
 
           "editor.fontFamily" = "'DejaVu Sans Mono', monospace";
           "editor.fontSize" = 13;
+          "editor.lineHeight" = 19;
+          "editor.minimap.enabled" = false;
+          "editor.showFoldingControls" = "always";
+
+          # Terminal cursor
+          "terminal.integrated.cursorStyle" = "block";
+          "terminal.integrated.cursorBlinking" = true;
         };
+        keybindings = [
+          {
+            key = "ctrl+b";
+            command = "editor.action.insertSnippet";
+            args = {
+              snippet = "\\\\textbf{\${TM_SELECTED_TEXT:$0}}";
+            };
+            when = "editorTextFocus && !editorReadonly && editorLangId == 'latex'";
+          }
+          {
+            key = "ctrl+i";
+            command = "editor.action.insertSnippet";
+            args = {
+              snippet = "\\\\textit{\${TM_SELECTED_TEXT:$0}}";
+            };
+            when = "editorTextFocus && !editorReadonly && editorLangId == 'latex'";
+          }
+          {
+            key = "ctrl+u";
+            command = "editor.action.insertSnippet";
+            args = {
+              snippet = "\\\\underline{\${TM_SELECTED_TEXT:$0}}";
+            };
+            when = "editorTextFocus && !editorReadonly && editorLangId == 'latex'";
+          }
+        ];
+
       };
       ccpp = {
         extensions =

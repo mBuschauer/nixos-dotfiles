@@ -128,6 +128,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    overleaf-theme = {
+      url = "github:mbuschauer/overleaf-theme";
+      flake = false;
+    };
+
   };
 
   outputs =
