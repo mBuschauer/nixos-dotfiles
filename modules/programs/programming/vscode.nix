@@ -9,7 +9,7 @@
 let
   overleaf-theme = pkgs.vscode-utils.buildVscodeExtension {
     pname = "overleaf-theme";
-    version = "1.0.0";
+    version = "0.0.6";
     src = inputs.overleaf-theme;
     sourceRoot = "source";
     vscodeExtPublisher = "marco";
