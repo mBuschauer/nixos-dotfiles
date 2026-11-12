@@ -6,6 +6,25 @@
   settings,
   ...
 }:
+let
+  oo = pkgs.onlyoffice-desktopeditors;
+
+  # Detach from whatever launched us: own cgroup scope + own session
+  detach = pkgs.writeShellScript "onlyoffice-detached" ''
+    exec ${pkgs.systemd}/bin/systemd-run --user --scope --quiet --collect \
+      ${pkgs.util-linux}/bin/setsid -f ${oo}/bin/onlyoffice-desktopeditors "$@"
+  '';
+
+  onlyoffice-detached = pkgs.symlinkJoin {
+    name = "onlyoffice-detached";
+    paths = [ oo ];
+    postBuild = ''
+      f=share/applications/onlyoffice-desktopeditors.desktop
+      rm $out/$f
+      sed -E 's|^Exec=[^ ]+|Exec=${detach}|' ${oo}/$f > $out/$f
+    '';
+  };
+in
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -33,7 +52,7 @@
     [
       zoom-us
 
-      onlyoffice-desktopeditors
+      onlyoffice-detached
       # libreoffice-fresh
       hunspell
       hunspellDicts.en_US
@@ -112,7 +131,7 @@
 
       # caligula # disk/iso imager
 
-      handbrake
+      # handbrake
       mkvtoolnix
       stable.subtitleedit
 
@@ -168,12 +187,15 @@
       pandoc
       pv
       poppler-utils
-      tor-browser
+      # tor-browser
+      delfin
     ]
     ++ [
       # inputs.hyprsysteminfo.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.hyprpwcenter.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.jellyfin-desktop.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.nmrs-gui.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
   programs.obs-studio = {

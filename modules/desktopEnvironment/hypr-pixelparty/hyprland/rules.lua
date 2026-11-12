@@ -5,6 +5,8 @@ hl.window_rule({ name = "sigil-max", match = { title = "(.*)( %- Sigil)$" }, max
 hl.window_rule({ name = "corearchiver-float", match = { class = "CoreArchiver" }, float = true })
 hl.window_rule({ name = "qimgv-float", match = { class = "qimgv" }, float = true })
 hl.window_rule({ name = "pqiv-float", match = { class = "pqiv" }, float = true })
+hl.window_rule({match = { class = "^nmrs-popup$" }, float = true, size = { 400, 560 } })
+
 
 hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0, border_size = 0, no_rounding = true })
 hl.workspace_rule({ workspace = "99", monitor = "HEADLESS-1" })

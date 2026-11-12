@@ -96,7 +96,7 @@ in
           modules = [
             "custom/groupHardware"
             "custom/arrow5"
-            "network"
+            "custom/nmrs"
             "custom/arrow3"
             "disk"
             "custom/arrow4"
@@ -205,6 +205,31 @@ in
           path = "/";
         };
 
+        "custom/nmrs" = {
+          exec = "${pkgs.writeShellScript "waybar-nmrs" ''
+            nmrs-gui --status --watch | ${pkgs.jq}/bin/jq --unbuffered -c '
+              . as $s
+              | ($s.primary.kind // "none") as $kind
+              | ([$s.ethernet[]? | select(.interface == $s.primary.interface) | .ip4] | first) as $ip
+              | if $kind == "wifi" then
+                  {
+                    text: "  \($s.wifi.ssid) (\($s.wifi.strength)%) ",
+                    class: "wifi",
+                    tooltip: "\($s.wifi.ssid) · \($s.wifi.band) · \($s.wifi.security) · \($s.wifi.ip4)"
+                  }
+                elif $kind == "ethernet" then
+                  { text: " 󰈀 \($ip // "no IP")", class: "ethernet " }
+                else
+                  { text: "No connection", class: "disconnected" }
+                end
+              | .tooltip //= "\($s.primary.name // "offline") · \($s.primary.interface // "-") · \($s.connectivity)"
+              | .class = [.class, $s.connectivity]
+            '
+          ''}";
+          return-type = "json";
+          on-click = "nmrs-gui --toggle --app-id nmrs-popup --layout compact --page ethernet";
+        };
+
         "network" = {
           interval = 5;
           format-wifi = "    {essid} ({signalStrength}%)";
@@ -249,7 +274,7 @@ in
           format-bluetooth = " {volume}%";
           format-muted = "";
           scroll-step = 1;
-          on-click = "blueman-manager";
+          on-click = "overskride";
           tooltip = false;
         };
 

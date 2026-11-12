@@ -206,6 +206,11 @@
 	color: @black;
 }
 
+#custom-nmrs {
+	background: @network;
+	color: @black;
+}
+
 #memory {
 	background: @memory;
 	color: @black;

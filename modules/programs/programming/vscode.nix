@@ -136,7 +136,7 @@ in
       latex = {
         extensions = with pkgs.vscode-extensions; [
           latex-workshop
-          valentjn.vscode-ltex
+          ltex-plus.vscode-ltex-plus
           overleaf-theme
         ];
         userSettings = {
@@ -180,6 +180,8 @@ in
           # Terminal cursor
           "terminal.integrated.cursorStyle" = "block";
           "terminal.integrated.cursorBlinking" = true;
+
+          "ltex.ltex-ls.path" = pkgs.ltex-ls-plus;
         };
         keybindings = [
           {

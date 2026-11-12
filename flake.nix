@@ -133,6 +133,16 @@
       flake = false;
     };
 
+    helium = {
+      url = "github:amaanq/helium-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nmrs-gui = {
+      url = "github:freedesktop-rs/nmrs-gui";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs =

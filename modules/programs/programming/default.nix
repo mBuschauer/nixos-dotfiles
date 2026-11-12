@@ -106,11 +106,13 @@ in
     # iverilog
     # gtkwave
     # apio
-    # inputs.antigravity-nix.packages.x86_64-linux.google-antigravity-ide # IDE
+    inputs.antigravity-nix.packages.x86_64-linux.google-antigravity-ide # IDE
     inputs.antigravity-nix.packages.x86_64-linux.google-antigravity-cli # CLI
   ];
 
   # services.udev.packages = with pkgs; [ apio-udev-rules ]; # for FPGA work  (ftdi)
+
+  # services.envfs.enable = true;
 
   home-manager.users."${settings.userDetails.username}" = {
     imports = [
